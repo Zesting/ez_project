@@ -42,7 +42,6 @@ public class MemorySampleRepository implements SampleRepository {
     public Long Delete(Long sampleFiledId) {
         store.remove(sampleFiledId);
         return sampleFiledId;
-
     }
 
 }
