@@ -22,7 +22,6 @@ public class SampleController {
         sampleDomain.setSampleFiledName(form.getSampleFiledName());
         sampleDomain.setSampleFiledAge(form.getSampleFiledAge());
         sampleService.sampleJoin(sampleDomain);
-        /* model.addAttribute("sampleDomain", sampleDomain); */
         return "sample";
     }
 

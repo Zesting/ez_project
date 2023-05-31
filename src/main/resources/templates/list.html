@@ -8,7 +8,7 @@
     <title>Project</title>
   </head>
   <body>
-    <div th:each="sampleList : ${sampleList}">
+    <div th:each="sampleList : ${sampleList}" style="border: 1px solid black">
       <p th:text="${sampleList.sampleFiledId}"></p>
       <p th:text="${sampleList.sampleFiledName}"></p>
       <p th:text="${sampleList.sampleFiledAge}"></p>

@@ -20,6 +20,7 @@ public class SampleService {
 
     public List<SampleDomain> findByAll() {
         return sampleRepository.findByAll();
+
     }
 
 }
