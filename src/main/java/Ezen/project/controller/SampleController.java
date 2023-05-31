@@ -1,8 +1,13 @@
 package Ezen.project.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import Ezen.project.domain.SampleDomain;
 import Ezen.project.service.SampleService;
 import lombok.RequiredArgsConstructor;
 
@@ -11,8 +16,20 @@ import lombok.RequiredArgsConstructor;
 public class SampleController {
     private final SampleService sampleService;
 
-    @GetMapping("/")
-    public String home() {
-        return "home";
+    @PostMapping("/create")
+    public String createSample(SampleDomain form, Model model) {
+        SampleDomain sampleDomain = new SampleDomain();
+        sampleDomain.setSampleFiledName(form.getSampleFiledName());
+        sampleDomain.setSampleFiledAge(form.getSampleFiledAge());
+        sampleService.sampleJoin(sampleDomain);
+        /* model.addAttribute("sampleDomain", sampleDomain); */
+        return "sample";
+    }
+
+    @GetMapping("/list")
+    public String sampleList(Model model) {
+        List<SampleDomain> sampleList = sampleService.findByAll();
+        model.addAttribute("sampleList", sampleList);
+        return "list";
     }
 }
