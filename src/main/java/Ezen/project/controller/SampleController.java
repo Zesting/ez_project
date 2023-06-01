@@ -32,4 +32,5 @@ public class SampleController {
         System.out.println("GetMapping() list 출력");
         return "list";
     }
+    
 }
