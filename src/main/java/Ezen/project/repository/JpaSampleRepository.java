@@ -25,20 +25,17 @@ public class JpaSampleRepository implements SampleRepository {
 
     @Override
     public Optional<SampleDomain> findById(Long sampleFiledId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return Optional.empty();
     }
 
     @Override
     public Optional<SampleDomain> update(SampleDomain sampleDomain) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return Optional.empty();
     }
 
     @Override
     public Long Delete(Long sampleFiledId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Delete'");
+        return null;
     }
 
 }

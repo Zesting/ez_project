@@ -29,6 +29,8 @@ public class SampleController {
     public String sampleList(Model model) {
         List<SampleDomain> sampleList = sampleService.findByAll();
         model.addAttribute("sampleList", sampleList);
+        System.out.println("GetMapping() list 출력");
         return "list";
     }
+    
 }
