@@ -52,4 +52,5 @@ public class SpringConfig {
     public PaymentRepository paymentRepository() {
         return new JpaPaymentRepository(em);
     }
+
 }
