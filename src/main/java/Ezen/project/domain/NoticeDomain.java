@@ -1,7 +1,5 @@
 package Ezen.project.domain;
 
-import java.time.LocalDateTime;
-
 import Ezen.project.DTO.NoticeDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,14 +9,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 @Table(name = "notice")
-public class NoticeDomain {
+public class NoticeDomain extends BaseNoticeDomain {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,9 +33,6 @@ public class NoticeDomain {
 
     @Column(name = "content")
     private String noticeContent;
-
-    @Column(name = "WriteDate")
-    private LocalDateTime noticeWriteDate;
 
     @Column(name = "file")
     private byte[] noticeFile;

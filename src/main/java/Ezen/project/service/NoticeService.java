@@ -1,5 +1,9 @@
 package Ezen.project.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import Ezen.project.DTO.NoticeDTO;
@@ -17,6 +21,28 @@ public class NoticeService {
     public void save(NoticeDTO noticeDTO) {
         NoticeDomain noticeDomain = NoticeDomain.toSaveEntity(noticeDTO);
         noticeRepository.save(noticeDomain);
+    }
+
+
+    public List<NoticeDTO> findAll() {
+        List<NoticeDomain> noticeDomainList = noticeRepository.findAll();
+        List<NoticeDTO> noticeDTOList = new ArrayList<>();
+        for(NoticeDomain noticeDomain: noticeDomainList){
+            noticeDTOList.add(NoticeDTO.toNoticeDTO(noticeDomain));
+        }
+        return noticeDTOList;
+    }
+
+
+    public NoticeDTO findById(Long id) {
+        Optional<NoticeDomain> optionalNoticeDomain = noticeRepository.findById(id);
+        if(optionalNoticeDomain.isPresent()){
+            NoticeDomain noticeDomain = optionalNoticeDomain.get();
+            NoticeDTO noticeDTO = NoticeDTO.toNoticeDTO(noticeDomain);
+            return noticeDTO;
+        } else {
+            return null;
+        }
     }
     
 }
