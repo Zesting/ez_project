@@ -20,19 +20,19 @@ public class NoticeController {
 
     @GetMapping("notice")
     public String notice(){
-        return "notice";
+        return "/notice/notice";
     }
 
 
     @GetMapping("/notice/save")
     public String saveForm(){
-        return "noticeSave";
+        return "/notice/noticeSave";
     }
 
     @PostMapping("/notice/save")
     public String save(@ModelAttribute NoticeDTO noticeDTO){
         noticeService.save(noticeDTO);
-        return "notice";
+        return "/notice/notice";
     }
     
 }
