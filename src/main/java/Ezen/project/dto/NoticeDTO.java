@@ -1,4 +1,4 @@
-package Ezen.project.dto;
+package Ezen.project.DTO;
 
 import java.time.LocalDateTime;
 

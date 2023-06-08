@@ -2,8 +2,8 @@ package Ezen.project.service;
 
 import org.springframework.stereotype.Service;
 
+import Ezen.project.DTO.NoticeDTO;
 import Ezen.project.domain.NoticeDomain;
-import Ezen.project.dto.NoticeDTO;
 import Ezen.project.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 

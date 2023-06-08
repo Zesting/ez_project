@@ -20,7 +20,8 @@ public class JpaSampleRepository implements SampleRepository {
 
     @Override
     public List<SampleDomain> findByAll() {
-        return em.createQuery("select m from SampleDomain m ", SampleDomain.class).getResultList();
+        String jpql = "select m from SampleDomain m";
+        return em.createQuery(jpql, SampleDomain.class).getResultList();
     }
 
     @Override

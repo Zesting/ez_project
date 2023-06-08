@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Project</title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="/createRoom" method="post" id="createForm">
+        <!-- 룸 이름 입력(라벨 + 인풋) -->
+        <label for="roomName">신규 룸 이름 </label><br />
+        <input type="text" id="roomName" name="roomName" required /> <br />
+
+        <!-- 룸 가격 입력(라벨 + 인풋) -->
+        <label for="roomPrice">룸 1박 가격</label><br />
+        <input type="number" id="roomPrice" name="roomPrice" required /><br />
+
+        <!-- 룸 타입 선택(라벨 + 인풋) -->
+        <label for="roomType">룸 타입</label><br />
+        <input type="radio" name="roomType" value="Mercury" />Mercury
+        <input type="radio" name="roomType" value="Mars" />Mars
+        <input type="radio" name="roomType" value="Jupiter" />Jupiter
+        <br />
+
+        <!-- 룸 상세 설명(라벨 + 인풋) -->
+        <label for="roomDetailInfo">룸 상세 설명란</label><br />
+        <textarea
+          name="roomDetailInfo"
+          id="roomDetailInfo"
+          cols="50"
+          rows="20"></textarea
+        ><br />
+
+        <!-- 룸 이미지 패스 경로(라벨 + 인풋) -->
+        <label for="roomImagePath"
+          >룸 이미지 패스(나중에 수정 이미지 입력받는 것으로)</label
+        ><br />
+        <input type="text" name="roomImagePath" id="roomImagePath" /><br />
+        <input type="submit" />
+      </form>
+    </div>
+  </body>
+</html>

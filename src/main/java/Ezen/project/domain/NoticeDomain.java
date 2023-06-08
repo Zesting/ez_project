@@ -2,7 +2,7 @@ package Ezen.project.domain;
 
 import java.time.LocalDateTime;
 
-import Ezen.project.dto.NoticeDTO;
+import Ezen.project.DTO.NoticeDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
