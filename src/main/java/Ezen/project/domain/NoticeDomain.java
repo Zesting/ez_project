@@ -1,7 +1,8 @@
 package Ezen.project.domain;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
+import Ezen.project.DTO.NoticeDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,10 +35,20 @@ public class NoticeDomain {
     private String noticeContent;
 
     @Column(name = "WriteDate")
-    private Date noticeWriteDate;
+    private LocalDateTime noticeWriteDate;
 
-    // @Column(name = "file")
-    // private byte[] noticeFile;
+    @Column(name = "file")
+    private byte[] noticeFile;
 
+    public static NoticeDomain toSaveEntity(NoticeDTO noticeDTO){
+        NoticeDomain noticeDomain = new NoticeDomain();
+        noticeDomain.setNoticeId(noticeDTO.getId());
+        noticeDomain.setUserId(noticeDTO.getUserId());
+        noticeDomain.setNoticeTitle(noticeDTO.getTitle());
+        noticeDomain.setNoticeContent(noticeDTO.getContent());
+        noticeDomain.setNoticeWriteDate(noticeDTO.getWriteDate());
+        noticeDomain.setNoticeFile(noticeDTO.getNoticeFile());
+        return noticeDomain;
+    }
 
 }

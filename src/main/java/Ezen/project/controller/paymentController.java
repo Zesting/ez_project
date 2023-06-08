@@ -34,6 +34,6 @@ public class paymentController {
 
     @GetMapping("/iamport")
     public String iamport(){
-      return "payment";
+      return "payment/payment";
     }
 }
