@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import Ezen.project.repository.*;
+import Ezen.project.service.PaymentService;
 import Ezen.project.service.SampleService;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
@@ -26,4 +27,13 @@ public class SpringConfig {
         return new JpaSampleRepository(em);
     }
 
+    @Bean
+    public PaymentService paymentsService() {
+        return new PaymentService(paymentRepository());
+    }
+
+    @Bean
+    public PaymentRepository paymentRepository() {
+        return new JpaPaymentRepository(em);
+    }
 }
