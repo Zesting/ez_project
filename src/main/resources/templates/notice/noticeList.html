@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>writer</th>
+            <th>date</th>
+        </tr>
+        <tr th:each="notice: ${noticeList}">
+            <td th:text="${notice.id}"></td>
+            <td><a th:href="@{|list/${notice.id}|}" th:text="${notice.title}"></a></td>
+            <td th:text="${notice.userId}"></td>
+            <td th:text="*{#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+        </tr>
+    </table>
+</body>
+</html>

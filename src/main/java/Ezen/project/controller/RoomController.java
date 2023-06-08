@@ -1,6 +1,7 @@
 package Ezen.project.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +52,33 @@ public class RoomController {
         return "redirect:/";
     }
 
+    @GetMapping("/modifyRoom")
+    public String roomModifyView(Model model) {
+        model.addAttribute("testRoom", roomService.findRoomById(1l).get());
+        return "Room/roomModify";
+    }
+
+    @PostMapping("/modifyRoom")
+    public String roomModify(RoomDTO roomDTO) {
+        System.out.println("roomDTO : " + roomDTO);
+        Optional<Room> coverOriginalRoom = roomService.findRoomById(roomDTO.getRoomId());
+        if (coverOriginalRoom.isPresent()) {
+            Room originalRoom = coverOriginalRoom.get();
+            System.out.println("originalRoom : " + originalRoom);
+            Room updateRoom = roomService.roomConverter(roomDTO);
+            System.out.println("updateRoom1" + updateRoom);
+            // updateRoom.setRoomId(originalRoom.getRoomId());
+            // updateRoom.setRoomName(originalRoom.getRoomName());
+            // updateRoom.setRoomPrice(originalRoom.getRoomPrice());
+            // updateRoom.setRoomType(originalRoom.getRoomType());
+            // updateRoom.setRoomDetailInfo(originalRoom.getRoomDetailInfo());
+            // updateRoom.setRoomImagePath(originalRoom.getRoomImagePath());
+            System.out.println("updateRoom2" + updateRoom);
+            roomService.modifyRoom(updateRoom);
+        }
+        return "redirect:/";
+    }
+
     // 룸 삭제 뷰 출력 메서드(해당 구성은 뷰 리스트 내에 버튼으로 수정될 예정)
     @GetMapping("/dropRoom")
     public String roomDropView() {
@@ -59,6 +87,7 @@ public class RoomController {
 
     @PostMapping("/dropRoom")
     public String roomDrop(Long roomId) {
+        roomService.verificationRoom(roomId);
         roomService.dropRoom(roomId);
         return "redirect:/";
     }
