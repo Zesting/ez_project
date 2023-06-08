@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노티스</title>
+</head>
+<body>
+    <header><br><br>헤더입니다<br><br><br><br><br></header>
+
+    <div>
+
+        <button onclick="saveReq()">글작성</button>
+        <a href="/notice/save">글작성(링크)</a>
+
+    </div>
+
+
+    <footer><br><br>푸터입니다<br><br></footer>
+
+    <script>
+        const saveReq = () => {
+            location.href = "notice/save";
+        }
+    </script>
+</body>
+</html>
