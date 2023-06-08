@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import Ezen.project.repository.JpaPaymentRepository;
 import Ezen.project.repository.JpaRoomRepository;
 import Ezen.project.repository.JpaSampleRepository;
+import Ezen.project.repository.PaymentRepository;
 import Ezen.project.repository.RoomRepository;
 import Ezen.project.repository.SampleRepository;
 import Ezen.project.service.RoomService;
@@ -50,4 +52,5 @@ public class SpringConfig {
     public PaymentRepository paymentRepository() {
         return new JpaPaymentRepository(em);
     }
+
 }
