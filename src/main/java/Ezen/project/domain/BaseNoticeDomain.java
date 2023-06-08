@@ -16,7 +16,7 @@ import lombok.Data;
 public class BaseNoticeDomain {
     
     @CreationTimestamp
-    @Column(name = "WriteDate")
+    @Column(name = "writeDate")
     private LocalDateTime noticeWriteDate;
 
 }

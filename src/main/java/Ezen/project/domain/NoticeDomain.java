@@ -1,7 +1,5 @@
 package Ezen.project.domain;
 
-import java.time.LocalDateTime;
-
 import Ezen.project.DTO.NoticeDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

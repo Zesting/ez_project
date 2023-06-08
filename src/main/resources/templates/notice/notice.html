@@ -13,6 +13,8 @@
 
         <button onclick="saveReq()">글작성</button>
 
+        <button onclick="listReq()">목록</button>
+
     </div>
 
 
@@ -20,7 +22,10 @@
 
     <script>
         const saveReq = () => {
-            location.href = "notice/save";
+            location.href = "/notice/save";
+        }
+        const listReq = () => {
+            location.href = "/notice/list";
         }
     </script>
 </body>
