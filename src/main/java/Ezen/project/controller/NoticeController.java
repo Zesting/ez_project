@@ -15,41 +15,40 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-// @RequestMapping("/notice")
 public class NoticeController {
 
     private final NoticeService noticeService;
 
+    //공지 메인페이지
     @GetMapping("notice")
-    public String notice(){
-        return "/notice/notice";
-    }
-
-    @GetMapping("/notice/save")
-    public String saveForm(){
-        return "/notice/noticeSave";
-    }
-
-    @PostMapping("/notice/save")
-    public String save(@ModelAttribute NoticeDTO noticeDTO){
-        noticeService.save(noticeDTO);
-        return "/notice/notice";
-    }
-
-    @GetMapping("/notice/list")
     public String findAll(Model model){
         List<NoticeDTO> noticeDTOList = noticeService.findAll();
         model.addAttribute("noticeList", noticeDTOList);
         return "/notice/noticeList";
     }
 
-    @GetMapping("/notice/list/{id}")
+    //공지글 작성 폼
+    @GetMapping("/notice/save")
+    public String saveForm(){
+        return "/notice/noticeSave";
+    }
+
+    //작성 폼 전달
+    @PostMapping("/notice/save")
+    public String save(@ModelAttribute NoticeDTO noticeDTO){
+        Long saveId = noticeService.save(noticeDTO);
+        return "redirect:/notice/" + saveId;
+    }
+    
+    //글 상세보기
+    @GetMapping("/notice/{id}")
     public String findById(@PathVariable Long id, Model model){
         NoticeDTO noticeDTO = noticeService.findById(id);
         model.addAttribute("notice", noticeDTO);
         return "/notice/detail";
     }
 
+    //수정 작성 폼
     @GetMapping("/notice/update/{id}")
     public String updateForm(@PathVariable Long id, Model model){
         NoticeDTO noticeDTO = noticeService.findById(id);
@@ -57,6 +56,7 @@ public class NoticeController {
         return "/notice/update";
     }
 
+    //수정 폼 전달
     @PostMapping("/notice/update")
     public String update(@ModelAttribute NoticeDTO noticeDTO, Model model){
         NoticeDTO notice = noticeService.update(noticeDTO);
@@ -64,10 +64,11 @@ public class NoticeController {
         return "/notice/detail";
     }
 
+    //게시글 삭제
     @GetMapping("/notice/delete/{id}")
     public String delete(@PathVariable Long id){
         noticeService.delete(id);
-        return "redirect:/notice/list";
+        return "redirect:/notice";
     }
 
 }

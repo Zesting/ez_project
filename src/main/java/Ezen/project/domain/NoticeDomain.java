@@ -23,32 +23,22 @@ public class NoticeDomain extends BaseNoticeDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long noticeId;
+    private Long noticeId; //Entity 공지글 id
 
     @Column(name = "userId")
-    private Long userId;
+    private Long userId; //Entity 공지글 작성자
 
     @Column(name = "title")
-    private String noticeTitle;
+    private String noticeTitle; //Entity 공지글 제목
 
     @Column(name = "content")
-    private String noticeContent;
+    private String noticeContent; //Entity 공지글 내용
 
     @Column(name = "file")
-    private byte[] noticeFile;
+    private byte[] noticeFile;//Entity 공지글 첨부파일
 
+    //DTO에서 Entity로 데이터 넣기
     public static NoticeDomain toSaveEntity(NoticeDTO noticeDTO){
-        NoticeDomain noticeDomain = new NoticeDomain();
-        noticeDomain.setNoticeId(noticeDTO.getId());
-        noticeDomain.setUserId(noticeDTO.getUserId());
-        noticeDomain.setNoticeTitle(noticeDTO.getTitle());
-        noticeDomain.setNoticeContent(noticeDTO.getContent());
-        noticeDomain.setNoticeWriteDate(noticeDTO.getWriteDate());
-        noticeDomain.setNoticeFile(noticeDTO.getNoticeFile());
-        return noticeDomain;
-    }
-
-    public static NoticeDomain toUpdateDomain(NoticeDTO noticeDTO) {
         NoticeDomain noticeDomain = new NoticeDomain();
         noticeDomain.setNoticeId(noticeDTO.getId());
         noticeDomain.setUserId(noticeDTO.getUserId());

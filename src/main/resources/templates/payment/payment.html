@@ -10,6 +10,11 @@
   <!-- iamport.payment.js-->
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
   <title>호텔</title>
+  <style>
+    .kakaopayBtn{
+      border: none;
+    }
+  </style>
 </head>
 
 <body>
@@ -18,13 +23,13 @@
     <li> <button id="iamportPayment" type="button">통합결제API샘플</button> </li>
     <li> <button id="KakaoPayment" type="button">카카오페이API샘플</button> </li>
   </div>
-  <div>
+  <!-- <div>
     <form method="post" action="/payment">
       <button>카카오페이로 결제하기</button>
     </form>
-  </div>
+  </div> -->
 
-  <button onclick="payBtn()">결제버튼</button>
+  <button onclick="KakaoPayment()" class="kakaopayBtn"><img th:src="@{/images/payment_icon_yellow_medium.png}" alt="카카오페이"></button>
   <script type="text/javascript"> //문서가 준비되면 제일 먼저 실행
 
     $(document).ready(function () {

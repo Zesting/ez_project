@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>관리자페이지</title>
+</head>
+
+<body>
+  <p>관리자 페이지입니다.</p>
+
+  <!-- name속성은 데이터 받는 클래스에(여기서는 DTO)이름과 같아야 데이터가 제대로 들어감 -->
+  <!-- 추후에는 만들어준거 받아서 저장하기  -->
+  <form action="/adminPageSave" method="post">
+    adminId : <input type="text" name="adminId"><br>
+    userId : <input type="text" name="userId"><br>
+    noticeId : <input type="text" name="noticeId"><br>
+    weddingId : <input type="text" name="weddingId"><br>
+    roomId : <input type="text" name="roomId"><br>
+    paymentId : <input type="text" name="paymentId"><br>
+    reservationId : <input type="text" name="reservationId"><br>
+    <button type="submit">테스트입력</button>
+  </form>
+</body>
+
+</html>
