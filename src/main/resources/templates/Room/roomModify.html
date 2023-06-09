@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Project</title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="modifyRoom" method="post">
+        <input
+          type="text"
+          name="roomId"
+          th:value="${testRoom.roomId}"
+          readonly />
+        <input type="text" name="roomName" th:value="${testRoom.roomName}" />
+        <input
+          type="number"
+          name="roomPrice"
+          th:value="${testRoom.roomPrice}" />
+        <input type="text" name="roomType" th:value="${testRoom.roomType}" />
+        <input
+          type="text"
+          name="roomDetailInfo"
+          th:value="${testRoom.roomDetailInfo}" />
+        <input
+          type="text"
+          name="roomImagePath"
+          th:value="${testRoom.roomImagePath}" />
+        <input type="submit" />
+      </form>
+    </div>
+  </body>
+</html>

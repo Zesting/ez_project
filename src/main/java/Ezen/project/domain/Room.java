@@ -1,5 +1,7 @@
 package Ezen.project.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // 기본 생성자 자동 생성 어노테이션
 @Entity // DB Table에 존재하는 테이블과 매핑하는 어노테이션
 @Table(name = "Room") // DB에 존재하는 테이블 중 하나를 지정하기 위한 어노테이션(여기서는 'room' Table 매핑)
+@DynamicUpdate // 변경된 컬럼만 update를 수행하는 어노테이션
 public class Room {
 
     @Id // primary key

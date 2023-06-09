@@ -13,8 +13,8 @@ import lombok.Data;
 @Table(name = "adminpage")
 public class AdminPage {
   
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id //기본키 설정
+  @GeneratedValue(strategy = GenerationType.IDENTITY) //자동 증가
   @Column(name = "id")
   private Long adminId; //관리자고유번호(PK)
 
@@ -24,8 +24,8 @@ public class AdminPage {
   @Column(name = "noticeId")
   private Long noticeId;  //공지사항고유번호(FK)
 
-  @Column(name = "inquiryId")
-  private Long inquiryId; //문의사항고유번호(FK)
+  @Column(name = "weddingId")
+  private Long weddingId; //문의사항고유번호(FK)
 
   @Column(name = "roomId")
   private Long roomId;  //방고유번호(FK)
