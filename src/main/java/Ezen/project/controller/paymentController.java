@@ -38,8 +38,8 @@ public class PaymentController {
       return "payment/paymentList";
     }
 
-    
-    //아임포트 연동.. 데이터값을 주지 않음.
+
+    //아임포트 연동.. 데이터값을 주지 않음 
     @GetMapping("/iamport")
     public String iamport(){
       return "payment/payment";
