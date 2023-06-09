@@ -18,9 +18,10 @@ public class NoticeService {
     private final NoticeRepository noticeRepository;
     
 
-    public void save(NoticeDTO noticeDTO) {
+    public Long save(NoticeDTO noticeDTO) {
         NoticeDomain noticeDomain = NoticeDomain.toSaveEntity(noticeDTO);
         noticeRepository.save(noticeDomain);
+        return noticeDomain.getNoticeId();
     }
 
 

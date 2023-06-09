@@ -36,8 +36,8 @@ public class NoticeController {
     //작성 폼 전달
     @PostMapping("/notice/save")
     public String save(@ModelAttribute NoticeDTO noticeDTO){
-        noticeService.save(noticeDTO);
-        return "redirect:/notice";
+        Long saveId = noticeService.save(noticeDTO);
+        return "redirect:/notice/" + saveId;
     }
     
     //글 상세보기
