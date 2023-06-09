@@ -1,5 +1,6 @@
 package Ezen.project.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,6 +45,12 @@ public class ReservationService {
     @Transactional(readOnly = true)
     public Optional<Reservation> findOneReservationById(Long reservationId) {
         return reservationRepository.findById(reservationId);
+    }
+
+    // check_In 날짜에 해당하는 룸 조회 기능[관리자 파트]
+    @Transactional(readOnly = true)
+    public List<Reservation> findAllReservationByCheckIn(Date checkIn) {
+        return reservationRepository.findAll().stream().filter(d -> d.getCheckIn().equals(checkIn)).toList();
     }
 
     // 예약 변경 기능[회원 파트](비지니스 로직)
