@@ -39,7 +39,7 @@ public class Reservation {
     // 유저
 
     @Column
-    private Date reservationDate; // 예약 수행 일자.
+    private String reservationDate; // 예약 수행 일자.
 
     @Column
     private Date checkIn; // 체크 인 날짜.

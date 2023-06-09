@@ -34,7 +34,7 @@ public class RoomController {
         return "Room/roomCreate";
     }
 
-    // 룸 생성 데이터 저장 메서드
+    // 룸 생성 데이터 저장 로직
     @PostMapping("/createRoom")
     public String roomJoin(RoomDTO roomDTO) {
         // 관리자 권한을 가진 사용자만 가능하도록 리펙토링할 듯
@@ -52,12 +52,14 @@ public class RoomController {
         return "redirect:/";
     }
 
+    // 룸 객체 데이터 수정 뷰 출력 메서드
     @GetMapping("/modifyRoom")
     public String roomModifyView(Model model) {
         model.addAttribute("testRoom", roomService.findRoomById(1l).get());
         return "Room/roomModify";
     }
 
+    // 룸 객체 데이터 수정 로직 메서드
     @PostMapping("/modifyRoom")
     public String roomModify(RoomDTO roomDTO) {
         System.out.println("roomDTO : " + roomDTO);
@@ -85,6 +87,7 @@ public class RoomController {
         return "Room/roomDrop";
     }
 
+    // 룸 삭제 로직 메서드
     @PostMapping("/dropRoom")
     public String roomDrop(Long roomId) {
         roomService.verificationRoom(roomId);

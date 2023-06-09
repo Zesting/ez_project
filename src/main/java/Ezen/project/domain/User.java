@@ -61,4 +61,17 @@ public class User {
         user.setUserAuthority(1);
         return user;
     }
+
+    public static User updateSave(UserDTO userDTO){
+        User user = new User();
+        user.setId(userDTO.getId());
+        user.setUserId(userDTO.getUserId());
+        user.setUserPassword(userDTO.getUserPassword());
+        user.setUserName(userDTO.getUserName());
+        user.setUserAge(userDTO.getUserAge());
+        user.setUserPhoneNumber(userDTO.getUserPhoneNumber());
+        user.setUserEmail(userDTO.getUserEmail());
+        user.setUserAuthority(0);
+        return user;
+    }
 }
