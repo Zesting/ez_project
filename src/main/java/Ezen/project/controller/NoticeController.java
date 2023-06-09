@@ -50,5 +50,24 @@ public class NoticeController {
         return "/notice/detail";
     }
 
-    
+    @GetMapping("/notice/update/{id}")
+    public String updateForm(@PathVariable Long id, Model model){
+        NoticeDTO noticeDTO = noticeService.findById(id);
+        model.addAttribute("noticeUpdate", noticeDTO);
+        return "/notice/update";
+    }
+
+    @PostMapping("/notice/update")
+    public String update(@ModelAttribute NoticeDTO noticeDTO, Model model){
+        NoticeDTO notice = noticeService.update(noticeDTO);
+        model.addAttribute("notice", notice);
+        return "/notice/detail";
+    }
+
+    @GetMapping("/notice/delete/{id}")
+    public String delete(@PathVariable Long id){
+        noticeService.delete(id);
+        return "redirect:/notice/list";
+    }
+
 }

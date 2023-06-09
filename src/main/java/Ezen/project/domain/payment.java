@@ -15,8 +15,8 @@ import lombok.Data;
 @Table(name = "payment")
 public class Payment {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id //기본키
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //자동증가
     @Column(name = "id")
     private Long payId;
 
