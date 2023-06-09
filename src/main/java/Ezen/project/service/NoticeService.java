@@ -44,5 +44,17 @@ public class NoticeService {
             return null;
         }
     }
+
+
+    public NoticeDTO update(NoticeDTO noticeDTO) {
+        NoticeDomain noticeDomain = NoticeDomain.toUpdateDomain(noticeDTO);
+        noticeRepository.save(noticeDomain);
+        return findById(noticeDTO.getId());
+    }
+
+
+    public void delete(Long id) {
+        noticeRepository.deleteById(id);
+    }
     
 }
