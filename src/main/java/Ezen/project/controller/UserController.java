@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import Ezen.project.DTO.UserDTO;
+import Ezen.project.DTO.UserDTO;
 import Ezen.project.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,8 @@ public class UserController {
 
     @PostMapping("/user/memberjoin")
     // modelattribute 생략가능하나 사용하는게 좋음
-    public String userSave(@ModelAttribute UserDTO userDTO){
-        System.out.println("userDTO = "+userDTO);
+    public String userSave(@ModelAttribute UserDTO userDTO) {
+        System.out.println("userDTO = " + userDTO);
 
         userService.save(userDTO);
         return "user/login";

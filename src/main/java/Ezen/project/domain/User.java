@@ -19,26 +19,26 @@ import lombok.Data;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;             //유저 고유번호
+    private Long id; // 유저 고유번호
     @Column(name = "userAge")
-    private Integer userAge;        //유저 주민번호
+    private Integer userAge; // 유저 주민번호
     @Column(name = "userAuthority")
-    private Integer userAuthority;  //유저 권한
+    private Integer userAuthority; // 유저 권한
     @Column(name = "userId")
-    private String userId;          //유저 아이디
+    private String userId; // 유저 아이디
     @Column(name = "userPassword")
-    private String userPassword;    //유저 비밀번호
+    private String userPassword; // 유저 비밀번호
     @Column(name = "userName")
-    private String userName;        //유저 이름
+    private String userName; // 유저 이름
     @Column(name = "userPhoneNumber")
-    private String userPhoneNumber; //유저 핸드폰번호
+    private String userPhoneNumber; // 유저 핸드폰번호
     @Column(name = "userEmail")
-    private String userEmail;       //유저 이메일
+    private String userEmail; // 유저 이메일
     @CreationTimestamp
     @Column(name = "joinDate")
-    private Timestamp joinDate;     //유저 가입날짜
-    
-    public static User userSave(UserDTO userDTO){
+    private Timestamp joinDate; // 유저 가입날짜
+
+    public static User userSave(UserDTO userDTO) {
         User user = new User();
         user.setUserId(userDTO.getUserId());
         user.setUserPassword(userDTO.getUserPassword());
@@ -50,7 +50,7 @@ public class User {
         return user;
     }
 
-    public static User userAdminSave(UserDTO userDTO){
+    public static User userAdminSave(UserDTO userDTO) {
         User user = new User();
         user.setUserId(userDTO.getUserId());
         user.setUserPassword(userDTO.getUserPassword());

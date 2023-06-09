@@ -72,5 +72,5 @@ public class UserService {
     public void userupdate(UserDTO userDTO) {
         userRepository.save(User.updateSave(userDTO));
     }
-    
+
 }
