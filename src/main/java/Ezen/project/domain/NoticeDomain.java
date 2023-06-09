@@ -48,15 +48,4 @@ public class NoticeDomain extends BaseNoticeDomain {
         return noticeDomain;
     }
 
-    public static NoticeDomain toUpdateDomain(NoticeDTO noticeDTO) {
-        NoticeDomain noticeDomain = new NoticeDomain();
-        noticeDomain.setNoticeId(noticeDTO.getId());
-        noticeDomain.setUserId(noticeDTO.getUserId());
-        noticeDomain.setNoticeTitle(noticeDTO.getTitle());
-        noticeDomain.setNoticeContent(noticeDTO.getContent());
-        noticeDomain.setNoticeWriteDate(noticeDTO.getWriteDate());
-        noticeDomain.setNoticeFile(noticeDTO.getNoticeFile());
-        return noticeDomain;
-    }
-
 }

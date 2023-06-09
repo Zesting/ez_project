@@ -47,7 +47,7 @@ public class NoticeService {
 
 
     public NoticeDTO update(NoticeDTO noticeDTO) {
-        NoticeDomain noticeDomain = NoticeDomain.toUpdateDomain(noticeDTO);
+        NoticeDomain noticeDomain = NoticeDomain.toSaveEntity(noticeDTO);
         noticeRepository.save(noticeDomain);
         return findById(noticeDTO.getId());
     }
