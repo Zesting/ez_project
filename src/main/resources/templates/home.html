@@ -9,12 +9,23 @@
   </head>
   <body>
     <p>Hello Project</p>
-    <div><a th:href="@{/list}">출력</a></div>
     <div><a href="/memberjoin">회원가입</a></div>
-    <div><a href="/login"></a></div>
+    <div><a href="/login">로그인</a></div>
+    <div><a href="/userlist">회원목록</a></div>
+    <div><a href="/userupdate">내정보수정하기</a></div>
     <a href="/paymentList"><button>결제리스트</button></a>
     <a href="/iamport"><button>결제API테스트</button></a>
+    <br /><br />
     <div><a href="/notice">공지사항</a></div>
+
+    <a th:href="@{/room}"><button>Room_List</button></a>
+    <a th:href="@{/createRoom}"><button>Create_Room</button></a>
+    <a th:href="@{/modifyRoom}"><button>Modify_Room</button></a>
+    <a th:href="@{/dropRoom}"><button>Drop_Room</button></a><br />
+    <a th:href="@{/reservation/list}"><button>Reservation</button></a>
+    <a th:href="@{/reservation/selectDate}"
+      ><button>Create_Reservation</button></a
+    >
     <div><a href="/adminPage">관리자페이지</a></div>
 
   </body>

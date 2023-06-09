@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +7,11 @@
     <title>로그인</title>
 </head>
 <body>
+    <form action="/user/login" method="post">
+        <input type="text" name="userId" placeholder="ID">
+        <input type="password" name="userPassword" placeholder="PASSWORD">
+        <button type="submit">로그인</button>
+    </form>
     
 </body>
 </html>
