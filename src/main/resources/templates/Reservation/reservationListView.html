@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Project</title>
+    <style>
+      tbody td {
+        text-align: center;
+        border: 1px dotted #555;
+      }
+      thead td {
+        text-align: center;
+        border: 3px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <td>예약 고유 번호</td>
+          <td>예약한 회원 고유 번호</td>
+          <td>회원이 예약한 룸 고유 번호</td>
+          <td>체크 인 날짜</td>
+          <td>체크 아웃 날짜</td>
+          <td>예약한 날짜</td>
+          <td>최종 예약 금액</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="reservationList : ${reservationList}">
+          <td th:text="${reservationList.reservationId}"></td>
+          <td th:text="${reservationList.userId}"></td>
+          <td th:text="${reservationList.roomId}"></td>
+          <td th:text="${reservationList.checkIn}"></td>
+          <td th:text="${reservationList.checkOut}"></td>
+          <td th:text="${reservationList.reservationDate}"></td>
+          <td th:text="${reservationList.finalPrice}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
