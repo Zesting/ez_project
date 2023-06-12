@@ -86,6 +86,10 @@ public class ReservationController {
         CheckDTO finalDTO = (CheckDTO) session.getAttribute("checkDTO");
         System.out.println("finalDTO : " + finalDTO);
         Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return "str";
+        }
+
         UserDTO logInUser = userService.findById(userId);
         System.out.println("logInUser :" + logInUser);
 

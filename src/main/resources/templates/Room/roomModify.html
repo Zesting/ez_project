@@ -13,22 +13,28 @@
         <input
           type="text"
           name="roomId"
-          th:value="${testRoom.roomId}"
+          th:value="${roomData.roomId}"
           readonly />
-        <input type="text" name="roomName" th:value="${testRoom.roomName}" />
+        <hr />
+        <input type="text" name="roomName" th:value="${roomData.roomName}" />
+        <hr />
         <input
           type="number"
           name="roomPrice"
-          th:value="${testRoom.roomPrice}" />
-        <input type="text" name="roomType" th:value="${testRoom.roomType}" />
+          th:value="${roomData.roomPrice}" />
+        <hr />
+        <input type="text" name="roomType" th:value="${roomData.roomType}" />
+        <hr />
         <input
           type="text"
           name="roomDetailInfo"
-          th:value="${testRoom.roomDetailInfo}" />
+          th:value="${roomData.roomDetailInfo}" />
+        <hr />
         <input
           type="text"
           name="roomImagePath"
-          th:value="${testRoom.roomImagePath}" />
+          th:value="${roomData.roomImagePath}" />
+        <hr />
         <input type="submit" />
       </form>
     </div>
