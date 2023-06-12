@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/memberjoin")
-    public String userJoin(){
+    public String userJoin() {
         return "user/memberjoin";
     }
 
@@ -28,29 +28,30 @@ public class UserController {
     // modelattribute 생략가능하나 사용하는게 좋음
     public String userSave(@ModelAttribute UserDTO userDTO) {
         System.out.println("userDTO = " + userDTO);
-
-        userService.save(userDTO);
+        
+        userService.save(userDTO); //회원가입
         return "user/login";
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "user/login";
     }
 
     @PostMapping("/user/login")
-    public String userLogin(@ModelAttribute UserDTO userDTO, HttpSession session){
+    public String userLogin(@ModelAttribute UserDTO userDTO, HttpSession session) {
+        // 로그인 아이디 비밀번호 일치여부확인
         UserDTO result = userService.login(userDTO);
-        if(result != null){
+        if (result != null) {
             session.setAttribute("userId", result.getUserId());
             return "home";
-        }else{
+        } else {
             return "user/login";
         }
     }
-    
+
     @GetMapping("/userlist")
-    public String findAll(Model model){
+    public String findAll(Model model) {
         List<UserDTO> userDTOList = userService.findAll();
         System.out.println(userDTOList);
 
@@ -59,24 +60,31 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public String findById(@PathVariable Long id,Model model){
+    public String findById(@PathVariable Long id, Model model) {
         UserDTO userDTO = userService.findById(id);
-              model.addAttribute("user", userDTO);
+        model.addAttribute("user", userDTO);
         return "user/userdetail";
     }
- 
+
     @GetMapping("/userupdate")
-    public String userUpdate(HttpSession session, Model model){
-        String userId = (String)session.getAttribute("userId");
+    public String userUpdate(HttpSession session, Model model) {
+        String userId = (String) session.getAttribute("userId");
         UserDTO userDTO = userService.update(userId);
         model.addAttribute("updateuser", userDTO);
         return "user/userupdate";
     }
 
     @PostMapping("/user/update")
-    public String update(@ModelAttribute UserDTO userDTO){
+    public String update(@ModelAttribute UserDTO userDTO) {
         userService.userupdate(userDTO);
-        return "redirect:/user" + userDTO.getId();
+        return "redirect:/user/" + userDTO.getId();
+    }
+
+    @GetMapping("/user/delete/{id}")
+    public String delete(@PathVariable Long id){
+        userService.delete(id);
+
+        return "redirect:/userlist";
     }
 
 }
