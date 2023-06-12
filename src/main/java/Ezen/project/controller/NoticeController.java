@@ -1,5 +1,6 @@
 package Ezen.project.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -39,7 +40,7 @@ public class NoticeController {
 
     //작성 폼 전달
     @PostMapping("/notice/save")
-    public String save(@ModelAttribute NoticeDTO noticeDTO){
+    public String save(@ModelAttribute NoticeDTO noticeDTO) throws IllegalStateException, IOException{
         Long saveId = noticeService.save(noticeDTO);
         return "redirect:/notice/" + saveId;
     }

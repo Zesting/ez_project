@@ -1,5 +1,7 @@
 package Ezen.project.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,9 +11,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import Ezen.project.DTO.NoticeDTO;
 import Ezen.project.domain.NoticeDomain;
+import Ezen.project.domain.NoticeFileDomain;
+import Ezen.project.repository.NoticeFileRepository;
 import Ezen.project.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -20,12 +25,46 @@ import lombok.RequiredArgsConstructor;
 public class NoticeService {
 
     private final NoticeRepository noticeRepository;
+    private final NoticeFileRepository noticeFileRepository;
     
     //작성 기능
-    public Long save(NoticeDTO noticeDTO) {
-        NoticeDomain noticeDomain = NoticeDomain.toSaveEntity(noticeDTO);
-        noticeRepository.save(noticeDomain);
-        return noticeDomain.getNoticeId();
+    public Long save(NoticeDTO noticeDTO) throws IllegalStateException, IOException {
+        // 파일 첨부 여부에 따라 로직 분리
+            //첨부 파일 없을 때
+        if(noticeDTO.getNoticeFile().isEmpty()){
+            NoticeDomain noticeDomain = NoticeDomain.toSaveEntity(noticeDTO);
+            noticeRepository.save(noticeDomain);
+            return noticeDomain.getNoticeId();
+            //첨부 파일 있을 때
+        } else {
+            
+            /*
+                1. DTO에 담긴 파일을 꺼냄
+                2. 파일의 이름 가져옴
+                3. 서버 저장용 이름 생성
+                // 내사진.jpg => 283758923523_내사진.jpg
+                4. 저장 경로 설정
+                5. 해당 경로에 파일 저장
+                6. notice 테이블에 해당 데이터 save 처리
+                7. notice 파일 테이블에 해당 데이터 save 처리
+             */
+            MultipartFile noticeFile = noticeDTO.getNoticeFile();       //1
+            String originalFileName = noticeFile.getOriginalFilename(); //2
+            String storedFileName = System.currentTimeMillis()+"_"+originalFileName; //3
+            String savePath = "C:/notice_img/" + storedFileName; // C:/notic_img/235235_내사진.jpg //4
+            noticeFile.transferTo(new File(savePath)); //5
+
+            NoticeDomain noticeDomain = NoticeDomain.toSaveFileEntity(noticeDTO);
+            Long savedId = noticeRepository.save(noticeDomain).getNoticeId();
+            NoticeDomain board = noticeRepository.findById(savedId).get();
+
+            NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(board, originalFileName, storedFileName);
+            noticeFileRepository.save(noticeFileDomain);
+            return noticeFileDomain.getId();
+            
+        }
+        
+        
     }
 
     //공지 테이블 모든 데이터 값 찾는 기능
