@@ -24,16 +24,27 @@
       </thead>
       <tbody>
         <tr th:each="roomList : ${roomList}">
-          <td th:text="${roomList.roomId}" style="text-align: center"></td>
+          <td
+            th:text="${roomList.roomId}"
+            id="roomId"
+            style="text-align: center"></td>
           <td th:text="${roomList.roomName}"></td>
           <td th:text="${roomList.roomPrice}"></td>
           <td th:text="${roomList.roomType}"></td>
           <td th:text="${roomList.roomDetailInfo}"></td>
           <td th:text="${roomList.roomImagePath}"></td>
-          <td><a th:href="@{|/Room/modify/${roomList.roomId}|}">수정</a></td>
-          <td><a th:href="@{|/Room/delete/${roomList.roomId}|}">삭제</a></td>
+          <td><a th:href="@{|/Rooms/modify/${roomList.roomId}|}">수정</a></td>
+          <td><a th:href="@{|/Rooms/drop/${roomList.roomId}|}">삭제</a></td>
         </tr>
       </tbody>
     </table>
+
+    <script>
+      const roomId = $("#roomId").val();
+      $.ajax({
+        type: "get",
+        url: "/Room/modify/" + roomId,
+      });
+    </script>
   </body>
 </html>

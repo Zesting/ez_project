@@ -19,9 +19,10 @@ public class RoomService {
 
     // 룸 추가 기능[관리자 파트] (비지니스 로직)
     @Transactional // AOP
-    public Long roomJoin(Room room) {
+    public Optional<Room> roomJoin(RoomDTO roomDTO) {
+        Room room = roomConverter(roomDTO);
         roomRepository.save(room);
-        return room.getRoomId();
+        return Optional.of(room);
     }
 
     // 룸 전체 조회 기능[관리자 파트] (비지니스 로직)
@@ -35,8 +36,8 @@ public class RoomService {
     @Transactional(readOnly = true)
     public Optional<Room> findRoomById(Long roomId) {
         Optional<Room> room = roomRepository.findById(roomId);
-        Room roomtemp = room.get();
-        roomtemp.setRoomName("이상한이름");
+        // Room roomtemp = room.get();
+        // roomtemp.setRoomName("이상한이름");
         if (room.isPresent()) {
             System.out.println("조회된 room : " + room.get());
             return room;
@@ -61,18 +62,11 @@ public class RoomService {
 
     // 룸 객체 정보 변경 기능[관리자 파트] (비지니스 로직)
     @Transactional
-    public Optional<Room> modifyRoom(Room room) {
-        System.out.println("룸 객제 정보 변경 시작");
-        if (!(room.getRoomId() == null)) {
-            Optional<Room> roomOptional = roomRepository.findById(room.getRoomId());
-            if (roomOptional.isPresent()) {
-                // Room updateRoom = roomOptional.get();
-                // updateRoom.setRoomName(room.getRoomName());
-                // updateRoom.setRoomPrice(room.getRoomPrice());
-                // updateRoom.setRoomType(room.getRoomType());
-                // updateRoom.setRoomDetailInfo(room.getRoomDetailInfo());
-                // updateRoom.setRoomImagePath(room.getRoomImagePath());
-                System.out.println("룸 서비스 if문 시작");
+    public Optional<Room> modifyRoom(RoomDTO roomDTO) {
+        if (!(roomDTO.getRoomId() == null)) {
+            Optional<Room> roomOptionalDTO = roomRepository.findById(roomDTO.getRoomId());
+            if (roomOptionalDTO.isPresent()) {
+                Room room = roomConverter(roomDTO);
                 roomRepository.save(room);
                 return Optional.of(room);
             } else {
