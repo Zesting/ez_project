@@ -2,12 +2,16 @@ package Ezen.project.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import Ezen.project.DTO.NoticeDTO;
 import Ezen.project.service.NoticeService;
@@ -69,6 +73,13 @@ public class NoticeController {
     public String delete(@PathVariable Long id){
         noticeService.delete(id);
         return "redirect:/notice";
+    }
+
+    //페이징 처리
+    @GetMapping("/notice/paging")
+    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
+        // pageable.get
+        return null;
     }
 
 }

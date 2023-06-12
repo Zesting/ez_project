@@ -17,8 +17,12 @@
     <a href="/iamport"><button>결제API테스트</button></a>
     <br /><br />
     <div><a href="/notice">공지사항</a></div>
+    <div>
+      <button onclick="pagingReq()">페이징 목록</button>
+    </div>
+    
     <br>
-    <div><a href="/wedding/save">웨딩</a></div>
+    <div><a href="/wedding/save">웨딩(문의하기)</a></div>
     <div><a href="/weddingBoard">문의게시판</a></div>
     <br>
     <a th:href="@{/room}"><button>Room_List</button></a>
@@ -32,4 +36,10 @@
     <div><a href="/adminPage">관리자페이지</a></div>
 
   </body>
+
+  <script>
+        const pagingReq = () => {
+            location.href = "/notice/paging";
+        }
+    </script>
 </html>
