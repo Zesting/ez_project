@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h3>웨딩</h3>
+        <h2>문의</h2>
+    </div>
+    <form action="/wedding/save" method="post">
+        <fieldset>
+            <legend>작성자 정보</legend>
+            <div>
+                <p>아이디</p>
+                <input type="text" name="userId"><br>
+                <p>성명</p>
+                <input type="text" name="userName"><br>
+                <p>이메일</p>
+                <input type="text" name="userEmail"><br>
+                <p>연락처</p>
+                <input type="text"name="userPhoneNumber"><br>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>예식정보</legend>
+            <div>
+                <p>예정일</p>
+                <input type="date" name="weddingDueDate"><br>
+                <p>요청사항</p>
+                <p>제목</p>
+                <input type="text" name="weddingTitle"><br>
+                <p>내용</p>
+                <textarea type="text"name="weddingContent"></textarea><br>
+            </div>
+        </fieldset>
+
+        <div>
+            <button type="submit"><span>접수하기</span></button>
+            <a href="#"><span>취소</span></a>
+        </div>
+    </form>
+    
+</body>
+</html>
