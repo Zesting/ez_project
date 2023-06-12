@@ -18,6 +18,13 @@ public class NoticeDTO {
     private LocalDateTime writeDate;        //DTO 공지글 작성일
     private byte[] noticeFile;      //DTO 공지글 첨부파일
 
+    public NoticeDTO(Long id, Long userId, String title, LocalDateTime writeDate) {
+        this.id =id;
+        this.userId = userId;
+        this.title = title;
+        this.writeDate = writeDate;
+    }
+
     //Entity에서 DTO로 데이터 전송
     public static NoticeDTO toNoticeDTO(NoticeDomain noticeDomain){
         NoticeDTO noticeDTO = new NoticeDTO();

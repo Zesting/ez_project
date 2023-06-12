@@ -15,14 +15,14 @@
     <table>
         <tr>
             <th>id</th>
-            <th>title</th>
             <th>writer</th>
+            <th>title</th>
             <th>date</th>
         </tr>
         <tr th:each="notice: ${noticeList}">
             <td th:text="${notice.id}"></td>
-            <td><a th:href="@{|notice/${notice.id}|}" th:text="${notice.title}"></a></td>
             <td th:text="${notice.userId}"></td>
+            <td><a th:href="@{|notice/${notice.id}|}" th:text="${notice.title}"></a></td>
             <td th:text="*{#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
     </table>

@@ -16,10 +16,14 @@
     <a href="/paymentList"><button>결제리스트</button></a>
     <a href="/iamport"><button>결제API테스트</button></a>
     <br /><br />
-    <div><a href="/notice">공지사항</a></div>
-    <br />
-    <div><a href="/wedding/save">웨딩</a></div>
-    <div><a href="/weddingBoard">문의게시판</a></div>
+    <div><a href="/notice">공지사항(페이징 없음)</a></div>
+    <div>
+      <button onclick="pagingReq()">페이징 목록보기</button>
+    </div>
+    
+    <br>
+    <div><a href="/wedding/save">웨딩(폼)</div>
+    <div><a href="/weddingBoard">문의게시판(관리자가 볼 테이블)</a></div>
     <br />
     <a th:href="@{/Rooms}"><button>Room_List</button></a>
     <a th:href="@{/Rooms/add}"><button>Create_Room</button></a>
@@ -29,4 +33,10 @@
     >
     <div><a href="/adminPage">관리자페이지</a></div>
   </body>
+
+  <script>
+        const pagingReq = () => {
+            location.href = "/notice/paging";
+        }
+    </script>
 </html>
