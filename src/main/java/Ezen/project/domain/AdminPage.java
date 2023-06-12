@@ -1,5 +1,6 @@
 package Ezen.project.domain;
 
+import Ezen.project.DTO.AdminPageDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,8 +14,8 @@ import lombok.Data;
 @Table(name = "adminpage")
 public class AdminPage {
   
-  @Id //기본키 설정
-  @GeneratedValue(strategy = GenerationType.IDENTITY) //자동 증가
+  @Id //기본키 설정 , 필수
+  @GeneratedValue(strategy = GenerationType.IDENTITY) //Auto Increment
   @Column(name = "id")
   private Long adminId; //관리자고유번호(PK)
 
@@ -35,4 +36,17 @@ public class AdminPage {
 
   @Column(name = "reservationId")
   private Long reservationId; //예약고유번호(FK)
+
+  //DTO -> Entity 로 변환
+  public static AdminPage toSaveEntity(AdminPageDTO adminPageDTO){
+    AdminPage adminPage = new AdminPage();
+    adminPage.setAdminId(adminPageDTO.getAdminId());
+    adminPage.setUserId(adminPageDTO.getUserId());
+    adminPage.setNoticeId(adminPageDTO.getNoticeId());
+    adminPage.setWeddingId(adminPageDTO.getWeddingId());
+    adminPage.setRoomId(adminPageDTO.getRoomId());
+    adminPage.setPaymentId(adminPageDTO.getPaymentId());
+    adminPage.setReservationId(adminPageDTO.getReservationId());
+    return adminPage;
+  }
 }

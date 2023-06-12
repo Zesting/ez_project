@@ -6,6 +6,7 @@ package Ezen.project.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import Ezen.project.domain.Room;
+import java.util.List;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
@@ -26,4 +27,5 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     /** 룸 정보 삭제(매개변수 roomId) */
     // void delete(Long roomId);
+    List<Room> findByRoomType(String roomType);
 }

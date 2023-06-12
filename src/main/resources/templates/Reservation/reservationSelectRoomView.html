@@ -6,8 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Project</title>
+    <style>
+      tbody td {
+        text-align: center;
+        border: 1px dotted #555;
+      }
+      thead td {
+        text-align: center;
+        border: 3px solid black;
+      }
+    </style>
   </head>
   <body>
-    <p>test</p>
+    <table>
+      <thead>
+        <tr>
+          <td>Check_IN</td>
+          <td>Check_OUT</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td th:text="${checkDTO.checkIn}"></td>
+          <td th:text="${checkDTO.checkOut}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+
+    <table>
+      <thead>
+        <tr>
+          <td>예약 가능한 방 고유 아이디</td>
+          <td>예약 가능한 방 이름</td>
+          <td>룸 기본 가격</td>
+          <td>룸 타입</td>
+          <td>룸 상세 설명</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each=" roomList : ${roomList}">
+          <form action="/reservation/selectRoom" method="post">
+            <td>
+              <input name="roomId" th:value="${roomList.roomId}" />
+            </td>
+            <td>
+              <input name="roomName" th:value="${roomList.roomName}" />
+            </td>
+            <td>
+              <input name="roomPrice" th:value="${roomList.roomPrice}" />
+            </td>
+            <td>
+              <input name="roomType" th:value="${roomList.roomType}" />
+            </td>
+            <td>
+              <input
+                name="roomDetailInfo"
+                th:value="${roomList.roomDetailInfo}" />
+            </td>
+            <td><input type="submit" /></td>
+          </form>
+        </tr>
+      </tbody>
+    </table>
   </body>
 </html>

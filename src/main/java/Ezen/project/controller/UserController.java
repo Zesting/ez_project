@@ -21,6 +21,7 @@ public class UserController {
 
     @GetMapping("/memberjoin")
     public String userJoin() {
+    public String userJoin() {
         return "user/memberjoin";
     }
 
@@ -35,6 +36,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
+    public String login() {
         return "user/login";
     }
 
@@ -43,14 +45,16 @@ public class UserController {
         // 로그인 아이디 비밀번호 일치여부확인
         UserDTO result = userService.login(userDTO);
         if (result != null) {
-            session.setAttribute("userId", result.getUserId());
+            session.setAttribute("userId", result.getId());
             return "home";
         } else {
             return "user/login";
         }
     }
 
+
     @GetMapping("/userlist")
+    public String findAll(Model model) {
     public String findAll(Model model) {
         List<UserDTO> userDTOList = userService.findAll();
         System.out.println(userDTOList);
@@ -60,6 +64,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
+    public String findById(@PathVariable Long id, Model model) {
     public String findById(@PathVariable Long id, Model model) {
         UserDTO userDTO = userService.findById(id);
         model.addAttribute("user", userDTO);

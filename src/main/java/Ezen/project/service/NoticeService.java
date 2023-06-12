@@ -17,13 +17,14 @@ public class NoticeService {
 
     private final NoticeRepository noticeRepository;
     
-
-    public void save(NoticeDTO noticeDTO) {
+    //작성 기능
+    public Long save(NoticeDTO noticeDTO) {
         NoticeDomain noticeDomain = NoticeDomain.toSaveEntity(noticeDTO);
         noticeRepository.save(noticeDomain);
+        return noticeDomain.getNoticeId();
     }
 
-
+    //공지 테이블 모든 데이터 값 찾는 기능
     public List<NoticeDTO> findAll() {
         List<NoticeDomain> noticeDomainList = noticeRepository.findAll();
         List<NoticeDTO> noticeDTOList = new ArrayList<>();
@@ -33,7 +34,7 @@ public class NoticeService {
         return noticeDTOList;
     }
 
-
+    //아이디 값만 찾는 기능 (상세보기)
     public NoticeDTO findById(Long id) {
         Optional<NoticeDomain> optionalNoticeDomain = noticeRepository.findById(id);
         if(optionalNoticeDomain.isPresent()){
@@ -47,7 +48,7 @@ public class NoticeService {
 
 
     public NoticeDTO update(NoticeDTO noticeDTO) {
-        NoticeDomain noticeDomain = NoticeDomain.toUpdateDomain(noticeDTO);
+        NoticeDomain noticeDomain = NoticeDomain.toSaveEntity(noticeDTO);
         noticeRepository.save(noticeDomain);
         return findById(noticeDTO.getId());
     }

@@ -10,23 +10,38 @@
   <!-- iamport.payment.js-->
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
   <title>호텔</title>
+  <style>
+    .kakaopayBtn{
+      border: none;
+    }
+  </style>
 </head>
 
 <body>
   <div>
+    <!-- 여기는 아임포트 연동으로 결제 준비 만하고 아직 승인 부분은 하지 않았다. -->
     <h2>IAMPORT 결제 데모</h2>
     <li> <button id="iamportPayment" type="button">통합결제API샘플</button> </li>
     <li> <button id="KakaoPayment" type="button">카카오페이API샘플</button> </li>
   </div>
-  <div>
-    <form method="post" action="/payment">
-      <button>카카오페이로 결제하기</button>
-    </form>
-  </div>
+  <hr>
+  
+  <!-- 여기는 카카오가 만든 카카오페이API임 -->
+  <h2> kakaoPay api 이용하기 </h2>
+ 
+<form method="post" action="/kakaoPay">
+    <button>카카오페이로 결제하기</button>
+</form>
 
-  <button onclick="payBtn()">결제버튼</button>
+<!-- 여기는 카카오페이 아이콘으로 결제 연동한거 ( 아임포트 ) -->
+<hr>
+  <button onclick="KakaoPayment()" class="kakaopayBtn"><img th:src="@{/images/payment_icon_yellow_medium.png}" alt="카카오페이"></button>
+
+
+  
   <script type="text/javascript"> //문서가 준비되면 제일 먼저 실행
 
+    //이니시스 API 연동
     $(document).ready(function () {
       $("#iamportPayment").click(function () {
         iamportPayment(); //버튼 클릭하면 호출
@@ -39,7 +54,7 @@
         // pg: "kakaopay", //pg사명 or pg사명.CID (잘못 입력할 경우, 기본 PG사가 띄워짐)
         pg: "html5_inicis", //pg사명 or pg사명.CID (잘못 입력할 경우, 기본 PG사가 띄워짐)
         pay_method: "card", //지불 방법
-        merchant_uid: "order_no_0005",//가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+        merchant_uid: "order_no_0009",//가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
         name: "주문명:결제테스트", //결제창에 노출될 상품명
         amount: 20000, //금액
         buyer_email: "choonsik@naver.com",
@@ -57,19 +72,19 @@
       });
     }
 
-
+    //카카오페이 API 연동
     $(document).ready(function () {
       $("#KakaoPayment").click(function () {
         KakaoPayment(); //버튼 클릭하면 호출
       });
     }) //버튼 클릭하면 실행
-    function KakaoPayment() {
+    function KakaoPayment() {//매개변수로 주문명, 금액 등 필요한거 넣으면 됨
       var IMP = window.IMP; // 생략 가능
       IMP.init('imp63442658');//아임포트 관리자 콘솔에서 확인한 '가맹점 식별코드' 입력 / 예: imp00000000
       IMP.request_pay({// param
         pg: "kakaopay", //pg사명 or pg사명.CID (잘못 입력할 경우, 기본 PG사가 띄워짐)
-        pay_method: "card", //지불 방법
-        merchant_uid: "order_no_0005",//가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
+        pay_method: "kakaopay", //지불 방법
+        merchant_uid: "merchant_"+new Date().getTime,//가맹점 주문번호 (아임포트를 사용하는 가맹점에서 중복되지 않은 임의의 문자열을 입력)
         name: "주문명:결제테스트", //결제창에 노출될 상품명
         amount: 20000, //금액
         // buyer_email: "choonsik@naver.com",
@@ -77,11 +92,19 @@
         // buyer_tel: "01012341234",
         // buyer_addr: '서울특별시 강남구 삼성동',
         // buyer_postcode: '123-456',
-        m_redirect_url: '{http://localhost:8080/iamport}' // 예: https://www.my-service.com/payments/complete/mobile
-      }, function (rsp) { // callback 로직
-        if (rsp.success) {
+
+        //m_redirect_url로 설정을 하면 결제완료 이후에 해당 URL주소로 결제결과를 쿼리스트링(Query String)형태로 전송해준다.
+        //Query String이란 URL뒤에 전달하는 가장 단순한 방법으로 주로 GET요청과 함께 데이터를 전송할 때 사용합니다.
+        // m_redirect_url: '{http://localhost:8080/iamport}' // 예: https://www.my-service.com/payments/complete/mobile
+      }, function (rsp) { // callback 로직 >>리디렉션의 경우 콜백로직은 실행되지 않음.
+        if (rsp.success) {//결제 성공시 로직
+          //종민
+          //폼객체 생성 - 바디에 붙이기
+          //form에 포스트 주소할 어트리뷰트, 메서드 포스트
+          //form.submit();
+
           alert("[완료] imp_uid : " + rsp.imp_uid + " / merchant_uid : " + rsp.merchant_uid);
-        } else {
+        } else {//결제 실패시 로직
           alert("[실패]코드(" + rsp.error_code + ") / 메세지(" + rsp.error_msg + ")");
         }
       });

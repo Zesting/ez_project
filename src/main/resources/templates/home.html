@@ -9,7 +9,6 @@
   </head>
   <body>
     <p>Hello Project</p>
-    <div><a th:href="@{/list}">출력</a></div>
     <div><a href="/memberjoin">회원가입</a></div>
     <div><a href="/login">로그인</a></div>
     <div><a href="/userlist">회원목록</a></div>
@@ -18,14 +17,18 @@
     <a href="/iamport"><button>결제API테스트</button></a>
     <br /><br />
     <div><a href="/notice">공지사항</a></div>
-
-    <a th:href="@{/room}"><button>Room_List</button></a>
-    <a th:href="@{/createRoom}"><button>Create_Room</button></a>
-    <a th:href="@{/modifyRoom}"><button>Modify_Room</button></a>
-    <a th:href="@{/dropRoom}"><button>Drop_Room</button></a><br />
+    <br />
+    <div><a href="/wedding/save">웨딩</a></div>
+    <div><a href="/weddingBoard">문의게시판</a></div>
+    <br />
+    <a th:href="@{/Room/list}"><button>Room_List</button></a>
+    <a th:href="@{/Room/create}"><button>Create_Room</button></a>
+    <a th:href="@{/modify}"><button>Modify_Room</button></a>
+    <a th:href="@{/drop}"><button>Drop_Room</button></a><br />
     <a th:href="@{/reservation/list}"><button>Reservation</button></a>
     <a th:href="@{/reservation/selectDate}"
       ><button>Create_Reservation</button></a
     >
+    <div><a href="/adminPage">관리자페이지</a></div>
   </body>
 </html>
