@@ -39,6 +39,18 @@
           <td th:text="${reservationList.checkOut}"></td>
           <td th:text="${reservationList.reservationDate}"></td>
           <td th:text="${reservationList.finalPrice}"></td>
+          <td>
+            <a
+              th:href="@{|/reservation/modify/${reservationList.reservationId}|}"
+              >수정</a
+            >
+          </td>
+          <td>
+            <a
+              th:href="@{|/reservation/delete/${reservationList.reservationId}|}"
+              >삭제</a
+            >
+          </td>
         </tr>
       </tbody>
     </table>

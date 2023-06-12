@@ -4,15 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import Ezen.project.DTO.CheckDTO;
+import Ezen.project.DTO.ReservationDTO;
 import Ezen.project.DTO.RoomDTO;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.domain.Reservation;
@@ -42,7 +45,11 @@ public class ReservationController {
 
     // 예약 날짜 선택 뷰 메서드
     @GetMapping("/selectDate")
-    public String reservationSelectDateView() {
+    public String reservationSelectDateView(HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            return "redirect:/login";
+        }
         return "Reservation/reservationSelectDateView";
     }
 
@@ -86,9 +93,6 @@ public class ReservationController {
         CheckDTO finalDTO = (CheckDTO) session.getAttribute("checkDTO");
         System.out.println("finalDTO : " + finalDTO);
         Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) {
-            return "str";
-        }
 
         UserDTO logInUser = userService.findById(userId);
         System.out.println("logInUser :" + logInUser);
@@ -112,6 +116,28 @@ public class ReservationController {
         System.out.println("saveReservation -> " + reservation);
         reservationService.reservationJoin(reservation);
         return "redirect:/";
+    }
+
+    @GetMapping(value = "/modify/{id}")
+    public String modifyView(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("reservation", reservationService.findOneReservationById(id).get());
+        return "Reservation/modifyView";
+    }
+
+    @PostMapping(value = "/modify/{id}")
+    public String modifyReservation(@PathVariable("id") Long id, ReservationDTO reservationDTO) {
+        Optional<Reservation> reservation = reservationService.findOneReservationById(id);
+        if (reservation.isPresent()) {
+            reservationService.modifyReservation(reservationDTO);
+        }
+        return "redirect:/reservation/list";
+    }
+
+    @GetMapping(value = "/delete/{id}")
+    public String deleteReservation(@PathVariable("id") Long id) {
+        reservationService.verificationReservation(id);
+        reservationService.dropReservation(id);
+        return "redirect:/reservation/list";
     }
 
 }
