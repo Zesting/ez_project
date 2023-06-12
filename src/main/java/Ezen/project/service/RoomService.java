@@ -18,7 +18,7 @@ public class RoomService {
     private final RoomRepository roomRepository;
 
     // 룸 추가 기능[관리자 파트] (비지니스 로직)
-    @Transactional
+    @Transactional // AOP
     public Long roomJoin(Room room) {
         roomRepository.save(room);
         return room.getRoomId();
@@ -35,6 +35,8 @@ public class RoomService {
     @Transactional(readOnly = true)
     public Optional<Room> findRoomById(Long roomId) {
         Optional<Room> room = roomRepository.findById(roomId);
+        Room roomtemp = room.get();
+        roomtemp.setRoomName("이상한이름");
         if (room.isPresent()) {
             System.out.println("조회된 room : " + room.get());
             return room;
