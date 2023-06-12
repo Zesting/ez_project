@@ -59,7 +59,7 @@ public class RoomController {
         return "Room/roomModify";
     }
 
-    // 룸 객체 데이터 수정 로직 메서드
+    // 룸 객체 데이터 메서드
     @PostMapping("/modifyRoom")
     public String roomModify(RoomDTO roomDTO) {
         System.out.println("roomDTO : " + roomDTO);

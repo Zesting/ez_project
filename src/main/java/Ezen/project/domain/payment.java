@@ -2,6 +2,8 @@ package Ezen.project.domain;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +33,7 @@ public class Payment {
     @Column(name = "payType")
     private String payType;
     
-    //시간은 @CreateDate 어노테이션이 있다. 어찌할지 체크
+    @CreationTimestamp
     @Column(name = "payTime")
     private LocalDateTime payTime;
 
