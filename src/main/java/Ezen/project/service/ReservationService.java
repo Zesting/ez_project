@@ -1,6 +1,7 @@
 package Ezen.project.service;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import Ezen.project.DTO.ReservationDTO;
 import Ezen.project.domain.Reservation;
 import Ezen.project.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
@@ -55,11 +57,13 @@ public class ReservationService {
 
     // 예약 변경 기능[회원 파트](비지니스 로직)
     @Transactional
-    public Optional<Reservation> modifyReservation(Reservation reservation) {
+    public Optional<Reservation> modifyReservation(ReservationDTO reservationDTO) {
         System.out.println("예약 객체 정보 변경 시작");
-        if (!(reservation == null)) {
-            Optional<Reservation> reservationOptional = reservationRepository.findById(reservation.getReservationId());
+        if (!(reservationDTO == null)) {
+            Optional<Reservation> reservationOptional = reservationRepository
+                    .findById(reservationDTO.getReservationId());
             if (reservationOptional.isPresent()) {
+                Reservation reservation = converter(reservationDTO);
                 reservationRepository.save(reservation);
                 return Optional.of(reservation);
             } else {
@@ -68,6 +72,19 @@ public class ReservationService {
         } else {
             return Optional.empty();
         }
+    }
+
+    public Reservation converter(ReservationDTO reservationDTO) {
+
+        Reservation reservation = new Reservation();
+        reservation.setReservationId(reservationDTO.getReservationId());
+        reservation.setRoomId(reservationDTO.getRoomId());
+        reservation.setUserId(reservationDTO.getUserId());
+        reservation.setReservationDate(reservationDTO.getReservationDate());
+        reservation.setCheckIn(reservationDTO.getCheckIn());
+        reservation.setCheckOut(reservationDTO.getCheckOut());
+        reservation.setFinalPrice(reservationDTO.getFinalPrice());
+        return reservation;
     }
 
     // 예약 삭제 기능[회원 파트](비지니스 로직)

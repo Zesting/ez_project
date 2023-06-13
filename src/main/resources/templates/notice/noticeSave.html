@@ -7,11 +7,12 @@
     <title>save</title>
 </head>
 <body>
-    <form action="/notice/save" method="post">
+    <form action="/notice/save" method="post" enctype="multipart/form-data"> <!-- 파일첨부할때 enctype 필수-->
         
     작성자 : <input type="text" name="userId"><br>
     제목 : <input type="text" name="title"><br>
     내용 : <textarea name="content"></textarea><br>
+    파일 : <input type="file" name="noticeFile"><br>
     <input type="submit" value="작성">
     </form> 
 </body>

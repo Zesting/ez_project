@@ -19,13 +19,9 @@ public class UserService {
     public void save(UserDTO userDTO) {
         List<User> userIdFilter = userRepository.findAll().stream()
                 .filter(x -> x.getUserId().equals(userDTO.getUserId())).toList();
-
         if (userIdFilter.isEmpty()) {
-            if (userDTO.getUserPassword().equals("1234!")) {
-                userRepository.save(User.userAdminSave(userDTO));
-            } else {
-                userRepository.save(User.userSave(userDTO));
-            }
+            User user = User.userSave(userDTO);
+            userRepository.save(user);
         }
     }
 

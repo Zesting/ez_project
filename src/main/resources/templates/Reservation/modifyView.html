@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project</title>
+  </head>
+  <body>
+    <div class="container">
+      <form th:action="@{|/reservation/modify/${id}|}" method="post">
+        <input
+          type="number"
+          name="reservationId"
+          th:value="${reservation.reservationId}"
+          readonly />
+        <hr />
+        <input type="number" name="roomId" th:value="${reservation.roomId}" />
+        <hr />
+        <input type="number" name="userId" th:value="${reservation.userId}" />
+        <hr />
+        <input
+          type="text"
+          name="reservationDate"
+          th:value="${reservation.reservationDate}" />
+        <hr />
+        <input type="date" name="checkIn" th:value="${reservation.checkIn}" />
+        <hr />
+        <input type="date" name="checkOut" th:value="${reservation.checkOut}" />
+        <hr />
+        <input
+          type="number"
+          name="finalPrice"
+          th:value="${reservation.finalPrice}" />
+        <hr />
+        <input type="submit" />
+      </form>
+    </div>
+  </body>
+</html>

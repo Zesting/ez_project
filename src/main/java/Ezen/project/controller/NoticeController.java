@@ -1,13 +1,18 @@
 package Ezen.project.controller;
 
+import java.io.IOException;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 
 import Ezen.project.DTO.NoticeDTO;
 import Ezen.project.service.NoticeService;
@@ -35,16 +40,18 @@ public class NoticeController {
 
     //작성 폼 전달
     @PostMapping("/notice/save")
-    public String save(@ModelAttribute NoticeDTO noticeDTO){
+    public String save(@ModelAttribute NoticeDTO noticeDTO) throws IllegalStateException, IOException{
         Long saveId = noticeService.save(noticeDTO);
         return "redirect:/notice/" + saveId;
     }
     
     //글 상세보기
     @GetMapping("/notice/{id}")
-    public String findById(@PathVariable Long id, Model model){
+    public String findById(@PathVariable Long id, Model model, 
+                            @PageableDefault(page=1) Pageable pageable){
         NoticeDTO noticeDTO = noticeService.findById(id);
         model.addAttribute("notice", noticeDTO);
+        model.addAttribute("page", pageable.getPageNumber());
         return "/notice/detail";
     }
 
@@ -69,6 +76,22 @@ public class NoticeController {
     public String delete(@PathVariable Long id){
         noticeService.delete(id);
         return "redirect:/notice";
+    }
+
+    //페이징 처리 /notice/paging?page=1
+    @GetMapping("/notice/paging")
+    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
+        // pageable.getPageNumber();
+        Page<NoticeDTO> noticeList = noticeService.paging(pageable);
+        int blockLimit = 5;
+        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
+        int endPage = ((startPage + blockLimit - 1) < noticeList.getTotalPages()) ? startPage + blockLimit - 1 : noticeList.getTotalPages();
+
+        model.addAttribute("noticeList", noticeList);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        return "/notice/paging";
+        
     }
 
 }

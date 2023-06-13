@@ -40,7 +40,8 @@
     const id = "[[${notice.id}]]"
 
     const listReq = () => {
-        location.href = "/notice";
+        const page = "[[${page}]]";
+        location.href = "/notice/paging?page=" + page;
     }
     const updateReq = () => {
         location.href = "/notice/update/" + id;
