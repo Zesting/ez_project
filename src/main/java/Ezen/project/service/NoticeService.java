@@ -18,6 +18,7 @@ import Ezen.project.domain.NoticeDomain;
 import Ezen.project.domain.NoticeFileDomain;
 import Ezen.project.repository.NoticeFileRepository;
 import Ezen.project.repository.NoticeRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -56,9 +57,9 @@ public class NoticeService {
 
             NoticeDomain noticeDomain = NoticeDomain.toSaveFileEntity(noticeDTO);
             Long savedId = noticeRepository.save(noticeDomain).getNoticeId();
-            NoticeDomain board = noticeRepository.findById(savedId).get();
+            NoticeDomain notice = noticeRepository.findById(savedId).get();
 
-            NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(board, originalFileName, storedFileName);
+            NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(notice, originalFileName, storedFileName);
             noticeFileRepository.save(noticeFileDomain);
             return noticeFileDomain.getId();
             
@@ -68,6 +69,7 @@ public class NoticeService {
     }
 
     //공지 테이블 모든 데이터 값 찾는 기능
+    @Transactional
     public List<NoticeDTO> findAll() {
         List<NoticeDomain> noticeDomainList = noticeRepository.findAll();
         List<NoticeDTO> noticeDTOList = new ArrayList<>();
@@ -78,6 +80,7 @@ public class NoticeService {
     }
 
     //아이디 값만 찾는 기능 (상세보기)
+    @Transactional
     public NoticeDTO findById(Long id) {
         Optional<NoticeDomain> optionalNoticeDomain = noticeRepository.findById(id);
         if(optionalNoticeDomain.isPresent()){

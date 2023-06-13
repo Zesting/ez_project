@@ -23,7 +23,7 @@ public class NoticeDTO {
     // 위 파일 필드는 save.html -> Controller 파일 담는 용도
     private String originalFileName; //원본 파일 이름
     private String storedFileName; // 서버 저장용 파일 이름
-    private int fileAttached; // 파일 첨부 여부(첨부 1, 미첨부 0)
+    private Integer fileAttached; // 파일 첨부 여부(첨부 1, 미첨부 0)
     
 
     public NoticeDTO(Long id, Long userId, String title, LocalDateTime writeDate) {
@@ -42,6 +42,17 @@ public class NoticeDTO {
         noticeDTO.setContent(noticeDomain.getNoticeContent());
         noticeDTO.setWriteDate(noticeDomain.getNoticeWriteDate());
         // noticeDTO.setNoticeFile(noticeDomain.getNoticeFile());
+        if(noticeDomain.getFileAttached() == 0){
+            noticeDTO.setFileAttached(noticeDomain.getFileAttached()); //0
+        } else {
+            noticeDTO.setFileAttached(noticeDomain.getFileAttached()); //1
+            // 파일 이름을 가져가야 함
+            // originalFileName, storedFileName : noticeFile(noticeFileEntity)
+            // join
+            // select * from notice n, noticeFile nf where n.id = nf.id and where n.id = ?
+            noticeDTO.setOriginalFileName(noticeDomain.getNoticeFileDomainList().get(0).getOriginalFileName());
+            noticeDTO.setStoredFileName(noticeDomain.getNoticeFileDomainList().get(0).getStoredFileName());
+        }
         return noticeDTO;
     }
 }

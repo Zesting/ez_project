@@ -84,7 +84,7 @@ public class NoticeController {
         // pageable.getPageNumber();
         Page<NoticeDTO> noticeList = noticeService.paging(pageable);
         int blockLimit = 5;
-        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
+       int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
         int endPage = ((startPage + blockLimit - 1) < noticeList.getTotalPages()) ? startPage + blockLimit - 1 : noticeList.getTotalPages();
 
         model.addAttribute("noticeList", noticeList);
