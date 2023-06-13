@@ -22,11 +22,11 @@ public class RoomController {
     private final RoomService roomService;
 
     // 룸 리스트 출력 메서드
-    @GetMapping(value = "")
-    public String roomList(Model model) {
-        model.addAttribute("roomList", roomService.findAllRoom());
-        return "Room/roomList";
-    }
+    // @GetMapping(value = "")
+    // public String roomList(Model model) {
+    // model.addAttribute("roomList", roomService.findAllRoom());
+    // return "Room/roomList";
+    // }
 
     // 룸 생성 뷰 출력 메서드
     @GetMapping(value = "/add")
