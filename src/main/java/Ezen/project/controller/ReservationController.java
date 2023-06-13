@@ -78,7 +78,6 @@ public class ReservationController {
                 }
             }
         }
-
         roomList.removeAll(roomsToRemove);
         model.addAttribute("roomList", roomList);
         System.out.println(roomList);
