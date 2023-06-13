@@ -1,7 +1,6 @@
 package Ezen.project.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,20 +28,10 @@ public class PaymentService {
     return paymentRepository.findAll();
   }
 
-  public Optional<Payment> findById(Long payId) {
-    return null;
-    }
+  // public Optional<Payment> findById(Long payId) {
+  //   Optional<Payment> test = paymentRepository.findById(payId);
+  //   System.out.println(test);
+  //   return test;
+  //   }
   
-    public Optional<Payment> findByName(String userId) {
-      return null;
-    }
-  
-    public Optional<Payment> update(Payment payment) {
-      return null;
-    }
-  
-    public Long delete(Long payId) {
-      return null;
-      
-    }
 }
