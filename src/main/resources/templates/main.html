@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Galaxy Palace - Hotel Page</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <!-- Add your CSS file path above -->
+    <style>
+        /* CSS styles for the header */
+        header {
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            color: #333;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            color: white;
+            display: block;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #111;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <h1 th:text="'Galaxy Palace'"></h1>
+                <!-- Display the hotel name dynamically using Thymeleaf -->
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Rooms</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Rest of your hotel page content goes here -->
+</body>
+
+</html>F

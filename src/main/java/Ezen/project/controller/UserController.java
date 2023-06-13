@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import Ezen.project.DTO.UserDTO;
+import Ezen.project.service.EmailService;
 import Ezen.project.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +21,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final EmailService emailService;
 
     @GetMapping("/memberjoin")
-    public String userJoin() {
     public String userJoin() {
         return "user/memberjoin";
     }
@@ -29,13 +32,12 @@ public class UserController {
     // modelattribute 생략가능하나 사용하는게 좋음
     public String userSave(@ModelAttribute UserDTO userDTO) {
         System.out.println("userDTO = " + userDTO);
-        
-        userService.save(userDTO); //회원가입
+
+        userService.save(userDTO); // 회원가입
         return "user/login";
     }
 
     @GetMapping("/login")
-    public String login() {
     public String login() {
         return "user/login";
     }
@@ -52,9 +54,16 @@ public class UserController {
         }
     }
 
+    @PostMapping("/emailcheck")
+    @ResponseBody
+    public String emailConfirm(@RequestParam("userEamil") String userEmail) throws Exception {
+
+        String check = emailService.sendSimpleMessage(userEmail);
+
+        return check;
+    }
 
     @GetMapping("/userlist")
-    public String findAll(Model model) {
     public String findAll(Model model) {
         List<UserDTO> userDTOList = userService.findAll();
         System.out.println(userDTOList);
@@ -64,7 +73,6 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public String findById(@PathVariable Long id, Model model) {
     public String findById(@PathVariable Long id, Model model) {
         UserDTO userDTO = userService.findById(id);
         model.addAttribute("user", userDTO);
@@ -86,7 +94,7 @@ public class UserController {
     }
 
     @GetMapping("/user/delete/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         userService.delete(id);
 
         return "redirect:/userlist";
