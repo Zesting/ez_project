@@ -3,8 +3,6 @@ package Ezen.project.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import Ezen.project.DTO.NoticeDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,16 +13,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 @Table(name = "notice")
 public class NoticeDomain extends BaseNoticeDomain {
     
@@ -46,10 +41,7 @@ public class NoticeDomain extends BaseNoticeDomain {
     private Integer fileAttached; // 1 or 0
 
     @OneToMany(mappedBy = "noticeDomain", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<NoticeFileDomain> NoticeFileDomainList = new ArrayList<>();
-
-    // @Column(name = "file")
-    // private MultipartFile noticeFile;//Entity 공지글 첨부파일
+    private List<NoticeFileDomain> noticeFileDomainList = new ArrayList<>();
 
     //DTO에서 Entity로 데이터 넣기
     public static NoticeDomain toSaveEntity(NoticeDTO noticeDTO){
@@ -59,8 +51,19 @@ public class NoticeDomain extends BaseNoticeDomain {
         noticeDomain.setNoticeTitle(noticeDTO.getTitle());
         noticeDomain.setNoticeContent(noticeDTO.getContent());
         noticeDomain.setNoticeWriteDate(noticeDTO.getWriteDate());
-        // noticeDomain.setNoticeFile(noticeDTO.getNoticeFile());
-        noticeDomain.setFileAttached(0); //파일 없음
+        // noticeDomain.setFileAttached(null); // 파일 없음
+        noticeDomain.setFileAttached(noticeDTO.getFileAttached() != null ? noticeDTO.getFileAttached() : 0); // 파일 없으면 0, 파일 있으면 값 사용
+        return noticeDomain;
+    }
+
+    public static NoticeDomain toUpdateEntity(NoticeDTO noticeDTO){
+        NoticeDomain noticeDomain = new NoticeDomain();
+        noticeDomain.setNoticeId(noticeDTO.getId());
+        noticeDomain.setUserId(noticeDTO.getUserId());
+        noticeDomain.setNoticeTitle(noticeDTO.getTitle());
+        noticeDomain.setNoticeContent(noticeDTO.getContent());
+        noticeDomain.setNoticeWriteDate(noticeDTO.getWriteDate());
+        noticeDomain.setFileAttached(noticeDTO.getFileAttached() != null ? noticeDTO.getFileAttached() : 0); // 파일 없으면 0, 파일 있으면 값 사용
         return noticeDomain;
     }
 
@@ -71,8 +74,8 @@ public class NoticeDomain extends BaseNoticeDomain {
         noticeDomain.setNoticeTitle(noticeDTO.getTitle());
         noticeDomain.setNoticeContent(noticeDTO.getContent());
         noticeDomain.setNoticeWriteDate(noticeDTO.getWriteDate());
-        // noticeDomain.setNoticeFile(noticeDTO.getNoticeFile());
-        noticeDomain.setFileAttached(1); //파일 있음
+        // noticeDomain.setFileAttached(1); //파일 있음
+        noticeDomain.setFileAttached(noticeDTO.getFileAttached() != null ? noticeDTO.getFileAttached() : 1); // 파일 있으면 1, 파일 없으면 값 사용
         return noticeDomain;
     }
 

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import Ezen.project.DTO.NoticeDTO;
+import Ezen.project.domain.NoticeFileDomain;
+import Ezen.project.service.NoticeFileService;
 import Ezen.project.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class NoticeController {
 
     private final NoticeService noticeService;
+    private final NoticeFileService noticeFileService;
 
     //공지 메인페이지
     @GetMapping("notice")
@@ -50,6 +53,9 @@ public class NoticeController {
     public String findById(@PathVariable Long id, Model model, 
                             @PageableDefault(page=1) Pageable pageable){
         NoticeDTO noticeDTO = noticeService.findById(id);
+        String noticeFileId = noticeDTO.getStoredFileName();
+        System.out.println(noticeFileId);
+       model.addAttribute("imageName", noticeFileId);
         model.addAttribute("notice", noticeDTO);
         model.addAttribute("page", pageable.getPageNumber());
         return "/notice/detail";
@@ -75,7 +81,7 @@ public class NoticeController {
     @GetMapping("/notice/delete/{id}")
     public String delete(@PathVariable Long id){
         noticeService.delete(id);
-        return "redirect:/notice";
+        return "redirect:/notice/paging";
     }
 
     //페이징 처리 /notice/paging?page=1

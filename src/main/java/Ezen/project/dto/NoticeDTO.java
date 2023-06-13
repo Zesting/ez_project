@@ -1,17 +1,23 @@
 package Ezen.project.DTO;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
 import Ezen.project.domain.NoticeDomain;
+import Ezen.project.domain.NoticeFileDomain;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor // 기본생성자
+@AllArgsConstructor // 모든 필드를 매개변수로 하는 생성자
 public class NoticeDTO {
     private Long id;        //DTO 공지글 id
     private Long userId;        //DTO 공지글 작성자
@@ -41,17 +47,24 @@ public class NoticeDTO {
         noticeDTO.setTitle(noticeDomain.getNoticeTitle());
         noticeDTO.setContent(noticeDomain.getNoticeContent());
         noticeDTO.setWriteDate(noticeDomain.getNoticeWriteDate());
-        // noticeDTO.setNoticeFile(noticeDomain.getNoticeFile());
-        if(noticeDomain.getFileAttached() == 0){
-            noticeDTO.setFileAttached(noticeDomain.getFileAttached()); //0
+
+        if(noticeDomain.getFileAttached() == null){
+            noticeDTO.setFileAttached(0); //0
         } else {
-            noticeDTO.setFileAttached(noticeDomain.getFileAttached()); //1
+            noticeDTO.setFileAttached(noticeDomain.getFileAttached().intValue()); //1
             // 파일 이름을 가져가야 함
             // originalFileName, storedFileName : noticeFile(noticeFileEntity)
             // join
             // select * from notice n, noticeFile nf where n.id = nf.id and where n.id = ?
-            noticeDTO.setOriginalFileName(noticeDomain.getNoticeFileDomainList().get(0).getOriginalFileName());
-            noticeDTO.setStoredFileName(noticeDomain.getNoticeFileDomainList().get(0).getStoredFileName());
+            
+            // noticeDTO.setOriginalFileName(noticeDomain.getNoticeFileDomainList().get(0).getOriginalFileName());
+            // noticeDTO.setStoredFileName(noticeDomain.getNoticeFileDomainList().get(0).getStoredFileName());
+
+            List<NoticeFileDomain> noticeFileDomainList = noticeDomain.getNoticeFileDomainList();
+        if (noticeFileDomainList != null && !noticeFileDomainList.isEmpty()) {
+            noticeDTO.setOriginalFileName(noticeFileDomainList.get(0).getOriginalFileName());
+            noticeDTO.setStoredFileName(noticeFileDomainList.get(0).getStoredFileName());
+        }
         }
         return noticeDTO;
     }
