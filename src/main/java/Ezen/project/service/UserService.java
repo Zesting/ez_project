@@ -69,7 +69,14 @@ public class UserService {
     }
 
     public void userupdate(UserDTO userDTO) {
-        userRepository.save(User.updateSave(userDTO));
+        Optional<User> user = userRepository.findById(userDTO.getId());
+        if (user.isPresent()) {
+            userRepository.save(User.updateSave(userDTO));
+        }
+    }
+
+    public void delete(Long id) {
+        userRepository.deleteById(id);
     }
 
 }

@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import Ezen.project.DTO.UserDTO;
+import Ezen.project.service.EmailService;
 import Ezen.project.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final EmailService emailService;
 
     @GetMapping("/memberjoin")
     public String userJoin() {
@@ -29,7 +33,7 @@ public class UserController {
     public String userSave(@ModelAttribute UserDTO userDTO) {
         System.out.println("userDTO = " + userDTO);
 
-        userService.save(userDTO);
+        userService.save(userDTO); // 회원가입
         return "user/login";
     }
 
@@ -40,6 +44,7 @@ public class UserController {
 
     @PostMapping("/user/login")
     public String userLogin(@ModelAttribute UserDTO userDTO, HttpSession session) {
+        // 로그인 아이디 비밀번호 일치여부확인
         UserDTO result = userService.login(userDTO);
         if (result != null) {
             session.setAttribute("userId", result.getId());
@@ -47,6 +52,15 @@ public class UserController {
         } else {
             return "user/login";
         }
+    }
+
+    @PostMapping("/emailcheck")
+    @ResponseBody
+    public String emailConfirm(@RequestParam("userEamil") String userEmail) throws Exception {
+
+        String check = emailService.sendSimpleMessage(userEmail);
+
+        return check;
     }
 
     @GetMapping("/userlist")
@@ -76,7 +90,14 @@ public class UserController {
     @PostMapping("/user/update")
     public String update(@ModelAttribute UserDTO userDTO) {
         userService.userupdate(userDTO);
-        return "redirect:/user" + userDTO.getId();
+        return "redirect:/user/" + userDTO.getId();
+    }
+
+    @GetMapping("/user/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        userService.delete(id);
+
+        return "redirect:/userlist";
     }
 
 }
