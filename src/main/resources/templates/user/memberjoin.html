@@ -1,11 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
+    <script>
+        let emConfirmaiton = false;
+        const emailcheck = () => {
+            const email = document.getElementById("userEmail").value;
+            $.ajax({
+                type: "post",
+                url: "/emailcheck",
+                data: {
+                    "userEmail": email
+                },
+                success: function (res) {
+                    alert("해당 이메일로 인증번호 발송이 완료되었습니다.")
+                    checkEmailConfirm(data, $emailConfirmTxt, $emailConfirm)
+                }
+            })
+        }
+        function checkEmailConfirm(data, $emailConfirmTxt, $emailConfirm) {
+            $emailConfirm.on("keyup", function () {
+                if (data != $emailConfirm.val()) {
+                    emConfirmaiton = false;
+                    $emailConfirmTxt.html("<span id=emConfirmaiton>인증번호가 잘못되었습니다.</span>")
+                    $("#emconfirmchk").css({
+                        "color": "#FA3E3E",
+                        "font-weight": "bold",
+                        "font-size": "10px"
+                    })
+                } else {
+                    emConfirmaiton = true;
+                    $emailConfirmTxt.html("<span id=emConfirmaiton>확인완료</span>")
+                    $("#emconfirmchk").css({
+                        "color": "#0D6EFD",
+                        "font-weight": "bold",
+                        "font-size": "10px"
+                    })
+                }
+            })
+        }
+    </script>
+
 </head>
+
+
 <body>
     <form action="/user/memberjoin" method="post">
         <input type="text" name="userId" placeholder="아이디"><br>
@@ -13,9 +55,13 @@
         <input type="text" name="userAge" placeholder="주민등록번호"><br>
         <input type="text" name="userName" placeholder="이름"><br>
         <input type="number" name="userPhoneNumber" placeholder="핸드폰 번호"><br>
-        <input type="text" name="userEmail" placeholder="이메일"><br>
+        <input type="text" name="userEmail" id="userEmail" placeholder="이메일">
+        <button type="button" id="check" onclick="emailcheck()">인증번호보내기</button><br>
+        <label for="memailconfirm" id="emailConfirmTxt">인증번호를 입력해주세요</label>
+        <input type="text" class="form-control" id="emailConfirm">
         <input type="submit" value="회원가입">
     </form>
-    
+
 </body>
+
 </html>
