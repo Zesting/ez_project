@@ -10,25 +10,36 @@
     <div class="container">
       <form th:action="@{|/Rooms/modify/${id}|}" method="post">
         <input type="hidden" name="_method" value="put" />
+        <label for="roomId">룸 고유 번호</label>
         <input
           type="text"
           name="roomId"
           th:value="${roomData.roomId}"
           readonly />
         <hr />
+        <label for="roomName">룸 이름</label>
+        <hr />
         <input type="text" name="roomName" th:value="${roomData.roomName}" />
+        <hr />
+        <label for="roomPrice">룸 기본 가격</label>
         <hr />
         <input
           type="number"
           name="roomPrice"
           th:value="${roomData.roomPrice}" />
         <hr />
+        <label for="roomType">룸 타입</label>
+        <hr />
         <input type="text" name="roomType" th:value="${roomData.roomType}" />
+        <hr />
+        <label for="roomDetailInfo">룸 상세 정보</label>
         <hr />
         <input
           type="text"
           name="roomDetailInfo"
           th:value="${roomData.roomDetailInfo}" />
+        <hr />
+        <label for="roomImagePath">룸 이미지 패스</label>
         <hr />
         <input
           type="text"

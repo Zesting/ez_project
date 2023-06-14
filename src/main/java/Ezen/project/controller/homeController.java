@@ -11,4 +11,8 @@ public class homeController {
         return "home";
     }
 
+    @GetMapping("/kakaoMap")
+    public String kakaoMap() {
+        return "kakaoMap";
+    }
 }

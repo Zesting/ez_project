@@ -18,6 +18,7 @@ import Ezen.project.domain.NoticeDomain;
 import Ezen.project.domain.NoticeFileDomain;
 import Ezen.project.repository.NoticeFileRepository;
 import Ezen.project.repository.NoticeRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -37,7 +38,6 @@ public class NoticeService {
             return noticeDomain.getNoticeId();
             //첨부 파일 있을 때
         } else {
-            
             /*
                 1. DTO에 담긴 파일을 꺼냄
                 2. 파일의 이름 가져옴
@@ -50,17 +50,17 @@ public class NoticeService {
              */
             MultipartFile noticeFile = noticeDTO.getNoticeFile();       //1
             String originalFileName = noticeFile.getOriginalFilename(); //2
-            String storedFileName = System.currentTimeMillis()+"_"+originalFileName; //3
-            String savePath = "C:/notice_img/" + storedFileName; // C:/notic_img/235235_내사진.jpg //4
+            String storedFileName = System.currentTimeMillis() + "_" + originalFileName; //3
+            String savePath = System.getProperty("user.dir")+"/src/main/resources/static/images/" + storedFileName; // C:/notic_img/235235_내사진.jpg //4
             noticeFile.transferTo(new File(savePath)); //5
 
             NoticeDomain noticeDomain = NoticeDomain.toSaveFileEntity(noticeDTO);
             Long savedId = noticeRepository.save(noticeDomain).getNoticeId();
-            NoticeDomain board = noticeRepository.findById(savedId).get();
+            NoticeDomain notice = noticeRepository.findById(savedId).get();
 
-            NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(board, originalFileName, storedFileName);
+            NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(notice, originalFileName, storedFileName);
             noticeFileRepository.save(noticeFileDomain);
-            return noticeFileDomain.getId();
+            return noticeDomain.getNoticeId();
             
         }
         
@@ -68,6 +68,7 @@ public class NoticeService {
     }
 
     //공지 테이블 모든 데이터 값 찾는 기능
+    @Transactional
     public List<NoticeDTO> findAll() {
         List<NoticeDomain> noticeDomainList = noticeRepository.findAll();
         List<NoticeDTO> noticeDTOList = new ArrayList<>();
@@ -78,6 +79,7 @@ public class NoticeService {
     }
 
     //아이디 값만 찾는 기능 (상세보기)
+    @Transactional
     public NoticeDTO findById(Long id) {
         Optional<NoticeDomain> optionalNoticeDomain = noticeRepository.findById(id);
         if(optionalNoticeDomain.isPresent()){
@@ -91,7 +93,7 @@ public class NoticeService {
 
     //수정
     public NoticeDTO update(NoticeDTO noticeDTO) {
-        NoticeDomain noticeDomain = NoticeDomain.toSaveEntity(noticeDTO);
+        NoticeDomain noticeDomain = NoticeDomain.toUpdateEntity(noticeDTO);
         noticeRepository.save(noticeDomain);
         return findById(noticeDTO.getId());
     }
@@ -106,6 +108,11 @@ public class NoticeService {
         int pageLimit = 10; //한 페이지에 보여줄 글 개수
         // 한 페이지당 10개씩 글을 보여주고 정렬 기준은 id 기준으로 내림차순 정렬
         // page 위치에 있는 값은 0부터 시작
+
+        if (page < 0) {
+                page = 0;
+            }
+
         Page<NoticeDomain> noticeDomains = 
             noticeRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "noticeId")));
         

@@ -78,7 +78,6 @@ public class ReservationController {
                 }
             }
         }
-
         roomList.removeAll(roomsToRemove);
         model.addAttribute("roomList", roomList);
         System.out.println(roomList);
@@ -115,7 +114,8 @@ public class ReservationController {
         System.out.println("저장되는 최종 가격" + reservation.getFinalPrice());
         System.out.println("saveReservation -> " + reservation);
         reservationService.reservationJoin(reservation);
-        return "redirect:/";
+        session.setAttribute("payReservation", reservation);//예약 정보 세션에 저장해서 가져가기 
+        return "redirect:/payment";
     }
 
     @GetMapping(value = "/modify/{id}")

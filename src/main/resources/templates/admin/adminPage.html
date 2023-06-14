@@ -1,27 +1,206 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>관리자페이지</title>
+    <style>
+      tbody td {
+        text-align: center;
+        border: 1px dotted #555;
+      }
+      thead td {
+        text-align: center;
+        border: 3px solid black;
+      }
+    </style>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <title>관리자페이지</title>
-</head>
+  <body>
+    <p>관리자 페이지 home입니다.</p>
 
-<body>
-  <p>관리자 페이지 home입니다.</p>
+    <button onclick="saveBtn()">임시저장</button>
 
-  <button onclick="saveBtn()">임시저장</button>
-
-  <button onclick="listBtn()">목록</button>
-</body>
-<script>
-  const saveBtn = () => {
+    <button onclick="listBtn()">목록</button>
+    <hr />
+    <button type="button" onclick="roomListBtn()">룸 리스트</button>
+    <div id="roomListContainer" style="border: 1px solid black"></div>
+    <div id="roomModifyContainer" style="border: 1px solid black"></div>
+  </body>
+  <script>
+    const saveBtn = () => {
       location.href = "/adminPageSave";
-  }
-  const listBtn = () => {
+    };
+    const listBtn = () => {
       location.href = "/adminPageList";
-  }
-</script>
+    };
+
+    $(document).ready(function () {
+      // jQuery에서 제공하는 함수로, HTML 문서의 로딩이 완료되었을 때 실행되는 이벤트 핸들러
+      $.ajax({
+        url: "/Rooms", // 요청 url
+        method: "GET", // 방식
+        dataType: "JSON", // 데이터 타입
+        success: function (data) {
+          console.log("ajax 성공!");
+          console.log(data);
+          var html = "";
+          html += `<table>
+                <thead>
+                  <tr>
+                    <th>룸 고유번호</th>
+                    <th>룸 이름</th>
+                    <th>룸 가격</th>
+                    <th>룸 타입</th>
+                    <th>룸 상세정보</th>
+                    <th>룸 이미지 패스</th>
+                  </tr>
+                </thead>
+                <tbody>`;
+
+          for (let i = 0; i < data.length; i++) {
+            let room = data[i];
+            html += `<tr>
+          <td id="roomId_${i}" name="roomId">${room.roomId}</td>
+          <td>${room.roomName}</td>
+          <td>${room.roomPrice}</td>
+          <td>${room.roomType}</td>
+          <td>${room.roomDetailInfo}</td>
+          <td>${room.roomImagePath}</td>
+          <td><button type="button" id="modifyMoveBtn">수정 폼 이동</button></td>
+          <td><button type="button" id="deleteRoomBtn">삭제</button></td>
+        </tr>`;
+          }
+
+          html += `</tbody></table>`;
+
+          $("#roomListContainer").html(html);
+        },
+        error: function (error) {
+          console.log("실패", error);
+        },
+      });
+
+      // 수정 버튼 클릭 이벤트 처리
+      $(document).on("click", "#modifyMoveBtn", function () {
+        //문서 객체인 'document'에 클릭 이벤트 등록
+        // (선택자 :.modifyMoveBtn) <- 클릭 이벤트를 처리할 대상 요소
+        console.log("modifyMoveBtn Start");
+        let roomId = $(this).closest("tr").find("td[name='roomId']").text();
+        // 상위 <tr> 요소에서 td[name='roomId']를 찾아 텍스트 가져옴.
+        // location.href = "/Rooms/modify/" + roomId;
+        // 버튼 폼 불러오는 ajax
+        $(document).ready(function () {
+          $.ajax({
+            url: "/Rooms/modify/" + roomId,
+            method: "GET",
+            dataType: "JSON",
+            success: function (data) {
+              console.log("modify Ajax 성공");
+              console.log(data);
+              var html = "";
+              html += `
+                      <div class="container">
+                          <label for="roomId">룸 고유 번호</label>
+                          <input type="text" id="roomId" name="roomId" value="${data.roomId}" readonly />
+                          <hr />
+                          <label for="roomName">룸 이름</label>
+                          <input type="text" id="roomName" name="roomName" value="${data.roomName}" />
+                          <hr />
+                          <label for="roomPrice">룸 기본 가격</label>
+                          <input type="number" id="roomPrice" name="roomPrice" value="${data.roomPrice}" />
+                          <hr />
+                          <label for="roomType">룸 타입</label>
+                          <input type="text" id="roomType" name="roomType" value="${data.roomType}" />
+                          <hr />
+                          <label for="roomDetailInfo">룸 상세 정보</label>
+                          <input type="text" id="roomDetailInfo" name="roomDetailInfo" value="${data.roomDetailInfo}" />
+                          <hr />
+                          <label for="roomImagePath">룸 이미지 패스</label>
+                          <input type="text" id="roomImagePath" name="roomImagePath" value="${data.roomImagePath}" />
+                          <hr />
+                          <input type="button" id="modifyRoomSubmit" value="수정">
+                      </div>
+                      `;
+
+              // html 변수를 DOM에 삽입하는 코드
+              $("#roomModifyContainer").html(html);
+            },
+            error: function (error) {
+              console.log("modify Ajax 실패..ㅜㅜ", error);
+            },
+          });
+        });
+
+        $(document).on("click", "#modifyRoomSubmit", function () {
+          // AJAX 요청 작성
+          let roomId = document.getElementById("roomId").value;
+          const params = {
+            roomId: document.getElementById("roomId").value,
+            roomName: document.getElementById("roomName").value,
+            roomPrice: document.getElementById("roomPrice").value,
+            roomType: document.getElementById("roomType").value,
+            roomDetailInfo: document.getElementById("roomDetailInfo").value,
+            roomImagePath: document.getElementById("roomImagePath").value,
+          };
+          console.log("params", params);
+          ajax("/Rooms/modify/" + roomId, params);
+
+          function ajax(url, data) {
+            console.log("Put Ajax", url, data);
+            $.ajax({
+              url: url,
+              method: "PUT",
+              dataType: "JSON",
+              contentType: "application/json; charset=UTF-8",
+              data: JSON.stringify(data), // 폼 데이터 직렬화하여 전송
+              success: function (data) {
+                console.log("modifyForm Post Ajax 성공!", data);
+                location.reload();
+              },
+              error: function (error) {
+                console.log("Post Ajax 실패!");
+              },
+            });
+          }
+        });
+        // 삭제 버튼 클릭 이벤트 처리
+      });
+      $(document).on("click", "#deleteRoomBtn", function () {
+        console.log("deleteRoom Start");
+
+        let roomId = $(this).closest("tr").find("td[name='roomId']").text();
+        console.log("params", roomId);
+        ajax("/Rooms/delete/" + roomId, roomId);
+
+        function ajax(url, data) {
+          console.log("Delete Ajax", url, data);
+          $.ajax({
+            url: url,
+            method: "DELETE",
+            dataType: "JSON",
+            contentType: "application/json; charset=UTF-8",
+            success: function (data) {
+              console.log("delete Ajax 성공!", data);
+              location.reload();
+            },
+            error: function (request, status, error) {
+              alert(
+                "code:" +
+                  request.status +
+                  "\n" +
+                  "message:" +
+                  request.responseText +
+                  "\n" +
+                  "error:" +
+                  error
+              );
+            },
+          });
+        }
+      });
+    });
+  </script>
 </html>

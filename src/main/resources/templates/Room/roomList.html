@@ -28,13 +28,19 @@
             th:text="${roomList.roomId}"
             id="roomId"
             style="text-align: center"></td>
-          <td th:text="${roomList.roomName}"></td>
-          <td th:text="${roomList.roomPrice}"></td>
-          <td th:text="${roomList.roomType}"></td>
-          <td th:text="${roomList.roomDetailInfo}"></td>
-          <td th:text="${roomList.roomImagePath}"></td>
+          <td id="roomName" th:text="${roomList.roomName}"></td>
+          <td id="roomPric" th:text="${roomList.roomPrice}"></td>
+          <td id="roomType" th:text="${roomList.roomType}"></td>
+          <td id="room" th:text="${roomList.roomDetailInfo}"></td>
+          <td id="room" th:text="${roomList.roomImagePath}"></td>
           <td><a th:href="@{|/Rooms/modify/${roomList.roomId}|}">수정</a></td>
+          <!--* <td><button type="button" id="modifyBtn" value="수정"></button></td> *-->
           <td><a th:href="@{|/Rooms/drop/${roomList.roomId}|}">삭제</a></td>
+          <td>
+            <button type="button">
+              <a th:href="@{|/Rooms/modify/${roomList.roomId}|}">수정</a>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -44,7 +50,17 @@
       $.ajax({
         type: "get",
         url: "/Room/modify/" + roomId,
+        data: { roomId: document.getElementById("roomId") },
       });
+
+      $("#modifyBtn").click(function () {
+        reqDate();
+      });
+      function reqDate() {
+        let roomId = $("#roomId");
+        console.log("수정 폼 이동 시작");
+        $.ajax({});
+      }
     </script>
   </body>
 </html>
