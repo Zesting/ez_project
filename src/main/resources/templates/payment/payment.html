@@ -33,14 +33,8 @@
     <button><img th:src="@{/images/payment_icon_yellow_medium.png}" alt="카카오페이"></button>
 </form>
 <a href="/">홈으로</a>
-<!-- 여기는 카카오페이 아이콘으로 결제 연동한거 ( 아임포트 ) -->
-<hr>
-  <button onclick="KakaoPayment()" class="kakaopayBtn"><img th:src="@{/images/payment_icon_yellow_medium.png}" alt="카카오페이"></button>
 
-
-  
   <script type="text/javascript"> //문서가 준비되면 제일 먼저 실행
-
     //이니시스 API 연동
     $(document).ready(function () {
       $("#iamportPayment").click(function () {

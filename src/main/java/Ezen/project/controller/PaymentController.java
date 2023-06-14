@@ -50,7 +50,9 @@ public class PaymentController {
     //새로운 객체를 만들어 필요한 값을 저장.
     PaymentDTO paymentDTO = new PaymentDTO();
     paymentDTO.setReservationId(reservation.getReservationId());
-    paymentDTO.setUserName(logInUser.getUserId());
+    paymentDTO.setUserId(logInUser.getUserId());
+    paymentDTO.setUserName(logInUser.getUserName());
+    paymentDTO.setUserPhoneNumber(logInUser.getUserPhoneNumber());
     //룸 ID로 찾아 예약된 룸아이디의 룸이름을 가져옴
     paymentDTO.setRoomName(roomService.findRoomById(reservation.getRoomId()).get().getRoomName());
     paymentDTO.setAmount(reservation.getFinalPrice());
@@ -68,7 +70,7 @@ public class PaymentController {
     log.info("kakaoPaySuccess pg_token : " + pg_token);
     model.addAttribute("info", kakaoPayService.kakaoPayInfo(pg_token, session));
     model.addAttribute("payment", paymentService.findByAll());
-
+    model.addAttribute("paymentDTO", session.getAttribute("paymentDTO"));
     return "payment/kakaoPaySuccess";
   }
 
@@ -76,7 +78,6 @@ public class PaymentController {
   @GetMapping("/kakaoPayCancel")
   public String kakaoPayCancel() {
     //취소 되었다고 뷰로 표시
-    //예약에 마지막 저장된 데이터를 삭제해야함. >> 준희가 결제 여부 만들어서 올려준다함.
 
     return "payment/kakaoPayCancel";
   }

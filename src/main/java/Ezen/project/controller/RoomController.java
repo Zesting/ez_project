@@ -1,38 +1,38 @@
 package Ezen.project.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import Ezen.project.service.RoomService;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Controller
-@RequestMapping("/Rooms")
+@RequiredArgsConstructor
 public class RoomController {
-
     private final RoomService roomService;
 
     // 룸 리스트 출력 메서드
-    // @GetMapping(value = "")
-    // public String roomList(Model model) {
-    // model.addAttribute("roomList", roomService.findAllRoom());
-    // return "Room/roomList";
-    // }
+    @RequestMapping(value = "/Rooms", method = RequestMethod.GET)
+    public String roomList(Model model) {
+        model.addAttribute("roomList", roomService.findAllRoom());
+        return "Room/roomList";
+    }
 
     // 룸 생성 뷰 출력 메서드
-    @GetMapping(value = "/add")
+    @RequestMapping(value = "/Rooms/add", method = RequestMethod.GET)
     public String roomJoinView() {
         return "Room/roomCreate";
     }
 
     // 룸 수정 뷰 컨트롤러
-    // @GetMapping("/modify/{id}")
-    // public String roomModifyView(@PathVariable("id") Long id, Model model) {
-    // model.addAttribute("roomData", roomService.findRoomById(id).get());
-    // return "Room/roomModify";
-    // }
+    @RequestMapping(value = "/Rooms/modify/{id}", method = RequestMethod.GET)
+    public String roomModifyView(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("data", roomService.findRoomById(id).get());
+        return "Room/roomModify";
+    }
 
     // 룸 수정
     // @PostMapping("/modify/{id}")

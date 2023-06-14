@@ -7,12 +7,15 @@ import lombok.Data;
 @Component
 @Data
 public class PaymentDTO {
+  //paymentCtroller에서 DTO를 셋팅함
   private Long id;
   private Long reservationId;//예약 번호
+  private String userId;  //회원 아이디
   private String userName;    //회원 이름
   private String roomName;    //룸 이름
   private int amount;    //가격
-
+  private String userPhoneNumber; //회원 전화번호
+  
 
   // private Long payId;
   // private String userId;
