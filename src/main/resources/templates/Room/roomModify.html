@@ -1,53 +1,51 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project</title>
-  </head>
-  <body>
-    <div class="container">
-      <form th:action="@{|/Rooms/modify/${id}|}" method="post">
-        <input type="hidden" name="_method" value="put" />
-        <label for="roomId">룸 고유 번호</label>
-        <input
-          type="text"
-          name="roomId"
-          th:value="${roomData.roomId}"
-          readonly />
-        <hr />
-        <label for="roomName">룸 이름</label>
-        <hr />
-        <input type="text" name="roomName" th:value="${roomData.roomName}" />
-        <hr />
-        <label for="roomPrice">룸 기본 가격</label>
-        <hr />
-        <input
-          type="number"
-          name="roomPrice"
-          th:value="${roomData.roomPrice}" />
-        <hr />
-        <label for="roomType">룸 타입</label>
-        <hr />
-        <input type="text" name="roomType" th:value="${roomData.roomType}" />
-        <hr />
-        <label for="roomDetailInfo">룸 상세 정보</label>
-        <hr />
-        <input
-          type="text"
-          name="roomDetailInfo"
-          th:value="${roomData.roomDetailInfo}" />
-        <hr />
-        <label for="roomImagePath">룸 이미지 패스</label>
-        <hr />
-        <input
-          type="text"
-          name="roomImagePath"
-          th:value="${roomData.roomImagePath}" />
-        <hr />
-        <input type="submit" />
-      </form>
-    </div>
-  </body>
-</html>
+<div class="container">
+  <label for="roomId">룸 고유 번호</label>
+  <input
+    type="number"
+    id="updateRoomId"
+    name="roomId"
+    th:value="${data.roomId}"
+    readonly />
+  <hr />
+  <label for="roomName">룸 이름</label>
+  <input
+    type="text"
+    id="updateRoomName"
+    name="roomName"
+    th:value="${data.roomName}" />
+  <hr />
+  <label for="roomPrice">룸 기본 가격</label>
+  <input
+    type="number"
+    id="updateRoomPrice"
+    name="roomPrice"
+    th:value="${data.roomPrice}" />
+  <hr />
+  <label for="roomType">룸 타입</label>
+  <input
+    type="text"
+    id="updateRoomType"
+    name="roomType"
+    th:value="${data.roomType}" />
+  <hr />
+  <label for="roomDetailInfo">룸 상세 정보</label>
+  <input
+    type="text"
+    id="updateRoomDetailInfo"
+    name="roomDetailInfo"
+    th:value="${data.roomDetailInfo}" />
+  <hr />
+  <label for="roomImagePath">룸 이미지 패스</label>
+  <input
+    type="text"
+    id="updateRoomImagePath"
+    name="roomImagePath"
+    th:value="${data.roomImagePath}" />
+  <hr />
+  <input type="button" id="modifyRoomSubmit" th:value="수정" />
+  <input
+    type="button"
+    name="modifyRoomCancel"
+    id="modifyRoomCancel"
+    th:value="취소" />
+</div>

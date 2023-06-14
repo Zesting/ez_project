@@ -3,13 +3,11 @@ package Ezen.project.apiController;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import Ezen.project.DTO.RoomDTO;
@@ -19,42 +17,17 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/Rooms")
 public class ApiRoomController {
 
     private final RoomService roomService;
 
-    @PostMapping(value = "/add")
-    public ResponseEntity<?> add(@RequestBody RoomDTO roomDTO) { // ? = room
-        Optional<?> result = roomService.roomJoin(roomDTO);
-        return ResponseEntity.ok(result.get());
-    }
+    // @RequestMapping(value = "/Rooms", method = RequestMethod.GET)
+    // public ResponseEntity<?> roomList() { // ? = room
+    // return ResponseEntity.ok(roomService.findAllRoom());
+    // }
 
-    @GetMapping(value = "")
-    public ResponseEntity<?> roomList() { // ? = room
-        return ResponseEntity.ok(roomService.findAllRoom());
-    }
-
-    @GetMapping(value = "/modify/{id}")
-    public ResponseEntity<?> findOneByRoom(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(roomService.findRoomById(id));
-    }
-
-    @PutMapping(value = "/modify/{id}")
-    public ResponseEntity<?> roomModify(@RequestBody RoomDTO roomDTO, @PathVariable("id") Long id) {
-        Optional<?> result = roomService.modifyRoom(roomDTO);
-        return ResponseEntity.ok(result);
-    }
-
-    @DeleteMapping(value = "/delete/{id}")
-    public ResponseEntity<?> roomDelete(@PathVariable Long id) {
-        roomService.verificationRoom(id);
-        roomService.dropRoom(id);
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping(value = "/create")
-    public ResponseEntity<Room> Join(@RequestBody RoomDTO roomDTO) {
+    @RequestMapping(value = "/Rooms/add", method = RequestMethod.POST)
+    public ResponseEntity<?> add(@RequestBody @Validated RoomDTO roomDTO) { // ? = room
         Optional<Room> result = roomService.roomJoin(roomDTO);
 
         if (result.isPresent()) {
@@ -62,6 +35,24 @@ public class ApiRoomController {
             return ResponseEntity.ok(createRoom);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    // @RequestMapping(value = "/Rooms/modify/{id}", method = RequestMethod.GET)
+    // public ResponseEntity<?> findOneByRoom(@PathVariable("id") Long id) {
+    // return ResponseEntity.ok(roomService.findRoomById(id));
+    // }
+
+    @RequestMapping(value = "/Rooms/modify/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> roomModify(@RequestBody @Validated RoomDTO roomDTO, @PathVariable("id") Long id) {
+        Optional<?> result = roomService.modifyRoom(roomDTO);
+        return ResponseEntity.ok(result);
+    }
+
+    @RequestMapping(value = "Rooms/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> roomDelete(@PathVariable Long id) {
+        roomService.verificationRoom(id);
+        roomService.dropRoom(id);
+        return ResponseEntity.ok(id);
     }
 
 }
