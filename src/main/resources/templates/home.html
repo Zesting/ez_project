@@ -20,25 +20,37 @@
     <div>
       <button onclick="pagingReq()">페이징 목록보기</button>
     </div>
-    
-    <br>
-    <div><a href="/wedding/save">웨딩(폼)</div>
+
+    <br />
+    <div><a href="/wedding/save">웨딩(폼)</a></div>
     <div><a href="/weddingBoard">문의게시판(관리자가 확인할 테이블)</a></div>
     <br />
     <a th:href="@{/Rooms}"><button>Room_List</button></a>
     <a th:href="@{/Rooms/add}"><button>Create_Room</button></a>
-    <a th:href="@{/reservation/list}"><button>Reservation</button></a>
-    <a th:href="@{/reservation/selectDate}"
-      ><button>Create_Reservation</button></a
-    >
-    <br>
-    <a href="/kakaoMap">찾아오시는 길</a><br>
+
+    <a th:href="@{/Reservations}"><button>Reservation</button></a>
+    <a th:href="@{/verificationUser}">예약하기</a>
+    <br />
+    <a href="/kakaoMap">찾아오시는 길</a><br />
     <div><a href="/adminPage">관리자페이지</a></div>
   </body>
 
   <script>
-        const pagingReq = () => {
-            location.href = "/notice/paging";
+    const pagingReq = () => {
+      location.href = "/notice/paging";
+    };
+
+    $(document).ready(function () {
+      $("#reservationBtn").click(function () {
+        let session = $("#reservationBtn").attr("th:value");
+        console.log(session);
+        if (session === undefined) {
+          alert("로그인이 필요한 항목입니다.");
+          window.location.href = "/login";
+        } else {
+          window.location.href = "/reservation/selectDate";
         }
-    </script>
+      });
+    });
+  </script>
 </html>

@@ -1,5 +1,7 @@
 package Ezen.project.service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -8,15 +10,19 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import Ezen.project.DTO.CheckDTO;
 import Ezen.project.DTO.ReservationDTO;
 import Ezen.project.domain.Reservation;
+import Ezen.project.domain.Room;
 import Ezen.project.repository.ReservationRepository;
+import Ezen.project.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
 public class ReservationService {
     private final ReservationRepository reservationRepository;
+    private final RoomRepository roomRepository;
 
     // 예약 추가 기능 [회원 파트](비지니스 로직)
     @Transactional
@@ -24,6 +30,23 @@ public class ReservationService {
         reservationRepository.save(reservation);
         System.out.println("예약 추가 기능 확인 (저장된 예약 -> " + reservation + " )");
         return reservation.getReservationId();
+    }
+
+    @Transactional
+    public Reservation addReservation(Long userId, Long roomId, CheckDTO checkDTO) {
+        Date today = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Reservation reservation = new Reservation();
+        reservation.setUserId(userId);
+        reservation.setRoomId(roomId);
+        reservation.setCheckIn(checkDTO.getCheckIn());
+        reservation.setCheckOut(checkDTO.getCheckOut());
+        reservation.setReservationDate(dateFormat.format(today));
+        reservation.setFinalPrice((int) (roomRepository.findById(roomId).get().getRoomPrice() * 0.9));
+        reservationRepository.save(reservation);
+
+        return reservation;
+
     }
 
     // 저장된 모든 예약 출력 기능[관리자 파트](비지니스 로직)
@@ -93,6 +116,7 @@ public class ReservationService {
         System.out.println("예약 삭제 완료 기능 확인");
     }
 
+    // 예약 검증 비지니스 로직
     public Long verificationReservation(Long reservationId) {
         Optional<Reservation> dropReservation = reservationRepository.findById(reservationId);
         if (dropReservation.isPresent()) {
@@ -101,4 +125,23 @@ public class ReservationService {
             return null;
         }
     }
+
+    // 사용자가 선택한 날짜에 예약 가능한 방 출력 비지니스 로직(서비스)
+    @Transactional
+    public List<?> bookableList(CheckDTO checkDTO) { // ? -> roomList
+        List<Room> bookableRooms = roomRepository.findAll();
+        List<Reservation> checkOutReservation = findAllReservationByCheckIn(checkDTO.getCheckIn());
+
+        List<Room> roomsToRemove = new ArrayList<>();
+        for (Reservation reservation : checkOutReservation) {
+            for (Room checkOnRoom : bookableRooms) {
+                if (checkOnRoom.getRoomId().equals(reservation.getRoomId())) {
+                    roomsToRemove.add(checkOnRoom);
+                }
+            }
+        }
+        bookableRooms.removeAll(roomsToRemove);
+        return bookableRooms;
+    }
+
 }
