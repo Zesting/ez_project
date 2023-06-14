@@ -77,7 +77,7 @@ public class PaymentController {
   //결제 진행 중 취소하였을 때.
   @GetMapping("/kakaoPayCancel")
   public String kakaoPayCancel() {
-    //취소 되었다고 뷰로 표시
+    //취소 되었다고 결제 데이터 베이스에 취소 상태해서 넣기 
 
     return "payment/kakaoPayCancel";
   }
