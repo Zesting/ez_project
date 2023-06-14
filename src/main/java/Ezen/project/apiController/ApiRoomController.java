@@ -1,6 +1,5 @@
 package Ezen.project.apiController;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import Ezen.project.DTO.RoomDTO;
@@ -27,27 +25,32 @@ public class ApiRoomController {
     private final RoomService roomService;
 
     @PostMapping(value = "/add")
-    public ResponseEntity<Room> add(@RequestBody RoomDTO roomDTO) {
-        Optional<Room> result = roomService.roomJoin(roomDTO);
+    public ResponseEntity<?> add(@RequestBody RoomDTO roomDTO) { // ? = room
+        Optional<?> result = roomService.roomJoin(roomDTO);
         return ResponseEntity.ok(result.get());
     }
 
     @GetMapping(value = "")
-    public List<Room> roomList() {
-        return roomService.findAllRoom();
+    public ResponseEntity<?> roomList() { // ? = room
+        return ResponseEntity.ok(roomService.findAllRoom());
+    }
+
+    @GetMapping(value = "/modify/{id}")
+    public ResponseEntity<?> findOneByRoom(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(roomService.findRoomById(id));
     }
 
     @PutMapping(value = "/modify/{id}")
-    public String roomModify(@RequestBody RoomDTO roomDTO, @PathVariable Long id) {
-        roomService.modifyRoom(roomDTO);
-        return "modify";
+    public ResponseEntity<?> roomModify(@RequestBody RoomDTO roomDTO, @PathVariable("id") Long id) {
+        Optional<?> result = roomService.modifyRoom(roomDTO);
+        return ResponseEntity.ok(result);
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public String roomDelete(@PathVariable Long id) {
+    public ResponseEntity<?> roomDelete(@PathVariable Long id) {
         roomService.verificationRoom(id);
         roomService.dropRoom(id);
-        return "delete";
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping(value = "/create")
