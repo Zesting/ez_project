@@ -79,4 +79,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public String checkId(String userId){
+        return userRepository.checkUserId(userId);
+    }
+
 }

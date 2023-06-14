@@ -38,6 +38,7 @@ public class User {
     @Column(name = "joinDate")
     private Timestamp joinDate; // 유저 가입날짜
 
+    // 유저 세이브
     public static User userSave(UserDTO userDTO) {
         User user = new User();
         user.setUserId(userDTO.getUserId());
@@ -49,7 +50,7 @@ public class User {
         user.setUserAuthority(0);
         return user;
     }
-
+    // 관리자 세이브
     public static User userAdminSave(UserDTO userDTO) {
         User user = new User();
         user.setUserId(userDTO.getUserId());
@@ -61,7 +62,7 @@ public class User {
         user.setUserAuthority(1);
         return user;
     }
-
+    // 수정 세이브
     public static User updateSave(UserDTO userDTO){
         User user = new User();
         user.setId(userDTO.getId());

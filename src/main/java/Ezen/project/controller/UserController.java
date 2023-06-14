@@ -54,6 +54,12 @@ public class UserController {
         }
     }
 
+    @PostMapping("/userIdCheck")
+    @ResponseBody
+    public int userIdConfirm(@RequestParam("userId") String userId) throws Exception {
+        return (userId.equals(userService.checkId(userId))) ? 1 : 0 ;
+    }
+
     @PostMapping("/emailconfirm")
     @ResponseBody
     String mailConfirm(@RequestParam("email") String email) throws Exception {

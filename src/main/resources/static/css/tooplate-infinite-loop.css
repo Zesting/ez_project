@@ -545,8 +545,7 @@ figure.effect-honey:hover h2 i {
 }
 
 .tm-input {
-	margin: 0 0 20px 0;
-	width: 90%;
+	width: 100%;
   padding: 8px 20px;
   border-radius: 6px;
   border: 1px solid white;

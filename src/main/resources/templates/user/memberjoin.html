@@ -8,6 +8,23 @@
     <title>회원가입</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tooplate-infinite-loop.css">
+    <style>
+        .memberjoincontainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .membership-form {
+            width: 40%;
+        }
+
+        .memberjoin-inputcontainer {
+            margin-bottom: 40px;
+        }
+
+        .memberjoin-submitbtn {}
+    </style>
 </head>
 
 
@@ -29,31 +46,32 @@
     </form> -->
     <div class="memberjoincontainer">
         <form action="/user/memberjoin" method="post" class="membership-form">
-            <div>
+            <div class="memberjoin-inputcontainer">
                 <input type="text" name="userId" placeholder="사용할 아이디를 입력하세요" class="tm-input" id="userId"><br>
+                <span id="userIdConfirmTxt"></span>
                 <button type="button" id="idcheck" class="btn-primary">중복확인</button>
             </div>
-            <div>
+            <div class="memberjoin-inputcontainer">
                 <input type="password" name="userPassword" placeholder="비밀번호를 입력하세요" class="tm-input"><br>
                 <input type="password" name="verifyPassword" placeholder="한번 더 같은 비밀번호를 입력하세요" class="tm-input">
             </div>
-            <div>
+            <div class="memberjoin-inputcontainer">
                 <input type="text" name="userName" placeholder="이름(성명)을 입력하세요" class="tm-input"><br>
             </div>
-            <div>
+            <div class="memberjoin-inputcontainer">
                 <input type="text" name="userAge" placeholder="YYYYMMDD(출생년도를 입력하세요)" class="tm-input"><br>
             </div>
-            <div>
+            <div class="memberjoin-inputcontainer">
                 <input type="number" name="userPhoneNumber" placeholder="전화번호를 입력하세요('띄어쓰기없이 '-'는 생략한형식)"
-                class="tm-input"><br>
+                    class="tm-input"><br>
             </div>
-            <div>
+            <div class="memberjoin-inputcontainer">
                 <input type="text" name="userEmail" id="userEmail" placeholder="사용할 이메일을 입력하세요" class="tm-input"><br>
                 <button type="button" id="emcheck" class="btn-primary">인증번호 요청</button><br>
                 <input type="text" class="tm-input" id="emailConfirm" placeholder="인증번호를 입력하세요"><br>
                 <label for="check" id="emailConfirmTxt" class="verification-label"></label>
             </div>
-            <button type="submit" class="tm-btn-submit">회원가입</button>
+            <button type="submit" class="memberjoin-submitbtn">회원가입</button>
         </form>
     </div>
     <script>
@@ -92,6 +110,27 @@
                 }
             })
         }
+
+        // 아이디 정규식
+        // $("#userId").on("keyup",function(){  //키보드 누르고떘을때마다 실행
+        //     const regExp = /[a-z]+[a-z0-9]/g;
+
+        //     if(!regExp.test($("#userId").val())) {
+        //         $("#userIdConfirmTxt").html("사용할 수 없는 아이디입니다.");
+        //         $("#userIdConfirmTxt").css({
+        //             "color" : "#FF0000",
+        //             "font-weight" : "bold",
+        //             "font-size" : "14px"
+        //         })
+        //     }else{
+        //         $.ajax({
+        //             type : "POST",
+        //             url : 
+        //         })
+        //     }
+        // })
+
+
     </script>
 </body>
 
