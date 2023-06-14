@@ -6,62 +6,93 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    <script>
-        let emConfirmaiton = false;
-        const emailcheck = () => {
-            const email = document.getElementById("userEmail").value;
-            $.ajax({
-                type: "post",
-                url: "/emailcheck",
-                data: {
-                    "userEmail": email
-                },
-                success: function (res) {
-                    alert("해당 이메일로 인증번호 발송이 완료되었습니다.")
-                    checkEmailConfirm(data, $emailConfirmTxt, $emailConfirm)
-                }
-            })
-        }
-        function checkEmailConfirm(data, $emailConfirmTxt, $emailConfirm) {
-            $emailConfirm.on("keyup", function () {
-                if (data != $emailConfirm.val()) {
-                    emConfirmaiton = false;
-                    $emailConfirmTxt.html("<span id=emConfirmaiton>인증번호가 잘못되었습니다.</span>")
-                    $("#emconfirmchk").css({
-                        "color": "#FA3E3E",
-                        "font-weight": "bold",
-                        "font-size": "10px"
-                    })
-                } else {
-                    emConfirmaiton = true;
-                    $emailConfirmTxt.html("<span id=emConfirmaiton>확인완료</span>")
-                    $("#emconfirmchk").css({
-                        "color": "#0D6EFD",
-                        "font-weight": "bold",
-                        "font-size": "10px"
-                    })
-                }
-            })
-        }
-    </script>
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/tooplate-infinite-loop.css">
 </head>
 
 
-<body>
-    <form action="/user/memberjoin" method="post">
+<body style="background-image: url(../img/space1.jpg);">
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 90px; width: 100%;"></div>
+
+    <!-- <form action="/user/memberjoin" method="post">
         <input type="text" name="userId" placeholder="아이디"><br>
         <input type="password" name="userPassword" placeholder="비밀번호"><br>
         <input type="text" name="userAge" placeholder="주민등록번호"><br>
         <input type="text" name="userName" placeholder="이름"><br>
         <input type="number" name="userPhoneNumber" placeholder="핸드폰 번호"><br>
         <input type="text" name="userEmail" id="userEmail" placeholder="이메일">
-        <button type="button" id="check" onclick="emailcheck()">인증번호보내기</button><br>
-        <label for="memailconfirm" id="emailConfirmTxt">인증번호를 입력해주세요</label>
+        <button type="button" id="check">인증번호보내기</button><br>
+        <label for="check" id="emailConfirmTxt">인증번호를 입력해주세요</label>
         <input type="text" class="form-control" id="emailConfirm">
         <input type="submit" value="회원가입">
-    </form>
+    </form> -->
+    <div class="memberjoincontainer">
+        <form action="/user/memberjoin" method="post" class="membership-form">
+            <div>
+                <input type="text" name="userId" placeholder="사용할 아이디를 입력하세요" class="tm-input" id="userId"><br>
+                <button type="button" id="idcheck" class="btn-primary">중복확인</button>
+            </div>
+            <div>
+                <input type="password" name="userPassword" placeholder="비밀번호를 입력하세요" class="tm-input"><br>
+                <input type="password" name="verifyPassword" placeholder="한번 더 같은 비밀번호를 입력하세요" class="tm-input">
+            </div>
+            <div>
+                <input type="text" name="userName" placeholder="이름(성명)을 입력하세요" class="tm-input"><br>
+            </div>
+            <div>
+                <input type="text" name="userAge" placeholder="YYYYMMDD(출생년도를 입력하세요)" class="tm-input"><br>
+            </div>
+            <div>
+                <input type="number" name="userPhoneNumber" placeholder="전화번호를 입력하세요('띄어쓰기없이 '-'는 생략한형식)"
+                class="tm-input"><br>
+            </div>
+            <div>
+                <input type="text" name="userEmail" id="userEmail" placeholder="사용할 이메일을 입력하세요" class="tm-input"><br>
+                <button type="button" id="emcheck" class="btn-primary">인증번호 요청</button><br>
+                <input type="text" class="tm-input" id="emailConfirm" placeholder="인증번호를 입력하세요"><br>
+                <label for="check" id="emailConfirmTxt" class="verification-label"></label>
+            </div>
+            <button type="submit" class="tm-btn-submit">회원가입</button>
+        </form>
+    </div>
+    <script>
 
+        // 이메일 인증번호 발송
+        $("#emcheck").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/emailconfirm",
+                data: {
+                    "email": $("#userEmail").val()
+                },
+                success: function (data) {
+                    alert("해당 이메일로 인증번호 발송이 완료되었습니다.");
+                    console.log("data : " + data);
+                    emailFunc(data, $("#emailConfirm"), $("#emailConfirmTxt"));
+                }
+            })
+        })
+
+        // 이메일 인증번호 확인 함수
+        function emailFunc(data, emailConfirm, emailConfirmTxt) {
+            emailConfirm.on("keyup", function () {
+                if (data != emailConfirm.val()) {
+                    emailConfirmTxt.html("<span id='echeckTxt'>인증번호가 틀렸습니다.</sapn>");
+                    $("#echeckTxt").css({
+                        "color": "CC0000",
+                        "font-size": "10px"
+                    })
+                } else {
+                    emailConfirmTxt.html("<span id='echeckTxt'>인증번호 일치</sapn>");
+                    $("#echeckTxt").css({
+                        "color": "#44CC00",
+                        "font-size": "11px"
+                    })
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>

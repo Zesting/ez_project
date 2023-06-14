@@ -54,13 +54,13 @@ public class UserController {
         }
     }
 
-    @PostMapping("/emailcheck")
+    @PostMapping("/emailconfirm")
     @ResponseBody
-    public String emailConfirm(@RequestParam("userEamil") String userEmail) throws Exception {
+    String mailConfirm(@RequestParam("email") String email) throws Exception {
 
-        String check = emailService.sendSimpleMessage(userEmail);
-
-        return check;
+        String code = emailService.sendSimpleMessage(email);
+        System.out.println("인증코드 : " + code);
+        return code;
     }
 
     @GetMapping("/userlist")
