@@ -60,7 +60,7 @@ public class KakaopayService {
 
     
     params.add("quantity", "1");  //굳이 있어야하나?
-    params.add("tax_free_amount", "100"); //  필요없을듯..?
+    params.add("tax_free_amount", "0"); //  필요없을듯..?
     params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");  //결제 성공
     params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");     //결제 취소
     params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");   //결제 실패
@@ -117,7 +117,10 @@ public class KakaopayService {
           KakaoPayApprovalVO.class);
 
       log.info("" + kakaoPayApprovalVO);
-
+      //금액에서 카카오 포인트로 사용하여 할인 받기
+      int total = kakaoPayApprovalVO.getAmount().getTotal();
+      int point = kakaoPayApprovalVO.getAmount().getPoint();
+      kakaoPayApprovalVO.getAmount().setDiscount(total - point);
       //받은 값을 DB에 저장하기 
       Payment pay = paymentRepository.save(kakaoPayApprovalVO.toSaveEntity());      
       System.out.println("*********************************************");
