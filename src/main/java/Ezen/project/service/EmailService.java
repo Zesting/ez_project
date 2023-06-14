@@ -1,9 +1,9 @@
 package Ezen.project.service;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -11,70 +11,95 @@ import org.springframework.stereotype.Service;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-@PropertySource("classpath:application.properties")
-@Slf4j
-@RequiredArgsConstructor
+import jakarta.mail.internet.MimeMessage.RecipientType;
 @Service
-public class EmailService {
+public class EmailService implements MailServiceInter {
 
-    private final JavaMailSender javaMailSender;
+	@Autowired
+	JavaMailSender emailsender; // Bean 등록해둔 MailConfig 를 emailsender 라는 이름으로 autowired
 
-    //인증번호 생성
-    private final String ePw = createKey();
+	private String ePw; // 인증번호
 
-    @Value("${spring.mail.username}")
-    private String id;
+	// 메일 내용 작성
+	@Override
+	public MimeMessage createMessage(String to) throws MessagingException, UnsupportedEncodingException {
+//		System.out.println("보내는 대상 : " + to);
+//		System.out.println("인증 번호 : " + ePw);
+		
+		MimeMessage message = emailsender.createMimeMessage();
 
-    public MimeMessage createMessage(String to)throws MessagingException, UnsupportedEncodingException {
-        log.info("보내는 대상 : "+ to);
-        log.info("인증 번호 : " + ePw);
-        MimeMessage  message = javaMailSender.createMimeMessage();
+		message.addRecipients(RecipientType.TO, to);// 보내는 대상
+		message.setSubject("GalaxyPalace회원가입 이메일 인증코드");// 제목
 
-        message.addRecipients(MimeMessage.RecipientType.TO, to); // to 보내는 대상
-        message.setSubject("ㅇㅇㅇ 회원가입 인증 코드: "); //메일 제목
+		String msgg = "";
+		msgg += "<div style='margin:100px;'>";
+		msgg += "<h1> 안녕하세요</h1>";
+		msgg += "<h1>GalayPalace 입니다.</h1>";
+		msgg += "<br>";
+		msgg += "<p>아래 코드를 회원가입 창으로 돌아가 입력해주세요<p>";
+		msgg += "<br>";
+		msgg += "<p>최고의 서비스로 보답하겠습니다! 감사합니다!<p>";
+		msgg += "<br>";
+		msgg += "<div align='center' style='border:1px solid black; font-family:verdana';>";
+		msgg += "<h3 style='color:blue;'>회원가입 인증 코드입니다.</h3>";
+		msgg += "<div style='font-size:130%'>";
+		msgg += "CODE : <strong>";
+		msgg += ePw + "</strong><div><br/> "; // 메일에 인증번호 넣기
+		msgg += "</div>";
+		message.setText(msgg, "utf-8", "html");// 내용, charset 타입, subtype
+		// 보내는 사람의 이메일 주소, 보내는 사람 이름
+		message.setFrom(new InternetAddress("sky_0783@naver.com", "GalaxyPalace"));// 보내는 사람
 
-        // 메일 내용 메일의 subtype을 html로 지정하여 html문법 사용 가능
-        String msg="";
-        msg += "<h1 style=\"font-size: 30px; padding-right: 30px; padding-left: 30px;\">이메일 주소 확인</h1>";
-        msg += "<p style=\"font-size: 17px; padding-right: 30px; padding-left: 30px;\">아래 확인 코드를 회원가입 화면에서 입력해주세요.</p>";
-        msg += "<div style=\"padding-right: 30px; padding-left: 30px; margin: 32px 0 40px;\"><table style=\"border-collapse: collapse; border: 0; background-color: #F4F4F4; height: 70px; table-layout: fixed; word-wrap: break-word; border-radius: 6px;\"><tbody><tr><td style=\"text-align: center; vertical-align: middle; font-size: 30px;\">";
-        msg += ePw;
-        msg += "</td></tr></tbody></table></div>";
+		return message;
+	}
 
-        message.setText(msg, "utf-8", "html"); //내용, charset타입, subtype
-        message.setFrom(new InternetAddress(id,"prac_Admin")); //보내는 사람의 메일 주소, 보내는 사람 이름
+	// 랜덤 인증 코드 전송
+	@Override
+	public String createKey() {
+		StringBuffer key = new StringBuffer();
+		Random rnd = new Random();
 
-        return message;
-    }
+		for (int i = 0; i < 8; i++) { // 인증코드 8자리
+			int index = rnd.nextInt(3); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
 
-    // 인증코드 만들기
-    public static String createKey() {
-        StringBuffer key = new StringBuffer();
-        Random rnd = new Random();
+			switch (index) {
+			case 0:
+				key.append((char) ((int) (rnd.nextInt(26)) + 97));
+				// a~z (ex. 1+97=98 => (char)98 = 'b')
+				break;
+			case 1:
+				key.append((char) ((int) (rnd.nextInt(26)) + 65));
+				// A~Z
+				break;
+			case 2:
+				key.append((rnd.nextInt(10)));
+				// 0~9
+				break;
+			}
+		}
 
-        for (int i = 0; i < 6; i++) { // 인증코드 6자리
-            key.append((rnd.nextInt(10)));
-        }
-        return key.toString();
-    }
+		return key.toString();
+	}
 
-    /*
-        메일 발송
-        sendSimpleMessage의 매개변수로 들어온 to는 인증번호를 받을 메일주소
-        MimeMessage 객체 안에 내가 전송할 메일의 내용을 담아준다.
-        bean으로 등록해둔 javaMailSender 객체를 사용하여 이메일 send
-     */
-    public String sendSimpleMessage(String to)throws Exception {
-        MimeMessage message = createMessage(to);
-        try{
-            javaMailSender.send(message); // 메일 발송
-        }catch(MailException es){
-            es.printStackTrace();
-            throw new IllegalArgumentException();
-        }
-        return ePw; // 메일로 보냈던 인증 코드를 서버로 리턴
-    }
+	// 메일 발송
+	// sendSimpleMessage 의 매개변수로 들어온 to 는 곧 이메일 주소가 되고,
+	// MimeMessage 객체 안에 내가 전송할 메일의 내용을 담는다.
+	// 그리고 bean 으로 등록해둔 javaMail 객체를 사용해서 이메일 send!!
+	@Override
+	public String sendSimpleMessage(String to) throws Exception {
+
+		ePw = createKey(); // 랜덤 인증번호 생성
+
+		// TODO Auto-generated method stub
+		MimeMessage message = createMessage(to); // 메일 발송
+		try {// 예외처리
+			emailsender.send(message);
+		} catch (MailException es) {
+			es.printStackTrace();
+			throw new IllegalArgumentException();
+		}
+
+
+		return ePw; // 메일로 보냈던 인증 코드를 서버로 반환
+	}
 }

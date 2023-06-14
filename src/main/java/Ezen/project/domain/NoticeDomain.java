@@ -3,8 +3,6 @@ package Ezen.project.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import Ezen.project.DTO.NoticeDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
