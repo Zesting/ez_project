@@ -9,34 +9,37 @@
   <title>관리자페이지</title>
 </head>
 
-<body>
+<body style="background-image: url(../img/space8.jpg);">
+  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+  <div style="height: 100px; width: 100%;"></div>
+  <!-- 헤더 불러오기 -->
   <p>관리자 페이지 리스트</p>
 
   <a href="/">홈으로</a>
-    <table >
-      <thead>
-        <tr>
-          <th>adminId</th>
-          <th>userId</th>
-          <th>noticeId</th>
-          <th>weddingId</th>
-          <th>roomId</th>
-          <th>paymentId</th>
-          <th>reservationId</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="adminPageList : ${adminPageList}" >
-          <td th:text="${adminPageList.adminId}"></td>
-          <td th:text="${adminPageList.userId}"></td>
-          <td th:text="${adminPageList.noticeId}"></td>
-          <td th:text="${adminPageList.weddingId}"></td>
-          <td th:text="${adminPageList.roomId}"></td>
-          <td th:text="${adminPageList.paymentId}"></td>
-          <td th:text="${adminPageList.reservationId}"></td>
-        </tr>
-      </tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th>adminId</th>
+        <th>userId</th>
+        <th>noticeId</th>
+        <th>weddingId</th>
+        <th>roomId</th>
+        <th>paymentId</th>
+        <th>reservationId</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="adminPageList : ${adminPageList}">
+        <td th:text="${adminPageList.adminId}"></td>
+        <td th:text="${adminPageList.userId}"></td>
+        <td th:text="${adminPageList.noticeId}"></td>
+        <td th:text="${adminPageList.weddingId}"></td>
+        <td th:text="${adminPageList.roomId}"></td>
+        <td th:text="${adminPageList.paymentId}"></td>
+        <td th:text="${adminPageList.reservationId}"></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 
 </html>

@@ -10,28 +10,36 @@
 
 </head>
 
-<body>
+<body style="background-image: url(../img/space8.jpg);">
+  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+  <div style="height: 100px; width: 100%;"></div>
+  <!-- 헤더 불러오기 -->
   <a href="/">홈으로</a>
 
- <div>주문이 완료되었습니다.</div>
- <div>주문번호 : [[${info.partner_order_id}]]</div>
+  <div>주문이 완료되었습니다.</div>
+  <div>주문번호 : [[${info.partner_order_id}]]</div>
 
- <div>[[${paymentDTO.userName}]]  [[${paymentDTO.userPhoneNumber}]]</div><div><button>변경</button></div>
+  <div>[[${paymentDTO.userName}]] [[${paymentDTO.userPhoneNumber}]]</div>
+  <div><button>변경</button></div>
 
- <p>요청사항</p>
- <div>15시 입실 예정이고, 차 1대 주차합니다.</div>
+  <p>요청사항</p>
+  <div>15시 입실 예정이고, 차 1대 주차합니다.</div>
 
- 미니로고  / 갤럭시펠리스
- 
- <div>룸미니사진</div><div>[[${info.item_name}]]</div>
- [[${info.amount.total}]]
- <div>[[${info.quantity}]]</div>
- 
- <!-- 연산한 가격이 나와야함 -->
- <div>최종 결제 금액</div> <div>[[${info.amount.discount}]]원</div> 
- <hr>
-  <div>총 상품금액</div><div>[[${info.amount.total}]]원</div>
-  <div>포인트 사용</div><div>-[[${info.amount.point}]]원</div>
+  미니로고 / 갤럭시펠리스
+
+  <div>룸미니사진</div>
+  <div>[[${info.item_name}]]</div>
+  [[${info.amount.total}]]
+  <div>[[${info.quantity}]]</div>
+
+  <!-- 연산한 가격이 나와야함 -->
+  <div>최종 결제 금액</div>
+  <div>[[${info.amount.discount}]]원</div>
+  <hr>
+  <div>총 상품금액</div>
+  <div>[[${info.amount.total}]]원</div>
+  <div>포인트 사용</div>
+  <div>-[[${info.amount.point}]]원</div>
   <hr>
   결제수단(방법) : [[${info.payment_method_type}]]
   결제카드 : <p th:if="${info.payment_method_type != 'MONEY'}">[[${info.card_info.getPurchase_corp()}]]</p>

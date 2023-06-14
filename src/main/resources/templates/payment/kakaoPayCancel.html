@@ -2,20 +2,42 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <title>Project</title>
-
+  <title>Galaxy Palace</title>
 </head>
 
-<body>
-  카카오페이 결제가 취소되었습니다 <br>
-  <a href="/">홈으로</a>
+<body style="background-image: url(../img/space8.jpg);">
+  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+  <div style="height: 100px; width: 100%;"></div>
+  <!-- 헤더 불러오기 -->
 
+  <div class="container tm-container-contact">
 
-  <h2>[[${cancelInfo}]]</h2>
+    <div class="row">
+
+      <div class="text-center col-12">
+        <h2 class="tm-section-title mb-4">결제 취소</h2>
+        <p class="mb-5">
+          카카오페이 결제가 취소되었습니다.
+        </p><br>
+        <button onclick="homeBtn()" class="btn tm-btn-submit">홈으로</button>
+      </div>
+
+    </div><!-- row ending -->
+
+  </div>
+  <!-- 여기서는 사용 안되고 있음
+  <h2>[[${cancelInfo}]]</h2> -->
+
+  <script>
+    const homeBtn = () => {
+      location.href = "/";
+    }
+
+  </script>
 </body>
 
 </html>
