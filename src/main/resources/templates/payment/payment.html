@@ -30,9 +30,9 @@
   <h2> kakaoPay api 이용하기 </h2>
  
 <form method="post" action="/kakaoPay">
-    <button>카카오페이로 결제하기 </button>
+    <button><img th:src="@{/images/payment_icon_yellow_medium.png}" alt="카카오페이"></button>
 </form>
-
+<a href="/">홈으로</a>
 <!-- 여기는 카카오페이 아이콘으로 결제 연동한거 ( 아임포트 ) -->
 <hr>
   <button onclick="KakaoPayment()" class="kakaopayBtn"><img th:src="@{/images/payment_icon_yellow_medium.png}" alt="카카오페이"></button>
@@ -105,7 +105,11 @@
 
           alert("[완료] imp_uid : " + rsp.imp_uid + " / merchant_uid : " + rsp.merchant_uid);
         } else {//결제 실패시 로직
-          alert("[실패]코드(" + rsp.error_code + ") / 메세지(" + rsp.error_msg + ")");
+          // alert("[실패]코드(" + rsp.error_code + ") / 메세지(" + rsp.error_msg + ")");
+          selectTime = [];
+          let msg = "결제에 실패하였습니다.";
+          msg += "에러내용 : " + rsp.error_msg;
+          alert(msg);
         }
       });
     }
