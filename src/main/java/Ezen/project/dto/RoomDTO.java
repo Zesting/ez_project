@@ -11,6 +11,7 @@ public class RoomDTO { // 룸 생성하기 위한 이미지 경로.
 
     @NotNull
     private String roomName;
+
     @NotNull
     private int roomPrice;
 

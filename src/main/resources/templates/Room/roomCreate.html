@@ -1,60 +1,17 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <title>Project</title>
-  </head>
-  <body>
-    <div>
-      <input type="hidden" id="roomId" name="roomId" />
-      <label for="roomName">신규 룸 이름</label><br />
-      <input type="text" id="roomName" name="roomName" /><br />
-      <label for="roomPrice">룸 1박 가격</label><br />
-      <input type="number" id="roomPrice" name="roomPrice" /><br />
-      <label for="roomType">룸 타입</label><br />
-      <input type="radio" name="roomType" value="Mercury" />Mercury
-      <input type="radio" name="roomType" value="Mars" />Mars
-      <input type="radio" name="roomType" value="Jupiter" />Jupiter
-      <br />
-      <label for="roomDetailInfo">룸 상세 설명</label><br />
-      <input type="text" id="roomDetailInfo" name="roomDetailInfo" /><br />
-      <label for="roomImagePath">룸 이미지 패스</label><br />
-      <input type="text" id="roomImagePath" name="roomImagePath" /><br />
-      <input type="button" value="전송" id="ajaxReqBtn" /><br />
-    </div>
-
-    <script>
-      const ajaxReqBtn = document.getElementById("ajaxReqBtn");
-
-      ajaxReqBtn.addEventListener("click", function () {
-        const param = {
-          roomId: document.getElementById("roomId").value,
-          roomName: document.getElementById("roomName").value,
-          roomPrice: document.getElementById("roomPrice").value,
-          roomType: $("input:radio[name=roomType]:checked").val(),
-          roomDetailInfo: document.getElementById("roomDetailInfo").value,
-          roomImagePath: document.getElementById("roomImagePath").value,
-        };
-        ajax("/Rooms/add", param);
-      });
-
-      const ajax = function (url, data) {
-        console.log("ajax", url, data);
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", url);
-        xhr.setRequestHeader(
-          "Content-type",
-          "application/json; charset=UTF-8;"
-        );
-        xhr.responseType = "json";
-        xhr.onload = function (e) {
-          console.log(this, e);
-        };
-        xhr.send(JSON.stringify(data));
-      };
-    </script>
-  </body>
-</html>
+<div>
+  <input type="hidden" id="roomId" name="roomId" />
+  <label for="roomName">신규 룸 이름</label><br />
+  <input type="text" id="roomName" name="roomName" /><br />
+  <label for="roomPrice">룸 1박 가격</label><br />
+  <input type="number" id="roomPrice" name="roomPrice" /><br />
+  <label for="roomType">룸 타입</label><br />
+  <input type="radio" name="roomType" value="Mercury" />Mercury
+  <input type="radio" name="roomType" value="Mars" />Mars
+  <input type="radio" name="roomType" value="Jupiter" />Jupiter
+  <br />
+  <label for="roomDetailInfo">룸 상세 설명</label><br />
+  <input type="text" id="roomDetailInfo" name="roomDetailInfo" /><br />
+  <label for="roomImagePath">룸 이미지 패스</label><br />
+  <input type="text" id="roomImagePath" name="roomImagePath" /><br />
+  <input type="button" value="전송" id="postBtn" /><br />
+</div>
