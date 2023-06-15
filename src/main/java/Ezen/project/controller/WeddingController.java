@@ -28,7 +28,7 @@ public class WeddingController {
     //웨딩 문의 폼 
     @GetMapping("wedding/save")
     public String saveForm(){
-        return "/wedding/weddingForm";
+        return "wedding/weddingForm";
     }  
 
     //웨딩 문의 폼 전달

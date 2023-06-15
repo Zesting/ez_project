@@ -19,7 +19,7 @@
 
             <div class="container">
                 <div class="tm-next">
-                    <a href="#infinite" class="navbar-brand">Galaxy Palace</a>
+                    <a href="/" class="navbar-brand">Galaxy Palace</a>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -35,18 +35,30 @@
                         <li class="nav-item">
                             <a class="nav-link tm-nav-link" href="#whatwedo">Room</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item">       
                             <a class="nav-link tm-nav-link" href="#testimonials">Reservation</a>
                         </li>
                         <li class="nav-item"><!--#gallery-->
-                            <a class="nav-link tm-nav-link" href="/wedding/save">Wedding Inquiry</a>
+                            <a class="nav-link tm-nav-link" href="/wedding/save" onclick="weddingReq()">Wedding Inquiry</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link tm-nav-link" href="#contact">Notice</a>
+                            <a class="nav-link tm-nav-link" href="/notice/paging" onclick="pagingReq()">Notice</a>
                         </li>
                     </ul>
                 </div>
             </div>
+
+            <script>
+                const weddingReq = () => {
+                    event.preventDefault();
+                    window.location.href = "/wedding/save";
+                };
+                const pagingReq = () => {
+                    event.preventDefault();
+                    location.href = "/notice/paging";
+                };
+            </script>
+
             <script th:src="@{/js/template.js}"></script>
             <script th:src="@{/js/jquery-1.9.1.min.js}"></script>
             <script th:src="@{/slick/slick.min.js}"></script>
@@ -55,6 +67,8 @@
             <script th:src="@{/js/jquery.singlePageNav.min.js}"></script>
             <script th:src="@{/js/bootstrap.min.js}"></script>
         </nav>
+        
 </body>
+    
 
 </html>
