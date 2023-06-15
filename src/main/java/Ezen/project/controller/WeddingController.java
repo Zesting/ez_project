@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import Ezen.project.DTO.UserDTO;
+import Ezen.project.DTO.WeddingCommentDTO;
 import Ezen.project.DTO.WeddingDTO;
 import Ezen.project.service.UserService;
+import Ezen.project.service.WeddingCommentService;
 import Ezen.project.service.WeddingService;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +23,7 @@ public class WeddingController {
     
     private final WeddingService weddingService;
     private final UserService userService;
+    private final WeddingCommentService weddingCommentService;
 
     //웨딩 문의 폼 
     @GetMapping("wedding/save")
@@ -52,6 +55,9 @@ public class WeddingController {
         WeddingDTO weddingDTO = weddingService.findById(id);
         UserDTO user = userService.findById(weddingDTO.getUserId());
 
+        /* 댓글 목록 가져오기 */
+        List<WeddingCommentDTO> weddingCommentDTOList = weddingCommentService.findAll(id);
+        model.addAttribute("commentList", weddingCommentDTOList);
         
         model.addAttribute("wedding", weddingDTO);
         model.addAttribute("logInUser", user);

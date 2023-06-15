@@ -48,22 +48,23 @@ public class NoticeService {
                 6. notice 테이블에 해당 데이터 save 처리
                 7. notice 파일 테이블에 해당 데이터 save 처리
              */
-            MultipartFile noticeFile = noticeDTO.getNoticeFile();       //1
-            String originalFileName = noticeFile.getOriginalFilename(); //2
-            String storedFileName = System.currentTimeMillis() + "_" + originalFileName; //3
-            String savePath = System.getProperty("user.dir")+"/src/main/resources/static/images/" + storedFileName; // C:/notic_img/235235_내사진.jpg //4
-            noticeFile.transferTo(new File(savePath)); //5
-
             NoticeDomain noticeDomain = NoticeDomain.toSaveFileEntity(noticeDTO);
             Long savedId = noticeRepository.save(noticeDomain).getNoticeId();
             NoticeDomain notice = noticeRepository.findById(savedId).get();
 
-            NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(notice, originalFileName, storedFileName);
-            noticeFileRepository.save(noticeFileDomain);
+            for(MultipartFile noticeFile: noticeDTO.getNoticeFile()){
+                // MultipartFile noticeFile = noticeDTO.getNoticeFile();       //1
+                String originalFileName = noticeFile.getOriginalFilename(); //2
+                String storedFileName = System.currentTimeMillis() + "_" + originalFileName; //3
+                String savePath = System.getProperty("user.dir")+"/src/main/resources/static/images/" + storedFileName; // C:/notic_img/235235_내사진.jpg //4
+                noticeFile.transferTo(new File(savePath)); //5
+
+                NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(notice, originalFileName, storedFileName);
+                noticeFileRepository.save(noticeFileDomain);
+                
+            }
             return noticeDomain.getNoticeId();
-            
         }
-        
         
     }
 
