@@ -30,36 +30,36 @@ public class PaymentController {
   private final KakaopayService kakaoPayService;
   private final RoomService roomService;
 
-  //결제하기 버튼 눌렀을때.
+  // 결제하기 버튼 눌렀을때.
   @PostMapping("/kakaoPay")
   public String kakaoPayService(HttpSession session, RoomDTO roomDTO) {
     log.info("kakaoPayService post.........................................");
-    //세션 아이디가 없으면 로그인창으로 보내기
-    if(session.getAttribute("userId") == null){
+    // 세션 아이디가 없으면 로그인창으로 보내기
+    if (session.getAttribute("userId") == null) {
       return "redirect:/login";
-    } 
-    //세션 아이디 가져옴.
+    }
+    // 세션 아이디 가져옴.
     Long userId = (Long) session.getAttribute("userId");
-    //예약 정보 reservationController에서 세션에 저장하여 가져옴.
-    if(session.getAttribute("payReservation")==null){
-      return "redirect:/reservation/selectDate";      
+    // 예약 정보 reservationController에서 세션에 저장하여 가져옴.
+    if (session.getAttribute("payReservation") == null) {
+      return "redirect:/verificationUser";
     }
     Reservation reservation = (Reservation) session.getAttribute("payReservation");
-    //로그인 되어 있는 userID를 가져옴
+    // 로그인 되어 있는 userID를 가져옴
     UserDTO logInUser = userService.findById(userId);
-    //새로운 객체를 만들어 필요한 값을 저장.
+    // 새로운 객체를 만들어 필요한 값을 저장.
     PaymentDTO paymentDTO = new PaymentDTO();
     paymentDTO.setReservationId(reservation.getReservationId());
     paymentDTO.setUserId(logInUser.getUserId());
     paymentDTO.setUserName(logInUser.getUserName());
     paymentDTO.setUserPhoneNumber(logInUser.getUserPhoneNumber());
-    //룸 ID로 찾아 예약된 룸아이디의 룸이름을 가져옴
+    // 룸 ID로 찾아 예약된 룸아이디의 룸이름을 가져옴
     paymentDTO.setRoomName(roomService.findRoomById(reservation.getRoomId()).get().getRoomName());
     paymentDTO.setAmount(reservation.getFinalPrice());
-    //다른 곳에서 DTO를 쓰기 위해 세션에 paymentDTO를 저장.
+    // 다른 곳에서 DTO를 쓰기 위해 세션에 paymentDTO를 저장.
     session.setAttribute("paymentDTO", paymentDTO);
-    
-  System.out.println("포스트맵핑/kakaopay dto 저장"+paymentDTO);
+
+    System.out.println("포스트맵핑/kakaopay dto 저장" + paymentDTO);
     return "redirect:" + kakaoPayService.kakaoPayReady(paymentDTO);
   }
 
@@ -74,11 +74,13 @@ public class PaymentController {
     return "payment/kakaoPaySuccess";
   }
 
-  //결제 진행 중 취소하였을 때.
+  // 결제 진행 중 취소하였을 때.
   @GetMapping("/kakaoPayCancel")
-  public String kakaoPayCancel() {
-    //취소 되었다고 결제 데이터 베이스에 취소 상태해서 넣기 
-
+  public String kakaoPayCancel(PaymentDTO paymentDTO) {
+    // 취소 되었다고 결제 데이터 베이스에 취소 상태해서 넣기
+    log.info("kakaoPayCancel get............................................");
+    Payment payCancel = paymentService.save(paymentDTO.toSaveEntity()); 
+    System.out.println(payCancel);
     return "payment/kakaoPayCancel";
   }
 
@@ -89,7 +91,7 @@ public class PaymentController {
 
   // 아래는 카카오 페이랑 관련 x 다른 api및 테스트하던 매핑.
 
-  //결제 버튼 있는 페이지
+  // 결제 버튼 있는 페이지
   @GetMapping("/payment")
   public String payment() {
     return "payment/payment";
