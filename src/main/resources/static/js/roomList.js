@@ -129,6 +129,7 @@ $(document).on("click", "#createForm", function () {
 });
 
 /* =========================================================================================== */
+/** ajax 기본 메서드(POST, PUT, DELETE) */
 /** ajax(url, method, data)  */
 function ajax(url, method, data) {
   console.log("Put Ajax", url, data);

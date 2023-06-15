@@ -41,7 +41,7 @@ public class Payment {
     private String tid; // 카카오페이 고유 번호
 
     @Column(name = "amount")
-    private int paymentAmount; // 결제 금액
+    private int paymentAmount; // 원래 결제 금액
 
     @Column(name = "cardName")
     private String cardName; // 카드 정보
@@ -51,6 +51,12 @@ public class Payment {
     private Date approved_at; // 결제 시간
 
     @Column(name = "roomName")
-    private String roomName;
+    private String roomName;   //룸 이름
+
+    @Column(name = "kakaoPoint")
+    private int kakaoPoint;  //카카오 포인트
+
+    @Column(name = "discountAmount")
+    private int discountAmount; //할인된 금액
 
 }

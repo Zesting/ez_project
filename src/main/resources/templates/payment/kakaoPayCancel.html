@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <title>Galaxy Palace</title>
+  <link rel="stylesheet" th:href="@{/css/kakaoPay.css}">
 </head>
 
 <body style="background-image: url(../img/space8.jpg);">
@@ -14,19 +15,77 @@
   <div style="height: 100px; width: 100%;"></div>
   <!-- 헤더 불러오기 -->
 
-  <div class="container tm-container-contact">
-
-    <div class="row">
-
-      <div class="text-center col-12">
-        <h2 class="tm-section-title mb-4">결제 취소</h2>
-        <p class="mb-5">
-          카카오페이 결제가 취소되었습니다.
-        </p><br>
-        <button onclick="homeBtn()" class="btn tm-btn-submit">홈으로</button>
+  <section class="tm-section-pad-top tm-parallax-2"> <!--id="#contact" 지움 /배경사진이 들어가서-->
+    <div class="payState">
+      <div>카카오페이 결제가 취소되었습니다.</div>
+      <div>주문번호 : 11</div>
+    </div>
+    <!-- <hr>아래로 지우면됨 테스트용  -->
+    <div class="userInfo">
+      <div class="userInfo_a">
+        <div class="userInfo_a_a">이재영</div>
+        <div class="userInfo_a_a">01089898989</div>
+        <!-- 가운데 아이디로 바꾸고 번호를 마지막으로 할까? -->
+        <div class="userInfo_a_a"><button>변경</button></div>
       </div>
+      <p>&lt; 요청사항 &gt; </p>
+      <div>15시 입실 예정이고, 차 1대 주차합니다.</div>
+    </div>
+    <!-- <hr> -->
+    <div class="itemInfo">
+      <div class="itemInfo_a">
+        <div class="itemInfo_a_a">로고</div>
+        <div class="itemInfo_a_b">갤럭시펠리스</div>
+      </div>
+      <div class="itemInfo_b">
+        <div class="itemInfo_b_a">룸미니사진</div>
+        <div class="itemInfo_b_b">
+          <div class="itemInfo_b_b_a">필로우 라이언</div>
+          <div class="itemInfo_b_b_b">
+            <div class="itemInfo_b_b_b_a">5000000원</div>
+            <div class="itemInfo_b_b_b_b">1개</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <hr> -->
+    <div class="finalAmount">
+      <div class="finalAmount_a">최종 결제 금액</div>
+      <div class="finalAmount_b">500000원</div>
+    </div>
+    <!-- <hr> -->
+    <div class="discountAmount">
+      <div class="discountAmount_a">
+        <div class="discountAmount_a_a">총 상품금액</div>
+        <div class="discountAmount_a_b">100000원</div>
+      </div>
+      <div class="discountAmount_b">
+        <div class="discountAmount_b_a">포인트 사용</div>
+        <div class="discountAmount_b_b">-10000원</div>
+      </div>
+    </div>
+    <!-- <hr> -->
 
-    </div><!-- row ending -->
+    <div class="paymentInfo">
+      <div class="paymentInfo_a">
+        <div class="paymentInfo_a_a">결제수단(방법) :</div>
+        <div class="paymentInfo_a_b"> 카드</div>
+      </div>
+      <div class="paymentInfo_b">
+        <div class="paymentInfo_b_a">결제카드 : </div>
+        <div class="paymentInfo_b_b">딩가</div>
+      </div>
+      <div class="paymentInfo_c">
+        <div class="paymentInfo_c_a">승인 일시 :</div>
+        <div class="paymentInfo_c_b"> 23061411</div>
+      </div>
+    </div>
+  </section>
+  <!-- <hr> -->
+  <button onclick="homeBtn()" class="btn tm-btn-submit">홈으로</button>
+  </div>
+
+  </div><!-- row ending -->
 
   </div>
   <!-- 여기서는 사용 안되고 있음
@@ -34,7 +93,7 @@
 
   <script>
     const homeBtn = () => {
-      location.href = "/";
+      location.href = "/payment";
     }
 
   </script>
