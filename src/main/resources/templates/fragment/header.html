@@ -19,7 +19,7 @@
 
             <div class="container">
                 <div class="tm-next">
-                    <a href="/" class="navbar-brand">Galaxy Palace</a>
+                    <a href="/" class="navbar-brand" onclick="homeReq()">Galaxy Palace</a>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -49,14 +49,19 @@
             </div>
 
             <script>
+                const homeReq = () => {
+                    event.preventDefault();
+                    window.location.href = "/";
+                }
+
                 const roomList = () => {
                     event.preventDefault();
-                    location.href = "/Rooms";
+                    window.location.href = "/Rooms";
                 }
 
                 const reservation = () => {
                     event.preventDefault();
-                    location.href = "/Reservations/SelectDate";
+                    window.location.href = "/Reservations/SelectDate";
                 }
 
                 const weddingReq = () => {
@@ -65,7 +70,7 @@
                 };
                 const pagingReq = () => {
                     event.preventDefault();
-                    location.href = "/notice/paging";
+                    window.location.href = "/notice/paging";
                 };
             </script>
 
