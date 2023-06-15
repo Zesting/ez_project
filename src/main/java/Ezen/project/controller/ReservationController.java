@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +41,7 @@ public class ReservationController {
 
     // 예약 날짜 선택 뷰 메서드
     @RequestMapping(value = "/Reservations/SelectDate", method = RequestMethod.GET)
-    public String reservationSelectDateView() {
+    public String reservationSelectDateView(@ModelAttribute CheckDTO checkDTO) {
         return "Reservation/SelectDate";
     }
 
@@ -54,12 +55,14 @@ public class ReservationController {
     // }
 
     // 예약 룸
-    @GetMapping("/Reservations/SelectRoom")
-    public String reservationSelectRoomView(HttpSession session, Model model) {
+    @RequestMapping(value = "/Reservations/SelectRoom", method = RequestMethod.GET)
+    public String reservationSelectRoomView(Model model, HttpSession session) {
+
         System.out.println("GetMapping 실행(/selectRoom)");
         CheckDTO checkDTO = (CheckDTO) session.getAttribute("checkDTO");
+        System.out.println("GetMApping CheckDTO :" + checkDTO);
+
         List<?> roomList = reservationService.bookableList(checkDTO);
-        System.out.println(roomList);
 
         model.addAttribute("checkDTO", checkDTO);
         model.addAttribute("roomList", roomList);

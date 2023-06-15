@@ -12,7 +12,6 @@ import Ezen.project.DTO.RoomDTO;
 import Ezen.project.domain.Reservation;
 import Ezen.project.service.ReservationService;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -22,9 +21,11 @@ public class ApiReservationController {
     private final ReservationService reservationService;
 
     @RequestMapping(value = "/Reservations/SelectDate", method = RequestMethod.POST)
-    public ResponseEntity<?> selectDate(@RequestBody @Valid CheckDTO checkDTO, HttpSession session) {
+    public ResponseEntity<?> selectDate(@RequestBody CheckDTO checkDTO, HttpSession session) {
         System.out.println("REST(POST)selectRoom 실행 -> checkDTO : checkDTO" + checkDTO);
+
         session.setAttribute("checkDTO", checkDTO);
+        System.out.println("post selectDate Post : checkDTO : " + session.getAttribute("checkDTO"));
         return ResponseEntity.ok(checkDTO);
     }
 
@@ -37,7 +38,6 @@ public class ApiReservationController {
         Long userId = (Long) session.getAttribute("userId");
 
         Reservation reservation = reservationService.addReservation(userId, roomDTO.getRoomId(), checkDTO);
-
         session.setAttribute("payReservation", reservation); // 예약 정보 세션에 저장해서 가져가기
 
         return ResponseEntity.ok(reservation);

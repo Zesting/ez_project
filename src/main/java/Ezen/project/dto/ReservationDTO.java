@@ -12,7 +12,7 @@ public class ReservationDTO {
 
     private Long userId; // 회원 고유 번호.(FK)
 
-    private String reservationDate; // 예약 수행 일자.
+    private Date reservationDate; // 예약 수행 일자.
 
     private Date checkIn; // 체크 인 날짜.
 
