@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Project</title>
+    <style>
+      tbody td {
+        text-align: center;
+        border: 1px dotted #555;
+      }
+      thead td {
+        text-align: center;
+        border: 3px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <table>
+      <thead>
+        <tr>
+          <td>Check_IN</td>
+          <td>Check_OUT</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td th:text="${checkDTO.checkIn}"></td>
+          <td th:text="${checkDTO.checkOut}"></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+
+    <table>
+      <thead>
+        <tr>
+          <td>룸 고유 아이디</td>
+          <td>예약 가능한 방 이름</td>
+          <td>룸 기본 가격</td>
+          <td>룸 타입</td>
+          <td>룸 상세 설명</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each=" roomList : ${roomList}">
+          <td>
+            <input
+              id="choiceRoomId"
+              name="roomId"
+              th:value="${roomList.roomId}"
+              readonly />
+          </td>
+          <td>
+            <input
+              id="choiceRoomName"
+              name="roomName"
+              th:value="${roomList.roomName}"
+              readonly />
+          </td>
+          <td>
+            <input
+              id="choiceRoomPrice"
+              name="roomPrice"
+              th:value="${roomList.roomPrice}"
+              readonly />
+          </td>
+          <td>
+            <input
+              id="choiceRoomType"
+              name="roomType"
+              th:value="${roomList.roomType}"
+              readonly />
+          </td>
+          <td>
+            <input
+              id="choiceRoomDetailInfo"
+              name="roomDetailInfo"
+              th:value="${roomList.roomDetailInfo}"
+              readonly />
+          </td>
+          <td><button type="button" id="choiceRoom">룸 선택</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

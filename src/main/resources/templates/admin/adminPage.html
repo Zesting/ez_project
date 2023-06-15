@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <title>관리자페이지</title>
-    <style>
-      tbody td {
-        text-align: center;
-        border: 1px dotted #555;
-      }
-      thead td {
-        text-align: center;
-        border: 3px solid black;
-      }
-    </style>
-  </head>
 
-  <body>
-    <p>관리자 페이지 home입니다.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>관리자페이지</title>
+  <style>
+    tbody td {
+      text-align: center;
+      border: 1px dotted #555;
+    }
 
-    <button onclick="saveBtn()">임시저장</button>
+    thead td {
+      text-align: center;
+      border: 3px solid black;
+    }
+  </style>
+</head>
+
+<body style="background-image: url(../img/space8.jpg);">
+  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+  <div style="height: 100px; width: 100%;"></div>
+  <!-- 헤더 불러오기 -->
+  <p>관리자 페이지 home입니다.</p>
+
+  <button onclick="saveBtn()">임시저장</button>
 
     <button onclick="listBtn()">목록</button>
     <hr />
-    <button type="button" onclick="roomListBtn()">룸 리스트</button>
+    <button type="button" id="listForm">룸 리스트</button>
+    <button type="button" id="createForm">룸 생성</button>
     <div id="roomListContainer" style="border: 1px solid black"></div>
+    <div id="roomModifyContainer" style="border: 1px solid black"></div>
+    <script th:src="@{/js/roomList.js}"></script>
+    <button type="button" id="userListBtn">회원 목록</button>
+  <div id="userList">
+    <table>
+      <tr th:each="user : ${userList}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.userId}"></td>
+        <td th:text="${user.userPassword}"></td>
+        <td th:text="${user.userName}"></td>
+        <td><a th:href="@{|/user/${user.id}|}">조회</a></td>
+        <td><a th:href="@{|/user/delete/${user.id}|}">삭제</a></td>
+      </tr>
+    </table>
+  </div>
   </body>
   <script>
     const saveBtn = () => {
@@ -35,54 +56,32 @@
     const listBtn = () => {
       location.href = "/adminPageList";
     };
+    //회원 리스트
+  // let togle = 0;
+  // if (togle = 0) {
+    $(document).ready(function () {
+      $("#userListBtn").click(function () {
+        $("#userList").show();
 
-    function roomListBtn() {
-      console.log("roomListBtn start");
-      $.ajax({
-        url: "/Rooms", //요청보내는 url
-        method: "Get", //방식
-        data: "", // 데이터 x list 출력이기 때문에
-        dataType: "JSON",
-        success: function (data) {
-          // data = JSON으로 변환된 list<Room>
-          console.log("ajax 성공!");
-          console.log(data);
-          var html = "";
-          html += "<table>";
-          html += "<thead>";
-          html += "<tr>";
-          html += "<th>룸 고유번호</th>";
-          html += "<th>룸 이름</th>";
-          html += "<th>룸 가격</th>";
-          html += "<th>룸 타입</th>";
-          html += "<th>룸 상세정보</th>";
-          html += "<th>룸 이미지 패스</th>";
-          html += "</tr>";
-          html += "</thead>";
-
-          html += "<tbody>";
-          for (var i = 0; i < data.length; i++) {
-            var room = data[i];
-            html += "<tr>";
-            html += "<td>" + room.roomId + "</td>";
-            html += "<td>" + room.roomName + "</td>";
-            html += "<td>" + room.roomPrice + "</td>";
-            html += "<td>" + room.roomType + "</td>";
-            html += "<td>" + room.roomDetailInfo + "</td>";
-            html += "<td>" + room.roomImagePath + "</td>";
-            html += "</tr>";
-          }
-          html += "</tbody>";
-          html += "</table>";
-
-          html += "<button type='button'>전송</button>";
-
-          $("#roomListContainer").html(html);
-        },
-        error: function (xhr, status, error) {
-          console.log("실패", error);
-        },
+        // togle = 1;
       });
-    }
+      $("#userListBtn").dblclick(function () {
+        $("#userList").hide();
+      });
+    });
+  //   console.log('쇼 :' + togle);
+  // } else {
+  //   $(document).ready(function () {
+  //     $("#userListBtn").click(function () {
+  //       $("#userList").hide();
+  //       togle = 0;
+  //     });
+  //     $("#userListBtn").dblclick(function () {
+  //       $("#userList").show();
+  //     });
+  //   });
+  //   console.log('하이드 :' + togle);
+  // }
+
   </script>
 </html>

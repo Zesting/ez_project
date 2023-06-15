@@ -1,20 +1,26 @@
 package Ezen.project.DTO;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
-public class RoomDTO { // 룸 생성하기 위한 이미지 경로.
+public class RoomDTO {
 
     @NotNull
+    @NotEmpty
     private Long roomId;
 
     @NotNull
+    @NotEmpty
     private String roomName;
+
     @NotNull
+    @NotEmpty
     private int roomPrice;
 
     @NotNull
+    @NotEmpty
     private String roomType;
 
     private String roomDetailInfo;
