@@ -100,7 +100,7 @@ public class PaymentController {
   public String paymentList(Model model) {
     List<Payment> paymentList = paymentService.findByAll();
     model.addAttribute("paymentList", paymentList);
-    System.out.println("getMapping() list 출력");
+    System.out.println("getMapping() paymentList 출력");
     return "payment/paymentList";
   }
 

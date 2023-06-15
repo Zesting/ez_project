@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" th:href="@{/css/weddingForm.css}" />
 </head>
-<body>
-    <div>
+<body style="background-image: url(../img/space8.jpg);"> 
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 100px; width: 100%;" ></div>
+    <div class="text1">
         <h3>웨딩</h3>
         <h2>문의</h2>
     </div>
     <form action="/wedding/save" method="post">
         <fieldset>
             <legend>작성자 정보</legend>
-            <div>
+            <div class="userInfo">
                 <p>아이디</p>
                 <input type="text" name="userId"><br>
                 <p>성명</p>

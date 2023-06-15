@@ -53,7 +53,7 @@ public class NoticeController {
     public String findById(@PathVariable Long id, Model model, 
                             @PageableDefault(page=1) Pageable pageable){
         NoticeDTO noticeDTO = noticeService.findById(id);
-        String noticeFileId = noticeDTO.getStoredFileName();
+        List<String> noticeFileId = noticeDTO.getStoredFileName();
         System.out.println(noticeFileId);
        model.addAttribute("imageName", noticeFileId);
         model.addAttribute("notice", noticeDTO);
