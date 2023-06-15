@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import Ezen.project.DTO.NoticeDTO;
-import Ezen.project.domain.NoticeFileDomain;
-import Ezen.project.service.NoticeFileService;
 import Ezen.project.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 
@@ -25,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 public class NoticeController {
 
     private final NoticeService noticeService;
-    private final NoticeFileService noticeFileService;
 
     //공지 메인페이지
     @GetMapping("notice")

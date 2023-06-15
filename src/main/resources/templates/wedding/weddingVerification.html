@@ -1,0 +1,13 @@
+<html lang="ko" xmlns="http://www.thymeleaf.org">
+  <p th:if="${session.userId == null}">
+    <script>
+      alert("로그인일 필요한 항목입니다. 로그인을 수행해주세요.");
+      window.location.href = "/login";
+    </script>
+  </p>
+  <p th:if="${session.userId != null}">
+    <script>
+      window.location.href = "/wedding/weddingForm";
+    </script>
+  </p>
+</html>
