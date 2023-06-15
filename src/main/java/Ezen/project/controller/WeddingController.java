@@ -15,6 +15,7 @@ import Ezen.project.DTO.WeddingDTO;
 import Ezen.project.service.UserService;
 import Ezen.project.service.WeddingCommentService;
 import Ezen.project.service.WeddingService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -27,7 +28,10 @@ public class WeddingController {
 
     //웨딩 문의 폼 
     @GetMapping("wedding/save")
-    public String saveForm(){
+    public String saveForm(HttpSession session){
+        if(session.getAttribute("userId") == null){
+      return "redirect:/login";
+    }
         return "wedding/weddingForm";
     }  
 

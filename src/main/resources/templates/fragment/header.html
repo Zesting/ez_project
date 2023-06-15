@@ -33,10 +33,10 @@
                             <a class="nav-link tm-nav-link" href="#infinite">Introduction</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link tm-nav-link" href="#whatwedo">Room</a>
+                            <a class="nav-link tm-nav-link" href="#whatwedo" onclick="roomList()">Room</a>
                         </li>
                         <li class="nav-item">       
-                            <a class="nav-link tm-nav-link" href="#testimonials">Reservation</a>
+                            <a class="nav-link tm-nav-link" href="#testimonials" onclick="reservation()">Reservation</a>
                         </li>
                         <li class="nav-item"><!--#gallery-->
                             <a class="nav-link tm-nav-link" href="/wedding/save" onclick="weddingReq()">Wedding Inquiry</a>
@@ -49,6 +49,16 @@
             </div>
 
             <script>
+                const roomList = () => {
+                    event.preventDefault();
+                    location.href = "/Rooms";
+                }
+
+                const reservation = () => {
+                    event.preventDefault();
+                    location.href = "/Reservations/SelectDate";
+                }
+
                 const weddingReq = () => {
                     event.preventDefault();
                     window.location.href = "/wedding/save";
