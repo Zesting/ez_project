@@ -28,26 +28,26 @@ public class Reservation {
     @Column
     private Long reservationId; // 예약 고유 번호(PK)
 
-    @Column
+    @Column(name = "roomId")
     private Long roomId;
     // @JoinColumn(name = "room_id")
     // private Room room; // 룸 고유 번호 (FK)
 
-    @Column
+    @Column(name = "userId")
     // @JoinColumn(name = "user_id")
     private Long userId; // 회원 고유 번호.(FK)
     // 유저
 
-    @Column
-    private String reservationDate; // 예약 수행 일자.
+    @Column(name = "reservationDate")
+    private Date reservationDate; // 예약 수행 일자.
 
-    @Column
+    @Column(name = "checkIn")
     private Date checkIn; // 체크 인 날짜.
 
-    @Column
+    @Column(name = "checkOut")
     private Date checkOut; // 체크 아웃 날짜.
 
-    @Column
+    @Column(name = "finalPrice")
     private int finalPrice; // 최종 결제 금액.
 
 }

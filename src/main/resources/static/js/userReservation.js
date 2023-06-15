@@ -13,6 +13,29 @@ $(document).on("click", "#postBtn", function () {
     dataType: "JSON",
     success: function (data) {
       console.log("ajax 성공! JSON :", data);
+      // Get {/Reservations/SelectRoom}
+      $.ajax({
+        url: "/Reservations/SelectRoom",
+        method: "GET",
+        dataType: "HTML",
+        success: function (data) {
+          console.log("ajax 성공! HTML->", data);
+
+          $("#bookableRoomList").html(data);
+        },
+        error: function (request, error) {
+          console.log(
+            "code:" +
+              request.status +
+              "\n" +
+              "message:" +
+              request.responseText +
+              "\n" +
+              "error:" +
+              error
+          );
+        },
+      });
     },
     error: function (request, error) {
       console.log(
@@ -29,42 +52,22 @@ $(document).on("click", "#postBtn", function () {
     },
   });
 
-  // Get {/Reservations/SelectRoom}
-  $.ajax({
-    url: "/Reservations/SelectRoom",
-    method: "GET",
-    dataType: "HTML",
-    success: function (data) {
-      console.log("ajax 성공! HTML->", data);
-
-      $("#bookableRoomList").html(data);
-    },
-    error: function (request, error) {
-      console.log(
-        "code:" +
-          request.status +
-          "\n" +
-          "message:" +
-          request.responseText +
-          "\n" +
-          "error:" +
-          error
-      );
-    },
-  });
-
   //Post {/Reservations/SelectRoom}
 
   $(document).on("click", "#choiceRoom", function () {
     console.log("choiceRoom Post 시작");
-    let roomId = document.getElementById("choiceRoomId").value;
-    console.log("roomId ->", roomId);
+    var $row = $(this).closest("tr");
+    var roomId = $row.find("#choiceRoomId").val();
+    var roomName = $row.find("#choiceRoomName").val();
+    var roomPrice = $row.find("#choiceRoomPrice").val();
+    var roomType = $row.find("#choiceRoomType").val();
+    var roomDetailInfo = $row.find("#choiceRoomDetailInfo").val();
     const params = {
-      roomId: document.getElementById("choiceRoomId").value,
-      roomName: document.getElementById("choiceRoomName").value,
-      roomPrice: document.getElementById("choiceRoomPrice").value,
-      roomType: document.getElementById("choiceRoomType").value,
-      roomDetailInfo: document.getElementById("choiceRoomDetailInfo").value,
+      roomId: roomId,
+      roomName: roomName,
+      roomPrice: roomPrice,
+      roomType: roomType,
+      roomDetailInfo: roomDetailInfo,
     };
     console.log("Params :", params);
 

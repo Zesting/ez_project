@@ -1,10 +1,12 @@
 package Ezen.project.service;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -34,14 +36,15 @@ public class ReservationService {
 
     @Transactional
     public Reservation addReservation(Long userId, Long roomId, CheckDTO checkDTO) {
-        Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        LocalDate today = LocalDate.now();
+        Date date = Date.valueOf(today);
+
         Reservation reservation = new Reservation();
         reservation.setUserId(userId);
         reservation.setRoomId(roomId);
         reservation.setCheckIn(checkDTO.getCheckIn());
         reservation.setCheckOut(checkDTO.getCheckOut());
-        reservation.setReservationDate(dateFormat.format(today));
+        reservation.setReservationDate(date);
         reservation.setFinalPrice((int) (roomRepository.findById(roomId).get().getRoomPrice() * 0.9));
         reservationRepository.save(reservation);
 
@@ -71,10 +74,12 @@ public class ReservationService {
         return reservationRepository.findById(reservationId);
     }
 
+    @Transactional
     // check_In 날짜에 해당하는 룸 조회 기능[관리자 파트]
-    @Transactional(readOnly = true)
     public List<Reservation> findAllReservationByCheckIn(Date checkIn) {
-        return reservationRepository.findAll().stream().filter(d -> d.getCheckIn().equals(checkIn)).toList();
+        return reservationRepository.findAll().stream()
+                .filter(r -> r.getCheckIn().toLocalDate().equals(checkIn.toLocalDate()))
+                .collect(Collectors.toList());
     }
 
     // 예약 변경 기능[회원 파트](비지니스 로직)
@@ -131,7 +136,6 @@ public class ReservationService {
     public List<?> bookableList(CheckDTO checkDTO) { // ? -> roomList
         List<Room> bookableRooms = roomRepository.findAll();
         List<Reservation> checkOutReservation = findAllReservationByCheckIn(checkDTO.getCheckIn());
-
         List<Room> roomsToRemove = new ArrayList<>();
         for (Reservation reservation : checkOutReservation) {
             for (Room checkOnRoom : bookableRooms) {
