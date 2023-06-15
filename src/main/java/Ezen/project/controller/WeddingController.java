@@ -28,13 +28,17 @@ public class WeddingController {
 
     //웨딩 문의 폼 
     @GetMapping("wedding/save")
-    public String saveForm(HttpSession session){
-        if(session.getAttribute("userId") == null){
-      return "redirect:/login";
-    }
-        return "wedding/weddingForm";
-    }  
+    public String saveForm(Model model, HttpSession session) {
+        Long userId = (Long)session.getAttribute("userId");
+        if (session.getAttribute("userId") == null) {
+            return "redirect:/login";
+        }
 
+        model.addAttribute("user", userService.findById(userId));
+        
+        return "wedding/weddingForm";
+    }
+    
     //웨딩 문의 폼 전달
     @PostMapping("wedding/save")
     public String save(@ModelAttribute WeddingDTO weddingDTO){
