@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.service.EmailService;
 import Ezen.project.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -38,7 +39,10 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpSession session, HttpServletRequest request) {
+        // 준희 수정(이전 페이지로 리턴(Get))
+        session.setAttribute("previousURL", request.getHeader("Referer"));
+        System.out.println("get에서의 Referer1 : " + request.getHeader("Referer"));
         return "user/login";
     }
 
@@ -48,10 +52,19 @@ public class UserController {
         UserDTO result = userService.login(userDTO);
         if (result != null) {
             session.setAttribute("userId", result.getId());
-            return "home";
+            // 준희 수정(이전 페이지로 리턴(Post))
+            String previousURL = (String) session.getAttribute("previousURL");
+            System.out.println("Post에서의 previousURL : " + previousURL);
+            if (previousURL == null) {
+                return "redirect:/";
+            }
+            /** 로그인 성공하면 이전 화면으로 리턴 */
+            return "redirect:" + previousURL;
+            // return "home"; (기존 정래형 코드)
         } else {
             return "user/login";
         }
+
     }
 
     // 아이디 중복체크

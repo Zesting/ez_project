@@ -5,18 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원정보수정</title>
-</head>
-<body>
+  </head>
+  <body>
     <form action="/user/update" method="post">
-        <input type="hidden" th:value="${updateuser.id}" name="id">
-        <input type="hidden" th:value="${updateuser.userAuthority}" name="userAuthority"><br>
-        아이디: <input type="text" th:value="${updateuser.userId}" name="userId" readonly><br>
-        비밀번호: <input type="text" th:value="${updateuser.userPassword}" name="userPassword"><br>
-        이름: <input type="text" th:value="${updateuser.userName}" name="userName" readonly><br>
-        나이:<input type="text" th:value="${updateuser.userAge}" name="userAge"><br>
-        핸드폰번호: <input type="text" th:value="${updateuser.userPhoneNumber}" name="userPhoneNumber"><br>
-        이메일: <input type="text" th:value="${updateuser.userEmail}" name="userEmail"><br>
-        <input type="submit" value="회원정보수정">
+      <input type="hidden" th:value="${updateuser.id}" name="id" />
+      <input
+        type="hidden"
+        th:value="${updateuser.userAuthority}"
+        name="userAuthority" /><br />
+      아이디:
+      <input
+        type="text"
+        th:value="${updateuser.userId}"
+        name="userId"
+        readonly /><br />
+      비밀번호:
+      <input
+        type="text"
+        th:value="${updateuser.userPassword}"
+        name="userPassword" /><br />
+      이름:
+      <input
+        type="text"
+        th:value="${updateuser.userName}"
+        name="userName"
+        readonly /><br />
+      나이:<input
+        type="text"
+        th:value="${updateuser.userAge}"
+        name="userAge" /><br />
+      핸드폰번호:
+      <input
+        type="text"
+        th:value="${updateuser.userPhoneNumber}"
+        name="userPhoneNumber" /><br />
+      이메일:
+      <input
+        type="text"
+        th:value="${updateuser.userEmail}"
+        name="userEmail" /><br />
+      <input type="submit" value="회원정보수정" />
     </form>
-</body>
+  </body>
 </html>

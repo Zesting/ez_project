@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import Ezen.project.DTO.AdminPageDTO;
+import Ezen.project.DTO.UserDTO;
 import Ezen.project.service.AdminPageService;
+import Ezen.project.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 //DTO -> Entity (Entity class에서 변환)
@@ -20,10 +22,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AdminPageController {
   private final AdminPageService adminPageService;
+  private final UserService userService;
 
   @GetMapping("/adminPage")
-  public String adminPage(){
-    
+  public String adminPage(Model model){
+    List<UserDTO> userDTOList = userService.findAll();
+    model.addAttribute("userList", userDTOList);
     return "admin/adminPage";
   }
 

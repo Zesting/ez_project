@@ -38,12 +38,15 @@ public class KakaoPayApprovalVO {
     payment.setPayment_method_type(payment_method_type); // 결제 방법 crad 또는 Money
     payment.setApproved_at(approved_at); // 결제 승인 시간
     payment.setPayState("완료"); // 결제 상태
+    payment.setKakaoPoint(amount.getPoint()); //카카오 포인트 
+    payment.setPaymentAmount(amount.getTotal());//total_amount
+    payment.setDiscountAmount(amount.getTotal()-amount.getPoint());//결제금액 - 카카오포인트
     if(card_info == null){
       payment.setCardName("카카오페이");  //카카오페이로 결제 할경우.
+      return payment; 
     }else{
       payment.setCardName(""+card_info.getPurchase_corp()); // 카드 정보
     }
-    payment.setPaymentAmount(amount.getTotal());//total_amount
     // System.out.println("데이터베이스 변환되어 저장되는지 확인"+payment);
     return payment;
   }

@@ -28,10 +28,6 @@ public class PaymentService {
     return paymentRepository.findAll();
   }
 
-  // public Optional<Payment> findById(Long payId) {
-  //   Optional<Payment> test = paymentRepository.findById(payId);
-  //   System.out.println(test);
-  //   return test;
-  //   }
+ 
   
 }

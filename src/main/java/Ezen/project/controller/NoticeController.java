@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import Ezen.project.DTO.NoticeDTO;
-import Ezen.project.service.NoticeFileService;
 import Ezen.project.service.NoticeService;
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 public class NoticeController {
 
     private final NoticeService noticeService;
-    private final NoticeFileService noticeFileService;
 
     //공지 메인페이지
     @GetMapping("notice")
@@ -51,7 +49,7 @@ public class NoticeController {
     public String findById(@PathVariable Long id, Model model, 
                             @PageableDefault(page=1) Pageable pageable){
         NoticeDTO noticeDTO = noticeService.findById(id);
-        String noticeFileId = noticeDTO.getStoredFileName();
+        List<String> noticeFileId = noticeDTO.getStoredFileName();
         System.out.println(noticeFileId);
        model.addAttribute("imageName", noticeFileId);
         model.addAttribute("notice", noticeDTO);

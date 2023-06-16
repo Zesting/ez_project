@@ -23,43 +23,34 @@
   </head>
   <body>
     <div class="container px-1 px-sm-5 mx-auto">
-      <form autocomplete="off" method="post" action="/reservation/selectDate">
-        <div class="flex-sm-row flex-column d-flex">
-          <div class="col-sm-9 col-12 px-0 mb-2">
-            <div class="input-group input-daterange">
-              <input
-                type="date"
-                id="checkIn"
-                name="checkIn"
-                class="form-control"
-                placeholder="Check_In Date"
-                readonly />
-              <input
-                type="date"
-                id="checkOut"
-                name="checkOut"
-                class="form-control"
-                placeholder="Check_Out Date"
-                readonly />
-            </div>
-          </div>
-          <br />
-          <div class="col-sm-3 col-12 px-0">
-            <button type="submit" class="btn btn-black">Search</button>
+      <div class="flex-sm-row flex-column d-flex">
+        <div class="col-sm-9 col-12 px-0 mb-2">
+          <div class="input-group input-daterange">
+            <input
+              type="date"
+              id="checkIn"
+              name="checkIn"
+              class="form-control"
+              placeholder="Check_In Date"
+              readonly />
+            <input
+              type="date"
+              id="checkOut"
+              name="checkOut"
+              class="form-control"
+              placeholder="Check_Out Date"
+              readonly />
           </div>
         </div>
-      </form>
+        <br />
+        <div class="col-sm-3 col-12 px-0">
+          <button id="postBtn" type="button" class="btn btn-black">
+            Search
+          </button>
+        </div>
+      </div>
     </div>
+    <div id="bookableRoomList"></div>
+    <script th:src="@{/js/userReservation.js}"></script>
   </body>
-
-  <!--* 날짜 클릭 시 선택 가능한 날짜 출력 *-->
-  <script>
-    $(document).ready(function () {
-      $(".input-daterange").datepicker({
-        format: "yyyy-mm-dd",
-        todayHighlight: true,
-        startDate: "0d",
-      });
-    });
-  </script>
 </html>

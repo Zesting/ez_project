@@ -8,7 +8,6 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <title>Project</title>
   <style>
-    
     .paymentTable th,
     .paymentTable td {
       border: 1px solid black;
@@ -16,36 +15,43 @@
   </style>
 </head>
 
-<body>
+<body style="background-image: url(../img/space8.jpg);">
+  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+  <div style="height: 100px; width: 100%;"></div>
+  <!-- 헤더 불러오기 -->
   <a href="/">홈으로</a>
-    <table class="paymentTable">
-      <thead>
-        <tr>
-          <th>payId</th>
-          <th>userId</th>
-          <th>reservationId</th>
-          <th>roomName</th>
-          <th>paymentAmount</th>
-          <th>payType</th>
-          <th>cardName</th>
-          <th>payState</th>
-          <th>approved_at</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="paymentList : ${paymentList}" >
-          <td th:text="${paymentList.id}"></td>
-          <td th:text="${paymentList.userId}"></td>
-          <td th:text="${paymentList.reservationId}"></td>
-          <td th:text="${paymentList.roomName}"></td>
-          <td th:text="${paymentList.paymentAmount}"></td>
-          <td th:text="${paymentList.payment_method_type}"></td>
-          <td th:text="${paymentList.cardName}"></td>
-          <td th:text="${paymentList.payState}"></td>
-          <td th:text="${paymentList.approved_at}"></td>
-        </tr>
-      </tbody>
-    </table>
+  <table class="paymentTable">
+    <thead>
+      <tr>
+        <th>결제 번호</th>
+        <th>회원 이름</th>
+        <th>예약 번호</th>
+        <th>방 이름</th>
+        <th>최종 결제 금액</th>
+        <th>카카오포인트</th>
+        <th>할인된 금액</th>
+        <th>결제 방식</th>
+        <th>카드 이름</th>
+        <th>결제 상태</th>
+        <th>결제 시간</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="paymentList : ${paymentList}">
+        <td th:text="${paymentList.id}"></td>
+        <td th:text="${paymentList.userId}"></td>
+        <td th:text="${paymentList.reservationId}"></td>
+        <td th:text="${paymentList.roomName}"></td>
+        <td th:text="${paymentList.paymentAmount}"></td>
+        <td th:text="${paymentList.kakaoPoint}"></td>
+        <td th:text="${paymentList.discountAmount}"></td>
+        <td th:text="${paymentList.payment_method_type}"></td>
+        <td th:text="${paymentList.cardName}"></td>
+        <td th:text="${paymentList.payState}"></td>
+        <td th:text="${paymentList.approved_at}"></td>
+      </tr>
+    </tbody>
+  </table>
   </div>
 </body>
 

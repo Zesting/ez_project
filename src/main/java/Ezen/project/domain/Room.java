@@ -2,6 +2,7 @@ package Ezen.project.domain;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,12 +26,15 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 자동 생성(auto_increment)
     private Long roomId; // 룸 고유 번호.(PK)
 
+    @NotNull
     @Column(name = "roomName", length = 25, nullable = false)
     private String roomName; // 룸 이름.
 
+    @NotNull
     @Column(name = "roomPrice", nullable = false)
     private int roomPrice; // 룸 기본 가격.
 
+    @NotNull
     @Column(name = "roomType", length = 100, nullable = false)
     private String roomType; // 룸 타입(Mercury, Mars, Jupiter).
 

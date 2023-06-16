@@ -5,40 +5,173 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <title>Project</title>
+    <title>home</title>
   </head>
-  <body>
-    <p>Hello Project</p>
+  <body style="background-image: url(../img/space8.jpg)">
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 100px; width: 100%"></div>
+    <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
+
+    <section id="infinite" class="text-white tm-font-big tm-parallax">
+      <div class="text-center tm-hero-text-container">
+        <div class="tm-hero-text-container-inner">
+          <h2 class="tm-hero-title">Galaxy Palace</h2>
+          <p class="tm-hero-subtitle">
+            항상 최고의 서비스로 모시겠습니다
+            <br />Experience the Difference
+          </p>
+        </div>
+      </div>  
+      <!-- 페이지 아래로 이동 버튼 -->
+      <div class="tm-next tm-intro-next">
+        <a href="#whatwedo" class="text-center tm-down-arrow-link">
+          <i class="fas fa-2x fa-arrow-down tm-down-arrow"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="tm-section-pad-top tm-parallax-2">
+      <div class="container tm-container-contact">
+        <div class="row">
+          <div class="text-center col-12">
+            <h2 class="tm-section-title mb-4">Contact Us</h2>
+            <p class="mb-5">글씨</p>
+            <br />
+          </div>
+
+          <div class="col-sm-12 col-md-6">
+            <form action="" method="get">
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Your Name"
+                class="tm-input"
+                required />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Your Email"
+                class="tm-input"
+                required />
+              <textarea
+                id="message"
+                name="message"
+                rows="8"
+                placeholder="Message"
+                class="tm-input"
+                required></textarea>
+              <button type="submit" class="btn tm-btn-submit">Submit</button>
+            </form>
+          </div>
+
+          <div class="col-sm-12 col-md-6">
+            <div class="contact-item">
+              <a
+                rel="nofollow"
+                href="https://www.tooplate.com/contact"
+                class="item-link">
+                <i class="far fa-2x fa-comment mr-4"></i>
+                <span class="mb-0">Chat Online</span>
+              </a>
+            </div>
+
+            <div class="contact-item">
+              <a
+                rel="nofollow"
+                href="mailto:mail@company.com"
+                class="item-link">
+                <i class="far fa-2x fa-envelope mr-4"></i>
+                <span class="mb-0">mail@company.com</span>
+              </a>
+            </div>
+
+            <div class="contact-item">
+              <a
+                rel="nofollow"
+                href="https://www.google.com/maps"
+                class="item-link">
+                <i class="fas fa-2x fa-map-marker-alt mr-4"></i>
+                <span class="mb-0">Our Location</span>
+              </a>
+            </div>
+
+            <div class="contact-item">
+              <a rel="nofollow" href="tel:0100200340" class="item-link">
+                <i class="fas fa-2x fa-phone-square mr-4"></i>
+                <span class="mb-0">255-662-5566</span>
+              </a>
+            </div>
+
+            <div class="contact-item">&nbsp;</div>
+          </div>
+        </div>
+        <!-- row ending -->
+      </div>
+
+      <footer class="text-center small tm-footer">
+        <p class="mb-0">
+          Copyright &copy; 2020 Company Name .
+          <a
+            rel="nofollow"
+            href="https://www.tooplate.com"
+            title="HTML templates"
+            >Designed by TOOPLATE</a
+          >
+        </p>
+      </footer>
+    </section>
+
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="slick/slick.min.js"></script>
+    <script src="magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="js/easing.min.js"></script>
+    <script src="js/jquery.singlePageNav.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
     <div><a href="/memberjoin">회원가입</a></div>
     <div><a href="/login">로그인</a></div>
     <div><a href="/userlist">회원목록</a></div>
     <div><a href="/userupdate">내정보수정하기</a></div>
-    <a href="/paymentList"><button>결제리스트</button></a>
+    
     <a href="/iamport"><button>결제API테스트</button></a>
     <br /><br />
     <div><a href="/notice">공지사항(페이징 없음)</a></div>
     <div>
       <button onclick="pagingReq()">페이징 목록보기</button>
     </div>
-    
-    <br>
-    <div><a href="/wedding/save">웨딩(폼)</div>
+
+    <br />
+    <div><a href="/wedding/save">웨딩(폼)</a></div>
     <div><a href="/weddingBoard">문의게시판(관리자가 확인할 테이블)</a></div>
     <br />
     <a th:href="@{/Rooms}"><button>Room_List</button></a>
     <a th:href="@{/Rooms/add}"><button>Create_Room</button></a>
-    <a th:href="@{/reservation/list}"><button>Reservation</button></a>
-    <a th:href="@{/reservation/selectDate}"
-      ><button>Create_Reservation</button></a
-    >
-    <br>
-    <a href="/kakaoMap">찾아오시는 길</a><br>
+    <a th:href="@{/Reservations}"><button>Reservation</button></a>
+    <a th:href="@{/verificationUser}">예약하기</a>
+    <br />
+    <a href="/kakaoMap">찾아오시는 길</a><br />
     <div><a href="/adminPage">관리자페이지</a></div>
   </body>
 
   <script>
-        const pagingReq = () => {
-            location.href = "/notice/paging";
+    // const pagingReq = () => {
+    //   location.href = "/notice/paging";
+    // };
+
+    $(document).ready(function () {
+      $("#reservationBtn").click(function () {
+        let session = $("#reservationBtn").attr("th:value");
+        console.log(session);
+        if (session === undefined) {
+          alert("로그인이 필요한 항목입니다.");
+          window.location.href = "/login";
+        } else {
+          window.location.href = "/reservation/selectDate";
         }
-    </script>
+      });
+    });
+  </script>
 </html>

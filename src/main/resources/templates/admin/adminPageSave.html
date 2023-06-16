@@ -9,7 +9,10 @@
   <title>관리자페이지</title>
 </head>
 
-<body>
+<body style="background-image: url(../img/space8.jpg);">
+  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+  <div style="height: 100px; width: 100%;"></div>
+  <!-- 헤더 불러오기 -->
   <p>관리자 페이지입니다.</p>
 
   <!-- name속성은 데이터 받는 클래스에(여기서는 DTO)이름과 같아야 데이터가 제대로 들어감 -->
