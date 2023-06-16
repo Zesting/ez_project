@@ -27,7 +27,4 @@ public class PaymentService {
     System.out.println("전체 결제 리스트 출력");
     return paymentRepository.findAll();
   }
-
- 
-  
 }
