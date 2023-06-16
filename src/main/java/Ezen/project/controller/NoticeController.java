@@ -51,7 +51,7 @@ public class NoticeController {
         NoticeDTO noticeDTO = noticeService.findById(id);
         List<String> noticeFileId = noticeDTO.getStoredFileName();
         System.out.println(noticeFileId);
-       model.addAttribute("imageName", noticeFileId);
+        model.addAttribute("imageName", noticeFileId);
         model.addAttribute("notice", noticeDTO);
         model.addAttribute("page", pageable.getPageNumber());
         return "/notice/detail";
