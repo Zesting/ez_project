@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 import Ezen.project.DTO.NoticeDTO;
 import Ezen.project.service.NoticeService;
 import lombok.RequiredArgsConstructor;

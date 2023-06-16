@@ -51,8 +51,8 @@ public class UserService {
         return userDTOList;
     }
 
-    public UserDTO update(String userId) {
-        Optional<User> user = userRepository.findByUserId(userId);
+    public UserDTO update(Long id) {
+        Optional<User> user = userRepository.findById(id);
         if (user.isPresent()) {
             return UserDTO.saveUserDTO(user.get());
         } else {
@@ -77,6 +77,10 @@ public class UserService {
 
     public void delete(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public String checkId(String userId){
+        return userRepository.checkUserId(userId);
     }
 
 }
