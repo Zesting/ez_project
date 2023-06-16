@@ -23,7 +23,7 @@
             margin-bottom: 40px;
         }
 
-        .memberjoin-submitbtn {}
+        /* .memberjoin-submitbtn {} */
     </style>
 </head>
 
@@ -32,52 +32,61 @@
     <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
     <div style="height: 90px; width: 100%;"></div>
 
-    <!-- <form action="/user/memberjoin" method="post">
-        <input type="text" name="userId" placeholder="아이디"><br>
-        <input type="password" name="userPassword" placeholder="비밀번호"><br>
-        <input type="text" name="userAge" placeholder="주민등록번호"><br>
-        <input type="text" name="userName" placeholder="이름"><br>
-        <input type="number" name="userPhoneNumber" placeholder="핸드폰 번호"><br>
-        <input type="text" name="userEmail" id="userEmail" placeholder="이메일">
-        <button type="button" id="check">인증번호보내기</button><br>
-        <label for="check" id="emailConfirmTxt">인증번호를 입력해주세요</label>
-        <input type="text" class="form-control" id="emailConfirm">
-        <input type="submit" value="회원가입">
-    </form> -->
     <div class="memberjoincontainer">
         <form action="/user/memberjoin" method="post" class="membership-form">
+            <h3 class="tm-section-title">GalaxyPalace회원 가입</h3><br>
             <div class="memberjoin-inputcontainer">
-                <input type="text" name="userId" placeholder="사용할 아이디를 입력하세요" class="tm-input" id="userId"><br>
-                <span id="userIdConfirmTxt"></span>
+                <input type="text" name="userId" placeholder="사용할 아이디를 입력하세요" class="tm-input" id="userId" required><br>
                 <button type="button" id="idcheck" class="btn-primary">중복확인</button>
+                <span id="userIdConfirmTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
-                <input type="password" name="userPassword" placeholder="비밀번호를 입력하세요" class="tm-input"><br>
-                <input type="password" name="verifyPassword" placeholder="한번 더 같은 비밀번호를 입력하세요" class="tm-input">
+                <input type="password" name="userPassword" placeholder="비밀번호를 입력하세요" class="tm-input" id="upw"
+                    required><br>
+                <input type="password" name="verifyPassword" placeholder="한번 더 같은 비밀번호를 입력하세요" class="tm-input"
+                    id="upwcheck" required>
+                <span id="upwTxt"></span><br><span id="upwcTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
-                <input type="text" name="userName" placeholder="이름(성명)을 입력하세요" class="tm-input"><br>
+                <input type="text" name="userName" placeholder="이름(성명)을 입력하세요" class="tm-input" required id="uname"><br>
+                <span id="unameTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
-                <input type="text" name="userAge" placeholder="YYYYMMDD(출생년도를 입력하세요)" class="tm-input"><br>
+                <input type="text" name="userAge" placeholder="YYYYMMDD(출생년도를 입력하세요)" class="tm-input" id="uage"
+                    required><br>
+                <span id="uageTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
-                <input type="number" name="userPhoneNumber" placeholder="전화번호를 입력하세요('띄어쓰기없이 '-'는 생략한형식)"
-                    class="tm-input"><br>
+                <input type="text" name="userPhoneNumber" placeholder="전화번호를 입력하세요('띄어쓰기없이 '-'는 생략한 형식)"
+                    class="tm-input" id="uphone" required><br>
+                <span id="uphoneTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
                 <input type="text" name="userEmail" id="userEmail" placeholder="사용할 이메일을 입력하세요" class="tm-input"><br>
-                <button type="button" id="emcheck" class="btn-primary">인증번호 요청</button><br>
+                <button type="button" id="emcheck" class="btn-primary">인증번호 요청</button><span id="emailTxt"></span><br>
                 <input type="text" class="tm-input" id="emailConfirm" placeholder="인증번호를 입력하세요"><br>
                 <label for="check" id="emailConfirmTxt" class="verification-label"></label>
             </div>
-            <button type="submit" class="memberjoin-submitbtn">회원가입</button>
+            <span id="submitTxt"></span><button type="submit" class="memberjoin-submitbtn" id="memberjoinsubmit"
+                onclick="return submitCheck()">회원가입</button>
         </form>
     </div>
+
     <script>
+        // submit 유효성검사를 위한 체크
+        let idchk = false;
+        let idconfirmchk = false;
+        let passwordchk = false;
+        let passwordconfirmchk = false;
+        let namechk = false;
+        let agechk = false;
+        let phonechk = false;
+        let emailchk = false;
+        let emailconfirmchk = false;
 
         // 이메일 인증번호 발송
-        $("#emcheck").click(function () {
+        $("#emcheck").click("click")
+        const emailCofirmFunction = function () {
             $.ajax({
                 type: "POST",
                 url: "/emailconfirm",
@@ -89,8 +98,195 @@
                     console.log("data : " + data);
                     emailFunc(data, $("#emailConfirm"), $("#emailConfirmTxt"));
                 }
-            })
-        })
+            });
+        }
+
+
+        // 아이디 중복확인,정규식확인
+        $("#idcheck").click("keyup", function () {
+            // 아이디 정규식
+            const regExp = /[a-z]+[a-z0-9]{5,12}/g;
+
+            if (!regExp.test($("#userId").val())) {
+                $("#userIdConfirmTxt").html("사용할 수 없는 아이디입니다.");
+                $("#userIdConfirmTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                idchk = false;
+            } else {
+
+                // 아이디 중복검사
+                $.ajax({
+                    type: "POST",
+                    url: "/userIdCheck",
+                    data: { "userId": $("#userId").val() },
+                    success: function (data) {
+                        if (data == 1) {                 // 중복인 경우
+                            $("#userIdConfirmTxt").html("이미 존재하는 아이디입니다.");
+                            $("#userIdConfirmTxt").css({
+                                "color": "#FF0000",
+                                "font-weight": "bold",
+                                "font-size": "14px"
+                            });
+                            idconfirmchk = false;
+                        } else {                        // 중복이 아닐 경우
+                            $("#userIdConfirmTxt").html("사용 가능한 아이디입니다.");
+                            $("#userIdConfirmTxt").css({
+                                "color": "#00FF2B",
+                                "font-weight": "bold",
+                                "font-size": "14px"
+                            });
+                            idconfirmchk = true;
+                        }
+                    }
+                });
+                idchk = true;
+            }
+        });
+
+        // 비밀번호 정규식
+        $("#upw").on("keyup", function () {
+            // 비밀번호 정규식 (영문자1개이상 숫자1개이상 특수문자 ~!@#$%^&* 중에 1개이상 8자에서20자까지)
+            const regExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*])[a-zA-Z\d~!@#$%^&*]{8,20}$/;
+            if ($("#upw").val() != $("#upwcheck").val()) {
+                $("#upwcTxt").html("비밀번호가 일치하지 않습니다.");
+                $("#upwcTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                passwordconfirmchk = false;
+            }
+            passwordconfirmchk = false;
+            if (!regExp.test($("#upw").val())) {
+                $("#upwTxt").html("하나이상의 영문자,숫자,특수문자를 포함해야합니다.");
+                $("#upwTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                passwordchk = false;
+            } else {
+                $("#upwTxt").html("사용가능한 비밀번호입니다.");
+                $("#upwTxt").css({
+                    "color": "#00FF2B",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                passwordchk = true;
+            }
+        });
+        // 비밀번호 재확인 값비교
+        $("#upwcheck").on("keyup", function () {
+            if ($("#upw").val() != $("#upwcheck").val()) {
+                $("#upwcTxt").html("비밀번호가 일치하지 않습니다.");
+                $("#upwcTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                passwordconfirmchk = false;
+            } else {
+                $("#upwcTxt").html("비밀번호가 일치합니다.");
+                $("#upwcTxt").css({
+                    "color": "#00FF2B",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                passwordconfirmchk = true;
+            }
+        });
+
+        //이름 유효성검사
+        $("#uname").on("keyup", function () {
+            // 이름 정규식
+            const regExp = /^[가-힣]{2,4}$/;
+            if (!regExp.test($("#uname").val())) {
+                $("#unameTxt").html("형식에 맞게 입력해주세요.");
+                $("#unameTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                namechk = false;
+            } else {
+                $("#unameTxt").html("Good!!")
+                $("#unameTxt").css({
+                    "color": "#00FF2B",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                namechk = true;
+            }
+        });
+        // 생년월일 정규식
+        $("#uage").on("keyup", function () {
+            // 생년월일 정규식
+            const regExp = /^[12][190][0-9]{6}$/;
+            if (!regExp.test($("#uage").val())) {
+                $("#uageTxt").html("생년월일 형식을 확인해주세요(YYYY.MM.DD)");
+                $("#uageTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                agechk = false;
+            } else {
+                $("#uageTxt").html("Good!!");
+                $("#uageTxt").css({
+                    "color": "#00FF2B",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                agechk = true;
+            }
+        });
+        // 전화번호 정규식
+        $("#uphone").on("keyup", function () {
+            // 핸드폰 정규식
+            const regExp = /[0][1][01]\d{4}\d{4}$/;
+            if (!regExp.test($("#uphone").val())) {
+                $("#uphoneTxt").html("띄어쓰기나 '-'를 생략한 형식으로 입력해주세요.");
+                $("#uphoneTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                phonechk = false;
+            } else {
+                $("#uphoneTxt").html("Good!!");
+                $("#uphoneTxt").css({
+                    "color": "#00FF2B",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                phonechk = true;
+            }
+        });
+        // 이메일 정규식
+        $("#userEamil").on("keyup", function () {
+            const regExp = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!regExp.test($("userEmail").val())) {
+                $("#eamilTxt").html("이메일 형식이 틀립니다");
+                $("#emailTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                emailchk = false;
+            } else {
+                $("#eamilTxt").html("Good!!");
+                $("#eamilTxt").css({
+                    "color": "#00FF2B",
+                    "font-weight": "bold",
+                    "font-size": "14px"
+                });
+                emailchk = true;
+            }
+        }
+        );
 
         // 이메일 인증번호 확인 함수
         function emailFunc(data, emailConfirm, emailConfirmTxt) {
@@ -98,39 +294,112 @@
                 if (data != emailConfirm.val()) {
                     emailConfirmTxt.html("<span id='echeckTxt'>인증번호가 틀렸습니다.</sapn>");
                     $("#echeckTxt").css({
-                        "color": "CC0000",
-                        "font-size": "10px"
-                    })
+                        "color": "#FF0000",
+                        "font-weight": "bold",
+                        "font-size": "14px"
+                    });
+                    emailconfirmchk = false;
                 } else {
                     emailConfirmTxt.html("<span id='echeckTxt'>인증번호 일치</sapn>");
                     $("#echeckTxt").css({
-                        "color": "#44CC00",
-                        "font-size": "11px"
-                    })
+                        "color": "#00FF2B",
+                        "font-weight": "bold",
+                        "font-size": "14px"
+                    });
+                    emailconfirmchk = true;
                 }
-            })
+            });
         }
 
-        // 아이디 정규식
-        // $("#userId").on("keyup",function(){  //키보드 누르고떘을때마다 실행
-        //     const regExp = /[a-z]+[a-z0-9]/g;
+        // 이메일 정규식확인 함수
 
-        //     if(!regExp.test($("#userId").val())) {
-        //         $("#userIdConfirmTxt").html("사용할 수 없는 아이디입니다.");
-        //         $("#userIdConfirmTxt").css({
-        //             "color" : "#FF0000",
-        //             "font-weight" : "bold",
-        //             "font-size" : "14px"
-        //         })
-        //     }else{
-        //         $.ajax({
-        //             type : "POST",
-        //             url : 
-        //         })
-        //     }
-        // })
+        // submit 유효성검사 함수
+        function submitCheck() {
+            if (!idchk) {
+                $("#submitTxt").html("아이디를 확인하세요");
+                $("#submitTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "18px"
+                })
+                return false;
+            }
+            if (!idconfirmchk) {
+                $("#submitTxt").html("아이디 중복체크를 확인하세요");
+                $("#submitTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "18px"
+                })
+                return false;
+            }
+            if (!passwordchk) {
+                $("#submitTxt").html("비밀번호를 확인하세요");
+                $("#submitTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "18px"
+                })
+                return false;
+            }
+            if (!passwordconfirmchk) {
+                $("#submitTxt").html("비밀번호 재입력을 확인하세요");
+                $("#submitTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "18px"
+                })
+                return false;
+            }
+            if (!namechk) {
+                $("#submitTxt").html("이름을 확인하세요");
+                $("#submitTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "18px"
+                })
+                return false;
+            }
+            if (!agechk) {
+                $("#submitTxt").html("생년월일을 확인하세요");
+                $("#submitTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "18px"
+                })
+                return false;
+            }
+            if (!phonechk) {
+                $("#submitTxt").html("전화번호를 확인하세요");
+                $("#submitTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "18px"
+                })
+                return false;
+            }
+            if (!emailchk) {
+                $("#submitTxt").html("이메일을 확인하세요");
+                $("#submitTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "18px"
+                })
+                return false;
+            }
+            if (!emailconfirmchk) {
+                $("#submitTxt").html("이메일 인증번호를 확인하세요");
+                $("#submitTxt").css({
+                    "color": "#FF0000",
+                    "font-weight": "bold",
+                    "font-size": "18px"
+                })
+                return false;
+            }
+            $("#submitTxt").html("");
 
-
+            alert("회원가입이 완료되었습니다!")
+        }
     </script>
 </body>
 

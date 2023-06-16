@@ -12,6 +12,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUserId(String userId);
     
-    @Query("SELECT u From User u WHERE u.userId=mid")
+    // : 는 쿼리의 매개변수를 바인딩하기 위한 플레이스홀더를 나타내는 기호다.
+    @Query("SELECT userId From User u WHERE u.userId= :mid")
     String checkUserId(@Param("mid") String mid);
 }

@@ -54,6 +54,7 @@ public class UserController {
         }
     }
 
+    // 아이디 중복체크
     @PostMapping("/userIdCheck")
     @ResponseBody
     public int userIdConfirm(@RequestParam("userId") String userId) throws Exception {
@@ -87,8 +88,8 @@ public class UserController {
 
     @GetMapping("/userupdate")
     public String userUpdate(HttpSession session, Model model) {
-        String userId = (String) session.getAttribute("userId");
-        UserDTO userDTO = userService.update(userId);
+        Long id = (Long) session.getAttribute("userId");
+        UserDTO userDTO = userService.update(id);
         model.addAttribute("updateuser", userDTO);
         return "user/userupdate";
     }
