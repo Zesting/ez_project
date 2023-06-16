@@ -52,7 +52,8 @@
 
     <!-- 댓글 작성 부분-->
     <div id="comment-write">
-        <input type="text" id="commentWriter" placeholder="작성자">
+        <!-- <input type="text" id="commentWriter" placeholder="작성자"> -->
+        <input type="text" id="userId" th:value="${commentWriter.userName}"><br>
         <input type="text" id="commentContents" placeholder="내용">
         <button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
     </div>
@@ -82,7 +83,7 @@
     const id = "[[${wedding.weddingId}]]"; //게시글 번호
 
     const commentWrite = () => {
-        const writer = document.getElementById("commentWriter").value;
+        const writer = document.getElementById("userId").value;
         const constens = document.getElementById("commentContents").value;
         console.log("작성자: ", writer);
         console.log("내용: ", constens);
@@ -92,7 +93,7 @@
             type: "post",
             url: "/comment/save",
             data: {
-                "commentWriter": writer,
+                "userId": writer,
                 "commentContents": constens,
                 "weddingId": id
             },
@@ -113,7 +114,7 @@
                }
                output += "</table>";
                document.getElementById('comment-list').innerHTML = output;
-               document.getElementById('commentWriter').value = '';
+               document.getElementById('userId').value = '';
                document.getElementById('commentContents').value = '';
            },
             error: function(err){
@@ -122,6 +123,7 @@
         });
     }
 
+    
     
 
     const listReq = () => {

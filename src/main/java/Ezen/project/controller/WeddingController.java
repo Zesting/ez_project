@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.DTO.WeddingCommentDTO;
 import Ezen.project.DTO.WeddingDTO;
+import Ezen.project.domain.User;
 import Ezen.project.service.UserService;
 import Ezen.project.service.WeddingCommentService;
 import Ezen.project.service.WeddingService;
@@ -57,17 +58,30 @@ public class WeddingController {
 
     // 문의글 상세보기
     @GetMapping("/wedding/{id}")
-    public String findById(@PathVariable Long id, Model model) {
+    public String findById(@PathVariable Long id, Model model, HttpSession session) {
 
         WeddingDTO weddingDTO = weddingService.findById(id);
         UserDTO user = userService.findById(weddingDTO.getUserId());
 
+        Long userId = (Long) session.getAttribute("userId");
+
+        UserDTO userName = userService.findById(userId);
+        WeddingDTO weddingDTOUser = new WeddingDTO();
+        weddingDTOUser.setUserName(userName.getUserName());
+
+        
+
+        // WeddingDTO userName = (WeddingDTO)session.getAttribute("userId");
+
+        
         /* 댓글 목록 가져오기 */
         List<WeddingCommentDTO> weddingCommentDTOList = weddingCommentService.findAll(id);
         model.addAttribute("commentList", weddingCommentDTOList);
 
         model.addAttribute("wedding", weddingDTO);
         model.addAttribute("logInUser", user);
+        model.addAttribute("commentWriter", weddingDTOUser);
+        System.out.println("유저 이름값 : "+ user.getUserName());
 
         return "/wedding/detail";
     }

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class WeddingDTO {
     private Long weddingId;     //DTO 문의글 id
     private Long userId;    //DTO 문의글 작성자
-    
+    private String userName;
     private String weddingTitle;    //DTO 문의글 제목
     private String weddingContent;  //DTO 문의글 내용
     private LocalDateTime weddingWriteDate;    //DTO 문의글 작성일
