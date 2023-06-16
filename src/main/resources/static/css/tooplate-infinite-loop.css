@@ -110,6 +110,8 @@ blockquote {
 
 .tm-nav-link {
   color: white;
+  text-shadow: 1px 1px 2px rgb(255, 255, 255), 1px 1px 2px rgb(0, 0, 0), 1px 1px 2px rgb(255, 255, 255);
+  
 }
 
 .tm-navbar.scroll .tm-nav-link {

@@ -79,4 +79,6 @@ public class WeddingController {
         return "redirect:/weddingBoard";
     }
 
+    
+
 }
