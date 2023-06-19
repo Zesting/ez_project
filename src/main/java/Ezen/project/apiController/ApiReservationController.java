@@ -1,13 +1,17 @@
 package Ezen.project.apiController;
 
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import Ezen.project.DTO.CheckDTO;
+import Ezen.project.DTO.ReservationDTO;
 import Ezen.project.DTO.RoomDTO;
 import Ezen.project.domain.Reservation;
 import Ezen.project.service.ReservationService;
@@ -42,5 +46,42 @@ public class ApiReservationController {
 
         return ResponseEntity.ok(reservation);
     }
+
+    @RequestMapping(value = "/Reservations/modify/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> modifyReservation(@PathVariable("id") Long id,
+            @RequestBody ReservationDTO reservationDTO) {
+        Optional<Reservation> reservation = reservationService.findOneReservationById(id);
+        if (reservation.isPresent()) {
+            Reservation result = reservationService.modifyReservation(reservationDTO).get();
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.ok(null);
+        }
+    }
+
+    @RequestMapping(value = "/Reservations/delete/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteReservation(@PathVariable("id") Long id) {
+        reservationService.verificationReservation(id);
+        reservationService.dropReservation(id);
+        return ResponseEntity.ok(id);
+    }
+
+    // @GetMapping(value = "/delete/{id}")
+    // public String deleteReservation(@PathVariable("id") Long id) {
+    // reservationService.verificationReservation(id);
+    // reservationService.dropReservation(id);
+    // return "redirect:/reservation/list";
+    // }
+
+    // @PostMapping(value = "/modify/{id}")
+    // public String modifyReservation(@PathVariable("id") Long id, ReservationDTO
+    // reservationDTO) {
+    // Optional<Reservation> reservation =
+    // reservationService.findOneReservationById(id);
+    // if (reservation.isPresent()) {
+    // reservationService.modifyReservation(reservationDTO);
+    // }
+    // return "redirect:/reservation/list";
+    // }
 
 }

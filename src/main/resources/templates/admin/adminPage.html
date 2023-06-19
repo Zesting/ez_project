@@ -1,97 +1,95 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>관리자페이지</title>
+    <style>
+      tbody td {
+        text-align: center;
+        border: 1px dotted #555;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <title>관리자페이지</title>
-  <style>
-    tbody td {
-      text-align: center;
-      border: 1px dotted #555;
-    }
+      thead td {
+        text-align: center;
+        border: 3px solid black;
+      }
+    </style>
+  </head>
 
-    thead td {
-      text-align: center;
-      border: 3px solid black;
-    }
-  </style>
-</head>
+  <body style="background-image: url(../img/space8.jpg)">
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 100px; width: 100%"></div>
+    <!-- 헤더 불러오기 -->
+    <p>관리자 페이지 home입니다.</p>
 
-<body style="background-image: url(../img/space8.jpg);">
-  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-  <div style="height: 100px; width: 100%;"></div>
-  <!-- 헤더 불러오기 -->
-  <p>관리자 페이지 home입니다.</p>
+    <button onclick="saveBtn()">임시저장</button>
 
-  <button onclick="saveBtn()">임시저장</button>
-
-  <button onclick="listBtn()">목록</button>
-  <hr />
-  <button type="button" id="listForm">룸 리스트</button>
-  <button type="button" id="createForm">룸 생성</button>
-  <button type="button" id="userListBtn">회원 목록</button>
-  <a href="/paymentList"><button>결제리스트</button></a>
-  <div id="roomListContainer" style="border: 1px solid black"></div>
-  <div id="roomModifyContainer" style="border: 1px solid black"></div>
-  <script th:src="@{/js/roomList.js}"></script>
-  <div id="userList">
-    <table>
-      <tr th:each="user : ${userList}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.userId}"></td>
-        <td th:text="${user.userPassword}"></td>
-        <td th:text="${user.userName}"></td>
-        <td><a th:href="@{|/user/${user.id}|}">조회</a></td>
-        <td><a th:href="@{|/user/delete/${user.id}|}">삭제</a></td>
-      </tr>
-    </table>
-  </div>
-</body>
-<script>
-
-  $(document).on("click", "#userListBtn", function () {
-    $.ajax({
-      url: "/userlist", //요청 url
-      method: "GET", // 방식
-      dataType: "HTML", // 데이터 타입
-      success: function (data) {
-        console.log("ajax 성공! HTML->", data);
-        $("#roomListContainer").html(data);//여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
-      },
-      error: function (request, error) {
-        console.log(
-          "code:" +
-          request.status +
-          "\n" +
-          "message:" +
-          request.responseText +
-          "\n" +
-          "error:" +
-          error
-        );
-      },
-    })
-  })
-
-  const saveBtn = () => {
-    location.href = "/adminPageSave";
-  };
-  const listBtn = () => {
-    location.href = "/adminPageList";
-  };
-  //회원 리스트
-  $(document).ready(function () {
-    $("#userListBtn").click(function () {
-      $("#userList").show();
+    <button onclick="listBtn()">목록</button>
+    <hr />
+    <button type="button" id="listForm">룸 리스트</button>
+    <button type="button" id="createForm">룸 생성</button>
+    <button type="button" id="reservationListForm">예약 리스트</button>
+    <button type="button" id="userListBtn">회원 목록</button>
+    <a href="/paymentList"><button>결제리스트</button></a>
+    <div id="roomListContainer" style="border: 1px solid black"></div>
+    <div id="roomModifyContainer" style="border: 1px solid black"></div>
+    <script th:src="@{/js/roomList.js}"></script>
+    <script th:src="@{/js/reservationList.js}"></script>
+    <div id="userList">
+      <table>
+        <tr th:each="user : ${userList}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.userId}"></td>
+          <td th:text="${user.userPassword}"></td>
+          <td th:text="${user.userName}"></td>
+          <td><a th:href="@{|/user/${user.id}|}">조회</a></td>
+          <td><a th:href="@{|/user/delete/${user.id}|}">삭제</a></td>
+        </tr>
+      </table>
+    </div>
+  </body>
+  <script>
+    $(document).on("click", "#userListBtn", function () {
+      $.ajax({
+        url: "/userlist", //요청 url
+        method: "GET", // 방식
+        dataType: "HTML", // 데이터 타입
+        success: function (data) {
+          console.log("ajax 성공! HTML->", data);
+          $("#roomListContainer").html(data); //여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
+        },
+        error: function (request, error) {
+          console.log(
+            "code:" +
+              request.status +
+              "\n" +
+              "message:" +
+              request.responseText +
+              "\n" +
+              "error:" +
+              error
+          );
+        },
+      });
     });
-    $("#userListBtn").dblclick(function () {
-      $("#userList").hide();
+
+    const saveBtn = () => {
+      location.href = "/adminPageSave";
+    };
+    const listBtn = () => {
+      location.href = "/adminPageList";
+    };
+    //회원 리스트
+    $(document).ready(function () {
+      $("#userListBtn").click(function () {
+        $("#userList").show();
+      });
+      $("#userListBtn").dblclick(function () {
+        $("#userList").hide();
+      });
     });
-  });
-
-</script>
-
+  </script>
 </html>

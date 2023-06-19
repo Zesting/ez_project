@@ -1,14 +1,12 @@
 // 룸 리스트 폼 View(ajax)
 
-$(document).on("click", "#listForm", function () {
+$(document).on("click", "#roomListForm", function () {
   // jQuery에서 제공하는 함수로, HTML 문서의 로딩이 완료되었을 때 실행되는 이벤트 핸들러
   $.ajax({
     url: "/Rooms", // 요청 url
     method: "GET", // 방식
     dataType: "HTML", // 데이터 타입
     success: function (data) {
-      console.log("ajax 성공! HTML->", data);
-
       $("#roomListContainer").html(data);
     },
     error: function (request, error) {
@@ -41,12 +39,10 @@ $(document).on("click", "#listForm", function () {
         method: "GET",
         dataType: "HTML",
         success: function (data) {
-          console.log("modify Ajax 성공 data ->", data);
-          console.log(data);
           // html 변수를 DOM에 삽입하는 코드
           $("#roomModifyContainer").html(data);
         },
-        function(request, error) {
+        error: function (request, error) {
           console.log(
             "code:" +
               request.status +
