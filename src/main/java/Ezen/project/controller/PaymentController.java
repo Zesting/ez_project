@@ -16,6 +16,7 @@ import Ezen.project.domain.Payment;
 import Ezen.project.domain.Reservation;
 import Ezen.project.service.KakaopayService;
 import Ezen.project.service.PaymentService;
+import Ezen.project.service.ReservationService;
 import Ezen.project.service.RoomService;
 import Ezen.project.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +31,7 @@ public class PaymentController {
   private final UserService userService;
   private final KakaopayService kakaoPayService;
   private final RoomService roomService;
+  private final ReservationService reservationService;
 
   // 결제하기 버튼 눌렀을때.
   @PostMapping("/kakaoPay")
@@ -42,12 +44,12 @@ public class PaymentController {
     // 세션 아이디 가져옴.
     Long userId = (Long) session.getAttribute("userId");
     // 예약 정보 reservationController에서 세션에 저장하여 가져옴.
-    if (session.getAttribute("payReservation") == null) { //검증 방법 바꾸기(준희참고)
+    if (session.getAttribute("payReservation") == null) { // 검증 방법 바꾸기(준희참고)
       return "redirect:/verificationUser";
     }
-    //예약정보를 paymentDTO에 담기 위해 가져옴
+    // 예약정보를 paymentDTO에 담기 위해 가져옴
     Reservation reservation = (Reservation) session.getAttribute("payReservation");
-    //중복결제 막기
+    // 중복결제 막기
     List<Payment> payments = paymentService.findByAll();
     for (Payment payment : payments) {
       if (payment.getReservationId().equals(String.valueOf(reservation.getReservationId()))) {
@@ -58,7 +60,7 @@ public class PaymentController {
       } else {
         System.out.println("payment.getReservationId() ::" + payment.getReservationId());
         System.out.println("reservation.getReservationId() ::" + reservation.getReservationId());
-      System.out.println("값이 다르게 나왔습니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"); 
+        System.out.println("값이 다르게 나왔습니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       }
     }
     System.out.println("List 비교문 끝나고 나옴 ");
@@ -120,11 +122,11 @@ public class PaymentController {
     return "payment/paymentList";
   }
 
-  //kakaoPaySuccessInfo
-  //Payment 결제 별 정보 보기 
+  // kakaoPaySuccessInfo
+  // Payment 결제 별 정보 보기
   @GetMapping("/kakaoPaySuccessInfo/{id}")
-  public String paymentInfo(HttpSession session, Model model, @PathVariable("id")Long payId) {
-    Long userDTO = (Long)session.getAttribute("userId");
+  public String paymentInfo(HttpSession session, Model model, @PathVariable("id") Long payId) {
+    Long userDTO = (Long) session.getAttribute("userId");
     Payment payment = paymentService.findById(payId).get();
     UserDTO logInUser = userService.findById(userDTO);
     // Entity -> DTO (DTO class에서 변환)
@@ -132,9 +134,9 @@ public class PaymentController {
     paymentInfoDTO.setPayId(payment.getId());
     paymentInfoDTO.setUserId(payment.getUserId());
     paymentInfoDTO.setTid(payment.getTid());
-    paymentInfoDTO.setUserName(logInUser.getUserName());//user
-    paymentInfoDTO.setUserLoginId(logInUser.getUserId());//user
-    paymentInfoDTO.setUserPhoneNumber(logInUser.getUserPhoneNumber());//user
+    paymentInfoDTO.setUserName(logInUser.getUserName());// user
+    paymentInfoDTO.setUserLoginId(logInUser.getUserId());// user
+    paymentInfoDTO.setUserPhoneNumber(logInUser.getUserPhoneNumber());// user
     paymentInfoDTO.setOrderNumber(payment.getReservationId());
     paymentInfoDTO.setRoomName(payment.getRoomName());
     paymentInfoDTO.setRoomPrice(payment.getPaymentAmount());
@@ -164,13 +166,15 @@ public class PaymentController {
     return "payment/payment";
   }
 
-  //결제 정보 삭제
+  // 결제 정보 삭제
   @GetMapping("/payment/delete/{id}")
-    public String delete(@PathVariable("id") Long id,HttpSession session) {
-      if(session.getAttribute("userId") == null){
-        return "redirect:/login";
-      }
-        paymentService.delete(id);
-        return "redirect:/paymentList";
+  public String delete(@PathVariable("id") Long id, HttpSession session) {
+    if (session.getAttribute("userId") == null) {
+      return "redirect:/login";
     }
+    Payment payment = paymentService.findById(id).get();
+    reservationService.dropReservation(Long.parseLong(payment.getReservationId()));
+    paymentService.delete(id);
+    return "redirect:/paymentList";
+  }
 }
