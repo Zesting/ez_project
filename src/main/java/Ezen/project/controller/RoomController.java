@@ -34,6 +34,11 @@ public class RoomController {
         return "Room/roomModify";
     }
 
+    @RequestMapping(value = "/roomDetailView", method = RequestMethod.GET)
+    public String roomDetailView() {
+        return "Room/roomDetail";
+    }
+
     // 룸 수정
     // @PostMapping("/modify/{id}")
     // public String roomModify(@PathVariable("id") Long id, RoomDTO roomDTO) {

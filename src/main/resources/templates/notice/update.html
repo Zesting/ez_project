@@ -2,34 +2,42 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <title>Hotel Galaxy Palace 공지사항</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>Hotel Galaxy Palace 공지사항</title>
+
+  <link rel="icon" href="../../images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" th:href="@{/css/noticeUpdate.css}" />
 </head>
 
 <body style="background-image: url(../../img/space8.jpg);">
-    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-    <div style="height: 100px; width: 100%;" ></div>
-  
-    <form action="/notice/update/{id}" method="post" name="updateForm">
-        
-      <input type="hidden" name="id" th:value="${noticeUpdate.id}">
-        작성자: <input type="text" name="userId" th:value="${noticeUpdate.userId}" readonly> <br>
-        제목: <input type="text" name="title" th:value="${noticeUpdate.title}"> <br>
-        내용: <textarea name="content" cols="30" rows="10" th:text="${noticeUpdate.content}"></textarea> <br>
-        작성일: <input type="text" name="writeDate" th:value="${noticeUpdate.writeDate}" readonly> <br>
-        
-        <input type="submit" value="글수정">
-      </form>
-      <button onclick="listReq()">목록</button>
+  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+  <div style="height: 100px; width: 100%;"></div>
 
-      <script th:inline="javascript">
-        const listReq = () => {
-          location.href = "/notice/paging";
-        }
-      </script>
+  <div class="noticeUpdateDiv">
+    <div class="noticeUpdateFormDiv">
+      <form class="noticeUpdateForm" action="/notice/update" method="post" name="updateForm">
+
+        <input type="hidden" name="id" th:value="${noticeUpdate.id}">
+        <input type="hidden" name="userId" th:value="${noticeUpdate.userId}" readonly> <br>
+        <input class="noticeUpdateTitle" type="text" name="title" th:value="${noticeUpdate.title}"> <br>
+        <textarea class="noticeUpdateContent" name="content" cols="30" rows="10" th:text="${noticeUpdate.content}"></textarea> <br>
+        <input class="noticeUpdateDate" type="hidden" name="writeDate" th:value="${noticeUpdate.writeDate}" readonly> <br>
+
+        <input class="noticeUpdateSumbit" type="submit" value="글수정">
+      </form>
+    </div>
+    <div class="noticeUpdateBtnDiv">
+      <button class="noticeUpdateListBtn" onclick="listReq()">목록</button>
+    </div>
+  </div>
+  <script th:inline="javascript">
+    const listReq = () => {
+      location.href = "/notice/paging";
+    }
+  </script>
 </body>
 
 </html>

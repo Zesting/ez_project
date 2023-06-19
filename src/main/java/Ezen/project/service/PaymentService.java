@@ -40,5 +40,8 @@ public class PaymentService {
     paymentRepository.deleteById(id);
   }
 
-  
+  public List<Payment> findByUserId(String userId){
+
+    return paymentRepository.findByUserId(userId);
+  }
 }
