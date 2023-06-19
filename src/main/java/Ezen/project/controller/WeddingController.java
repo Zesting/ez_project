@@ -68,11 +68,6 @@ public class WeddingController {
         WeddingDTO weddingDTOUser = new WeddingDTO();
         weddingDTOUser.setUserName(userName.getUserName());
 
-        
-
-        // WeddingDTO userName = (WeddingDTO)session.getAttribute("userId");
-
-        
         /* 댓글 목록 가져오기 */
         List<WeddingCommentDTO> weddingCommentDTOList = weddingCommentService.findAll(id);
         model.addAttribute("commentList", weddingCommentDTOList);

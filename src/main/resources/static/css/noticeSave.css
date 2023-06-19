@@ -4,7 +4,7 @@
     margin: 0;
 }
 
-.tableDetail {
+.noticeSave{
     border: solid 1px rgba(255, 255, 255, 0.1);
     width: 100%;
     height: 560px;
@@ -13,7 +13,8 @@
     background-color: rgba(230, 230, 230, 0.5);
 }
 
-.noticeTableDetail {
+
+.saveForm {
     /* border: solid 1px red; */
     position: relative;
     width: 700px;
@@ -23,29 +24,42 @@
     color: rgb(15, 15, 82);
 }
 
-.tableDetail tr {
-    border-bottom: solid 1px rgb(15, 15, 82);
+.saveTitle, .saveContent {
+    width: 680px;
+    margin: 5px;
 }
 
-.tableTitle, .tableDate {
-    height: 40px;
+.saveTitle {
+    /* border: solid 1px red; */
 }
 
-.tableContent {
+.saveContent {
+    /* border: solid 1px red; */
     height: 300px;
     vertical-align: top;
     padding-top: 10px;
 }
 
-.detailBar {
+.saveFile {
+    margin: 5px;
+    width: 220px;
+    font-size: 15px;
+}
+
+.saveFile:hover {
+    cursor: pointer;
+}
+
+.saveBar {
     /* border: solid 1px red; */
     position: absolute;
+    margin: 5px;
     width: 700px;
     transform: translateX(-50%);
     left: 50%; 
 }
 
-.listBtn, .updateBtn, .deleteBtn{
+.saveListBtn, .saveSubmitBtn{
     border: none;
     border-radius: 7px;
     width: 100px;
@@ -54,19 +68,12 @@
     color: whitesmoke;
 }
 
-.listBtn {
-    margin-left: 1%;
-    margin-right: 50%;
-}
-
-.updateBtn, .deleteBtn {
-    margin-left: 10px;
-}
-
-
-.listBtn:hover, .updateBtn:hover, .deleteBtn:hover {
+.saveListBtn:hover, .saveSubmitBtn:hover {
     background-color: darkslateblue;
     cursor: pointer;
     border: none;
 }
 
+.saveSubmitBtn {
+    margin-left: 68%;
+}

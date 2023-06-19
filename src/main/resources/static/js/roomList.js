@@ -94,7 +94,6 @@ $(document).on("click", "#createForm", function () {
     method: "GET",
     dataType: "HTML",
     success: function (data) {
-      console.log("ajax 성공! data ->", data);
       $("#roomListContainer").html(data);
     },
     error: function (request, error) {

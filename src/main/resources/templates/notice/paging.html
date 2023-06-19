@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <title>기본폼</title>
-
+    <title>Hotel Galaxy Palace 공지사항</title>
+    
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/noticeList.css}" />
 </head>
 
@@ -19,18 +20,18 @@
     <div class="noticeList">
         <table class=noticeTable>
             <tr>
-                <th>No</th>
-                <th>작성자</th>
+                <th class="tableNo">No</th>
                 <th>제목</th>
-                <th>작성일</th>
+                <th class="tableName">작성자</th>
+                <th class="tableDate">작성일</th>
             </tr>
             <tr th:each="notice: ${noticeList}">
-                <td th:text="${notice.id}"></td>
-                <td th:text="${notice.userId}"></td>
+                <td class="tableNo" th:text="${notice.id}"></td>
                 <td><a class="tableTitle" th:href="@{|/notice/${notice.id}|(page=${noticeList.number + 1})}"
                         th:text="${notice.title}"></a>
                 </td>
-                <td>
+                <td class="tableName">관리자</td>
+                <td class="tableDate">
                     <span
                         th:if="${#temporals.format(notice.writeDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
                         <span th:text="*{#temporals.format(notice.writeDate, 'HH:mm')}"></span>
@@ -70,7 +71,7 @@
             <!-- 마지막 페이지로 이동 -->
             <a class="lastBtn" th:href="@{/notice/paging(page=${noticeList.totalPages})}">Last</a>
             <div class="submitBtnDiv">
-                <button class="submitBtn" onclick="saveReq()">글작성</button>
+                <button class="submitBtn" onclick="saveReq()">글쓰기</button>
             </div>
         
         </div>
