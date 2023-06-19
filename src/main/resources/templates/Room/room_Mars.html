@@ -1,0 +1,268 @@
+<div class="content" id="content" style="background-color: #fff">
+  <div
+    class="container"
+    id="container"
+    style="padding: 30px 0px; background-color: #fff">
+    <div class="row" id="row">
+      <div class="col-sm-3">
+        <div class="wrap_menu_side">
+          <div class="wrap_side" id="wrap_side">
+            <!-- 왼쪽 네비게이션 바  -->
+            <nav>
+              <h4 style="color: #333; text-align: center">Galaxy 은하(Mars)</h4>
+              <ul>
+                <li>
+                  <a href="/Rooms/room_MercuryView" id="changeMercuryBtn"
+                    >Mercury_Room</a
+                  >
+                </li>
+                <li>
+                  <a href="/Rooms/room_MarsView" id="changeMarsBtn"
+                    >Mars_Room</a
+                  >
+                </li>
+                <li>
+                  <a href="/Rooms/room_EarthView" id="changeEarthBtn"
+                    >Earth_Room</a
+                  >
+                </li>
+                <li>
+                  <a href="/Rooms/room_JupiterView" id="changeJupiterBtn"
+                    >Jupiter_Room</a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <script th:src="@{/js/changeRoomView.js}"></script>
+        </div>
+      </div>
+
+      <!-- 가운데 설명란 -->
+      <div class="col-sm-9 sub_content" id="sub_content">
+        <div class="wrap_facile text_center" id="text_center">
+          <!-- 상단 네임 div -->
+          <div class="wrap_tit" id="warp_tit">
+            <h3>오션브릿지 더블</h3>
+            <p>Ocean Bridge Double</p>
+            <span class="theme_bar mt_1" id="theme_bar"></span>
+          </div>
+
+          <!-- 이미지 div -->
+          <div class="fa_img_main" id="fa_img_main">
+            <img th:src="@{/roomImage/Jupiter1.png}" alt="#" />
+          </div>
+
+          <ul class="fa_img_list">
+            <li>
+              <img
+                th:src="@{/roomImage/Jupiter1.png}"
+                alt="#"
+                onclick="changeImageSrc('@{/roomImage/Jupiter1.png}')" />
+            </li>
+            <li>
+              <img
+                th:src="@{/roomImage/Jupiter2.png}"
+                alt="#"
+                onclick="changeImageSrc('@{/roomImage/Jupiter2.png}')" />
+            </li>
+            <li>
+              <img
+                th:src="@{/roomImage/Jupiter3.png}"
+                alt="#"
+                onclick="changeImageSrc('@{/roomImage/Jupiter3.png}')" />
+            </li>
+            <li>
+              <img
+                th:src="@{/roomImage/Jupiter4.png}"
+                alt="#"
+                onclick="changeImageSrc('@{/roomImage/Jupiter4.png}')" />
+            </li>
+          </ul>
+          <script>
+            function changeImageSrc(imageSrc) {
+              // 이미지 경로 변경
+              document
+                .getElementById("fa_img_main")
+                .getElementsByTagName("img")[0].src = imageSrc;
+            }
+
+            // 각 이미지에 클릭 이벤트 추가
+            var imageList = document
+              .getElementsByClassName("fa_img_list")[0]
+              .getElementsByTagName("img");
+            for (var i = 0; i < imageList.length; i++) {
+              imageList[i].addEventListener("click", function () {
+                var clickedImageSrc = this.src;
+                changeImageSrc(clickedImageSrc);
+              });
+            }
+          </script>
+
+          <!-- 객실 안내 div -->
+          <div class="wrap_facile_detail">
+            <div class="detail_tit">
+              <h5 class="font_nanum">HOTEL AQUA PALACE</h5>
+            </div>
+            <div class="wrap_tit text_center">
+              <h3>객실안내</h3>
+              <p>INFORMATION</p>
+            </div>
+            <div class="container_style_1 text_center mt_1">
+              <p class="container_article" style="margin-bottom: 0">
+                광안대교 전망을 머금은 호텔 아쿠아펠리스 오션브릿지룸은
+                <br />
+                전반적으로
+                <b
+                  >은은하고 따듯한 조명으로 광안대교의 화려함을 더욱 빛날 수
+                  있게 연출되었고 <br />
+                  친환경 소재의 자재로 벽면을 마감하여 모던함을 강조</b
+                >하였습니다. <br />
+                트여있는 창과 넓은 폭의 윈도우 시트를 배치하여 아름다운
+                광안대교를 보며 <br />
+                여유를 가질 수 있는 숙박 고객을 최우선으로 한 공간으로,<br />
+                일 상에 지친 고객에게 넉넉한 여유를 드리고 있으며
+                <b
+                  ><br />
+                  최고 전망의 객실에서 최상의 시간</b
+                >을 보내실 수 있습니다.
+              </p>
+            </div>
+
+            <div class="room_info_wrap">
+              <div class="room_info_left">
+                <dl>
+                  <dt>기본정보</dt>
+                  <dd>
+                    전망<br />
+                    · 오션뷰<br /><br />
+                    객실크기<br />
+                    · 33m²<br /><br />
+                    위치<br />
+                    · 10F ~ 20F<br /><br />
+                    침대타입<br />
+                    · King Double Bed 1<br /><br />
+                    객실 금액<br />
+                    · 450,000원 정가
+                  </dd>
+                </dl>
+              </div>
+
+              <div class="room_info_right">
+                <dl>
+                  <dt>이용안내</dt>
+                  <dd>
+                    · 인피니티풀 이용 안내<br />
+                    현장에서 추가 결제 후 이용 가능<br /><br />
+
+                    체크인 & 체크아웃<br />
+                    · 15:00 & 11:00<br /><br />
+                    · 상기요금 : 세금/봉사료 포함된 금액<br /><br />
+                    · 단체요금은 별도로 정해집니다.<br /><br />
+                    · 상기요금은 사전통보 없이 변경될 수 있음<br /><br />
+                    · 무료 주차 서비스<br /><br />
+                    · 전 객실 금연<br /><br />
+                    · 조식정보<br />
+                    &nbsp;&nbsp;<b>-</b> 예약 인원에 따라 미국식 조찬 또는
+                    뷔페<br />
+                    &nbsp;&nbsp;<b>-</b> 08:00 ~ 09:30 AM<br />
+                    &nbsp;&nbsp;<b>-</b> 2F PEARL ROOM<br />
+                    &nbsp;&nbsp;<b>-</b> 현장 결제
+                  </dd>
+                </dl>
+              </div>
+            </div>
+            <!-- room_info_wrap -->
+
+            <div class="room_service_wrap">
+              <p class="room_service_title">제공 서비스</p>
+
+              <div class="room_service_box">
+                <ul>
+                  <li>
+                    <div class="room_icon">
+                      <img
+                        th:src="@{/roomImage/room_icon_1.png}"
+                        alt="룸_아이콘" />
+                    </div>
+
+                    <div class="room_icon_text_box">
+                      <p class="room_icon_title">전망</p>
+
+                      <p class="room_icon_article">아름다운 오션뷰</p>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="room_icon">
+                      <img
+                        th:src="@{/roomImage/room_icon_2.png}"
+                        alt="룸_아이콘" />
+                    </div>
+
+                    <div class="room_icon_text_box">
+                      <p class="room_icon_title">침실</p>
+
+                      <p class="room_icon_article">
+                        침대, TV, 에어컨, 전화기, 객실내 안전금고, 암막커튼,
+                        모닝콜서비스
+                      </p>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="room_icon">
+                      <img
+                        th:src="@{/roomImage/room_icon_3.png}"
+                        alt="룸_아이콘" />
+                    </div>
+
+                    <div class="room_icon_text_box">
+                      <p class="room_icon_title">욕실</p>
+
+                      <p class="room_icon_article">
+                        욕조 또는 샤워실, 타월/린넨, 헤어 드라이기<br />
+                        <span class="room_mint">＊ 욕실가운 미제공</span>
+                      </p>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="room_icon">
+                      <img
+                        th:src="@{/roomImage/room_icon_4.png}"
+                        alt="룸_아이콘" />
+                    </div>
+
+                    <div class="room_icon_text_box">
+                      <p class="room_icon_title">식음료 서비스</p>
+
+                      <p class="room_icon_article">
+                        냉장고, 커피/티 메이커, 무료 생수, 무료 인스턴트 커피,
+                        무료 차
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="reservation_btn">
+              <button type="button" onclick="reservation_btn()">
+                예약하기&nbsp;&nbsp;&nbsp;<i
+                  class="fas fa-angle-double-right"></i>
+              </button>
+
+              <script>
+                const reservation_btn = () => {
+                  event.preventDefault();
+                  window.location.href = "/Reservations/verificationUser";
+                };
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

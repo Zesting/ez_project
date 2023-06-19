@@ -65,13 +65,6 @@ dd {
 }
 
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-}
-
-button,
 input,
 optgroup,
 select,
@@ -210,16 +203,16 @@ ul.fa_img_list li img {
   height: auto;
 }
 
-.wrap_facil_detail {
+.wrap_facile_detail {
   margin-top: 50px;
 }
 
-.wrap_facil_detail .detail_tit {
+.wrap_facile_detail .detail_tit {
   position: relative;
   text-align: center;
 }
 
-.wrap_facil_detail .detail_tit::before {
+.wrap_facile_detail .detail_tit::before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -235,7 +228,7 @@ ul.fa_img_list li img {
   box-sizing: border-box;
 }
 
-.wrap_facil_detail .detail_tit h5 {
+.wrap_facile_detail .detail_tit h5 {
   display: inline-block;
   padding: 10px;
   color: white;
@@ -402,6 +395,10 @@ ul.fa_img_list li img {
   outline: none;
 }
 
+.reservation_btn button:hover {
+  opacity: 0.6;
+}
+
 .reservation_btn button:before,
 button:after {
   content: "";
@@ -432,59 +429,4 @@ svg:not(:root).svg-inline--fa {
   top: inherit;
   left: 0;
   bottom: 0;
-}
-
-.btn-group-vertical > .btn-group:after,
-.btn-toolbar:after,
-.clearfix:after,
-.container-fluid:after,
-.container:after,
-.dl-horizontal dd:after,
-.form-horizontal .form-group:after,
-.modal-footer:after,
-.modal-header:after,
-.nav:after,
-.navbar-collapse:after,
-.navbar-header:after,
-.navbar:after,
-.pager:after,
-.panel-body:after,
-.row:after {
-  clear: both;
-}
-
-.btn-group-vertical > .btn-group:after,
-.btn-group-vertical > .btn-group:before,
-.btn-toolbar:after,
-.btn-toolbar:before,
-.clearfix:after,
-.clearfix:before,
-.container-fluid:after,
-.container-fluid:before,
-.container:after,
-.container:before,
-.dl-horizontal dd:after,
-.dl-horizontal dd:before,
-.form-horizontal .form-group:after,
-.form-horizontal .form-group:before,
-.modal-footer:after,
-.modal-footer:before,
-.modal-header:after,
-.modal-header:before,
-.nav:after,
-.nav:before,
-.navbar-collapse:after,
-.navbar-collapse:before,
-.navbar-header:after,
-.navbar-header:before,
-.navbar:after,
-.navbar:before,
-.pager:after,
-.pager:before,
-.panel-body:after,
-.panel-body:before,
-.row:after,
-.row:before {
-  display: table;
-  content: " ";
 }

@@ -34,9 +34,29 @@ public class RoomController {
         return "Room/roomModify";
     }
 
-    @RequestMapping(value = "/roomDetailView", method = RequestMethod.GET)
-    public String roomDetailView() {
-        return "Room/roomDetail";
+    @RequestMapping(value = "/Rooms/room_Base", method = RequestMethod.GET)
+    public String roomBaseView() {
+        return "Room/room_Base";
+    }
+
+    @RequestMapping(value = "/Rooms/room_MercuryView", method = RequestMethod.GET)
+    public String roomMercuryView() {
+        return "Room/room_Mercury";
+    }
+
+    @RequestMapping(value = "/Rooms/room_MarsView", method = RequestMethod.GET)
+    public String roomMarsView() {
+        return "Room/room_Mars";
+    }
+
+    @RequestMapping(value = "/Rooms/room_EarthView", method = RequestMethod.GET)
+    public String roomEarthView() {
+        return "Room/room_Earth";
+    }
+
+    @RequestMapping(value = "/Rooms/room_JupiterView", method = RequestMethod.GET)
+    public String roomJupiterView() {
+        return "Room/room_Jupiter";
     }
 
     // 룸 수정

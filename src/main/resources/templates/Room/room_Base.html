@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,17 +10,17 @@
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" th:href="@{/css/roomDetail.css}" />
   </head>
-  <body style="background-image: url(../img/space8.jpg)">
+  <body>
     <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
     <div style="height: 100px; width: 100%"></div>
     <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
 
-    <section style="padding-top: 15px">
+    <section style="padding-top: 15px" id="customSection">
       <div class="content" id="content" style="background-color: #fff">
         <div
           class="container"
           id="container"
-          style="padding-top: 30px; background-color: #fff">
+          style="padding: 30px 0px; background-color: #fff">
           <div class="row" id="row">
             <div class="col-sm-3">
               <div class="wrap_menu_side">
@@ -30,25 +30,35 @@
                     <h4 style="color: #333; text-align: center">Galaxy 은하</h4>
                     <ul>
                       <li>
-                        <a href="/room_o/room_ocean.php">Mercury_Room</a>
+                        <a href="/Rooms/room_MercuryView" id="changeMercuryBtn"
+                          >Mercury_Room</a
+                        >
                       </li>
                       <li>
-                        <a href="/room_o/room1_2.php">Mars_Room</a>
+                        <a href="/Rooms/room_MarsView" id="changeMarsBtn"
+                          >Mars_Room</a
+                        >
                       </li>
                       <li>
-                        <a href="/room_o/room1_3.php">Earth_Room</a>
+                        <a href="/Rooms/room_EarthView" id="changeEarthBtn"
+                          >Earth_Room</a
+                        >
                       </li>
                       <li>
-                        <a href="/room_o/room1_4.php">Jupiter_Room</a>
+                        <a href="/Rooms/room_JupiterView" id="changeJupiterBtn"
+                          >Jupiter_Room</a
+                        >
                       </li>
                     </ul>
                   </nav>
                 </div>
+                <script th:src="@{/js/changeRoomView.js}"></script>
               </div>
             </div>
+
             <!-- 가운데 설명란 -->
             <div class="col-sm-9 sub_content" id="sub_content">
-              <div class="wrap_facil text_center" id="text_center">
+              <div class="wrap_facile text_center" id="text_center">
                 <!-- 상단 네임 div -->
                 <div class="wrap_tit" id="warp_tit">
                   <h3>오션브릿지 더블</h3>
@@ -63,21 +73,52 @@
 
                 <ul class="fa_img_list">
                   <li>
-                    <img th:src="@{/roomImage/Jupiter1.png}" alt="#" />
+                    <img
+                      th:src="@{/roomImage/Jupiter1.png}"
+                      alt="#"
+                      onclick="changeImageSrc('@{/roomImage/Jupiter1.png}')" />
                   </li>
                   <li>
-                    <img th:src="@{/roomImage/Jupiter2.png}" alt="#" />
+                    <img
+                      th:src="@{/roomImage/Jupiter2.png}"
+                      alt="#"
+                      onclick="changeImageSrc('@{/roomImage/Jupiter2.png}')" />
                   </li>
                   <li>
-                    <img th:src="@{/roomImage/Jupiter3.png}" alt="#" />
+                    <img
+                      th:src="@{/roomImage/Jupiter3.png}"
+                      alt="#"
+                      onclick="changeImageSrc('@{/roomImage/Jupiter3.png}')" />
                   </li>
                   <li>
-                    <img th:src="@{/roomImage/Jupiter4.png}" alt="#" />
+                    <img
+                      th:src="@{/roomImage/Jupiter4.png}"
+                      alt="#"
+                      onclick="changeImageSrc('@{/roomImage/Jupiter4.png}')" />
                   </li>
                 </ul>
+                <script>
+                  function changeImageSrc(imageSrc) {
+                    // 이미지 경로 변경
+                    document
+                      .getElementById("fa_img_main")
+                      .getElementsByTagName("img")[0].src = imageSrc;
+                  }
+
+                  // 각 이미지에 클릭 이벤트 추가
+                  var imageList = document
+                    .getElementsByClassName("fa_img_list")[0]
+                    .getElementsByTagName("img");
+                  for (var i = 0; i < imageList.length; i++) {
+                    imageList[i].addEventListener("click", function () {
+                      var clickedImageSrc = this.src;
+                      changeImageSrc(clickedImageSrc);
+                    });
+                  }
+                </script>
 
                 <!-- 객실 안내 div -->
-                <div class="wrap_facil_detail">
+                <div class="wrap_facile_detail">
                   <div class="detail_tit">
                     <h5 class="font_nanum">HOTEL AQUA PALACE</h5>
                   </div>
@@ -225,12 +266,17 @@
                   </div>
 
                   <div class="reservation_btn">
-                    <button
-                      type="button"
-                      onclick="window.open('https://be.wingsbooking.com/ko/HAP1?') ">
+                    <button type="button" onclick="reservation_btn()">
                       예약하기&nbsp;&nbsp;&nbsp;<i
                         class="fas fa-angle-double-right"></i>
                     </button>
+
+                    <script>
+                      const reservation_btn = () => {
+                        event.preventDefault();
+                        window.location.href = "/Reservations/verificationUser";
+                      };
+                    </script>
                   </div>
                 </div>
               </div>
@@ -238,9 +284,6 @@
           </div>
         </div>
       </div>
-      <link
-        rel="stylesheet"
-        href="//cdn.jsdelivr.net/npm/xeicon@2/xeicon.min.css" />
     </section>
   </body>
 </html>
