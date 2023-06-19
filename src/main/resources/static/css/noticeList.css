@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.noticeTable {
+    border: solid 1px red;
+    position: relative;
+    width: 600px;
+    margin: auto;
+    margin-top: 70px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.tableTitle {
+    color: white;
+}
+
+.tableTitle:hover {
+    text-decoration: underline;
+    color: indianred;
+}
+
+.listBar {
+    border: solid 1px red;
+    position: absolute;
+    display: flex;
+    width: 300px;
+    transform: translateX(-50%);
+    justify-content: space-between; 
+    align-items: center; 
+    left: 50%; 
+    text-align: center;
+
+}
+
+.listBar a {
+    color: white;
+}
+
+.submitBtnDiv {
+    border: 1px solid red;
+    position: absolute;
+    width: 100px;
+    left: 120%;
+}
+
