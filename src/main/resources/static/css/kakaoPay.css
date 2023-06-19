@@ -1,4 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:100,300,400,500,700,900");
+/* 
+  인풋 양식?
+  width: 100%;
+  border: 1px solid white;
+  padding: 8px 20px;
+  border-radius: 6px;
+  background: transparent;
+  color: white;
+*/
 
 /* payState 블럭 */
 .payState {
@@ -11,22 +20,13 @@
   width: 60%;
   margin: auto;
 }
-/* 
-  인풋 양식?
-  width: 100%;
-  border: 1px solid white;
-  padding: 8px 20px;
-  border-radius: 6px;
-  background: transparent;
-  color: white;
-*/
 
 /* userInfo 블럭 */
 .userInfo {
   width: 60%;
   border: 1px solid white;
-  padding: 8px 20px;
   border-radius: 6px;
+  padding: 8px 20px;
   color: white;
   height: 200px;
   margin: auto;
@@ -35,6 +35,7 @@
 .userInfo_a {
   height: 100px;
 }
+/* 로그인 사용자 이름 */
 .userInfo_a_a {
   width: 48%;
   border: 1px solid white;
@@ -45,6 +46,10 @@
   padding: 10px;
   margin: 25px 0px 0 5px;
   box-sizing: border-box;
+}
+/* 로그인 사용자 핸드폰 번호 */
+.userInfo_b {
+  height: 100px;
 }
 
 
@@ -57,112 +62,123 @@
   height: 240px;
   width: 60%;
   margin: auto;
-  
 }
 .itemInfoBox {
-  /* margin: 10px; */
-  border: 1px solid blue;
-}
-.itemInfo_a {
-  width: 100%;
   margin: 10px;
-  height: 80px;
+}
+/* 로고사진 + 회사명 */
+.itemInfo_a {
+  /* border: 1px solid white; */
+  /* border-radius: 6px; */
+  width: 100%;
+  height: 100px;
   display: flex;
 }
+/* 로고 사진 */
 .itemInfo_a_a {
-  border: 1px solid white;
+  background-image: url('/images/222.png');
+  background-size: cover; /* 이미지를 컨테이너에 맞게 조절합니다. */
+  background-position: center center; /* 이미지를 가운데로 정렬합니다. */
+  background-repeat: no-repeat; /* 이미지 반복을 제거합니다. */
   border-radius: 6px;
   width: 15%;
-  /* margin: 10px; */
-  height: 100%;
+  
 }
+/* 회사명 */
 .itemInfo_a_b {
   width: 85%;
-  /* margin: 10px; */
-  height: 100%;
-  border: 1px solid white;
-  border-radius: 6px;
+  height: 100px;
+  line-height: 100px;
   font-weight: bold;
   font-size: 30px;
+  padding-left: 20px;
 }
 .itemInfo_b {
+  /* border: 1px solid white; */
+  /* border-radius: 6px; */
   height: 100px;
-  margin: 10px;
   width: 100%;
   display: flex;
-  /* justify-content: ; */
 }
+/* 룸 미니 사진 */
 .itemInfo_b_a {
-  border: 1px solid white;
+  background-image: url('/images/room.png');
+  background-size: cover; /* 이미지를 컨테이너에 맞게 조절합니다. */
+  background-position: center center; /* 이미지를 가운데로 정렬합니다. */
+  background-repeat: no-repeat; /* 이미지 반복을 제거합니다. */
   border-radius: 6px;
   width: 15%;
-  /* margin: 10px; */
-  height: 100%;
 }
+/* 상품 정보 박스 */
 .itemInfo_b_b {
-  height: 50%;
-  height: 100%;
-  /* margin: 10px; */
+  height: 100px;
   width: 85%;
 }
+/* 상품명 */
 .itemInfo_b_b_a {
-  border: 1px solid white;
-  /* margin: 10px 10px 0 10px; */
-  border-radius: 6px;
   font-weight: bold;
-  height: 50%;
+  line-height: 50px;
+  height: 50px;
   width: 100%;
+  padding-left: 20px;
 }
+/* 결제 금액 + 상품 수량 */
 .itemInfo_b_b_b {
-  height: 50%;
+  /* border: 1px solid white;
+  border-radius: 6px; */
+  height: 50px;
   width: 100%;
   display: flex;
 }
+/* 결제 금액 */
 .itemInfo_b_b_b_a {
-  border: 1px solid white;
-  border-radius: 6px;
+  /* border: 1px solid white; */
+  /* border-radius: 6px; */
   width: 40%;
+  line-height: 50px;
   height: 50px;
-  /* margin: 0 0 10px 10px; */
+  padding-left: 20px;
 }
+/* 상품 수량 */
 .itemInfo_b_b_b_b {
-  border: 1px solid white;
-  border-radius: 6px;
   width: 60%;
+  line-height: 50px;
   height: 50px;
-  /* margin: 0 10px 10px 0; */
 }
 
 
 /* finalAmount 블럭 */
-.paymetnInfoBox {
-  border: 1px solid red;
+.paymentInfoBox {
   width: 60%;
   margin: auto;
 }
 .finalAmount {
   color: white;
   border: 1px solid white;
-  padding: 8px 20px;
   border-radius: 6px;
+  padding: 8px 20px;
   background: transparent;
   height: 100px;
   display: flex;
   align-items: center;
 }
+/* 최종 결제 금액 */
 .finalAmount_a {
   width: 50%;
-  height: 50px;
-  border: 1px solid white;
-  border-radius: 6px;
+  /* border: 1px solid white;
+  border-radius: 6px; */
   margin: 10px 0 10px 10px;
   text-align: left;
+  line-height: 50px;
+  height: 50px;
 }
+/* 최종 결제 금액 info.amount.discount 원 */
 .finalAmount_b {
   width: 50%;
   height: 50px;
-  border: 1px solid white;
-  border-radius: 6px;
+  line-height: 50px;
+  /* border: 1px solid white;
+  border-radius: 6px; */
   text-align: right;
   font-weight: bold;
   margin: 10px 10px 10px 0;
@@ -179,37 +195,45 @@
   background: transparent;
   margin: auto;
 }
+/* 총 상품금액 + info.amount.total */
 .discountAmount_a {
   height: 50px;
+  line-height: 50px;
   display: flex;
   margin: 10px;
 }
+/* 총 상품금액 */
 .discountAmount_a_a {
-  border: 1px solid white;
-  border-radius: 6px;
+  /* border: 1px solid white;
+  border-radius: 6px; */
   width: 50%;
   text-align: left;
 }
+/* info.amount.total */
 .discountAmount_a_b {
-  border: 1px solid white;
-  border-radius: 6px;
+  /* border: 1px solid white;
+  border-radius: 6px; */
   width: 50%;
   text-align: right;
 }
+/* 포인트 사용 + info.amount.point */
 .discountAmount_b {
   height: 50px;
+  line-height: 50px;
   display: flex;
   margin: 10px;
 }
+/* 포인트 사용 */
 .discountAmount_b_a {
-  border: 1px solid white;
-  border-radius: 6px;
+  /* border: 1px solid white;
+  border-radius: 6px; */
   width: 50%;
   text-align: left;
 }
+/* info.amount.point */
 .discountAmount_b_b {
-  border: 1px solid white;
-  border-radius: 6px;
+  /* border: 1px solid white;
+  border-radius: 6px; */
   width: 50%;
   text-align: right;
   color: red;
@@ -219,73 +243,85 @@
 .paymentInfo {
   color: white;
   border: 1px solid white;
-  padding: 8px 20px;
   border-radius: 6px;
+  padding: 8px 20px;
   background: transparent;
   height: 220px;
   margin: auto;
   align-items: center;
 }
+/* 결제 수단(방법) + info.payment_method_type */
 .paymentInfo_a {
   height: 50px;
+  line-height: 50px;
   display: flex;
   margin: 10px;
 }
+/* 결제 수단(방법) */
 .paymentInfo_a_a {
-  border: 1px solid white;
-  border-radius: 6px;
+  /* border: 1px solid white;
+  border-radius: 6px; */
   width: 50%;
   text-align: left;
 }
+/* info.payment_method_type */
 .paymentInfo_a_b {
-  border: 1px solid white;
-  border-radius: 6px;
-
+  /* border: 1px solid white;
+  border-radius: 6px; */
   width: 50%;
   text-align: right;
 }
+/* 결제카드 : + 카드 종류 + 카드이름 */
 .paymentInfo_b {
   /* border: 1px solid wheat; */
   height: 50px;
+  line-height: 50px;
   display: flex;
   margin: 10px;
 }
+/* 결제카드 :  */
 .paymentInfo_b_a {
   width: 50%;
-  border: 1px solid white;
-  border-radius: 6px;
-
+  /* border: 1px solid white;
+  border-radius: 6px; */
   width: 50%;
   text-align: left;
 }
+/* 카드 종류 + 카드이름 */
 .paymentInfo_b_b {
   width: 50%;
-  border: 1px solid white;
-  border-radius: 6px;
-
+  /* border: 1px solid white;
+  border-radius: 6px; */
   text-align: right;
 }
+/* 승인 일시 + info.approved_at */
 .paymentInfo_c {
   height: 50px;
+  line-height: 50px;
   display: flex;
   margin: 10px;
 }
+/* 승인 일시  */
 .paymentInfo_c_a {
   width: 50%;
-  border: 1px solid white;
-  border-radius: 6px;
+  /* border: 1px solid white;
+  border-radius: 6px; */
   text-align: left;
 }
+/* info.approved_at */
 .paymentInfo_c_b {
   width: 50%;
-  border: 1px solid white;
-  border-radius: 6px;
+  /* border: 1px solid white;
+  border-radius: 6px; */
   text-align: right;
 }
 
 .homebtn {
   width: 60%;
   margin: auto;
-  border: 1px solid wheat;
+  /* border: 1px solid wheat; */
   border-radius: 6px;
+  text-align: center;
+  height: 100px;
+  margin-top: 20px;
 }

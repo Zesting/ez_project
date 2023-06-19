@@ -14,18 +14,17 @@
   <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
   <div style="height: 100px; width: 100%;"></div>
 
-  <!-- <section class="tm-section-pad-top tm-parallax-2"> id="#contact" 지움 /배경사진이 들어가서 -->
+
+  <!-- 결제 정보를 보려면 결제를 다시 해야하기 때문에 저장하여 띄워주기 위한 페이지 -->
   <div class="payState">
-    <div>주문이 완료되었습니다.</div>
-    <div>주문번호 : [[${info.partner_order_id}]]</div>
+    <div>주문 정보 상세보기</div>
+    <div>주문번호 : [[${payInfo.OrderNumber}]]</div>
   </div>
   <!-- <hr> -->
   <div class="userInfo">
     <div class="userInfo_a">
-      <div class="userInfo_a_a">[[${paymentDTO.userName}]]</div>
-      <div class="userInfo_a_a">[[${paymentDTO.userPhoneNumber}]]</div>
-      <!-- 가운데 아이디로 바꾸고 번호를 마지막으로 할까? -->
-      <!-- <div class="userInfo_a_a"><button>변경</button></div> -->
+      <div class="userInfo_a_a">[[${payInfo.userName}]]</div>
+      <div class="userInfo_a_a">[[${payInfo.userPhoneNumber}]]</div>
     </div>
     <div class="userInfo_b">
       <p>&lt; 요청사항 &gt; </p>
@@ -42,10 +41,10 @@
       <div class="itemInfo_b">
         <div class="itemInfo_b_a"><!--룸미니사진--></div>
         <div class="itemInfo_b_b">
-          <div class="itemInfo_b_b_a">[[${info.item_name}]]</div>
+          <div class="itemInfo_b_b_a">[[${payInfo.roomName}]]</div>
           <div class="itemInfo_b_b_b">
-            <div class="itemInfo_b_b_b_a">[[${info.amount.total}]] 원</div>
-            <div class="itemInfo_b_b_b_b">[[${info.quantity}]] 개</div>
+            <div class="itemInfo_b_b_b_a">[[${payInfo.roomPrice}]] 원</div>
+            <div class="itemInfo_b_b_b_b">[[${payInfo.quantity}]] 개</div>
           </div>
         </div>
       </div>
@@ -55,45 +54,42 @@
   <div class="paymentInfoBox">
     <div class="finalAmount">
       <div class="finalAmount_a">최종 결제 금액</div>
-      <div class="finalAmount_b">[[${info.amount.discount}]]원</div>
+      <div class="finalAmount_b">[[${payInfo.finalPrice}]]원</div>
     </div>
     <!-- <hr> -->
     <div class="discountAmount">
       <div class="discountAmount_a">
         <div class="discountAmount_a_a">총 상품금액</div>
-        <div class="discountAmount_a_b">[[${info.amount.total}]]원</div>
+        <div class="discountAmount_a_b">[[${payInfo.roomPrice}]]원</div>
       </div>
       <div class="discountAmount_b">
         <div class="discountAmount_b_a">포인트 사용</div>
-        <div class="discountAmount_b_b">-[[${info.amount.point}]]원</div>
+        <div class="discountAmount_b_b">-[[${payInfo.point}]]원</div>
       </div>
     </div>
     <!-- <hr> -->
     <div class="paymentInfo">
       <div class="paymentInfo_a">
         <div class="paymentInfo_a_a">결제수단(방법) :</div>
-        <div class="paymentInfo_a_b"> [[${info.payment_method_type}]]</div>
+        <div class="paymentInfo_a_b"> [[${payInfo.paymentMethod}]]</div>
       </div>
       <div class="paymentInfo_b">
         <div class="paymentInfo_b_a">결제카드 : </div>
-        <div class="paymentInfo_b_b" th:if="${info.payment_method_type != 'CARD'}">카카오페이(카드) 간편결제</div>
-        <div class="paymentInfo_b_b" th:if="${info.payment_method_type != 'MONEY'}">
-          [[${info.card_info.getPurchase_corp()}]]</div>
+        <div class="paymentInfo_b_b" th:if="${payInfo.paymentMethod != 'CARD'}">카카오페이(카드) 간편결제</div>
+        <div class="paymentInfo_b_b" th:if="${payInfo.paymentMethod != 'MONEY'}">
+          [[${payInfo.cardName}]]</div>
       </div>
       <div class="paymentInfo_c">
         <div class="paymentInfo_c_a">승인 일시 :</div>
-        <div class="paymentInfo_c_b"> [[${info.approved_at}]]</div>
+        <div class="paymentInfo_c_b"> [[${payInfo.approved_at}]]</div>
       </div>
     </div>
   </div>
-  <!-- </section> -->
   <!-- <hr> -->
   <div class="homebtn">
     <button onclick="homeBtn()" class="btn tm-btn-submit">홈으로</button>
   </div>
 
-  <!-- 여기서는 사용 안되고 있음
-  <h2>[[${cancelInfo}]]</h2> -->
 
   <script>
     const homeBtn = () => {
@@ -102,19 +98,6 @@
 
   </script>
 
-  <!-- <br /><br />
-  결제일시: [[${info.approved_at}]]<br />
-  주문번호: [[${info.partner_order_id}]]<br />
-  상품명: [[${info.item_name}]]<br />
-  상품수량: [[${info.quantity}]]<br />
-  결제금액: [[${info.amount.total}]]<br />
-  결제방법: [[${info.payment_method_type}]]<br /> -->
-
-
-  <!-- <hr>
-  <h3>[[${info}]] 카카오페이에서 주는 값들 확인</h3>
-  <hr>확인 완료되어 주석처리함
-  <h3>[[${payment}]]</h3> payment객체 리스트형식으로 보기 -->
 </body>
 
 </html>

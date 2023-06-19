@@ -11,6 +11,19 @@
     .paymentTable th,
     .paymentTable td {
       border: 1px solid black;
+      text-align: center;
+    }
+
+    .paymentTable td>a {
+      cursor: pointer;
+    }
+
+    .paymentTable tr:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    * {
+      color: white;
     }
   </style>
 </head>
@@ -19,7 +32,7 @@
   <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
   <div style="height: 100px; width: 100%;"></div>
   <!-- 헤더 불러오기 -->
-  <a href="/">홈으로</a>
+  <a href="/adminPage">관리자 페이지 홈</a>
   <table class="paymentTable">
     <thead>
       <tr>
@@ -38,21 +51,28 @@
     </thead>
     <tbody>
       <tr th:each="paymentList : ${paymentList}">
-        <td th:text="${paymentList.id}"></td>
-        <td th:text="${paymentList.userId}"></td>
-        <td th:text="${paymentList.reservationId}"></td>
-        <td th:text="${paymentList.roomName}"></td>
-        <td th:text="${paymentList.paymentAmount}"></td>
-        <td th:text="${paymentList.kakaoPoint}"></td>
-        <td th:text="${paymentList.discountAmount}"></td>
-        <td th:text="${paymentList.payment_method_type}"></td>
-        <td th:text="${paymentList.cardName}"></td>
-        <td th:text="${paymentList.payState}"></td>
-        <td th:text="${paymentList.approved_at}"></td>
+        <td><a th:text="${paymentList.id}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.userId}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.reservationId}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.roomName}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.paymentAmount}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.kakaoPoint}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.discountAmount}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.payment_method_type}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.cardName}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.payState}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:text="${paymentList.approved_at}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><a th:href="@{|/payment/delete/${paymentList.id}|}">삭제</a></td>
       </tr>
     </tbody>
   </table>
   </div>
+
+  <script>
+    function payInfo(id) {
+      window.location.href = "/kakaoPaySuccessInfo/" + id;
+    }
+  </script>
 </body>
 
 </html>

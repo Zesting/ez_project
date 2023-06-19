@@ -76,8 +76,10 @@ public class KakaopayService {
       return kakaoPayReadyVO.getNext_redirect_pc_url();
 
     } catch (RestClientException e) {
+      System.out.println("RestClientException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
       e.printStackTrace();
     } catch (URISyntaxException e) {
+            System.out.println("URISyntaxException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
       e.printStackTrace();
     }
     return "/pay";

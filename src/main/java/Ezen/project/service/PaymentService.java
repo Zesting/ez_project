@@ -1,6 +1,7 @@
 package Ezen.project.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,4 +28,17 @@ public class PaymentService {
     System.out.println("전체 결제 리스트 출력");
     return paymentRepository.findAll();
   }
+
+  //결제 id로 조회  
+  public Optional<Payment> findById(Long id) {
+    Optional<Payment> payment = paymentRepository.findById(id);
+        return payment;
+  }
+
+  //결제 삭제
+  public void delete(Long id) {
+    paymentRepository.deleteById(id);
+  }
+
+  
 }

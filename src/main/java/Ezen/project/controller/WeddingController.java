@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.DTO.WeddingCommentDTO;
 import Ezen.project.DTO.WeddingDTO;
-import Ezen.project.domain.User;
 import Ezen.project.service.UserService;
 import Ezen.project.service.WeddingCommentService;
 import Ezen.project.service.WeddingService;
