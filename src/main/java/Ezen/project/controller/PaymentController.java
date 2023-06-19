@@ -109,17 +109,53 @@ public class PaymentController {
 
   // 결제 버튼 있는 페이지
   @GetMapping("/payment")
-  public String payment() {
+  public String payment(HttpSession session, Model model) {
+    // 결제 정보를 간단하게 띄워 보기
+    Long logInUser = (Long) session.getAttribute("userId");
+
+    Reservation reservation = (Reservation) session.getAttribute("payReservation");
+    PaymentDTO paymentDTO = new PaymentDTO();
+    paymentDTO.setReservationId(reservation.getReservationId());
+    paymentDTO.setUserId(userService.findById(logInUser).getUserId());
+    paymentDTO.setUserName(userService.findById(logInUser).getUserName());
+    paymentDTO.setUserPhoneNumber(userService.findById(logInUser).getUserPhoneNumber());
+    System.out.println("reservation 에 저장된 값은??????" + reservation);
+    model.addAttribute("reservationInfo", paymentDTO);
     return "payment/payment";
   }
 
-  // Payment테이블에 결제 리스트 조회
+  // Payment테이블에 결제 리스트 조회 [관리자 페이지]
   @GetMapping("/paymentList")
-  public String paymentList(Model model) {
+  public String paymentList(Model model, HttpSession session) {
+    if (session.getAttribute("userId") == null) {
+      return "redirect:/login";
+    }
     List<Payment> paymentList = paymentService.findByAll();
     model.addAttribute("paymentList", paymentList);
     System.out.println("getMapping() paymentList 출력");
     return "payment/paymentList";
+  }
+  //마이페이지에서 모든 결제 내역 리스트 [ 마이페이지 ]
+  @GetMapping("/paymentList/my")
+  public String myPaymentList(HttpSession session, Model model) {
+    Long userId = (Long) session.getAttribute("userId");
+    String userName = userService.findById(userId).getUserName();
+    List<Payment> payList = paymentService.findByUserId(userName);
+    if (userId == null) {
+      return "redirect:/login";
+    }
+    model.addAttribute("pay", payList);
+    // 리스트값이 잘 나오는지 확인하는 작업
+    // for (Payment payment : payList) {
+    //   if (payment != null) {
+    //     System.out.println("payment.getUserId() ::" + payment.getUserId());
+    //     System.out.println(payList.toString());
+    //     System.out.println("값이 같rp 나왔습니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    //   } else {
+    //     System.out.println("값이 다르게 나왔습니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    //   }
+    // }
+    return "payment/myPaymentList";
   }
 
   // kakaoPaySuccessInfo
@@ -175,6 +211,6 @@ public class PaymentController {
     Payment payment = paymentService.findById(id).get();
     reservationService.dropReservation(Long.parseLong(payment.getReservationId()));
     paymentService.delete(id);
-    return "redirect:/paymentList";
+    return "redirect:/adminPage";
   }
 }

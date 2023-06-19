@@ -1,6 +1,6 @@
 // 룸 리스트 폼 View(ajax)
 
-$(document).on("click", "#roomListForm", function () {
+$(document).on("click", "#listForm", function () {
   // jQuery에서 제공하는 함수로, HTML 문서의 로딩이 완료되었을 때 실행되는 이벤트 핸들러
   $.ajax({
     url: "/Rooms", // 요청 url
