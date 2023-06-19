@@ -35,7 +35,7 @@ public class KakaopayService {
   private KakaoPayCancelResponseVO kakaoPayCancelResponseVO;
   private final PaymentRepository paymentRepository;
 
-  // ...............................결제 준비.............................................
+  /*...............................결제 준비.............................................*/
   public String kakaoPayReady(PaymentDTO paymentDTO) {
     RestTemplate restTemplate = new RestTemplate();
 
@@ -45,25 +45,24 @@ public class KakaopayService {
     headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
     headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 
-    //body에 넣을 데이터 셋팅
+    // body에 넣을 데이터 셋팅
 
     // 서버로 요청할 Body
     // Body에는 결제로 지정할 데이터를 넣는다.
     MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
     params.add("cid", "TC0ONETIME"); // 테스트코드 넣어주고 실제 결제하려면 제휴Id를 넣어주면 된다.
 
-    //승인요청할때 값과 똑같아야 오류가 안남.
-    params.add("partner_order_id", ""+paymentDTO.getReservationId()); //예약 고유 번호>>
-    params.add("partner_user_id", paymentDTO.getUserName());  //회원 이름>>
-    params.add("total_amount", ""+paymentDTO.getAmount()); //결제 금액>>
-    params.add("item_name", paymentDTO.getRoomName());  //룸 이름>>
+    // 승인요청할때 값과 똑같아야 오류가 안남.
+    params.add("partner_order_id", "" + paymentDTO.getReservationId()); // 예약 고유 번호>>
+    params.add("partner_user_id", paymentDTO.getUserName()); // 회원 이름>>
+    params.add("total_amount", "" + paymentDTO.getAmount()); // 결제 금액>>
+    params.add("item_name", paymentDTO.getRoomName()); // 룸 이름>>
 
-    
-    params.add("quantity", "1");  //굳이 있어야하나?
-    params.add("tax_free_amount", "0"); //  필요없을듯..?
-    params.add("approval_url", "http://localhost:8080/kakaoPaySuccess");  //결제 성공
-    params.add("cancel_url", "http://localhost:8080/kakaoPayCancel");     //결제 취소
-    params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail");   //결제 실패
+    params.add("quantity", "1"); // 굳이 있어야하나?
+    params.add("tax_free_amount", "0"); // 필요없을듯..?
+    params.add("approval_url", "http://localhost:8080/kakaoPaySuccess"); // 결제 성공
+    params.add("cancel_url", "http://localhost:8080/kakaoPayCancel"); // 결제 취소
+    params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail"); // 결제 실패
 
     HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
@@ -84,10 +83,10 @@ public class KakaopayService {
     return "/pay";
   }
 
-  // ...............................결제 승인 요청.............................................
+  /*  ...............................결제 승인 요청.............................................*/
 
   public KakaoPayApprovalVO kakaoPayInfo(String pg_token, HttpSession session) {
-    PaymentDTO paymentDTO = (PaymentDTO)session.getAttribute("paymentDTO");
+    PaymentDTO paymentDTO = (PaymentDTO) session.getAttribute("paymentDTO");
     log.info("KakaoPayInfoVO............................................");
     log.info("-----------------------------");
 
@@ -104,9 +103,9 @@ public class KakaopayService {
     params.add("cid", "TC0ONETIME");
     params.add("tid", kakaoPayReadyVO.getTid());
 
-    params.add("partner_order_id", ""+paymentDTO.getReservationId());   //예약 고유 번호
-    params.add("partner_user_id", paymentDTO.getUserName());  //회원 이름>>
-    params.add("total_amount", ""+paymentDTO.getAmount());       // 가격>> 예약목록> 최종예약 금액
+    params.add("partner_order_id", "" + paymentDTO.getReservationId()); // 예약 고유 번호
+    params.add("partner_user_id", paymentDTO.getUserName()); // 회원 이름>>
+    params.add("total_amount", "" + paymentDTO.getAmount()); // 가격>> 예약목록> 최종예약 금액
 
     params.add("pg_token", pg_token); // 결제 승인 요청을 인증하는 토큰
 
@@ -117,12 +116,12 @@ public class KakaopayService {
           KakaoPayApprovalVO.class);
 
       log.info("" + kakaoPayApprovalVO);
-      //금액에서 카카오 포인트로 사용하여 할인 받기
+      // 금액에서 카카오 포인트로 사용하여 할인 받기
       int total = kakaoPayApprovalVO.getAmount().getTotal();
       int point = kakaoPayApprovalVO.getAmount().getPoint();
       kakaoPayApprovalVO.getAmount().setDiscount(total - point);
-      //받은 값을 DB에 저장하기 
-      Payment pay = paymentRepository.save(kakaoPayApprovalVO.toSaveEntity());      
+      // 받은 값을 DB에 저장하기
+      Payment pay = paymentRepository.save(kakaoPayApprovalVO.toSaveEntity());
       System.out.println("*********************************************");
       System.out.println(pay);
 
@@ -138,7 +137,8 @@ public class KakaopayService {
 
   }
 
-  // ...............................결제 취소 요청.............................................
+  // ...............................결제 취소
+  // 요청.............................................
 
   public KakaoPayCancelResponseVO kakaoPayCancel(Integer amount, String tid) {
 
@@ -152,20 +152,20 @@ public class KakaopayService {
     headers.add("Authorization", "KakaoAK " + "416234c21f220c45b3ea64f69ce4e775");
     headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
     headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
-
     // 서버로 요청할 Body
     MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
     params.add("cid", "TC0ONETIME"); // 가맹점 코드
 
     params.add("tid", tid); // 결제 고유 번호
-    params.add("cancel_amount",String.valueOf(amount)); // 취소 금액 String.valueOf(amount)
+    params.add("cancel_amount", String.valueOf(amount)); // 취소 금액 String.valueOf(amount)
     params.add("cancel_tax_free_amount", "0"); // 취소 비과세 금액
 
     // 파라메타, 헤더
     HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<>(params, headers);
 
     try {
-      kakaoPayCancelResponseVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/cancel"), body, KakaoPayCancelResponseVO.class);
+      kakaoPayCancelResponseVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/cancel"), body,
+          KakaoPayCancelResponseVO.class);
       log.info("" + kakaoPayCancelResponseVO);
 
       return kakaoPayCancelResponseVO;

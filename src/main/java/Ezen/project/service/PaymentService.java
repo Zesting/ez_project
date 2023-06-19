@@ -27,11 +27,4 @@ public class PaymentService {
     System.out.println("전체 결제 리스트 출력");
     return paymentRepository.findAll();
   }
-
-  // public Optional<Payment> findById(Long payId) {
-  //   Optional<Payment> test = paymentRepository.findById(payId);
-  //   System.out.println(test);
-  //   return test;
-  //   }
-  
 }

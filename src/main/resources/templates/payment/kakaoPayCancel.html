@@ -13,32 +13,31 @@
 <body style="background-image: url(../img/space8.jpg);">
   <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
   <div style="height: 100px; width: 100%;"></div>
-  <!-- 헤더 불러오기 -->
 
-  <section class="tm-section-pad-top tm-parallax-2"> <!--id="#contact" 지움 /배경사진이 들어가서-->
-    <div class="payState">
-      <div>카카오페이 결제가 취소되었습니다.</div>
-      <div>주문번호 : 11</div>
+  <!-- <section class="tm-section-pad-top tm-parallax-2"> -->
+  <div class="payState">
+    <div>카카오페이 결제가 취소되었습니다.</div>
+    <div>주문번호 : 11</div>
+  </div>
+  <!-- <hr>아래로 지우면됨 테스트용  -->
+  <!-- tm-input -->
+  <div class="userInfo">
+    <div class="userInfo_a">
+      <div class="userInfo_a_a">이재영</div>
+      <div class="userInfo_a_a">01089898989</div>
     </div>
-    <!-- <hr>아래로 지우면됨 테스트용  -->
-    <div class="userInfo">
-      <div class="userInfo_a">
-        <div class="userInfo_a_a">이재영</div>
-        <div class="userInfo_a_a">01089898989</div>
-        <!-- 가운데 아이디로 바꾸고 번호를 마지막으로 할까? -->
-        <div class="userInfo_a_a"><button>변경</button></div>
-      </div>
-      <p>&lt; 요청사항 &gt; </p>
-      <div>15시 입실 예정이고, 차 1대 주차합니다.</div>
-    </div>
-    <!-- <hr> -->
-    <div class="itemInfo">
+    <p>&lt; 요청사항 &gt; </p>
+    <div>15시 입실 예정이고, 차 1대 주차합니다.</div>
+  </div>
+  <!-- <hr> -->
+  <div class="itemInfo">
+    <div class="itemInfoBox">
       <div class="itemInfo_a">
         <div class="itemInfo_a_a">로고</div>
         <div class="itemInfo_a_b">갤럭시펠리스</div>
       </div>
       <div class="itemInfo_b">
-        <div class="itemInfo_b_a">룸미니사진</div>
+        <div class="itemInfo_b_a">룸사진</div>
         <div class="itemInfo_b_b">
           <div class="itemInfo_b_b_a">필로우 라이언</div>
           <div class="itemInfo_b_b_b">
@@ -48,7 +47,9 @@
         </div>
       </div>
     </div>
-    <!-- <hr> -->
+  </div>
+  <!-- <hr> -->
+  <div class="paymetnInfoBox">
     <div class="finalAmount">
       <div class="finalAmount_a">최종 결제 금액</div>
       <div class="finalAmount_b">500000원</div>
@@ -64,6 +65,7 @@
         <div class="discountAmount_b_b">-10000원</div>
       </div>
     </div>
+
     <!-- <hr> -->
 
     <div class="paymentInfo">
@@ -80,14 +82,13 @@
         <div class="paymentInfo_c_b"> 23061411</div>
       </div>
     </div>
-  </section>
+  </div>
+  <!-- </section> -->
   <!-- <hr> -->
-  <button onclick="homeBtn()" class="btn tm-btn-submit">홈으로</button>
+  <div class="homebtn">
+    <button onclick="homeBtn()" class="btn tm-btn-submit">홈으로</button>
   </div>
 
-  </div><!-- row ending -->
-
-  </div>
   <!-- 여기서는 사용 안되고 있음
   <h2>[[${cancelInfo}]]</h2> -->
 
@@ -100,3 +101,13 @@
 </body>
 
 </html>
+<!-- 
+/* 
+  인풋 양식?
+  width: 100%;
+  border: 1px solid white;
+  padding: 8px 20px;
+  border-radius: 6px;
+  background: transparent;
+  color: white;
+*/ -->

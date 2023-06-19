@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import Ezen.project.DTO.WeddingCommentDTO;
+import Ezen.project.DTO.WeddingDTO;
 import Ezen.project.service.WeddingCommentService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -28,6 +31,7 @@ public class WeddingCommentController {
             //작성 성공하면 댓글목록을 가져와서 리턴
             //댓글목록: 해당 게시글의 댓글 전체 
             List<WeddingCommentDTO> weddingCommentDTOList = weddingCommentService.findAll(weddingCommentDTO.getWeddingId());
+
             return new ResponseEntity<>(weddingCommentDTOList, HttpStatus.OK);
         } else {
 

@@ -110,6 +110,8 @@ blockquote {
 
 .tm-nav-link {
   color: white;
+  text-shadow: 1px 1px 2px rgb(255, 255, 255), 1px 1px 2px rgb(0, 0, 0), 1px 1px 2px rgb(255, 255, 255);
+  
 }
 
 .tm-navbar.scroll .tm-nav-link {
@@ -250,6 +252,7 @@ blockquote {
 .tm-section-title {
   font-size: 2.6rem;
   font-weight: normal;
+  color: #FFF;
 }
 
 .tm-intro-text {
@@ -545,8 +548,7 @@ figure.effect-honey:hover h2 i {
 }
 
 .tm-input {
-	margin: 0 0 20px 0;
-	width: 90%;
+	width: 100%;
   padding: 8px 20px;
   border-radius: 6px;
   border: 1px solid white;
