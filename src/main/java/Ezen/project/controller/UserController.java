@@ -45,6 +45,16 @@ public class UserController {
         System.out.println("get에서의 Referer1 : " + request.getHeader("Referer"));
         return "user/login";
     }
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
+        return "redirect:/";
+
+    }
+
 
     @PostMapping("/user/login")
     public String userLogin(@ModelAttribute UserDTO userDTO, HttpSession session) {
