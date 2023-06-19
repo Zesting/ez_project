@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import Ezen.project.DTO.NoticeDTO;
+import Ezen.project.DTO.UserDTO;
 import Ezen.project.service.NoticeService;
+import Ezen.project.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -22,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class NoticeController {
 
     private final NoticeService noticeService;
+    private final UserService userService;
 
     //공지 메인페이지
     @GetMapping("notice")
@@ -33,7 +37,16 @@ public class NoticeController {
 
     //공지글 작성 폼
     @GetMapping("/notice/save")
-    public String saveForm(){
+    public String saveForm(Model model, HttpSession session){
+
+        Long userId = (Long) session.getAttribute("userId");
+
+        // UserDTO userDTO = userService.findById(userId);
+        // NoticeDTO noticeDTOId = new NoticeDTO();
+        // noticeDTOId.setUserName(userDTO.getUserName());
+    
+        
+
         return "/notice/noticeSave";
     }
 
@@ -82,12 +95,15 @@ public class NoticeController {
 
     //페이징 처리 /notice/paging?page=1
     @GetMapping("/notice/paging")
+    //세션 넣는다
     public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
         // pageable.getPageNumber();
         Page<NoticeDTO> noticeList = noticeService.paging(pageable);
         int blockLimit = 5;
-       int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
+        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
         int endPage = ((startPage + blockLimit - 1) < noticeList.getTotalPages()) ? startPage + blockLimit - 1 : noticeList.getTotalPages();
+
+        
 
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("startPage", startPage);

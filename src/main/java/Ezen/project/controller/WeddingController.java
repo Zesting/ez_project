@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.DTO.WeddingCommentDTO;
 import Ezen.project.DTO.WeddingDTO;
-import Ezen.project.domain.User;
 import Ezen.project.service.UserService;
 import Ezen.project.service.WeddingCommentService;
 import Ezen.project.service.WeddingService;
@@ -69,11 +68,6 @@ public class WeddingController {
         WeddingDTO weddingDTOUser = new WeddingDTO();
         weddingDTOUser.setUserName(userName.getUserName());
 
-        
-
-        // WeddingDTO userName = (WeddingDTO)session.getAttribute("userId");
-
-        
         /* 댓글 목록 가져오기 */
         List<WeddingCommentDTO> weddingCommentDTOList = weddingCommentService.findAll(id);
         model.addAttribute("commentList", weddingCommentDTOList);

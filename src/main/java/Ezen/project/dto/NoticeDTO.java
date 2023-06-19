@@ -25,7 +25,7 @@ public class NoticeDTO {
     private String title;       //DTO 공지글 제목
     private String content;     //DTO 공지글 내용
     private LocalDateTime writeDate;        //DTO 공지글 작성일
-    
+    private String userName;
     private List<MultipartFile> noticeFile; //DTO 공지글 첨부파일
     // 위 파일 필드는 save.html -> Controller 파일 담는 용도
     private List<String> originalFileName; //원본 파일 이름
