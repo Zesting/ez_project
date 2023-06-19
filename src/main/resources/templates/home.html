@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,7 +7,10 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>home</title>
     <!-- 파비콘 (이미지 추후 변경 예정)-->
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+    <script
+      src="https://kit.fontawesome.com/5a08958583.js"
+      crossorigin="anonymous"></script>
   </head>
   <body style="background-image: url(../img/space8.jpg)">
     <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
@@ -23,12 +26,166 @@
             <br />Experience the Difference
           </p>
         </div>
-      </div>  
+      </div>
       <!-- 페이지 아래로 이동 버튼 -->
       <div class="tm-next tm-intro-next">
         <a href="#whatwedo" class="text-center tm-down-arrow-link">
           <i class="fas fa-2x fa-arrow-down tm-down-arrow"></i>
         </a>
+      </div>
+    </section>
+
+    <!-- Room 기본 페이지 및 Room 상세 설명 이동 섹션  -->
+    <section
+      id="whatwedo"
+      class="tm-section-pad-top"
+      style="background-color: #333">
+      <div class="container">
+        <div class="row tm-content-box">
+          <!-- first row -->
+          <div class="col-lg-12 col-xl-12">
+            <div class="tm-intro-text-container">
+              <h2
+                class="tm-text-primary mb-4 tm-section-title"
+                style="color: white">
+                ABOUT US
+              </h2>
+              <p
+                class="mb-4 tm-intro-text"
+                style="text-align: center; opacity: 0.9; color: #ddd">
+                정선 밤하늘에 펼쳐진 별빛을 가득 담은 호텔
+              </p>
+              <p class="mb-4 tm-intro-text" style="color: #ddd">
+                15년의 역사를 이어온 Galaxy Palace 호텔은 24개의 객실, 2개의
+                레스토랑 및 라운지 & 바 등 다양한 공간과 Breakfast Service,
+                dinner Party Service 및 Wedding Service를 고객님들에게
+                제공합니다.
+              </p>
+              <p class="mb-4 tm-intro-text" style="color: #ddd">
+                Galaxy Palace 호텔은 강원도 정선에 위치하며 별마로 천문대와
+                도보로 5분 거리에 존재하여 대한민국 상공에 펼쳐진 수많은 별빛을
+                고객님들에게 제공합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- first row -->
+
+        <div class="row tm-content-box">
+          <!-- second row -->
+          <div class="col-lg-1">
+            <i class="far fa-3x fa-comment-alt text-center tm-icon"></i>
+          </div>
+          <div class="col-lg-5">
+            <div class="tm-intro-text-container">
+              <h2 class="tm-text-primary mb-4" style="color: #ddd">
+                Mercury_Room
+              </h2>
+              <p
+                class="mb-4 tm-intro-text"
+                style="font-size: 1rem; color: #ddd">
+                <strong>수성</strong>의 아름다운 푸른색을 머금은
+                <strong>Mercury_Room</strong>은 청량한 청색 조명으로 대한민국의
+                별빛이 더욱 빛날 수 있게 연출되었고, 친환경 소재의 자재로 벽면을
+                마감하여 시크함을 강조하였습니다.
+              </p>
+              <div class="tm-continue">
+                <a
+                  href="#"
+                  class="tm-intro-text tm-btn-primary"
+                  style="color: #ddd"
+                  >Room_Detail</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1">
+            <i class="far fa-3x fa-comment-alt text-center tm-icon"></i>
+          </div>
+          <div class="col-lg-5">
+            <div class="tm-intro-text-container">
+              <h2 class="tm-text-primary mb-4" style="color: #ddd">
+                Mars_Room
+              </h2>
+              <p
+                class="mb-4 tm-intro-text"
+                style="font-size: 1rem; color: #ddd">
+                <strong>화성</strong>의 강렬한 붉은색으로 표현된
+                <strong>Mars_Room</strong>은 부드러운 적색 조명으로 대한민국의
+                별빛이 더욱 빛날 수 있게 연출되었고, 친환경 소재의 자재로 벽면을
+                마감하여 모던함을 강조하였습니다.
+              </p>
+              <div class="tm-continue">
+                <a
+                  href="#"
+                  class="tm-intro-text tm-btn-primary"
+                  style="color: #ddd"
+                  >Room_Detail</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- second row -->
+
+        <div class="row tm-content-box">
+          <!-- third row -->
+          <div class="col-lg-1">
+            <i class="far fa-3x fa-comment-alt text-center tm-icon"></i>
+          </div>
+          <div class="col-lg-5">
+            <div class="tm-intro-text-container">
+              <h2 class="tm-text-primary mb-4" style="color: #ddd">
+                Jupiter_Room
+              </h2>
+              <p
+                class="mb-4 tm-intro-text"
+                style="font-size: 1rem; color: #ddd">
+                <strong>목성</strong>의 따뜻한 주황색이 적용된
+                <strong>Jupiter_Room</strong>은 은은한 갈색 조명으로 대한민국의
+                별빛이 더욱 빛날 수 있게 연출되었고, 친환경 소재의 자재로 벽면을
+                마감하여 시크함을 강조하였습니다.
+              </p>
+              <div class="tm-continue">
+                <a
+                  href="#"
+                  class="tm-intro-text tm-btn-primary"
+                  style="color: #ddd"
+                  >Room_Detail</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1">
+            <i class="far fa-3x fa-comment-alt text-center tm-icon"></i>
+          </div>
+          <div class="col-lg-5">
+            <div class="tm-intro-text-container">
+              <h2 class="tm-text-primary mb-4">Social Work</h2>
+              <p class="mb-4 tm-intro-text">
+                You can change
+                <a href="https://fontawesome.com/icons?d=gallery"
+                  >Font Awesome icons</a
+                >
+                by either <b><em>fas or far</em></b> in the HTML codes. For
+                Examples:<br />
+                <em
+                  >&lt;i class=&quot;fas fa-users&quot;&gt;&lt;i class=&quot;far
+                  fa-chart-bar&quot;&gt;</em
+                >
+              </p>
+
+              <div class="tm-continue">
+                <a href="#testimonials" class="tm-intro-text tm-btn-primary"
+                  >Details</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- third row -->
       </div>
     </section>
 
@@ -137,7 +294,7 @@
     <div><a href="/login">로그인</a></div>
     <div><a href="/userlist">회원목록</a></div>
     <div><a href="/userupdate">내정보수정하기</a></div>
-    
+
     <a href="/iamport"><button>결제API테스트</button></a>
     <br /><br />
     <div><a href="/notice">공지사항(페이징 없음)</a></div>
