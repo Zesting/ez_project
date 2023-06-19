@@ -22,7 +22,7 @@
                 <td class="tableTitle" th:text="${notice.title}"></td>
             </tr>
             <tr>
-                <td class="tableDate" th:text="${notice.writeDate}"></td>
+                <td class="tableDate" th:text="*{#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:MM')}"></td>
             </tr>
             <tr>
                 <td class="tableContent" th:text="${notice.content}"></td>

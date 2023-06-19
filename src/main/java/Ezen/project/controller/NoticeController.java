@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import Ezen.project.DTO.NoticeDTO;
-import Ezen.project.DTO.UserDTO;
 import Ezen.project.service.NoticeService;
 import Ezen.project.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -38,16 +37,15 @@ public class NoticeController {
     //공지글 작성 폼
     @GetMapping("/notice/save")
     public String saveForm(Model model, HttpSession session){
+        return "/notice/noticeVerification";
+    }
 
+    //검증 후 폼 받기
+    @GetMapping("/notice/noticeSave")
+    public String verification(Model model, HttpSession session){
         Long userId = (Long) session.getAttribute("userId");
-
-        // UserDTO userDTO = userService.findById(userId);
-        // NoticeDTO noticeDTOId = new NoticeDTO();
-        // noticeDTOId.setUserName(userDTO.getUserName());
-    
-        
-
-        return "/notice/noticeSave";
+        model.addAttribute("user", userService.findById(userId));
+        return "notice/noticeSave";
     }
 
     //작성 폼 전달
