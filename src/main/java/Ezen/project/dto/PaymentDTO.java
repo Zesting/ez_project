@@ -2,7 +2,6 @@ package Ezen.project.DTO;
 
 import org.springframework.stereotype.Component;
 
-import Ezen.project.domain.Payment;
 import lombok.Data;
 
 @Component
@@ -17,11 +16,26 @@ public class PaymentDTO {
   private int amount; // 가격
   private String userPhoneNumber; // 회원 전화번호
 
-  public Payment toSaveEntity() {
-    Payment payment = new Payment();
-    
-    return payment;
-  }
+
+  // //결제 실패시 데이터베이스에 취소 내역 저장
+  // public Payment toCancelSaveEntity(HttpSession session) {
+  //   Payment payment = new Payment();
+  //   Payment payreservation = (Payment) session.getAttribute("payReservation");
+  //   payment.setId(null);  //결제 고유 번호
+  //   payment.setTid("-"); // 카카오페이 결제 고유 번호
+  //   payment.setUserId(""+session.getAttribute("userId")); // 회원 고유 번호
+  //   payment.setReservationId(""+reservationId); // 예약 고유 번호
+  //   payment.setRoomName(payreservation.getRoomName()); // 예약된 방 이름
+  //   payment.setPayment_method_type(""); // 결제 방법 crad 또는 Money
+  //   payment.setApproved_at(null); // 결제 승인 시간
+  //   payment.setPayState("취소"); // 결제 상태
+  //   payment.setKakaoPoint(0); //카카오 포인트 
+  //   payment.setCardName("-");
+  //   payment.setPaymentAmount(amount);//total_amount
+  //   payment.setDiscountAmount(0);//결제금액 - 카카오포인트
+  //   System.out.println("취소 payment:::::"+payment);
+  //   return payment;
+  // }
 
   // private Long payId;
   // private String userId;

@@ -1,58 +1,33 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <title>Project</title>
-    <style>
-      tbody td {
-        text-align: center;
-        border: 1px dotted #555;
-      }
-      thead td {
-        text-align: center;
-        border: 3px solid black;
-      }
-    </style>
-  </head>
-  <body>
-    <table>
-      <thead>
-        <tr>
-          <td>예약 고유 번호</td>
-          <td>예약한 회원 고유 번호</td>
-          <td>회원이 예약한 룸 고유 번호</td>
-          <td>체크 인 날짜</td>
-          <td>체크 아웃 날짜</td>
-          <td>예약한 날짜</td>
-          <td>최종 예약 금액</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="reservationList : ${reservationList}">
-          <td th:text="${reservationList.reservationId}"></td>
-          <td th:text="${reservationList.userId}"></td>
-          <td th:text="${reservationList.roomId}"></td>
-          <td th:text="${reservationList.checkIn}"></td>
-          <td th:text="${reservationList.checkOut}"></td>
-          <td th:text="${reservationList.reservationDate}"></td>
-          <td th:text="${reservationList.finalPrice}"></td>
-          <td>
-            <a
-              th:href="@{|/reservation/modify/${reservationList.reservationId}|}"
-              >수정</a
-            >
-          </td>
-          <td>
-            <a
-              th:href="@{|/reservation/delete/${reservationList.reservationId}|}"
-              >삭제</a
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
-</html>
+<table>
+  <thead>
+    <tr>
+      <td>예약 고유 번호</td>
+      <td>예약한 회원 고유 번호</td>
+      <td>회원이 예약한 룸 고유 번호</td>
+      <td>체크 인 날짜</td>
+      <td>체크 아웃 날짜</td>
+      <td>예약한 날짜</td>
+      <td>최종 예약 금액</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="reservationList : ${reservationList}">
+      <td
+        id="reservationId"
+        name="reservationId"
+        th:text="${reservationList.reservationId}"></td>
+      <td id="reservationUserId" th:text="${reservationList.userId}"></td>
+      <td id="reservationRoomId" th:text="${reservationList.roomId}"></td>
+      <td id="reservationCheckIn" th:text="${reservationList.checkIn}"></td>
+      <td id="reservationCheckOut" th:text="${reservationList.checkOut}"></td>
+      <td
+        id="reservationDate"
+        th:text="${reservationList.reservationDate}"></td>
+      <td
+        id="reservationFinalPrice"
+        th:text="${reservationList.finalPrice}"></td>
+      <td><button type="button" id="modifyMoveBtn">수정 폼 이동</button></td>
+      <td><button type="button" id="deleteSubmit">삭제</button></td>
+    </tr>
+  </tbody>
+</table>
