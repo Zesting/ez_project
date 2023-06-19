@@ -8,33 +8,52 @@
   </head>
   <body>
     <div class="container">
-      <form th:action="@{|/reservation/modify/${id}|}" method="post">
-        <input
-          type="number"
-          name="reservationId"
-          th:value="${reservation.reservationId}"
-          readonly />
-        <hr />
-        <input type="number" name="roomId" th:value="${reservation.roomId}" />
-        <hr />
-        <input type="number" name="userId" th:value="${reservation.userId}" />
-        <hr />
-        <input
-          type="text"
-          name="reservationDate"
-          th:value="${reservation.reservationDate}" />
-        <hr />
-        <input type="date" name="checkIn" th:value="${reservation.checkIn}" />
-        <hr />
-        <input type="date" name="checkOut" th:value="${reservation.checkOut}" />
-        <hr />
-        <input
-          type="number"
-          name="finalPrice"
-          th:value="${reservation.finalPrice}" />
-        <hr />
-        <input type="submit" />
-      </form>
+      <input
+        type="number"
+        id="updateReservationId"
+        name="reservationId"
+        th:value="${reservation.reservationId}"
+        readonly />
+      <hr />
+      <input
+        id="updateReservationRoomId"
+        type="number"
+        name="roomId"
+        th:value="${reservation.roomId}" />
+      <hr />
+      <input
+        id="updateReservationUserId"
+        type="number"
+        name="userId"
+        th:value="${reservation.userId}"
+        readonly />
+      <hr />
+      <input
+        id="updateReservationDate"
+        type="text"
+        name="reservationDate"
+        th:value="${reservation.reservationDate}"
+        readonly />
+      <hr />
+      <input
+        id="updateReservationCheckIn"
+        type="date"
+        name="checkIn"
+        th:value="${reservation.checkIn}" />
+      <hr />
+      <input
+        id="updateReservationCheckOut"
+        type="date"
+        name="checkOut"
+        th:value="${reservation.checkOut}" />
+      <hr />
+      <input
+        id="updateReservationFinalPrice"
+        type="number"
+        name="finalPrice"
+        th:value="${reservation.finalPrice}" />
+      <hr />
+      <input type="button" id="modifySubmit" value="수정" />
     </div>
   </body>
 </html>

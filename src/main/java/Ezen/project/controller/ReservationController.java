@@ -1,19 +1,15 @@
 package Ezen.project.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import Ezen.project.DTO.CheckDTO;
-import Ezen.project.DTO.ReservationDTO;
 import Ezen.project.domain.Reservation;
 import Ezen.project.service.ReservationService;
 import jakarta.servlet.http.HttpSession;
@@ -45,16 +41,7 @@ public class ReservationController {
         return "Reservation/SelectDate";
     }
 
-    // 예약 날짜 저장 로직(rest)
-    // @PostMapping("/Reservations/SelectDate")
-    // public String reservationSelectDate(HttpSession session, @ModelAttribute
-    // CheckDTO checkDTO) {
-    // System.out.println("PostMapping 실행 -> checkDTO : " + checkDTO);
-    // session.setAttribute("checkDTO", checkDTO);
-    // return "redirect:SelectRoom";
-    // }
-
-    // 예약 룸
+    // 예약 룸 선택 뷰 메서드
     @RequestMapping(value = "/Reservations/SelectRoom", method = RequestMethod.GET)
     public String reservationSelectRoomView(Model model, HttpSession session) {
 
@@ -70,42 +57,10 @@ public class ReservationController {
         return "Reservation/SelectRoom";
     }
 
-    // rest로
-    // @PostMapping("/Reservations/SelectRoom")
-    // public String reservationSelectRoom(HttpSession session, Model model, RoomDTO
-    // roomDTO) {
-    // System.out.println("PostMapping(reservationSelectRoom) start");
-    // System.out.println(roomDTO);
-    // CheckDTO checkDTO = (CheckDTO) session.getAttribute("checkDTO");
-    // Long userId = (Long) session.getAttribute("userId");
-    //
-    // Reservation reservation = reservationService.addReservation(userId,
-    // roomDTO.getRoomId(), checkDTO);
-    //
-    // session.setAttribute("payReservation", reservation);// 예약 정보 세션에 저장해서 가져가기
-    // return "redirect:/payment";
-    // }
-
-    @GetMapping(value = "/modify/{id}")
+    @RequestMapping(value = "/Reservations/modify/{id}", method = RequestMethod.GET)
     public String modifyView(@PathVariable("id") Long id, Model model) {
         model.addAttribute("reservation", reservationService.findOneReservationById(id).get());
         return "Reservation/modifyView";
-    }
-
-    @PostMapping(value = "/modify/{id}")
-    public String modifyReservation(@PathVariable("id") Long id, ReservationDTO reservationDTO) {
-        Optional<Reservation> reservation = reservationService.findOneReservationById(id);
-        if (reservation.isPresent()) {
-            reservationService.modifyReservation(reservationDTO);
-        }
-        return "redirect:/reservation/list";
-    }
-
-    @GetMapping(value = "/delete/{id}")
-    public String deleteReservation(@PathVariable("id") Long id) {
-        reservationService.verificationReservation(id);
-        reservationService.dropReservation(id);
-        return "redirect:/reservation/list";
     }
 
 }
