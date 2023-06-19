@@ -1,6 +1,6 @@
 package Ezen.project.DTO;
 
-import jakarta.validation.constraints.NotNull;
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import lombok.Data;
 
 @Data

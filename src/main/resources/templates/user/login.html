@@ -74,7 +74,20 @@
     </style>
 </head>
 
-<body>
+
+<body style="background-image: url(../img/space8.jpg);">
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 130px; width: 100%;"></div>
+    <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
+
+    <div class="container">
+        <form class="login-form">
+          <h1>Login</h1>
+          <input type="text" placeholder="Username" name="username" required>
+          <input type="password" placeholder="Password" name="password" required>
+          <button type="submit">Login</button>
+        </form>
+      </div>
     <form action="/user/login" method="post">
         <input id="input_login_id" type="text" name="userId" placeholder="ID">
         <p id="login_id_alert" style="display:none;">아이디를 확인해주세요요</p>
@@ -92,15 +105,15 @@
             <div class="kakao_txt">카카오톡으로 간편로그인 </div>
         </a>
     </div> -->
-    
+
     <script>
         const inputLoginId = document.getElementById("input_login_id");
-        inputLoginId.addEventListener("keyup",(event)=>{
-            if(!(/(\w)/).test(inputLoginId.value)){
+        inputLoginId.addEventListener("keyup", (event) => {
+            if (!(/(\w)/).test(inputLoginId.value)) {
                 alert("틀림");
-                document.getElementById("login_id_alert").style.dispaly="block";
-            }else{
-                document.getElementById("login_id_alert").style.dispaly="none";
+                document.getElementById("login_id_alert").style.dispaly = "block";
+            } else {
+                document.getElementById("login_id_alert").style.dispaly = "none";
             }
         });
     </script>
