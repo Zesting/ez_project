@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>list</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>기본폼</title>
+
+    <link rel="stylesheet" th:href="@{/css/noticeList.css}" />
 </head>
-<body>
+
+<body style="background-image: url(../img/space8.jpg);"> 
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 100px; width: 100%;" ></div>
     <haeder>
         <br><br>
         <div>Galaxy Pallas</div>

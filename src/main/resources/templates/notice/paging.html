@@ -1,54 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>paging</title>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Hotel Galaxy Palace 공지사항</title>
+    
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/noticeList.css}" />
 </head>
-<body style="background-image: url(../img/space8.jpg)">
+
+<body style="background-image: url(../img/space8.jpg);">
     <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-    <div style="height: 100px; width: 100%"></div>
-    <button onclick="saveReq()">글작성</button>
+    <div style="height: 100px; width: 100%;"></div>
 
-<table>
-    <tr>
-        <th>No</th>
-        <th>작성자</th>
-        <th>제목</th>
-        <th>작성일</th>
-    </tr>
-    <tr th:each="notice: ${noticeList}">
-        <td th:text="${notice.id}"></td>
-        <td th:text="${notice.userId}"></td>
-        <td><a th:href="@{|/notice/${notice.id}|(page=${noticeList.number + 1})}" th:text="${notice.title}"></a></td>
-        <td th:text="*{#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-    </tr>
-</table>
-<!-- 첫번째 페이지로 이동 -->
-<!-- /notice/paging?page=1 -->
-<a th:href="@{/notice/paging(page=1)}">First</a>
-<!-- 이전 링크 활성화 비활성화 -->
-<!-- noticeList.getNumber() 사용자:2페이지 getNumber()=1 -->
-<a th:href="${noticeList.first} ? '#' : @{/notice/paging(page=${noticeList.number})}">&nbsp;&lt;&nbsp;</a>
 
-<!-- 페이지 번호 링크(현재 페이지는 숫자만)
+    <div class="noticeList">
+        <table class=noticeTable>
+            <tr>
+                <th class="tableNo">No</th>
+                <th>제목</th>
+                <th class="tableName">작성자</th>
+                <th class="tableDate">작성일</th>
+            </tr>
+            <tr th:each="notice: ${noticeList}">
+                <td class="tableNo" th:text="${notice.id}"></td>
+                <td><a class="tableTitle" th:href="@{|/notice/${notice.id}|(page=${noticeList.number + 1})}"
+                        th:text="${notice.title}"></a>
+                </td>
+                <td class="tableName">관리자</td>
+                <td class="tableDate">
+                    <span
+                        th:if="${#temporals.format(notice.writeDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+                        <span th:text="*{#temporals.format(notice.writeDate, 'HH:mm')}"></span>
+                    </span>
+                    <span
+                        th:unless="${#temporals.format(notice.writeDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+                        <span th:text="*{#temporals.format(notice.writeDate, 'yy-MM-dd')}"></span>
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+        <div class="listBar">
+            <!-- 첫번째 페이지로 이동 -->
+            <!-- /notice/paging?page=1 -->
+            <a class="firstBtn" th:href="@{/notice/paging(page=1)}">First</a>
+            <!-- 이전 링크 활성화 비활성화 -->
+            <!-- noticeList.getNumber() 사용자:2페이지 getNumber()=1 -->
+            <a class="prevBtn"
+                th:href="${noticeList.first} ? '#' : @{/notice/paging(page=${noticeList.number})}">&nbsp;&lt;&nbsp;</a>
+
+            <!-- 페이지 번호 링크(현재 페이지는 숫자만)
         for(int page=startPage; page<=endPage; page++)-->
-<span th:each="page: ${#numbers.sequence(startPage, endPage)}">
-<!-- 현재 보여지는 페이지는 링크 없이 숫자만 -->
-    <span th:if="${page == noticeList.number + 1}" th:text="${page}"></span>
-<!-- 현재 보여지는 페이지 번호가 아닌 다른 페이지번호에는 링크를 보여줌 -->
-    <span th:unless="${page == noticeList.number + 1}">
-        <a th:href="@{/notice/paging(page=${page})}" th:text="${page}"></a>
-    </span>
-</span>
+            <span th:each="page: ${#numbers.sequence(startPage, endPage)}">
+                <!-- 현재 보여지는 페이지는 링크 없이 숫자만 -->
+                <span th:if="${page == noticeList.number + 1}" th:text="${page}"></span>
+                <!-- 현재 보여지는 페이지 번호가 아닌 다른 페이지번호에는 링크를 보여줌 -->
+                <span th:unless="${page == noticeList.number + 1}">
+                    <a th:href="@{/notice/paging(page=${page})}" th:text="${page}"></a>
+                </span>
+            </span>
 
-<!-- 다음 링크 활성화 비활성화
+            <!-- 다음 링크 활성화 비활성화
     사용자: 2페이지, getNumber: 1, 3페이지-->
-<a th:href="${noticeList.last} ? '#' : @{/notice/paging(page=${noticeList.number + 2})}">&nbsp;&gt;&nbsp;</a>
-<!-- 마지막 페이지로 이동 -->
-<a th:href="@{/notice/paging(page=${noticeList.totalPages})}">Last</a>
-
+            <a class="nextBtn"
+                th:href="${noticeList.last} ? '#' : @{/notice/paging(page=${noticeList.number + 2})}">&nbsp;&gt;&nbsp;</a>
+            <!-- 마지막 페이지로 이동 -->
+            <a class="lastBtn" th:href="@{/notice/paging(page=${noticeList.totalPages})}">Last</a>
+            <div class="submitBtnDiv">
+                <button class="submitBtn" onclick="saveReq()">글쓰기</button>
+            </div>
+        
+        </div>
+        
+    </div>
 </body>
 <script>
     const saveReq = () => {
@@ -57,4 +85,5 @@
 
 </script>
 </body>
+
 </html>

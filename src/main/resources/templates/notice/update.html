@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>update</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Hotel Galaxy Palace 공지사항</title>
 </head>
-<body>
-    <form action="/notice/update" method="post" name="updateForm">
-        <input type="hidden" name="id" th:value="${noticeUpdate.id}">
+
+<body style="background-image: url(../../img/space8.jpg);">
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 100px; width: 100%;" ></div>
+  
+    <form action="/notice/update/{id}" method="post" name="updateForm">
+        
+      <input type="hidden" name="id" th:value="${noticeUpdate.id}">
         작성자: <input type="text" name="userId" th:value="${noticeUpdate.userId}" readonly> <br>
         제목: <input type="text" name="title" th:value="${noticeUpdate.title}"> <br>
         내용: <textarea name="content" cols="30" rows="10" th:text="${noticeUpdate.content}"></textarea> <br>
         작성일: <input type="text" name="writeDate" th:value="${noticeUpdate.writeDate}" readonly> <br>
-        <!-- 파일 : <input type="file" name="noticeFile" multiple><br>
-        <div>
-          <h4>첨부된 파일 목록:</h4>
-          <ul>
-              <li th:each="fileName : ${noticeUpdate.originalFileName}">
-                  <span th:text="${fileName}"></span>
-              </li>
-          </ul>
-        </div> -->
+        
         <input type="submit" value="글수정">
       </form>
       <button onclick="listReq()">목록</button>

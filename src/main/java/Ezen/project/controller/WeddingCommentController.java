@@ -28,6 +28,7 @@ public class WeddingCommentController {
             //작성 성공하면 댓글목록을 가져와서 리턴
             //댓글목록: 해당 게시글의 댓글 전체 
             List<WeddingCommentDTO> weddingCommentDTOList = weddingCommentService.findAll(weddingCommentDTO.getWeddingId());
+
             return new ResponseEntity<>(weddingCommentDTOList, HttpStatus.OK);
         } else {
 

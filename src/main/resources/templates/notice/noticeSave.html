@@ -1,19 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>save</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Hotel Galaxy Palace 공지사항</title>
+
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/noticeSave.css}" />
 </head>
-<body>
-    <form action="/notice/save" method="post" enctype="multipart/form-data"> <!-- 파일첨부할때 enctype 필수-->
-        
-    작성자 : <input type="text" name="userId"><br>
-    제목 : <input type="text" name="title"><br>
-    내용 : <textarea name="content" cols="30" rows="10"></textarea><br>
-    파일 : <input type="file" name="noticeFile" multiple><br>
-    <input type="submit" value="작성">
-    </form> 
+
+<body style="background-image: url(../img/space8.jpg);">
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 100px; width: 100%;"></div>
+
+    <div class="noticeSave">
+        <form action="/notice/save" id="myForm" method="post" enctype="multipart/form-data"> <!-- 파일첨부할때 enctype 필수-->
+
+            작성자 : <input type="text" name="userId" th:value="123"><br>
+            제목 : <input type="text" name="title"><br>
+            내용 : <textarea name="content" cols="30" rows="10"></textarea><br>
+            파일 : <input type="file" name="noticeFile" multiple><br>
+
+            <!-- <input type="submit" value="작성"> -->
+        </form>
+        <button onclick="listReq()">목록</button>
+
+        <button onclick="submitForm()">제출</button>
+    </div>
+
 </body>
+
+<script th:inline="javascript">
+    const listReq = () => {
+        location.href = "/notice/paging";
+    }
+    const submitForm = () => {
+        document.getElementById("myForm").submit();
+    }
+</script>
+
 </html>

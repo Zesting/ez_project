@@ -57,10 +57,16 @@ public class WeddingController {
 
     // 문의글 상세보기
     @GetMapping("/wedding/{id}")
-    public String findById(@PathVariable Long id, Model model) {
+    public String findById(@PathVariable Long id, Model model, HttpSession session) {
 
         WeddingDTO weddingDTO = weddingService.findById(id);
         UserDTO user = userService.findById(weddingDTO.getUserId());
+
+        Long userId = (Long) session.getAttribute("userId");
+
+        UserDTO userName = userService.findById(userId);
+        WeddingDTO weddingDTOUser = new WeddingDTO();
+        weddingDTOUser.setUserName(userName.getUserName());
 
         /* 댓글 목록 가져오기 */
         List<WeddingCommentDTO> weddingCommentDTOList = weddingCommentService.findAll(id);
@@ -68,6 +74,8 @@ public class WeddingController {
 
         model.addAttribute("wedding", weddingDTO);
         model.addAttribute("logInUser", user);
+        model.addAttribute("commentWriter", weddingDTOUser);
+        System.out.println("유저 이름값 : "+ user.getUserName());
 
         return "/wedding/detail";
     }
@@ -78,5 +86,7 @@ public class WeddingController {
         weddingService.delete(id);
         return "redirect:/weddingBoard";
     }
+
+    
 
 }

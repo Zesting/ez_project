@@ -26,7 +26,7 @@ public class KakaoPayApprovalVO {
   // 결제 준비 요청 시각/결제 승인 시각
   private Date created_at, approved_at;
 
-
+  // 결제 성공시 
   // DTO -> Entity 로 변환
   public Payment toSaveEntity() {
     Payment payment = new Payment();

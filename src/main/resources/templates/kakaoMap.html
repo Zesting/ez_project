@@ -7,6 +7,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <title>Project</title>
+  <style>
+    .posting {
+      display: flex;
+    }
+    .directions {
+      color: white;
+      border: 1px solid white;
+      border-radius: 6px;
+      width: 65%;
+    }
+    .directions_a {
+      color: white;
+      border: 1px solid white;
+      border-radius: 6px;
+      width: 35%;
+    }
+
+    .duration {
+      font-weight: bold;
+      color: wheat;
+      /* text-align: center; */
+    }
+  </style>
 </head>
 
 <body style="background-image: url(../img/space8.jpg);">
@@ -15,15 +38,33 @@
   <!-- 헤더 불러오기 -->
 
   <!-- 지도크기 정하기 -->
-  <div id="map" style="width:100%;height:500px;"></div>
+  <div id="map" style="width:60%;height:500px; margin: auto; border-radius: 6px;"></div>
   <p><em>지도를 확대 또는 축소 해주세요!</em></p>
   <!-- 확대 축소 레벨 -->
   <p id="result"></p>
-  <!-- 인포윈도우 테스트 출력 -->
-  <div style="color: red;">5.0★★★★★<span style="color: gray;">(777건)|리뷰 99</span></div>(77건)
-  <div>강원특별자치도 영월군 영월읍 갤럭시펠리스길 397</div>
-  <div>777-8888-9999</div>
-  <div>홈페이지</div>
+  <div class="posting">
+    <div class="directions">
+      <div>주소 : 강원특별자치도 영월군 영월읍 갤럭시펠리스길 397</div>
+      <div>문의 : 777-8888-9999</div>
+      <br>
+      <div class="duration">●서울 - 영월 (소요시간 2시간 10분)</div>
+      <div>경부,중부 고속도로 - 신갈, 호법분기점(영동고속국도) - 만종분기점(중앙고속도로) - 제천 I.C(38번 국도) - 영월 I.C - 영월</div>
+      <div class="duration">●대전 - 영월 (소요시간 2시간 30분)</div>
+      <div>경부, 중부고속도로 - 청주(36번국도) - 제천(38번 국도) - 영월</div>
+      <div class="duration">●부산 - 영월 (소요시간 4시간 30분)</div>
+      <div>남해지선 - 내서 I.C(구마고속도로) - 대구금호분기점 (중부고속국도) - 제천 I.C(38번 국도) - 영월</div>
+      <div class="duration">●광주 - 영월 (소요시간 4시간 30분)</div>
+      <div>88고속국도 - 대구금호분기점(중앙고속국도) - 제천 I.C(38번국도) - 영월</div>
+      <div class="duration">●대구 - 영월 (소요시간 2시간)</div>
+      <div>중앙고속국도 - 제천 I.C(38번 국도) - 영월 I.C - 영월</div>
+      <div class="duration">●강릉 - 영월 (소요시간 2시간 10분)</div>
+      <div>영동고속국도 - 장평 I.C(31번 국도) - 평창(38번 국도) - 영월</div>
+    </div>
+    <div class="directions_a">
+      <div class="duration">동절기 우회 안내</div>
+      <div>동절기 도로 폐쇄로 동강시스타 및 38국도 하이원 방향에서 진입하시는 분들은 영월역 → 영월중 → Galaxy Palace(네비 게이션 검색)로 우회 하시기 바랍니다.</div>
+    </div>
+  </div>
   <!-- appkey는 카카오톡에서 javascript APP KEY를 넣으면 된다. -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=72870684bb5620c6901cc799241f0673"></script>
   <script src="@{/js/kakaoMap/zoomControl.js}"></script>
@@ -31,7 +72,7 @@
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
       mapOption = {
         center: new kakao.maps.LatLng(37.1992643, 128.4867431), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨, 숫자가 낮을수록 확대됨.
+        level: 6 // 지도의 확대 레벨, 숫자가 낮을수록 확대됨.
       };
 
     // 지도를 생성 
