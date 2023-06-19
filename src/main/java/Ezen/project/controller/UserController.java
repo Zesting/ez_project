@@ -52,12 +52,11 @@ public class UserController {
             session.invalidate();
         }
         return "redirect:/";
-
     }
 
 
     @PostMapping("/user/login")
-    public String userLogin(@ModelAttribute UserDTO userDTO, HttpSession session) {
+    public String userLogin(@ModelAttribute UserDTO userDTO, HttpSession session, Model model) {
         // 로그인 아이디 비밀번호 일치여부확인
         UserDTO result = userService.login(userDTO);
         if (result != null) {
@@ -70,11 +69,10 @@ public class UserController {
             }
             /** 로그인 성공하면 이전 화면으로 리턴 */
             return "redirect:" + previousURL;
-            // return "home"; (기존 정래형 코드)
         } else {
+            model.addAttribute("failmsg", "아이디 비밀번호를 다시 확인해주세요");
             return "user/login";
         }
-
     }
 
     // 아이디 중복체크

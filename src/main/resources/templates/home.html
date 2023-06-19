@@ -1,63 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <title>Hotel Galaxy Palace</title>
-    <!-- 파비콘 (이미지 추후 변경 예정)-->
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
-  </head>
-  <body style="background-image: url(../img/space8.jpg)">
-    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-    <div style="height: 100px; width: 100%"></div>
-    <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://kit.fontawesome.com/2aff9b2515.js" crossorigin="anonymous"></script>
+  <title>Hotel Galaxy Palace</title>
+  <!-- 파비콘 (이미지 추후 변경 예정)-->
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+
+<body style="background-image: url(../img/space8.jpg)">
+  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+  <div style="height: 100px; width: 100%"></div>
+  <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
 
   <section id="infinite" class="text-white tm-font-big tm-parallax">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-md tm-navbar" id="tmNav" th:fragment="fragment-header">
-      <div class="container">
-        <div class="tm-next">
-          <a href="#infinite" class="navbar-brand">Galaxy Palace</a>
-        </div>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fas fa-bars navbar-toggler-icon"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link tm-nav-link" href="#infinite">Introduction</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link tm-nav-link" href="#whatwedo">Room</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link tm-nav-link" href="#testimonials">Reservation</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link tm-nav-link" href="#gallery">Wedding Inquiry</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link tm-nav-link" href="#contact">Notice</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link tm-nav-link" href="/login">
-                <i class="fa-solid fa-user fa-xl"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link tm-nav-link" href="/logout">
-                <i class="fa-sharp fa-solid fa-arrow-right-from-bracket fa-xl"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    
 
     <div class="text-center tm-hero-text-container">
       <div class="tm-hero-text-container-inner">
