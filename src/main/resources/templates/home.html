@@ -32,7 +32,6 @@
       </div>
     </section>
 
-
     <!-- Room 기본 페이지 및 Room 상세 설명 이동 섹션  -->
     <section
       id="whatwedo"
@@ -135,6 +134,33 @@
           <div class="col-lg-5">
             <div class="tm-intro-text-container">
               <h2 class="tm-text-primary mb-4" style="color: #ddd">
+                Earth_Room
+              </h2>
+              <p
+                class="mb-4 tm-intro-text"
+                style="font-size: 1rem; color: #ddd">
+                <strong>지구</strong>의 푸르른 다색이 적용된
+                <strong>Earth_Room</strong>은 밝은 청색, 푸르른 녹색 및 부드러운
+                갈색 조명으로 대한민국의 별빛이 더욱 빛날 수 있게 연출되었고,
+                친환경 소재의 자재로 벽면을 마감하여 시크함을 강조하였습니다.
+              </p>
+              <div class="tm-continue">
+                <a
+                  href="#"
+                  class="tm-intro-text tm-btn-primary"
+                  style="color: #ddd"
+                  >Room_Detail</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-1">
+            <i class="far fa-3x fa-comment-alt text-center tm-icon"></i>
+          </div>
+          <div class="col-lg-5">
+            <div class="tm-intro-text-container">
+              <h2 class="tm-text-primary mb-4" style="color: #ddd">
                 Jupiter_Room
               </h2>
               <p
@@ -155,38 +181,11 @@
               </div>
             </div>
           </div>
-
-          <div class="col-lg-1">
-            <i class="far fa-3x fa-comment-alt text-center tm-icon"></i>
-          </div>
-          <div class="col-lg-5">
-            <div class="tm-intro-text-container">
-              <h2 class="tm-text-primary mb-4">Social Work</h2>
-              <p class="mb-4 tm-intro-text">
-                You can change
-                <a href="https://fontawesome.com/icons?d=gallery"
-                  >Font Awesome icons</a
-                >
-                by either <b><em>fas or far</em></b> in the HTML codes. For
-                Examples:<br />
-                <em
-                  >&lt;i class=&quot;fas fa-users&quot;&gt;&lt;i class=&quot;far
-                  fa-chart-bar&quot;&gt;</em
-                >
-              </p>
-
-              <div class="tm-continue">
-                <a href="#testimonials" class="tm-intro-text tm-btn-primary"
-                  >Details</a
-                >
-              </div>
-            </div>
-          </div>
         </div>
         <!-- third row -->
       </div>
     </section>
-
+    <section>
       <footer class="text-center small tm-footer">
         <p class="mb-0">
           Copyright &copy; 2020 Company Name .
@@ -200,18 +199,12 @@
       </footer>
     </section>
 
-    <script src="js/jquery-1.9.1.min.js"></script>
-    <script src="slick/slick.min.js"></script>
-    <script src="magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="js/easing.min.js"></script>
-    <script src="js/jquery.singlePageNav.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <div><a href="/roomDetailView">Test</a></div>
 
     <div><a href="/memberjoin">회원가입</a></div>
     <div><a href="/login">로그인</a></div>
     <div><a href="/userlist">회원목록</a></div>
 
-    
     <a href="/iamport"><button>결제API테스트</button></a>
     <br /><br />
     <div><a href="/notice">공지사항(페이징 없음)</a></div>
@@ -219,36 +212,42 @@
       <button onclick="pagingReq()">페이징 목록보기</button>
     </div>
 
-  <br />
-  <div><a href="/wedding/save">웨딩(폼)</a></div>
-  <div><a href="/weddingBoard">문의게시판(관리자가 확인할 테이블)</a></div>
-  <br />
-  <a th:href="@{/Rooms}"><button>Room_List</button></a>
-  <a th:href="@{/Rooms/add}"><button>Create_Room</button></a>
-  <a th:href="@{/Reservations}"><button>Reservation</button></a>
-  <a th:href="@{/verificationUser}">예약하기</a>
-  <br />
-  <a href="/kakaoMap">찾아오시는 길</a><br />
-  <div><a href="/adminPage">관리자페이지</a></div>
-</body>
+    <br />
+    <div><a href="/wedding/save">웨딩(폼)</a></div>
+    <div><a href="/weddingBoard">문의게시판(관리자가 확인할 테이블)</a></div>
+    <br />
+    <a th:href="@{/Rooms}"><button>Room_List</button></a>
+    <a th:href="@{/Rooms/add}"><button>Create_Room</button></a>
+    <a th:href="@{/Reservations}"><button>Reservation</button></a>
+    <a th:href="@{/verificationUser}">예약하기</a>
+    <br />
+    <a href="/kakaoMap">찾아오시는 길</a><br />
+    <div><a href="/adminPage">관리자페이지</a></div>
 
-<script>
-  // const pagingReq = () => {
-  //   location.href = "/notice/paging";
-  // };
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="slick/slick.min.js"></script>
+    <script src="magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="js/easing.min.js"></script>
+    <script src="js/jquery.singlePageNav.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
 
-  $(document).ready(function () {
-    $("#reservationBtn").click(function () {
-      let session = $("#reservationBtn").attr("th:value");
-      console.log(session);
-      if (session === undefined) {
-        alert("로그인이 필요한 항목입니다.");
-        window.location.href = "/login";
-      } else {
-        window.location.href = "/reservation/selectDate";
-      }
+  <script>
+    // const pagingReq = () => {
+    //   location.href = "/notice/paging";
+    // };
+
+    $(document).ready(function () {
+      $("#reservationBtn").click(function () {
+        let session = $("#reservationBtn").attr("th:value");
+        console.log(session);
+        if (session === undefined) {
+          alert("로그인이 필요한 항목입니다.");
+          window.location.href = "/login";
+        } else {
+          window.location.href = "/reservation/selectDate";
+        }
+      });
     });
-  });
-</script>
-
+  </script>
 </html>
