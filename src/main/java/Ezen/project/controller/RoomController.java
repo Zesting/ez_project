@@ -34,9 +34,24 @@ public class RoomController {
         return "Room/roomModify";
     }
 
-    @RequestMapping(value = "/Rooms/room_Base", method = RequestMethod.GET)
-    public String roomBaseView() {
-        return "Room/room_Base";
+    @RequestMapping(value = "/Rooms/room_Base_Mercury", method = RequestMethod.GET)
+    public String roomBaseMercuryView() {
+        return "Room/room_Base_Mercury";
+    }
+
+    @RequestMapping(value = "/Rooms/room_Base_Mars", method = RequestMethod.GET)
+    public String roomBaseMarsView() {
+        return "Room/room_Base_Mars";
+    }
+
+    @RequestMapping(value = "/Rooms/room_Base_Earth", method = RequestMethod.GET)
+    public String roomBaseEarthView() {
+        return "Room/room_Base_Earth";
+    }
+
+    @RequestMapping(value = "/Rooms/room_Base_Jupiter", method = RequestMethod.GET)
+    public String roomBaseJupiterView() {
+        return "Room/room_Base_Jupiter";
     }
 
     @RequestMapping(value = "/Rooms/room_MercuryView", method = RequestMethod.GET)
@@ -58,34 +73,5 @@ public class RoomController {
     public String roomJupiterView() {
         return "Room/room_Jupiter";
     }
-
-    // 룸 수정
-    // @PostMapping("/modify/{id}")
-    // public String roomModify(@PathVariable("id") Long id, RoomDTO roomDTO) {
-    // System.out.println("roomDTO : " + roomDTO);
-    // Optional<Room> coverOriginalRoom = roomService.findRoomById(id);
-    // if (coverOriginalRoom.isPresent()) {
-    // roomService.modifyRoom(roomDTO);
-    // }
-    // return "redirect:/Rooms";
-    // }
-
-    // 룸 삭제 뷰 출력 메서드(해당 구성은 뷰 리스트 내에 버튼으로 수정될 예정)
-    // @GetMapping("/drop/{id}")
-    // public String roomDropView(@PathVariable Long id) {
-    // roomService.verificationRoom(id);
-    // roomService.dropRoom(id);
-    // return "redirect:/Rooms";
-    // }
-
-    // 룸 삭제 로직 메서드
-    /*
-     * @PostMapping("/dropRoom")
-     * public String roomDrop(Long roomId) {
-     * roomService.verificationRoom(roomId);
-     * roomService.dropRoom(roomId);
-     * return "redirect:/";
-     * }
-     */
 
 }
