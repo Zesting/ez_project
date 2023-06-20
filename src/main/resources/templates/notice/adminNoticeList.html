@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>기본폼</title>
+
+</head>
+
+<body>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>writer</th>
+      <th>title</th>
+      <th>date</th>
+    </tr>
+    <tr th:each="notice: ${noticeList}">
+      <td th:text="${notice.id}"></td>
+      <td th:text="${notice.userId}"></td>
+      <td><a th:href="@{|notice/${notice.id}|}" th:text="${notice.title}"></a></td>
+      <td th:text="*{#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+      <!-- <td><a th:href="@{|/adminNotice/delete/${notice.id}|}">삭제</a></td> -->
+      <td><button type="button" th:onclick="'deleteBtn('+${notice.id}+')'" th:id="'deleteBtn('+${notice.id}+')'">삭제</button></td>
+
+    </tr>
+  </table>
+<!-- 
+  <div>
+    <button onclick="saveReq()">글작성</button>
+  </div> -->
+  <script>
+    // const saveReq = () => {
+    //   location.href = "/notice/save";
+    // }
+
+    function deleteBtn(id){
+      // window.location.href = "/notice/delete/"+ id;
+      window.location.href = "/adminNotice/delete/"+ id;
+    }
+  </script>
+</body>
+
+</html>

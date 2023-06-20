@@ -10,7 +10,8 @@
     <nav
       class="navbar navbar-expand-md tm-navbar"
       id="tmNav"
-      th:fragment="fragment-header">
+      th:fragment="fragment-header"
+      style="background-image: url(../img/space8.jpg)">
       <link rel="stylesheet" th:href="@{/fontawesome-5.5/css/all.min.css}" />
       <link rel="stylesheet" th:href="@{/slick/slick.css}" />
       <link rel="stylesheet" th:href="@{/slick/slick-theme.css}" />
@@ -22,7 +23,6 @@
         <div class="tm-next">
           <a href="/" class="navbar-brand" onclick="homeReq()">Galaxy Palace</a>
         </div>
-
         <button
           class="navbar-toggler"
           type="button"
@@ -36,10 +36,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link tm-nav-link" href="#infinite">Introduction</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link tm-nav-link" href="#whatwedo">Room</a>
+              <a
+                class="nav-link tm-nav-link"
+                href="#whatwedo"
+                onclick="roomList()"
+                >Room</a
+              >
             </li>
             <li class="nav-item">
               <a
@@ -55,7 +57,7 @@
                 class="nav-link tm-nav-link"
                 href="/wedding/save"
                 onclick="weddingReq()"
-                >Wedding Inquiry</a
+                >Wedding</a
               >
             </li>
             <li class="nav-item">
@@ -65,6 +67,26 @@
                 onclick="pagingReq()"
                 >Notice</a
               >
+            </li>
+            <li class="nav-item" th:if="${session.admin==1}">
+              <a class="nav-link tm-nav-link" href="#infinite">Administrator</a>
+            </li>
+            <li class="name-item">
+              <a
+                class="nav-link tm-nav-link"
+                th:href="${session.userId == null} ? '/login' : '/user/' + ${session.userId}">
+                <i
+                  class="fa-solid fa-user fa-xl"
+                  onclick="location.href=this.parentElement.href;"></i>
+              </a>
+            </li>
+
+            <li class="nav-item" th:if="${session.userId != null}">
+              <a class="nav-link tm-nav-link" href="/logout">
+                <i
+                  class="fa-sharp fa-solid fa-arrow-right-from-bracket fa-xl"
+                  onclick="location.href='/logout'"></i>
+              </a>
             </li>
           </ul>
         </div>
@@ -78,12 +100,12 @@
 
         const roomList = () => {
           event.preventDefault();
-          window.location.href = "/Rooms";
+          window.location.href = "/Rooms/room_Base_Mercury";
         };
 
         const reservation = () => {
           event.preventDefault();
-          window.location.href = "/Reservations/SelectDate";
+          window.location.href = "/Reservations/verificationUser";
         };
 
         const weddingReq = () => {
@@ -103,6 +125,9 @@
       <script th:src="@{/js/easing.min.js}"></script>
       <script th:src="@{/js/jquery.singlePageNav.min.js}"></script>
       <script th:src="@{/js/bootstrap.min.js}"></script>
+      <script
+        src="https://kit.fontawesome.com/2aff9b2515.js"
+        crossorigin="anonymous"></script>
     </nav>
   </body>
 </html>

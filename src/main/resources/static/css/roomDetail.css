@@ -1,0 +1,432 @@
+/* =========================== 공통 부분 =========================== */
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: white;
+  font-size: 1em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #ddd;
+}
+
+body {
+  font-size: 1em;
+}
+
+div {
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+p {
+  margin: 0;
+}
+
+h3,
+h5 {
+  font-weight: bold;
+}
+img {
+  vertical-align: middle;
+  border: 0;
+}
+
+dl {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+dt {
+  display: block;
+}
+dl {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+dd {
+  display: block;
+  margin-inline-start: 40px;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  text-decoration: none;
+}
+/* =========================== 태그 부분 =========================== */
+#roomDetail #content {
+  margin-top: 100px;
+}
+
+#roomDetail #container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#roomDetail #container::before {
+  display: table;
+  content: " ";
+}
+
+#roomDetail #row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+#roomDetail #row::before {
+  display: table;
+  content: " ";
+}
+
+#wrap_side h4 {
+  font-weight: bold;
+}
+
+#wrap_side ul {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+#wrap_side ul li a {
+  display: block;
+  padding: 10px 0;
+  transition: 300ms;
+  transition-duration: 300ms;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  transition-property: all;
+}
+
+#wrap_side ul li a {
+  color: black;
+  text-decoration: none !important;
+}
+
+#wrap_side ul li a:hover {
+  background-color: rgb(189, 241, 239);
+  font-weight: bold;
+}
+
+#sub_content {
+  padding-left: 50px;
+}
+
+#text_center {
+  text-align: center;
+}
+
+#warp_tit {
+  font-size: 10px;
+}
+
+#warp_tit h3 {
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+#warp_tit p {
+  font-size: 1.3em;
+}
+
+#theme_bar {
+  display: inline-block;
+  width: 50px;
+  height: 2px;
+  background-color: #32b1ba;
+  transform: rotate(-30deg);
+}
+
+#fa_img_main {
+  margin-top: 50px;
+  height: 550px;
+  overflow: hidden;
+}
+
+#fa_img_main img {
+  width: 100%;
+  height: auto;
+}
+
+ul.fa_img_list {
+  margin-top: 20px;
+  padding: 0 5px;
+  text-align: left;
+}
+
+ul.fa_img_list li {
+  display: inline-block;
+  margin: 5px;
+  width: 120px;
+  cursor: pointer;
+}
+
+ul.fa_img_list li img {
+  width: 100%;
+  height: auto;
+}
+
+.wrap_facile_detail {
+  margin-top: 50px;
+}
+
+.wrap_facile_detail .detail_tit {
+  position: relative;
+  text-align: center;
+}
+
+.wrap_facile_detail .detail_tit::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 0%;
+  transform: translate(0, -50%);
+  width: 100%;
+  height: 1px;
+  background-color: #a0a0a0;
+  opacity: 0.3;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.wrap_facile_detail .detail_tit h5 {
+  display: inline-block;
+  padding: 10px;
+  color: white;
+  background-color: #a0a0a0;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.wrap_tit h3 {
+  font-size: 3em;
+  text-transform: uppercase;
+}
+
+.wrap_tit {
+  font-size: 10px;
+}
+
+.wrap_tit p {
+  font-size: 1.3em;
+}
+
+.text_center {
+  text-align: center;
+}
+
+.mt_1 {
+  margin-top: 20px !important;
+}
+
+.container_style_1 {
+  padding: 30px;
+  background-color: #f3f3f3;
+  -webkit-box-shadow: -2px 2px 15px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -2px 2px 15px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: -2px 2px 15px -5px rgba(0, 0, 0, 0.75);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.room_info_wrap {
+  margin-top: 60px;
+  overflow: hidden;
+}
+
+.room_info_left {
+  padding: 35px 0;
+  border-top: 1px solid #ddd;
+  float: left;
+  width: 45%;
+  text-align: left;
+}
+
+.room_info_left dl {
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.room_info_left dl dt {
+  float: left;
+  width: 40%;
+  font-weight: 700;
+  color: #333;
+  line-height: 2;
+}
+
+.room_info_left dl dd {
+  float: right;
+  width: 60%;
+  line-height: 2;
+  color: #666;
+}
+
+.room_info_right {
+  padding: 35px 0;
+  border-top: 1px solid #ddd;
+  float: right;
+  width: 45%;
+  text-align: left;
+}
+
+.room_info_right dl {
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.room_info_right dl dt {
+  float: left;
+  width: 30%;
+  font-weight: 700;
+  color: #333;
+  line-height: 2;
+}
+
+.room_info_right dl dd {
+  float: right;
+  width: 70%;
+  line-height: 2;
+  color: #666;
+}
+
+.room_service_wrap {
+  padding: 35px 0;
+  border-top: 1px solid #ddd;
+  text-align: left;
+}
+
+.room_service_title {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.room_service_box ul {
+  overflow: hidden;
+  padding-left: 0;
+}
+
+.room_service_box ul li:first-child {
+  width: 16%;
+}
+
+.room_service_box ul li {
+  width: 22%;
+  margin-right: 6%;
+  float: left;
+  font-size: 14px;
+}
+
+.room_icon {
+  margin-bottom: 10px;
+}
+
+.room_icon_title {
+  font-size: 18px;
+  color: #333;
+  font-weight: 700;
+}
+
+.room_icon_article {
+  margin-top: 5px;
+  word-break: keep-all;
+}
+
+.room_service_box ul li:last-child {
+  margin-right: 0;
+}
+
+.reservation_btn {
+  margin-top: 50px;
+}
+
+.reservation_btn button {
+  background: #32b1ba;
+  color: #fff;
+  border: none;
+  position: relative;
+  height: 60px;
+  font-size: 15px;
+  padding: 0 40px;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+}
+
+.reservation_btn button:hover {
+  opacity: 0.6;
+}
+
+.reservation_btn button:before,
+button:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  background: #32b1ba;
+  transition: 400ms ease all;
+}
+
+svg:not(:host).svg-inline--fa,
+svg:not(:root).svg-inline--fa {
+  overflow: visible;
+  box-sizing: content-box;
+}
+
+.svg-inline--fa {
+  display: var(--fa-display, inline-block);
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+
+.reservation_btn button:after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}

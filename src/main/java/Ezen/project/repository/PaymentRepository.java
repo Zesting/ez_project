@@ -5,9 +5,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import Ezen.project.domain.Payment;
+import java.util.List;
+
 
 public interface PaymentRepository extends JpaRepository<Payment,Long>{
   Optional<Payment> findById(Long id);
+  List<Payment> findByUserId(String userId);
 }
 
 //JpaRepository 모듈을 사용을 위해 주석 처리하였음.

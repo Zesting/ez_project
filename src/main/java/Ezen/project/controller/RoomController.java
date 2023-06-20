@@ -34,33 +34,44 @@ public class RoomController {
         return "Room/roomModify";
     }
 
-    // 룸 수정
-    // @PostMapping("/modify/{id}")
-    // public String roomModify(@PathVariable("id") Long id, RoomDTO roomDTO) {
-    // System.out.println("roomDTO : " + roomDTO);
-    // Optional<Room> coverOriginalRoom = roomService.findRoomById(id);
-    // if (coverOriginalRoom.isPresent()) {
-    // roomService.modifyRoom(roomDTO);
-    // }
-    // return "redirect:/Rooms";
-    // }
+    @RequestMapping(value = "/Rooms/room_Base_Mercury", method = RequestMethod.GET)
+    public String roomBaseMercuryView() {
+        return "Room/room_Base_Mercury";
+    }
 
-    // 룸 삭제 뷰 출력 메서드(해당 구성은 뷰 리스트 내에 버튼으로 수정될 예정)
-    // @GetMapping("/drop/{id}")
-    // public String roomDropView(@PathVariable Long id) {
-    // roomService.verificationRoom(id);
-    // roomService.dropRoom(id);
-    // return "redirect:/Rooms";
-    // }
+    @RequestMapping(value = "/Rooms/room_Base_Mars", method = RequestMethod.GET)
+    public String roomBaseMarsView() {
+        return "Room/room_Base_Mars";
+    }
 
-    // 룸 삭제 로직 메서드
-    /*
-     * @PostMapping("/dropRoom")
-     * public String roomDrop(Long roomId) {
-     * roomService.verificationRoom(roomId);
-     * roomService.dropRoom(roomId);
-     * return "redirect:/";
-     * }
-     */
+    @RequestMapping(value = "/Rooms/room_Base_Earth", method = RequestMethod.GET)
+    public String roomBaseEarthView() {
+        return "Room/room_Base_Earth";
+    }
+
+    @RequestMapping(value = "/Rooms/room_Base_Jupiter", method = RequestMethod.GET)
+    public String roomBaseJupiterView() {
+        return "Room/room_Base_Jupiter";
+    }
+
+    @RequestMapping(value = "/Rooms/room_MercuryView", method = RequestMethod.GET)
+    public String roomMercuryView() {
+        return "Room/room_Mercury";
+    }
+
+    @RequestMapping(value = "/Rooms/room_MarsView", method = RequestMethod.GET)
+    public String roomMarsView() {
+        return "Room/room_Mars";
+    }
+
+    @RequestMapping(value = "/Rooms/room_EarthView", method = RequestMethod.GET)
+    public String roomEarthView() {
+        return "Room/room_Earth";
+    }
+
+    @RequestMapping(value = "/Rooms/room_JupiterView", method = RequestMethod.GET)
+    public String roomJupiterView() {
+        return "Room/room_Jupiter";
+    }
 
 }

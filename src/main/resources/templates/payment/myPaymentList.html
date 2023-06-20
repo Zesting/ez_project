@@ -23,7 +23,7 @@
     }
 
     body {
-      color: white;
+      color: black;
     }
   </style>
 </head>
@@ -48,7 +48,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr th:each="paymentList : ${paymentList}">
+      <tr th:each="paymentList: ${pay}"> 
         <td><a th:text="${paymentList.id}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.userId}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.reservationId}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
@@ -60,7 +60,7 @@
         <td><a th:text="${paymentList.cardName}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.payState}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.approved_at}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><button type="button"  th:onclick="'deleteBtn('+${paymentList.id}+')'" th:id="'deleteBtn('+${paymentList.id}+')'">삭제</button></td>
+        <!-- <td><button type="button"  th:onclick="'deleteBtn('+${paymentList.id}+')'" th:id="'deleteBtn('+${paymentList.id}+')'">삭제</button></td> -->
       </tr>
     </tbody>
   </table>

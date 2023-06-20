@@ -45,23 +45,24 @@ public class UserController {
         System.out.println("get에서의 Referer1 : " + request.getHeader("Referer"));
         return "user/login";
     }
-    @PostMapping("/logout")
-    public String logout(HttpServletRequest request){
-        HttpSession session = request.getSession(false);
-        if(session != null){
-            session.invalidate();
-        }
-        return "redirect:/";
 
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        // 세션이 존재하지않으면 null을 반환
+        HttpSession session = request.getSession(false);
+        session.invalidate();
+        return "redirect:/";
     }
 
-
     @PostMapping("/user/login")
-    public String userLogin(@ModelAttribute UserDTO userDTO, HttpSession session) {
+    public String userLogin(@ModelAttribute UserDTO userDTO, HttpSession session, Model model) {
         // 로그인 아이디 비밀번호 일치여부확인
         UserDTO result = userService.login(userDTO);
+        int userAuthority = 0;
         if (result != null) {
+            userAuthority = userService.findById(result.getId()).getUserAuthority();
             session.setAttribute("userId", result.getId());
+            session.setAttribute("admin", userAuthority);
             // 준희 수정(이전 페이지로 리턴(Post))
             String previousURL = (String) session.getAttribute("previousURL");
             System.out.println("Post에서의 previousURL : " + previousURL);
@@ -70,18 +71,17 @@ public class UserController {
             }
             /** 로그인 성공하면 이전 화면으로 리턴 */
             return "redirect:" + previousURL;
-            // return "home"; (기존 정래형 코드)
         } else {
+            model.addAttribute("failmsg", "아이디 비밀번호를 다시 확인해주세요");
             return "user/login";
         }
-
     }
 
     // 아이디 중복체크
     @PostMapping("/userIdCheck")
     @ResponseBody
     public int userIdConfirm(@RequestParam("userId") String userId) throws Exception {
-        return (userId.equals(userService.checkId(userId))) ? 1 : 0 ;
+        return (userId.equals(userService.checkId(userId))) ? 1 : 0;
     }
 
     @PostMapping("/emailconfirm")
