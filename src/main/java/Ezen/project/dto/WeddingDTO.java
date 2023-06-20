@@ -21,6 +21,14 @@ public class WeddingDTO {
     private Date weddingDueDate;  //DTO 문의글 예정일
     private byte[] weddingFile;     //DTO 문의글 첨부파일
 
+    public WeddingDTO(Long weddingId, Long userId, String weddingTitle, LocalDateTime weddingWriteDate){
+        this.weddingId = weddingId;
+        this.userId = userId;
+        this.weddingTitle = weddingTitle;
+        this.weddingWriteDate = weddingWriteDate;
+    }
+
+
     public static WeddingDTO toWeddingDTO(WeddingDomain weddingDomain){
         WeddingDTO weddingDTO = new WeddingDTO();
         weddingDTO.setWeddingId(weddingDomain.getWeddingId());

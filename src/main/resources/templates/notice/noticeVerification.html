@@ -1,7 +1,7 @@
 <html lang="ko" xmlns="http://www.thymeleaf.org">
 <p th:if="${session.userId == null}">
   <script>
-    var confirmed = confirm("관리자 로그인이 필요한 합니다. \n로그인하시려면 확인. \n뒤로 돌아가시려면 취소를 눌러주세요.");
+    var confirmed = confirm("\n관리자 로그인이 필요합니다. \n\n 관리자 로그인페이지 👉 확인 \n 공지사항 보기 👉 취소");  //            //
     if (confirmed) {
       window.location.href = "/login";
     } else {

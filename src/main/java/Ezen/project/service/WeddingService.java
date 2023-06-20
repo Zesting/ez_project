@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import Ezen.project.DTO.WeddingDTO;
@@ -24,7 +28,8 @@ public class WeddingService {
 	}
 
     public List<WeddingDTO> findAll() {
-        List<WeddingDomain> weddingDomainList = weddingRepository.findAll();
+        // List<WeddingDomain> weddingDomainList = weddingRepository.findAll();
+        List<WeddingDomain> weddingDomainList = weddingRepository.findAll(Sort.by(Sort.Direction.DESC, "weddingWriteDate"));
         List<WeddingDTO> weddingDTOList = new ArrayList<>();
         for(WeddingDomain weddingDomain: weddingDomainList){
             weddingDTOList.add(WeddingDTO.toWeddingDTO(weddingDomain));
@@ -45,6 +50,26 @@ public class WeddingService {
 
     public void delete(Long id) {
         weddingRepository.deleteById(id);
+    }
+
+    public Page<WeddingDTO> paging(Pageable pageable) {
+        int page = pageable.getPageNumber() -1;
+        int pageLimit = 10;
+
+        if(page <0){
+            page = 0;
+        }
+
+        Page<WeddingDomain> weddingDomians = 
+            weddingRepository.findAll(PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "weddingId")));
+        
+        Page<WeddingDTO> weddingDTOs = weddingDomians.map(
+            wedding -> new WeddingDTO(wedding.getWeddingId(), 
+                                      wedding.getUserId(),
+                                      wedding.getWeddingTitle(),
+                                      wedding.getWeddingWriteDate()));
+        return weddingDTOs;
+
     }
 
 
