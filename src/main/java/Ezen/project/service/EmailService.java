@@ -12,6 +12,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.internet.MimeMessage.RecipientType;
+
 @Service
 public class EmailService implements MailServiceInter {
 
@@ -23,9 +24,9 @@ public class EmailService implements MailServiceInter {
 	// 메일 내용 작성
 	@Override
 	public MimeMessage createMessage(String to) throws MessagingException, UnsupportedEncodingException {
-//		System.out.println("보내는 대상 : " + to);
-//		System.out.println("인증 번호 : " + ePw);
-		
+		// System.out.println("보내는 대상 : " + to);
+		// System.out.println("인증 번호 : " + ePw);
+
 		MimeMessage message = emailsender.createMimeMessage();
 
 		message.addRecipients(RecipientType.TO, to);// 보내는 대상
@@ -63,18 +64,18 @@ public class EmailService implements MailServiceInter {
 			int index = rnd.nextInt(3); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
 
 			switch (index) {
-			case 0:
-				key.append((char) ((int) (rnd.nextInt(26)) + 97));
-				// a~z (ex. 1+97=98 => (char)98 = 'b')
-				break;
-			case 1:
-				key.append((char) ((int) (rnd.nextInt(26)) + 65));
-				// A~Z
-				break;
-			case 2:
-				key.append((rnd.nextInt(10)));
-				// 0~9
-				break;
+				case 0:
+					key.append((char) ((int) (rnd.nextInt(26)) + 97));
+					// a~z (ex. 1+97=98 => (char)98 = 'b')
+					break;
+				case 1:
+					key.append((char) ((int) (rnd.nextInt(26)) + 65));
+					// A~Z
+					break;
+				case 2:
+					key.append((rnd.nextInt(10)));
+					// 0~9
+					break;
 			}
 		}
 
@@ -90,7 +91,6 @@ public class EmailService implements MailServiceInter {
 
 		ePw = createKey(); // 랜덤 인증번호 생성
 
-		// TODO Auto-generated method stub
 		MimeMessage message = createMessage(to); // 메일 발송
 		try {// 예외처리
 			emailsender.send(message);
@@ -98,7 +98,6 @@ public class EmailService implements MailServiceInter {
 			es.printStackTrace();
 			throw new IllegalArgumentException();
 		}
-
 
 		return ePw; // 메일로 보냈던 인증 코드를 서버로 반환
 	}

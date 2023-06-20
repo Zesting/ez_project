@@ -1,17 +1,61 @@
-footer * {
-    font-family: "Pretendard Variable",
-        Pretendard, -apple-system, BlinkMacSystemFont,
-        system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-        "Apple SD Gothic Neo", "Noto Sans KR",
-        "Malgun Gothic", "Apple Color Emoji",
-        "Segoe UI Emoji", "Segoe UI Symbol",
-        sans-serif;
+.-footer {
+    background-color: #333;
+    color: #fff;
+    padding: 0;
+}
+.-footer *{
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+}
+.-footer a{
+    color:mediumpurple
+}
+.-footer a:hover{
+    color: aliceblue;
 }
 
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-footer {
-    margin-top: 100px;
-    padding: 50px;
-    height: 360px;
-    background-color: #2e2e2e;
+.footer-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left {
+    flex: 0 0 auto;
+}
+
+.logo-footer img {
+    max-width: 100px;
+    height: 100px;
+}
+
+.footer-right {
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.footer-link {
+    font-size: 12px;
+}
+
+.footer-info {
+    font-size: 12px;
+}
+
+.footer-info p {
+    margin: 10px 0;
+}
+.footer_sns_wrap{
+    display: flex;
+}
+.footer_sns_wrap *{
+    font-size: 24px;
+    margin-right: 6px;
 }

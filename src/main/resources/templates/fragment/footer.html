@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -8,71 +8,63 @@
 </head>
 
 <body>
-    <footer id="-footer" class="-footer" th:fragment="fragment-footer">
+    <footer class="-footer" th:fragment="fragment-footer">
+        <link rel="stylesheet" th:href="@{/fontawesome-5.5/css/all.min.css}" />
+        <link rel="stylesheet" th:href="@{/css/footer.css}">
 
         <div class="footer-container">
             <div class="footer-row">
-                <div class="footer_left col-xs-12 col-sm-6">
+                <div class="footer_left">
                     <div class="logo_footer">
-                        <img src="/img/logo_w.png" alt="푸터로고">
+                        <img th:src="@{/img/gplogo.png}" alt="푸터로고">
                     </div>
                 </div>
-                <div class="footer_right col-xs-12 col-sm-6">
+                <div class="footer_right">
                     <div class="footer_link">
                         <p>
-                            <a href="/intro/intro_1.php">호텔소개</a>
+                                 <a href="/intro/intro_1.php">호텔소개</a>
                             <span> | </span>
                             <a href="/server/bbs/board.php?bo_table=notice">고객지원</a>
                         </p>
                     </div>
                     <div class="footer_info">
-                        <p>상호명 : 호텔 아쿠아펠리스&nbsp;&nbsp;|&nbsp;&nbsp;대표자 : 김형목</p>
-                        <p>사업자 : 617-85-39799</p>
+                        <p>상호명 : 호텔 갤럭시펠리스&nbsp;&nbsp;|&nbsp;&nbsp;대표자 : Mr.Galaxy</p>
+                        <p>사업자 : 123-45-12345</p>
                         <p>
-                            사업장 : 부산광역시 수영구 광안해변로 225
+                            사업장 : 강원특별자치도 영월군 영월읍 갤럭시펠리스길 397
                         </p>
                         <p><a href="tel:051-790-2300" style="color: #fff;">TEL :
-                                051-790-2300</a>&nbsp;&nbsp;|&nbsp;&nbsp;FAX : 051-790-2366</p>
-                    </div>
-
-                    <div class="footer_sns_wrap">
-                        <!-- <div class="footer_insta">
-                                <a href="https://www.instagram.com/hotel_aquapalace/" target="_sub"></a>
-                            </div>
-                            
-                            <div class="footer_blog">
-                                <a href="https://blog.naver.com/aquapalacehotel" target="_sub"></a>
-                            </div> -->
-
-                        <div class="f_insta f_sns">
-                            <a href="https://www.instagram.com/hotel_aquapalace/" target="_sub">
-                                <i class="xi-instagram"></i>
-                            </a>
-                        </div><!-- f_insta -->
-
-                        <div class="f_blog f_sns">
-                            <a href="https://blog.naver.com/aquapalacehotel" target="_sub">
-                                <i class="xi-blogger"></i>
-                            </a>
-                        </div><!-- f_blog -->
-
-                        <div class="f_kakao f_sns">
-                            <a href="http://pf.kakao.com/_xaUckj" target="blank">
-                                <i class="xi-kakaotalk"></i>
-                            </a>
-                        </div><!-- f_blog -->
-
+                                032-123-1234</a>&nbsp;&nbsp;|&nbsp;&nbsp;FAX : 032-123-1234</p>
                     </div>
 
                     <div class="foot_copyright">
                         <p>
-                            Copyright (C) AQUA PALACE All rights reserved. Designed by <a href="http://hl-story.com/"
-                                target="_blink" class="color_theme">HL-STORY</a>
+                            Copyright (C) AQUA PALACE All rights reserved. Designed by <a href="#" target="_blink"
+                                class="color_theme">Mr.Galaxy</a>
                         </p>
+                    </div>
+                    <div class="footer_sns_wrap">
+                        <div class="f_insta f_sns">
+                            <a href="https://www.instagram.com/" target="_sub">
+                                <i class="fa-brands fa-instagram fa-lg"></i>
+                            </a>
+                        </div>
+                        <div class="f_blog f_sns">
+                            <a href="https://www.facebook.com/" target="_sub">
+                                <i class="fa-brands fa-facebook fa-lg"></i>
+                            </a>
+                        </div>
+
+                        <div class="f_kakao f_sns">
+                            <a href="http://pf.kakao.com/" target="blank">
+                                <i class="fa-brands fa-kickstarter fa-lg"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script src="https://kit.fontawesome.com/2aff9b2515.js" crossorigin="anonymous"></script>
     </footer>
 </body>
 
