@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class ReservationController {
     private final ReservationService reservationService;
 
-    @RequestMapping(value = "/verificationUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/Reservations/verificationUser", method = RequestMethod.GET)
     public String verification(HttpSession session, Model model) {
         session.getAttribute("userId");
         return "Reservation/verification";
