@@ -1,26 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Galaxy Palace 웨딩 문의</title>
+
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/css/weddingList.css}" />
 </head>
-<body style="background-image: url(../img/space8.jpg);"> 
+
+<body style="background-image: url(../img/space8.jpg);">
     <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-    <div style="height: 100px; width: 100%;" ></div>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
-        <tr th:each="wedding: ${weddingList}">
-            <td th:text="${wedding.weddingId}"></td>
-            <td><a th:href="@{|wedding/${wedding.weddingId}|}" th:text="${wedding.weddingTitle}"></a></td>
-            <td th:text="${wedding.userId}"></td>
-            <td th:text="*{#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-        </tr>
-    </table>
+    <div style="height: 100px; width: 100%;"></div>
+
+    
+    <div class="wedList">
+        <p><a style="color: greenyellow;" href="/wedding/paging">페이징 페이지로 이동<<<<<<<<<<<</a></p>
+        <div class="wedListTable">
+            <table>
+                <tr>
+                    <th>No</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                </tr>
+                <tr th:each="wedding: ${weddingList}">
+                    <td th:text="${wedding.weddingId}"></td>
+                    <td><a th:href="@{|wedding/${wedding.weddingId}|}" th:text="${wedding.weddingTitle}"></a></td>
+                    <td th:text="${wedding.userId}"></td>
+                    <!-- <td th:text="*{#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd HH:mm:ss')}"></td> -->
+                    <td>
+                        <span
+                            th:if="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+                            <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'HH:mm')}"></span>
+                        </span>
+                        <span
+                            th:unless="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+                            <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'yy-MM-dd')}"></span>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </body>
+
 </html>
