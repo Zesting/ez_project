@@ -53,13 +53,13 @@ public class KakaopayService {
     params.add("cid", "TC0ONETIME"); // 테스트코드 넣어주고 실제 결제하려면 제휴Id를 넣어주면 된다.
 
     // 승인요청할때 값과 똑같아야 오류가 안남.
-    params.add("partner_order_id", "" + paymentDTO.getReservationId()); // 예약 고유 번호>>
-    params.add("partner_user_id", paymentDTO.getUserName()); // 회원 이름>>
-    params.add("total_amount", "" + paymentDTO.getAmount()); // 결제 금액>>
-    params.add("item_name", paymentDTO.getRoomName()); // 룸 이름>>
+    params.add("partner_order_id", "" + paymentDTO.getReservationId()); // 예약 고유 번호
+    params.add("partner_user_id", paymentDTO.getUserName()); // 회원 이름
+    params.add("total_amount", "" + paymentDTO.getAmount()); // 결제 금액
+    params.add("item_name", paymentDTO.getRoomName()); // 룸 이름
 
-    params.add("quantity", "1"); // 굳이 있어야하나?
-    params.add("tax_free_amount", "0"); // 필요없을듯..?
+    params.add("quantity", "1");
+    params.add("tax_free_amount", "0");
     params.add("approval_url", "http://localhost:8080/kakaoPaySuccess"); // 결제 성공
     params.add("cancel_url", "http://localhost:8080/kakaoPayCancel"); // 결제 취소
     params.add("fail_url", "http://localhost:8080/kakaoPaySuccessFail"); // 결제 실패
