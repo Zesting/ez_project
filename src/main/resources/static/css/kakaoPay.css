@@ -86,15 +86,17 @@
 
 /* 로고 사진 */
 .itemInfo_a_a {
-  background-image: url('/images/222.png');
-  background-size: cover;
+  background-image: url('/img/gplogo.png');
   /* 이미지를 컨테이너에 맞게 조절합니다. */
-  background-position: center center;
-  /* 이미지를 가운데로 정렬합니다. */
-  background-repeat: no-repeat;
+  background-size: contain;
   /* 이미지 반복을 제거합니다. */
+  background-repeat: no-repeat;
+  /* 이미지를 가운데로 정렬합니다. */
+  background-position: center;
   border-radius: 6px;
   width: 15%;
+  height: 100%;
+  padding: 2px;
 }
 
 /* 회사명 */
@@ -368,6 +370,12 @@
   text-align: center;
   height: 100px;
   margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.homebtn button {
+  width: 45%;
 }
 
 .kakaoPayForm {
