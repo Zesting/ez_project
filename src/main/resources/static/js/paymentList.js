@@ -1,5 +1,5 @@
 //결제 리스트 조회
-$(document).on("click", "#paymentListBtn", function () {
+$(document).on("click", "#paymentListBtn", function () {//paymentListBtn
   $.ajax({
     url: "/paymentList", //요청 url>> 불러올 리스트 
     method: "GET", // 방식

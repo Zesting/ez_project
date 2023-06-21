@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Hotel Galaxy Palace</title>
+    <!-- 파비콘 (이미지 추후 변경 예정)-->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <title>Hotel Galaxy Palace</title>
-  <!-- 파비콘 (이미지 추후 변경 예정)-->
-  <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
-</head>
-
-<body style="background-image: url(../img/space8.jpg)">
-  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-  <div style="height: 100px; width: 100%"></div>
-  <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
+  <body style="background-image: url(../img/space8.jpg)">
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 100px; width: 100%"></div>
+    <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
 
     <section id="infinite" class="text-white tm-font-big tm-parallax">
       <div class="text-center tm-hero-text-container">
@@ -34,34 +33,41 @@
       </div>
     </section>
 
-  <!-- Room 기본 페이지 및 Room 상세 설명 이동 섹션  -->
-  <section id="whatwedo" class="tm-section-pad-top" style="background-color: #333">
-    <div class="container">
-      <div class="row tm-content-box">
-        <!-- first row -->
-        <div class="col-lg-12 col-xl-12">
-          <div class="tm-intro-text-container">
-            <h2 class="tm-text-primary mb-4 tm-section-title" style="color: white">
-              ABOUT US
-            </h2>
-            <p class="mb-4 tm-intro-text" style="text-align: center; opacity: 0.9; color: #ddd">
-              정선 밤하늘에 펼쳐진 별빛을 가득 담은 호텔
-            </p>
-            <p class="mb-4 tm-intro-text" style="color: #ddd">
-              15년의 역사를 이어온 Galaxy Palace 호텔은 24개의 객실, 2개의
-              레스토랑 및 라운지 & 바 등 다양한 공간과 Breakfast Service,
-              dinner Party Service 및 Wedding Service를 고객님들에게
-              제공합니다.
-            </p>
-            <p class="mb-4 tm-intro-text" style="color: #ddd">
-              Galaxy Palace 호텔은 강원도 정선에 위치하며 별마로 천문대와
-              도보로 5분 거리에 존재하여 대한민국 상공에 펼쳐진 수많은 별빛을
-              고객님들에게 제공합니다.
-            </p>
+    <!-- Room 기본 페이지 및 Room 상세 설명 이동 섹션  -->
+    <section
+      id="whatwedo"
+      class="tm-section-pad-top"
+      style="background-color: #333">
+      <div class="container">
+        <div class="row tm-content-box">
+          <!-- first row -->
+          <div class="col-lg-12 col-xl-12">
+            <div class="tm-intro-text-container">
+              <h2
+                class="tm-text-primary mb-4 tm-section-title"
+                style="color: white">
+                ABOUT US
+              </h2>
+              <p
+                class="mb-4 tm-intro-text"
+                style="text-align: center; opacity: 0.9; color: #ddd">
+                정선 밤하늘에 펼쳐진 별빛을 가득 담은 호텔
+              </p>
+              <p class="mb-4 tm-intro-text" style="color: #ddd">
+                15년의 역사를 이어온 Galaxy Palace 호텔은 24개의 객실, 2개의
+                레스토랑 및 라운지 & 바 등 다양한 공간과 Breakfast Service,
+                dinner Party Service 및 Wedding Service를 고객님들에게
+                제공합니다.
+              </p>
+              <p class="mb-4 tm-intro-text" style="color: #ddd">
+                Galaxy Palace 호텔은 강원도 정선에 위치하며 별마로 천문대와
+                도보로 5분 거리에 존재하여 대한민국 상공에 펼쳐진 수많은 별빛을
+                고객님들에게 제공합니다.
+              </p>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- first row -->
+        <!-- first row -->
 
         <div class="row tm-content-box">
           <!-- second row -->
@@ -168,7 +174,7 @@
               </p>
               <div class="tm-continue">
                 <a
-                  href="#"
+                  href="/Rooms/room_Base_Jupiter"
                   class="tm-intro-text tm-btn-primary"
                   style="color: #ddd"
                   >Room_Detail</a
@@ -177,12 +183,10 @@
             </div>
           </div>
         </div>
+        <!-- third row -->
       </div>
-      <!-- third row -->
-    </div>
-  </section>
+    </section>
 
-    <div><a href="/roomDetailView">Test</a></div>
     <script src="js/jquery-1.9.1.min.js"></script>
     <script src="slick/slick.min.js"></script>
     <script src="magnific-popup/jquery.magnific-popup.min.js"></script>
@@ -194,44 +198,42 @@
     <div><a href="/login">로그인</a></div>
     <div><a href="/userlist">회원목록</a></div>
 
-
     <br /><br />
     <div><a href="/notice">공지사항(페이징 없음)</a></div>
     <div>
       <button onclick="pagingReq()">페이징 목록보기</button>
     </div>
 
-  <br />
-  <div><a href="/wedding/save">웨딩(폼)</a></div>
-  <div><a href="/weddingBoard">문의게시판(관리자가 확인할 테이블)</a></div>
-  <br />
-  <a th:href="@{/Rooms}"><button>Room_List</button></a>
-  <a th:href="@{/Rooms/add}"><button>Create_Room</button></a>
-  <a th:href="@{/Reservations}"><button>Reservation</button></a>
-  <a th:href="@{/verificationUser}">예약하기</a>
-  <br />
-  <a href="/kakaoMap">찾아오시는 길</a><br />
-  <div><a href="/adminPage">관리자페이지</a></div>
-  <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
-</body>
+    <br />
+    <div><a href="/wedding/save">웨딩(폼)</a></div>
+    <div><a href="/weddingBoard">문의게시판(관리자가 확인할 테이블)</a></div>
+    <br />
+    <a th:href="@{/Rooms}"><button>Room_List</button></a>
+    <a th:href="@{/Rooms/add}"><button>Create_Room</button></a>
+    <a th:href="@{/Reservations}"><button>Reservation</button></a>
+    <a th:href="@{/verificationUser}">예약하기</a>
+    <br />
+    <a href="/kakaoMap">찾아오시는 길</a><br />
+    <div><a href="/adminPage">관리자페이지</a></div>
+    <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
+  </body>
 
-<script>
-  // const pagingReq = () => {
-  //   location.href = "/notice/paging";
-  // };
+  <script>
+    // const pagingReq = () => {
+    //   location.href = "/notice/paging";
+    // };
 
-  $(document).ready(function () {
-    $("#reservationBtn").click(function () {
-      let session = $("#reservationBtn").attr("th:value");
-      console.log(session);
-      if (session === undefined) {
-        alert("로그인이 필요한 항목입니다.");
-        window.location.href = "/login";
-      } else {
-        window.location.href = "/reservation/selectDate";
-      }
+    $(document).ready(function () {
+      $("#reservationBtn").click(function () {
+        let session = $("#reservationBtn").attr("th:value");
+        console.log(session);
+        if (session === undefined) {
+          alert("로그인이 필요한 항목입니다.");
+          window.location.href = "/login";
+        } else {
+          window.location.href = "/reservation/selectDate";
+        }
+      });
     });
-  });
-</script>
-
+  </script>
 </html>

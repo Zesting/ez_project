@@ -119,8 +119,10 @@ public class PaymentController {
     paymentDTO.setUserId(userService.findById(logInUser).getUserId());
     paymentDTO.setUserName(userService.findById(logInUser).getUserName());
     paymentDTO.setUserPhoneNumber(userService.findById(logInUser).getUserPhoneNumber());
+    paymentDTO.setRoomName(roomService.findRoomById(reservation.getRoomId()).get().getRoomName());
     System.out.println("reservation 에 저장된 값은??????" + reservation);
     model.addAttribute("reservationInfo", reservation);
+    model.addAttribute("paymentDTO",paymentDTO);
     return "payment/payment";
   }
 
@@ -145,16 +147,6 @@ public class PaymentController {
       return "redirect:/login";
     }
     model.addAttribute("pay", payList);
-    // 리스트값이 잘 나오는지 확인하는 작업
-    // for (Payment payment : payList) {
-    //   if (payment != null) {
-    //     System.out.println("payment.getUserId() ::" + payment.getUserId());
-    //     System.out.println(payList.toString());
-    //     System.out.println("값이 같rp 나왔습니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    //   } else {
-    //     System.out.println("값이 다르게 나왔습니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    //   }
-    // }
     return "payment/myPaymentList";
   }
 

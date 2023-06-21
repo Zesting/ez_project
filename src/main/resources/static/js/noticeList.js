@@ -1,5 +1,5 @@
 //noticeList 조회
-$(document).on("click", "#noticeListBtn", function () {
+$(document).on("click", "#noticeListBtn", function () {//noticeListBtn
   $.ajax({
     url: "/noticeList", //요청 url>> 불러올 리스트 
     method: "GET", // 방식

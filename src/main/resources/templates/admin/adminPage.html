@@ -1,48 +1,67 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <title>관리자페이지</title>
-    <style>
-      tbody td {
-        text-align: center;
-        border: 1px dotted #555;
-      }
 
-      thead td {
-        text-align: center;
-        border: 3px solid black;
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>관리자페이지</title>
+  <link rel="stylesheet" th:href="@{/css/adminPage.css}">
+  <link rel="stylesheet" th:href="@{/css/adminStyles.css}">
+  <style>
+    tbody td {
+      text-align: center;
+      border: 1px dotted #555;
+    }
 
-  <body style="background-image: url(../img/space8.jpg)">
-    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-    <div style="height: 100px; width: 100%"></div>
-    <!-- 헤더 불러오기 -->
-    <p>관리자 페이지 home입니다.</p>
+    thead td {
+      text-align: center;
+      border: 3px solid black;
+    }
+  </style>
 
-    <hr />
-    <button type="button" id="listForm">룸 리스트</button>
-    <button type="button" id="createForm">룸 생성</button>
-    <button type="button" id="reservationListForm">예약 리스트</button>
-    <button type="button" id="userListBtn">회원 목록</button>
-    <button type="button" id="paymentListBtn">결제 리스트</button>
-    <button type="button" id="noticeListBtn">공지사항 리스트</button>
-    <div id="roomListContainer" style="border: 1px solid black"></div>
-    <div id="roomModifyContainer" style="border: 1px solid black"></div>
-    <script th:src="@{/js/roomList.js}"></script>
-    <script th:src="@{/js/reservationList.js}"></script>
-    <script th:src="@{/js/userList.js}"></script>
-    <script th:src="@{/js/paymentList.js}"></script>
-    <script th:src="@{/js/noticeList.js}"></script>
-  </body>
-  <script>
-    
+</head>
 
-    
-  </script>
+<body style="background-image: url(../img/space8.jpg);">
+  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+  <div style="height: 130px; width: 100%;"></div>
+  <!-- 헤더 불러오기 -->
+  <!-- <p>관리자 페이지 home입니다.</p> -->
+  <div class="listBox">
+    <div class="sidebarBox">
+      <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+          <!-- sidebar fragment 사용 -->
+          <th:block th:replace="fragment/sidebar :: sidebarFragment"></th:block>
+        </div>
+      </div>
+    </div>
+    <div class="containerBox">
+      <div id="roomListContainer" style="border: 1px solid black"></div>
+      <div id="roomModifyContainer" style="border: 1px solid black"></div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragment/footer.html :: fragment-footer}"></div>
+  <script th:src="@{/js/roomList.js}"></script>
+  <script th:src="@{/js/reservationList.js}"></script>
+  <script th:src="@{/js/userList.js}"></script>
+  <script th:src="@{/js/paymentList.js}"></script>
+  <script th:src="@{/js/noticeList.js}"></script>
+  <script src="js/adminPage.js"></script>
+  <script src="js/datatables-simple-demo.js"></script>
+  <!-- <button type="button" id="userListBtn">회원 목록</button> -->
+  <!-- <button type="button" id="listForm">룸 리스트</button> -->
+  <!-- <button type="button" id="createForm">룸 생성</button> -->
+  <!-- <button type="button" id="reservationListForm">예약 리스트</button> -->
+  <!-- <button type="button" id="paymentListBtn">결제 리스트</button> -->
+  <!-- <button type="button" id="noticeListBtn">공지사항 리스트</button> -->
+</body>
+<script>
+
+
+
+</script>
+
 </html>
