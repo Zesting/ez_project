@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css?family=Questrial&display=swap");
+.dateRangePicker {
+  float: left;
+}
+
+.dateRangePicker::after {
+  content: "";
+
+  display: block;
+
+  clear: both;
+}
+
+.dateRangePicker div {
+  background-color: white;
+  height: auto;
+  width: 400px;
+  margin: 0px;
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 0px 40px 30px -20px rgba(0, 0, 0, 0.3);
+}
+
+.dateRangePicker td {
+  width: 50px;
+  height: 50px;
+}
+
+.dateRangePicker .Calendar {
+  text-align: center;
+  width: 100%;
+}
+
+.dateRangePicker .Calendar > thead > tr:first-child > td {
+  font-family: "Questrial", sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.dateRangePicker .Calendar > thead > tr:last-child > td {
+  font-family: "Questrial", sans-serif;
+  font-weight: 600;
+}
+
+.dateRangePicker .Calendar > tbody > tr > td > p {
+  font-family: "Montserrat", sans-serif;
+  height: 45px;
+  width: 45px;
+  border-radius: 45px;
+  transition-duration: 0.2s;
+  line-height: 45px;
+  margin: 2.5px;
+  display: block;
+  text-align: center;
+}
+
+.dateRangePicker .pastDay {
+  color: lightgray;
+}
+
+.dateRangePicker .today {
+  background-color: #f5d042;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dateRangePicker .futureDay {
+  background-color: #ffffff;
+  cursor: pointer;
+}
+.dateRangePicker .futureDay:hover {
+  background: #eee;
+}
+
+.dateRangePicker .futureDay.choiceDay,
+.dateRangePicker .today.choiceDay {
+  background: #0a174e;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -16,7 +16,7 @@
 .noticeTable {
     /* border: solid 1px red; */
     position: relative;
-    width: 700px;
+    width: 800px;
     margin: auto;
     margin-top: 50px;
     margin-bottom: 20px;
@@ -96,3 +96,19 @@
     border: none;
 }
 
+
+.noticeDeleteBtn{
+    border: none;
+    border-radius: 7px;
+    width: 50px;
+    height: 25px;
+    font-size: 13px;
+    background-color: rgb(15, 15, 82);
+    color: whitesmoke;
+}
+
+.noticeDeleteBtn:hover {
+    background-color:  darkslateblue;
+    cursor: pointer;
+    border: none;
+}

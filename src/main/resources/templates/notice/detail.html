@@ -35,10 +35,16 @@
 
         </table>
 
-        <div class="detailBar">
-            <button class="listBtn" onclick="listReq()">목록</button>
-            <button class="updateBtn" onclick="updateReq()">수정</button>
-            <button class="deleteBtn" onclick="deleteReq()">삭제</button>
+        <div class="controlBar">
+            <div class="detailBar">
+                <button class="listBtn" onclick="listReq()">목록</button>
+                <button class="updateBtn" onclick="updateReq()">수정</button>
+                <button class="deleteBtn" onclick="deleteReq()">삭제</button>
+                <button class="amdinPage" th:if="${session.admin==1}" onclick="adminReq()">admin</button>
+            </div>
+            <div class="goAdmin">
+                
+            </div>
         </div>
     </div>
 
@@ -51,6 +57,11 @@
         const page = "[[${page}]]";
         location.href = "/notice/paging?page=" + page;
     }
+
+    const adminReq = () => {
+        location.href = "/adminPage";
+    }
+
     const updateReq = () => {
         location.href = "/notice/update/" + id;
     }

@@ -71,7 +71,7 @@
             <!-- 마지막 페이지로 이동 -->
             <a class="lastBtn" th:href="@{/notice/paging(page=${noticeList.totalPages})}">Last</a>
             <div class="submitBtnDiv">
-            <!-- <div class="submitBtnDiv" th:if="${session.admin==1}"> -->
+            <div class="submitBtnDiv" th:if="${session.admin==1}">
                 <button class="submitBtn" onclick="saveReq()">글쓰기</button>
             </div>
         
