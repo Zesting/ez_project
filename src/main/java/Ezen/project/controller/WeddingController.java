@@ -2,6 +2,10 @@ package Ezen.project.controller;
 
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,6 +55,7 @@ public class WeddingController {
     @GetMapping("weddingBoard")
     public String findAll(Model model) {
         List<WeddingDTO> weddingDTOList = weddingService.findAll();
+        // List<WeddingDTO> weddingDTOList = weddingService.findAll(Sort.by(Sort.Direction.DESC , "weddingWriteDate"));
         model.addAttribute("weddingList", weddingDTOList);
         return "/wedding/weddingBoard";
     }
@@ -85,6 +90,20 @@ public class WeddingController {
     public String delete(@PathVariable Long id) {
         weddingService.delete(id);
         return "redirect:/weddingBoard";
+    }
+
+    @GetMapping("wedding/paging")
+    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
+        Page<WeddingDTO> weddingList = weddingService.paging(pageable);
+        int blockLimit = 5;
+        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
+        int endPage = ((startPage + blockLimit - 1) < weddingList.getTotalPages()) ? startPage + blockLimit - 1 : weddingList.getTotalPages();
+
+        model.addAttribute("weddingList", weddingList);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        return "/wedding/weddingPaging";
     }
 
     

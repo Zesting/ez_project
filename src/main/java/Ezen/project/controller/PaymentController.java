@@ -120,7 +120,7 @@ public class PaymentController {
     paymentDTO.setUserName(userService.findById(logInUser).getUserName());
     paymentDTO.setUserPhoneNumber(userService.findById(logInUser).getUserPhoneNumber());
     System.out.println("reservation 에 저장된 값은??????" + reservation);
-    model.addAttribute("reservationInfo", paymentDTO);
+    model.addAttribute("reservationInfo", reservation);
     return "payment/payment";
   }
 
@@ -197,10 +197,10 @@ public class PaymentController {
   }
 
   // 아임포트 연동.. >>카카오페이 먼저 연동하고 해볼 생각.
-  @GetMapping("/iamport")
-  public String iamport() {
-    return "payment/payment";
-  }
+  // @GetMapping("/iamport")
+  // public String iamport() {
+  //   return "payment/payment";
+  // }
 
   // 결제 정보 삭제
   @GetMapping("/payment/delete/{id}")
