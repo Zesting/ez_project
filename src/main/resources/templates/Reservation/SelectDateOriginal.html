@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project</title>
+    <!-- CSS Link -->
+    <link rel="stylesheet" th:href="@{/css/baseCase.css}" />
+    <!-- bootStrap_datePicker Link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+  </head>
+  <body>
+    <div class="container px-1 px-sm-5 mx-auto">
+      <div class="flex-sm-row flex-column d-flex">
+        <div class="col-sm-9 col-12 px-0 mb-2">
+          <div class="input-group input-daterange">
+            <input
+              type="date"
+              id="checkIn"
+              name="checkIn"
+              class="form-control"
+              placeholder="Check_In Date"
+              readonly />
+            <input
+              type="date"
+              id="checkOut"
+              name="checkOut"
+              class="form-control"
+              placeholder="Check_Out Date"
+              readonly />
+          </div>
+        </div>
+        <br />
+        <div class="col-sm-3 col-12 px-0">
+          <button id="postBtn" type="button" class="btn btn-black">
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="bookableRoomList"></div>
+    <script th:src="@{/js/userReservation.js}"></script>
+  </body>
+</html>

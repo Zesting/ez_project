@@ -1,0 +1,359 @@
+/* =========================== 공통 부분 =========================== */
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 13px;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+  color: #eee;
+}
+
+body * {
+  font-family: "Noto", "san-serif";
+  font-weight: 300;
+  letter-spacing: -0.5px;
+}
+
+div {
+  display: block;
+}
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.clearfix:after,
+.container:after,
+.container-fluid:after,
+.row:after {
+  clear: both;
+}
+
+.clearfix:before,
+.clearfix:after,
+.container:before,
+.container:after,
+.container-fluid:before,
+.container-fluid:after,
+.row:before,
+.row:after {
+  content: " ";
+  display: table;
+}
+
+fieldset {
+  display: block;
+  margin-inline-start: 2px;
+  margin-inline-end: 2px;
+  padding-block-start: 0.35em;
+  padding-inline-start: 0.75em;
+  padding-inline-end: 0.75em;
+  padding-block-end: 0.625em;
+  min-inline-size: min-content;
+  border-width: 2px;
+  border-style: groove;
+  border-color: rgb(192, 192, 192);
+  border-image: initial;
+}
+
+span,
+strong,
+a,
+i {
+  display: inline-block;
+}
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+
+/* =========================== 태그 부분 =========================== */
+#wrapper {
+  /* float: left; */
+  width: 100%;
+  position: relative;
+  z-index: 5;
+  padding-top: 60px;
+  min-height: 730px;
+}
+
+#wrapper .w1224 {
+  width: 100%;
+  max-width: 1224px;
+  margin: 0 auto;
+}
+
+#wrapper .content {
+  padding: 60px 0 100px;
+  float: none;
+}
+
+.content {
+  width: 100%;
+  position: relative;
+  z-index: 4;
+  float: left;
+  background: #fff;
+}
+
+.overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.2;
+  z-index: 9999;
+}
+
+#wrapper h2 {
+  position: relative;
+  font-size: 31px;
+  color: #333;
+  font-weight: 900;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+#wrapper h2:after {
+  content: "";
+  display: block;
+  width: 52px;
+  height: 4px;
+  margin: 0 auto;
+  background: #3aaced;
+  border-radius: 2px;
+  margin-top: 12px;
+}
+
+#wrapper .container.pd {
+  padding: 40px 0;
+}
+
+#wrapper .container {
+  width: 100%;
+}
+
+.clearfix::before,
+.clearfix::after,
+.container::before,
+.container::after,
+.container-fluid::before,
+.container-fluid::after,
+.row::before,
+.row::after .customSection::after {
+  content: " ";
+  display: table;
+}
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+#wrapper .container #left-area .dateRangePicker {
+  display: block !important;
+  position: relative;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  margin-top: 0;
+  padding-top: 33px;
+  border: 1px solid #dcdcdc;
+  border-radius: 3px;
+}
+
+/* 오른쪽 요소   */
+
+#wrapper .container #right-area {
+  padding-left: 2.5%;
+  border-radius: 3px;
+}
+
+#wrapper .container #right-area .book-form {
+  border-radius: 3px;
+  padding: 30px 30px 20px;
+}
+
+.border {
+  border: 1px solid #dcdcdc;
+}
+
+.custom-form {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+
+.custom-form input {
+  margin-bottom: 20px;
+}
+
+#wrapper .container #right-area .book-form fieldset {
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 20px;
+}
+
+.fl-wrap {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+
+#wrapper .container #right-area .book-form .bookdate-container label {
+  margin-bottom: 8px;
+  color: #666b7b;
+}
+
+.book-form .listsearch-input-item label,
+.book-form .bookdate-container label {
+  margin-bottom: 12px;
+}
+
+.custom-form label {
+  float: left;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  color: #666;
+  color: #878c9f;
+  font-size: 13px;
+}
+
+label {
+  cursor: default;
+}
+
+.book-form .bookdate-container label i {
+  top: 42px;
+}
+
+.custom-form label i {
+  padding-right: 12px;
+  font-size: 14px;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.fal,
+.far {
+  font-family: Font Awesome\5 Pro;
+}
+
+.fal {
+  font-weight: 300;
+}
+
+.fa,
+.fab,
+.fal,
+.far,
+.fas {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+.fa-calendar-check:before {
+  content: "\f274";
+}
+
+#wrapper .container #right-area .custom-form input[type="date"] {
+  color: #444;
+}
+
+.book-form .bookdate-container input {
+  padding-left: 42px;
+}
+
+.custom-form input[type="date"],
+.custom-form input[type="email"],
+.custom-form input[type="password"],
+.custom-form input[type="button"] {
+  float: left;
+  /* border: 1px solid #eee; */
+  border: 1px solid #e0e0e0;
+  background: #f7f9fb;
+  width: 100%;
+  padding: 14px 20px 14px 45px;
+  border-radius: 6px;
+  color: #666;
+  font-size: 13px;
+  height: 45px;
+}
+
+.custom-form input {
+  margin-bottom: 20px;
+}
+
+#wrapper .container #right-area .book-form .btnaplly {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.book-form .btnaplly {
+  color: #fff;
+  width: 100%;
+  background: #f8bb11;
+  padding: 15px 0;
+  border-radius: 4px;
+}
+
+.custom-form button {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.bg-box {
+  background: #f7f9fb;
+  border: 1px solid #eee;
+  text-align: center;
+  padding: 30px 0;
+  border-radius: 3px;
+  margin-top: 35px;
+}
+
+.bg-box .gr {
+  color: #a0a4b4;
+  font-size: 14px;
+  margin-right: 15px;
+}
+
+.bg-box span {
+  display: inline-block;
+  vertical-align: middle;
+  font-weight: 300;
+}
+
+.bg-box .bk {
+  color: #666666;
+  font-size: 18px;
+}
+
+.bg-box .slash {
+  margin: 0 40px;
+}
