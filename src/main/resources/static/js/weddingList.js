@@ -1,7 +1,7 @@
 //noticeList 조회
 $(document).on("click", "#weddingListBtn", function () {
   $.ajax({
-    url: "/weddingBoard", //요청 url>> 불러올 리스트 
+    url: "/weddingList", //요청 url>> 불러올 리스트 
     method: "GET", // 방식
     dataType: "HTML", // 데이터 타입
     success: function (data) {

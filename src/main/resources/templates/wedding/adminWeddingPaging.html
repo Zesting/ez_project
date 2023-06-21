@@ -42,15 +42,19 @@
             </table>
         </div>
         <div class="wedBtnBar">
+                        <!-- 경로 -->
             <a th:href="@{/wedding/paging(page=1)}">First</a>
+                                                        <!-- 경로 -->
             <a th:href="${weddingList.first} ? '#' : @{/wedding/paging(page=${weddingList.number})}">&nbsp;&lt;&nbsp;</a>
             <span th:each="page: ${#numbers.sequence(startPage, endPage)}">
                 <span th:if="${page == weddingList.number + 1}" th:text="${page}"></span>
                 <span th:unless="${page == weddingList.number + 1}">
+                                <!-- 경로 -->
                     <a th:href="@{/wedding/paging(page=${page})}" th:text="${page}"></a>
                 </span>
-            </span>
+            </span>                                 <!-- 경로 -->
             <a th:href="${weddingList.last} ? '#' : @{/wedding/paging(page=${weddingList.number + 2})}">&nbsp;&gt;&nbsp;</a>
+                        <!-- 경로 -->
             <a th:href="@{/wedding/paging(page=${weddingList.totalPages})}">Last</a>
         </div>
     </div>

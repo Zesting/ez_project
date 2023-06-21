@@ -10,14 +10,14 @@
     height: 1370px;
     margin: auto;
     /* margin-top: 2%; */
-    background-color: rgba(230, 230, 230, 0.6);
+    background-color: rgba(230, 230, 230, 0.5);
 }
 
 .wedListTable {
     /* border: solid 1px red; */
-    width: 750px;
+    width: 800px;
     margin: auto;
-    /* margin-top: 50px; */
+    margin-top: 50px;
     color: rgb(15, 15, 82);
 }
 
@@ -28,7 +28,7 @@
 .wedTable th {text-align: center;}
 
 .wedTable th, .wedTable td {
-    height: 35px;
+    height: 40px;
 }
 
 .wedTable a, .wedBtnBar a {
@@ -47,9 +47,9 @@
     text-align: center;
 }
 
-/* .wedBtnBar a {
-    margin: 0 1% 0 1%;
-} */
+.wedBtnBar span {
+    margin: 5px;
+}
 
 
 
