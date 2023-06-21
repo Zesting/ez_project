@@ -176,6 +176,7 @@ public class PaymentController {
     paymentInfoDTO.setCardName(payment.getCardName());
     paymentInfoDTO.setApproved_at(payment.getApproved_at());
     paymentInfoDTO.setPayState(payment.getPayState());
+    paymentInfoDTO.setUserAuthority(logInUser.getUserAuthority());
     model.addAttribute("payInfo", paymentInfoDTO);
     return "/payment/kakaoPaySuccessInfo";
   }

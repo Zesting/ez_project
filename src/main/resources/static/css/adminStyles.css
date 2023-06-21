@@ -6543,6 +6543,7 @@ textarea.form-control-lg {
   right: 0;
   left: 0;
   z-index: -1;/* 1030 */
+  height: 100%;
 }
 
 .fixed-bottom {
@@ -11322,6 +11323,8 @@ body {
 
 #layoutSidenav {
   display: flex;
+  height: 100%; /* 추가 한것 - viewport-height */
+  min-height: 100vh;
 }
 #layoutSidenav #layoutSidenav_nav {
   flex-basis: 225px;
@@ -11329,6 +11332,7 @@ body {
   transition: transform 0.15s ease-in-out;
   z-index: 1;/* 1038 */
   transform: translateX(-225px);
+  height: 100%;
 }
 #layoutSidenav #layoutSidenav_content {
   position: relative;
@@ -11343,6 +11347,7 @@ body {
 
 .sb-sidenav-toggled #layoutSidenav #layoutSidenav_nav {
   transform: translateX(0);
+  height: 100%;
 }
 .sb-sidenav-toggled #layoutSidenav #layoutSidenav_content:before {
   content: "";
@@ -11380,12 +11385,12 @@ body {
 .sb-nav-fixed .sb-topnav {
   z-index: 0;
   /* z-index: 1039; */
-
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
   /* width: 225px; */
-  width: 15%;
-  height: 100vh;
+  width: 235px;
+  height: 100%;
+  /* height: 100vh; */
   z-index: 1;/* 1038 */
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav .sb-sidenav {
@@ -11395,7 +11400,7 @@ body {
   overflow-y: auto;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_content {
-  padding-left: 225px;
+  padding-left: 235px;
   top: 56px;
 }
 

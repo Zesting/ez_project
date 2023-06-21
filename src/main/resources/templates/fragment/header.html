@@ -69,7 +69,7 @@
               >
             </li>
             <li class="nav-item" th:if="${session.admin==1}">
-              <a class="nav-link tm-nav-link" href="#infinite">Administrator</a>
+              <a class="nav-link tm-nav-link" href="/adminPage" onclick="adminPageReq()">Administrator</a>
             </li>
             <li class="name-item">
               <a
@@ -115,6 +115,10 @@
         const pagingReq = () => {
           event.preventDefault();
           window.location.href = "/notice/paging";
+        };
+        const adminPageReq = () => {
+          event.preventDefault();
+          window.location.href = "/adminPage";
         };
       </script>
 

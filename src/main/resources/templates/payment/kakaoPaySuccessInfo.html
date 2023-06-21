@@ -87,15 +87,18 @@
   </div>
   <!-- <hr> -->
   <div class="homebtn">
-    <button onclick="homeBtn()" class="btn tm-btn-submit">관리자 홈으로</button>
+    <button onclick="homeBtn()" class="btn tm-btn-submit">홈으로</button>
+    <button onclick="adminHomeBtn()" class="btn tm-btn-submit" th:if="${payInfo.userAuthority == 1}">관리자 홈으로</button>
   </div>
 
 
   <script>
     const homeBtn = () => {
+      location.href = "/";
+    }
+    const adminHomeBtn = () => {
       location.href = "/adminPage";
     }
-
   </script>
 <div th:replace="~{fragment/footer.html :: fragment-footer}"></div>
 </body>
