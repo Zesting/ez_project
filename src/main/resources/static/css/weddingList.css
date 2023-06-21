@@ -20,3 +20,41 @@
     /* margin-top: 50px; */
     color: rgb(15, 15, 82);
 }
+
+.wedTable tr {
+    border-bottom: solid 1px rgb(4, 4, 26);
+}
+
+.wedTable th {text-align: center;}
+
+.wedTable th, .wedTable td {
+    height: 35px;
+}
+
+.wedTable a, .wedBtnBar a {
+    color: rgb(15, 15, 82);
+}
+
+.wedListNo {width: 50px; text-align: center;}
+.wedListTitle {width: 500px; text-indent: 25px;}
+.wedListWriter {width: 110px; text-align: center;}
+.wedListDate{width: 100px; text-align: center;}
+
+.wedBtnBar {
+    width: 750px;
+    margin: auto;
+    margin-top: 3%;
+    text-align: center;
+}
+
+/* .wedBtnBar a {
+    margin: 0 1% 0 1%;
+} */
+
+
+
+
+
+
+
+

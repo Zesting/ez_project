@@ -18,12 +18,12 @@
     <div class="wedList">
         <p><a style="color: greenyellow;" href="/wedding/paging">페이징 페이지로 이동<<<<<<<<<<<</a></p>
         <div class="wedListTable">
-            <table>
+            <table class="wedTable">
                 <tr>
-                    <th>No</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
+                    <th class="wedListNo">No</th>
+                    <th class="wedListTitle">제목</th>
+                    <th class="wedListWriter">작성자</th>
+                    <th class="wedListDate">작성일</th>
                 </tr>
                 <tr th:each="wedding: ${weddingList}">
                     <td th:text="${wedding.weddingId}"></td>
