@@ -18,7 +18,7 @@
         <div class="wedListTable">
             <table class="wedTable">
                 <tr>
-                    <th class="wedListNo">id</th>
+                    <th class="wedListNo">No</th>
                     <th class="wedListTitle">제목</th>
                     <th class="wedListWriter">작성자</th>
                     <th class="wedListDate">작성일</th>
@@ -54,6 +54,7 @@
             <a th:href="@{/wedding/paging(page=${weddingList.totalPages})}">Last</a>
         </div>
     </div>
+    <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
 </body>
 <script>
 

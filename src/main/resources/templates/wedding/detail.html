@@ -89,7 +89,7 @@
             <button class="detaildeleteBtn" onclick="deleteReq()">삭제</button>
         </div>
     </div>
-
+    <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
 </body>
 <script th:inline="javascript">
     const id = "[[${wedding.weddingId}]]"; //게시글 번호

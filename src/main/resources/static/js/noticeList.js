@@ -23,6 +23,12 @@ $(document).on("click", "#noticeListBtn", function () {//noticeListBtn
   });
 });
 
+
+
+
+
+
+
 // notice 삭제
 // $(document).on("click", `#'deleteBtn('+[[${noticeList.id}]]+')'`, function () {
 //   $.ajax({
