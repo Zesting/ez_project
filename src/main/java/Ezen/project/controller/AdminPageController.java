@@ -2,6 +2,9 @@ package Ezen.project.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +16,9 @@ import Ezen.project.DTO.AdminPageDTO;
 import Ezen.project.DTO.NoticeDTO;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.DTO.WeddingDTO;
-import Ezen.project.DTO.WeddingDTO;
 import Ezen.project.service.AdminPageService;
 import Ezen.project.service.NoticeService;
 import Ezen.project.service.UserService;
-import Ezen.project.service.WeddingService;
 import Ezen.project.service.WeddingService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,6 @@ public class AdminPageController {
   private final AdminPageService adminPageService;
   private final UserService userService;
   private final NoticeService noticeService;
-  private final WeddingService weddingService;
   private final WeddingService weddingService;
 
   @GetMapping("/adminPage")
@@ -120,7 +120,7 @@ public class AdminPageController {
 
         return "/wedding/adminWeddingPaging";
     }
->>>>>>> cdd755a6fc00653e98ef994e3f7cd62fafd9b193
+
 }
 
  
