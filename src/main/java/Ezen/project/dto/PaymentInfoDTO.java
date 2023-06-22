@@ -2,7 +2,6 @@ package Ezen.project.DTO;
 
 import java.util.Date;
 
-
 import lombok.Data;
 
 //entity에 저장되어있는 정보를 가져와서 저장하고 꺼내볼수있게 하기.
@@ -15,6 +14,7 @@ public class PaymentInfoDTO {
   private String userLoginId;// 로그인된 사용자 아이디
   private String userPhoneNumber;// 로그인된 사용자 번호
   private String orderNumber;// 주문번호 // private String reservationId; // 예약 고유 번호
+  private Long roomId; //룸 고유 번호
   private String roomName;// 룸이름//private String roomName;
   private int roomPrice;// 룸가격
   private int quantity;// 수량
@@ -24,5 +24,7 @@ public class PaymentInfoDTO {
   private String paymentMethod;// 결제수단(방법)//private String payment_method_type;
   private String cardName;// 결제카드 이름// private String cardName; // 카드 정보
   private Date approved_at;// 승인일시// private Date approved_at; // 결제 시간
-  private String payState;// 결제상태private String payState;  
+  private String payState;// 결제상태private String payState;
+  private Integer userAuthority; //회원과 관리자 구분 1 또는 0
+
 }

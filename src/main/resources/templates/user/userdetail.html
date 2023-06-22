@@ -13,16 +13,24 @@
         <tr>
             <th>id</th>
             <th>아이디</th>
-            <th>이메일</th>
             <th>비밀번호</th>
             <th>이름</th>
+            <th>폰번호</th>
+            <th>생년월일</th>
+            <th>가입날짜</th>
+            <th>이메일</th>
+            <th>등급</th>
         </tr>
         <tr>
             <td th:text="${user.id}"></td>
             <td th:text="${user.userId}"></td>
-            <td th:text="${user.userEmail}"></td>
             <td th:text="${user.userPassword}"></td>
             <td th:text="${user.userName}"></td>
+            <td th:text="${user.userPhoneNumber}"></td>
+            <td th:text="${user.userAge}"></td>
+            <td th:text="${user.joinDate}"></td>
+            <td th:text="${user.userEmail}"></td>
+            <td th:text="${user.userAuthority}"></td>
         </tr>
     </table>
     <button><a href="/userupdate">내정보수정하기</a></button>

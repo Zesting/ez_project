@@ -23,7 +23,7 @@
                     <th class="wedListWriter">작성자</th>
                     <th class="wedListDate">작성일</th>
                 </tr>
-                <tr th:each="wedding: ${weddingList}">
+                <tr th:each="wedding: ${weddingList}" th:if="${wedding.userId == myWedding}">
                     <td class="wedListNo" th:text="${wedding.weddingId}"></td>
                     <td class="wedListTitle"><a th:href="@{|${wedding.weddingId}|}"
                             th:text="${wedding.weddingTitle}"></a></td>

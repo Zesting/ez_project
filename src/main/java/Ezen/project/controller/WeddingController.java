@@ -2,7 +2,6 @@ package Ezen.project.controller;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -104,6 +103,28 @@ public class WeddingController {
         model.addAttribute("endPage", endPage);
 
         return "/wedding/weddingPaging";
+    }
+
+    @GetMapping("wedding/weddingMy")
+    public String myPaging(@PageableDefault(page = 1) Pageable pageable, Model model, HttpSession session){
+        
+        Long userId = (Long) session.getAttribute("userId");
+
+        Page<WeddingDTO> weddingList = weddingService.paging(pageable);
+        int blockLimit = 5;
+        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
+        int endPage = ((startPage + blockLimit - 1) < weddingList.getTotalPages()) ? startPage + blockLimit - 1 : weddingList.getTotalPages();
+
+        
+        System.out.println(userId);
+
+        model.addAttribute("weddingList", weddingList);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        model.addAttribute("myWedding", userId);
+
+        return "/wedding/weddingMy";
     }
 
     

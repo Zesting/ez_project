@@ -1,31 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Galaxy Palace 웨딩 문의</title>
-
-    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/weddingList.css}" />
 </head>
-
-<body style="background-image: url(../img/space8.jpg);">
-    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-    <div style="height: 100px; width: 100%;"></div>
-
     <div class="wedList">
         <div class="wedListTable">
             <table class="wedTable">
                 <tr>
-                    <th class="wedListNo">No</th>
+                    <th class="wedListNo">id</th>
                     <th class="wedListTitle">제목</th>
                     <th class="wedListWriter">작성자</th>
                     <th class="wedListDate">작성일</th>
                 </tr>
                 <tr th:each="wedding: ${weddingList}">
                     <td class="wedListNo" th:text="${wedding.weddingId}"></td>
-                    <td class="wedListTitle"><a th:href="@{|${wedding.weddingId}|}"
+                    <td class="wedListTitle"><a th:href="'/wedding/' + @{|${wedding.weddingId}|}"
                             th:text="${wedding.weddingTitle}"></a></td>
                     <td class="wedListWriter" th:text="${wedding.userId}"></td>
                     <td class="wedListDate">
@@ -42,23 +30,21 @@
             </table>
         </div>
         <div class="wedBtnBar">
+                        <!-- 경로 -->
             <a th:href="@{/wedding/paging(page=1)}">First</a>
+                                                        <!-- 경로 -->
             <a th:href="${weddingList.first} ? '#' : @{/wedding/paging(page=${weddingList.number})}">&nbsp;&lt;&nbsp;</a>
             <span th:each="page: ${#numbers.sequence(startPage, endPage)}">
                 <span th:if="${page == weddingList.number + 1}" th:text="${page}"></span>
                 <span th:unless="${page == weddingList.number + 1}">
+                                <!-- 경로 -->
                     <a th:href="@{/wedding/paging(page=${page})}" th:text="${page}"></a>
                 </span>
-            </span>
+            </span>                                 <!-- 경로 -->
             <a th:href="${weddingList.last} ? '#' : @{/wedding/paging(page=${weddingList.number + 2})}">&nbsp;&gt;&nbsp;</a>
+                        <!-- 경로 -->
             <a th:href="@{/wedding/paging(page=${weddingList.totalPages})}">Last</a>
         </div>
     </div>
-    <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
 </body>
-<script>
 
-
-</script>
-
-</html>

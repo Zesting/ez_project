@@ -40,7 +40,11 @@
         <div class="itemInfo_a_b">갤럭시펠리스</div>
       </div>
       <div class="itemInfo_b">
-        <div class="itemInfo_b_a"><!--룸미니사진--></div>
+        <div class="itemInfo_b_a" th:if="${paymentDTO.roomName.equals('')}"><!--비어있을떄--></div>
+        <div class="itemInfo_b_a_1" th:if="${paymentDTO.roomName.contains('Mercury')}"><!--Mercury--></div>
+        <div class="itemInfo_b_a_2" th:if="${paymentDTO.roomName.contains('Mars')}"><!--Mars--></div>
+        <div class="itemInfo_b_a_3" th:if="${paymentDTO.roomName.contains('Earth')}"><!--Earth--></div>
+        <div class="itemInfo_b_a-4" th:if="${paymentDTO.roomName.contains('Jupiter')}"><!--Jupiter--></div>
         <div class="itemInfo_b_b">
           <div class="itemInfo_b_b_a">[[${info.item_name}]]</div>
           <div class="itemInfo_b_b_b">
@@ -115,6 +119,7 @@
   <h3>[[${info}]] 카카오페이에서 주는 값들 확인</h3>
   <hr>확인 완료되어 주석처리함
   <h3>[[${payment}]]</h3> payment객체 리스트형식으로 보기 -->
+  <div th:replace="~{fragment/footer.html :: fragment-footer}"></div>
 </body>
 
 </html>

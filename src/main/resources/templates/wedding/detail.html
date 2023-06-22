@@ -53,32 +53,43 @@
         </div>
 
         <div class="detailComment">
-            <!-- 댓글 작성 부분-->
-            <div id="comment-write">
-                <!-- <input type="text" id="commentWriter" placeholder="작성자"> -->
-                <input type="hidden" id="commentWriter" th:value="${commentWriter.userName}" readonly><br>
-                <textarea class="commentContent" type="text" id="commentContents" placeholder="내용"></textarea>
-                <button class="commentSubmitBtn" id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
-            </div>
-
             <!-- 댓글 출력 부분-->
             <div class="commentList" id="comment-list">
                 <table class="commentListTable">
                     <tr th:each="comment: ${commentList}">
                         <td class="commentWriter" th:text="${comment.commentWriter}"></td>
                         <td class="commentContents" th:text="${comment.commentContents}"></td>
-                        <td class="commentDate"
-                            th:text="*{#temporals.format(comment.commentCreatedTime, 'yyyy. MM. dd.')}"></td>
+                        <!-- <td class="commentDate"
+                            th:text="*{#temporals.format(comment.commentCreatedTime, 'yyyy. MM. dd.')}"></td> -->
+                        <td class="commentDate">
+                            <span
+                                th:if="${#temporals.format(comment.commentCreatedTime, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+                                <span th:text="*{#temporals.format(comment.commentCreatedTime, 'HH:mm')}"></span>
+                            </span>
+                            <span
+                                th:unless="${#temporals.format(comment.commentCreatedTime, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+                                <span th:text="*{#temporals.format(comment.commentCreatedTime, 'yy-MM-dd')}"></span>
+                            </span>
+                        </td>
                     </tr>
                 </table>
             </div>
+
+            <!-- 댓글 작성 부분-->
+            <div class="commentWriteDiv" id="comment-write">
+                <input type="hidden" id="commentWriter" th:value="${commentWriter.userName}"><br>
+                <textarea class="commentContent" type="text" id="commentContents" placeholder="내용"></textarea>
+                <button class="commentSubmitBtn" id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
+            </div>
+
+
         </div>
         <div class="detailBar">
             <button class="detailListBtn" onclick="listReq()">목록</button>
             <button class="detaildeleteBtn" onclick="deleteReq()">삭제</button>
         </div>
     </div>
-
+    <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
 </body>
 <script th:inline="javascript">
     const id = "[[${wedding.weddingId}]]"; //게시글 번호
@@ -118,16 +129,39 @@
                     output += "<td class='commentWriter'>" + res[i].commentWriter + "</td>";
                     output += "<td class='commentContents'>" + res[i].commentContents + "</td>";
 
+                    // const commentDate = new Date(res[i].commentCreatedTime);
+                    // const formattedDate = commentDate.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                    // output += "<td class='commentDate'>" + formattedDate + "</td>";
+
                     const commentDate = new Date(res[i].commentCreatedTime);
-                    const formattedDate = commentDate.toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                    const now = new Date();
+
+                    let formattedDate;
+                    if (
+                        commentDate.getDate() === now.getDate() &&
+                        commentDate.getMonth() === now.getMonth() &&
+                        commentDate.getFullYear() === now.getFullYear()
+                    ) {
+                        // 오늘인 경우
+                        const hours = commentDate.getHours().toString().padStart(2, '0');
+                        const minutes = commentDate.getMinutes().toString().padStart(2, '0');
+                        formattedDate = hours + ':' + minutes;
+                    } else {
+                        // 오늘이 아닌 경우
+                        const year = commentDate.getFullYear().toString().slice(2);
+                        const month = (commentDate.getMonth() + 1).toString().padStart(2, '0');
+                        const day = commentDate.getDate().toString().padStart(2, '0');
+                        formattedDate = year + '-' + month + '-' + day;
+                    }
+
                     output += "<td class='commentDate'>" + formattedDate + "</td>";
+
                     output += "</tr>";
                 }
                 output += "</table>";
                 document.getElementById('comment-list').innerHTML = output;
-                document.getElementById('commentWriter').value = '';
+                // document.getElementById('commentWriter').value = '';
                 document.getElementById('commentContents').value = '';
-                // location.reload();
 
             },
             error: function (err) {
@@ -139,7 +173,7 @@
 
 
 
-    
+
 </script>
 
 </html>

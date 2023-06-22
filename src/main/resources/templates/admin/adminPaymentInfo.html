@@ -9,18 +9,10 @@
   <title>Project</title>
   <link rel="stylesheet" th:href="@{/css/kakaoPay.css}">
 </head>
-
-<body style="background-image: url(../img/space8.jpg);">
-  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-  <div style="height: 100px; width: 100%;"></div>
-
-
-  <!-- 결제 정보를 보려면 결제를 다시 해야하기 때문에 저장하여 띄워주기 위한 페이지 -->
   <div class="payState">
     <div>주문 정보 상세보기</div>
     <div>주문번호 : [[${payInfo.OrderNumber}]]</div>
   </div>
-  <!-- <hr> -->
   <div class="userInfo">
     <div class="userInfo_a">
       <div class="userInfo_a_a">[[${payInfo.userName}]]</div>
@@ -31,7 +23,6 @@
       <div>15시 입실 예정이고, 차 1대 주차합니다.</div>
     </div>
   </div>
-  <!-- <hr> -->
   <div class="itemInfo">
     <div class="itemInfoBox">
       <div class="itemInfo_a">
@@ -54,13 +45,11 @@
       </div>
     </div>
   </div>
-  <!-- <hr> -->
   <div class="paymentInfoBox">
     <div class="finalAmount">
       <div class="finalAmount_a">최종 결제 금액</div>
       <div class="finalAmount_b">[[${payInfo.finalPrice}]]원</div>
     </div>
-    <!-- <hr> -->
     <div class="discountAmount">
       <div class="discountAmount_a">
         <div class="discountAmount_a_a">총 상품금액</div>
@@ -71,7 +60,6 @@
         <div class="discountAmount_b_b">-[[${payInfo.point}]]원</div>
       </div>
     </div>
-    <!-- <hr> -->
     <div class="paymentInfo">
       <div class="paymentInfo_a">
         <div class="paymentInfo_a_a">결제수단(방법) :</div>
@@ -89,22 +77,4 @@
       </div>
     </div>
   </div>
-  <!-- <hr> -->
-  <div class="homebtn">
-    <button onclick="homeBtn()" class="btn tm-btn-submit">홈으로</button>
-    <button onclick="adminHomeBtn()" class="btn tm-btn-submit" th:if="${payInfo.userAuthority == 1}">관리자 홈으로</button>
-  </div>
-
-
-  <script>
-    const homeBtn = () => {
-      location.href = "/";
-    }
-    const adminHomeBtn = () => {
-      location.href = "/adminPage";
-    }
-  </script>
-<div th:replace="~{fragment/footer.html :: fragment-footer}"></div>
-</body>
-
 </html>

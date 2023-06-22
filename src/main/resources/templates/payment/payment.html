@@ -11,10 +11,6 @@
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	<title>호텔</title>
 	<style>
-		.top {
-			padding-top: 100px;
-		}
-
 		.kakaopayBtn {
 			border: none;
 			border-radius: 6px;
@@ -33,92 +29,87 @@
 
 		}
 
-		.reservationId,
-		.roomId,
-		.userId,
-		.reservationDate,
-		.checkIn,
-		.checkOut,
-		.finalPrice {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-
-		.reservationId div,
-		.roomId div,
-		.userId div,
-		.reservationDate div,
-		.checkIn div,
-		.checkOut div,
-		.finalPrice div {
-			width: 150px;
-			/* border: 1px solid red; */
-		}
-
 		.kakaoPayForm {
 			width: 300px;
 		}
 
 		.kakaoPayImg {
-			width: 288px;
+			/* width: 576px; */
 			border-radius: 6px;
+			width: 180px;
+		}
+		.top { 
+			padding-top : 100px;
+			text-align: center;
+			color: #ddd;
 		}
 	</style>
+	<link rel="stylesheet" th:href="@{/css/kakaoPay.css}">
+
 </head>
 
 <body style="background-image: url(../img/space8.jpg);">
 	<div th:replace="~{/fragment/header.html :: fragment-header}"></div>
 	<!-- 헤더 불러오기 -->
 	<!-- 여기는 아임포트 연동으로 결제 준비 만하고 아직 승인 부분은 하지 않았다. -->
-	<h2>IAMPORT 결제 데모</h2>
-	<li> <button id="iamportPayment" type="button">통합결제API샘플</button> </li>
+	<!-- <h2>IAMPORT 결제 데모</h2> -->
+	<!-- <li> <button id="iamportPayment" type="button">통합결제API샘플</button> </li> -->
 	<!-- <li> <button id="KakaoPayment" type="button">카카오페이API샘플</button> </li> -->
 	<!-- 여기는 카카오가 만든 카카오페이API임 -->
-	<!-- <h2 class="top"> kakaoPay api 이용하기 </h2> -->
+	<h2 class="top"> kakaoPay api 이용하기 </h2>
 
-	<!-- reservationInfo 모델객체 -->
-	<div class="top"></div>
-	<div class="infoBox">
-		<div class="reservationId">
-			<div>예약번호 :</div>
-			<div>[[${reservationInfo.reservationId}]]</div>
+	<div class="payState">
+		<div>주문 정보 상세보기</div>
+		<div>주문번호 : [[${reservationInfo.reservationId}]]</div>
+	</div>
+
+	<div class="userInfo">
+		<div class="userInfo_a">
+			<div class="userInfo_a_a">[[${paymentDTO.userName}]]</div>
+			<div class="userInfo_a_a">[[${paymentDTO.userPhoneNumber}]]</div>
 		</div>
-		<div class="roomId">
-			<div>룸 번호(이름) :</div>
-			<div>[[${reservationInfo.roomId}]]</div>
+		<div class="userInfo_b">
+			<p>&lt; 요청사항 &gt; </p>
+			<div>15시 입실 예정이고, 차 1대 주차합니다.</div>
 		</div>
-		<div class="userId">
-			<div>유저 ID : </div>
-			<div>[[${reservationInfo.userId}]]</div>
+	</div>
+	<div class="itemInfo">
+		<div class="itemInfoBox">
+			<div class="itemInfo_a">
+				<div class="itemInfo_a_a"><!--로고--></div>
+				<div class="itemInfo_a_b">갤럭시펠리스</div>
+			</div>
+			<div class="itemInfo_b">
+				<div class="itemInfo_b_a" th:if="${paymentDTO.roomName.equals('')}"><!--비어있을떄--></div>
+        <div class="itemInfo_b_a_1" th:if="${paymentDTO.roomName.contains('Mercury')}"><!--Mercury--></div>
+        <div class="itemInfo_b_a_2" th:if="${paymentDTO.roomName.contains('Mars')}"><!--Mars--></div>
+        <div class="itemInfo_b_a_3" th:if="${paymentDTO.roomName.contains('Earth')}"><!--Earth--></div>
+        <div class="itemInfo_b_a-4" th:if="${paymentDTO.roomName.contains('Jupiter')}"><!--Jupiter--></div>
+				<div class="itemInfo_b_b">
+					<div class="itemInfo_b_b_a">[[${paymentDTO.roomName}]]</div>
+					<div class="itemInfo_b_b_b">
+						<div class="itemInfo_b_b_b_a">[[${reservationInfo.finalPrice}]] 원</div>
+						<div class="itemInfo_b_b_b_b"> 1 개</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="reservationDate">
-			<div>예약 날짜 : </div>
-			<div>[[${reservationInfo.reservationDate}]]</div>
+	</div>
+	<div class="paymentInfoBox">
+		<div class="finalAmount">
+			<div class="finalAmount_a">최종 결제 금액</div>
+			<div class="finalAmount_b">[[${reservationInfo.finalPrice}]]원</div>
 		</div>
-		<div class="checkIn">
-			<div>체크인 : </div>
-			<div>[[${reservationInfo.checkIn}]]</div>
-		</div>
-		<div class="checkOut">
-			<div>체크 아웃 : </div>
-			<div>[[${reservationInfo.checkOut}]]</div>
-		</div>
-		<div class="finalPrice">
-			<div>가격 :</div>
-			<div>[[${reservationInfo.finalPrice}]]</div>
-		</div>
-		<div>
 			<form method="post" action="/kakaoPay" class="kakaoPayForm">
+				<div>바로 결제하기 : </div>
 				<button class="kakaopayBtn"><img th:src="@{/images/payment_icon_yellow_medium.png}" alt="카카오페이"
 						class="kakaoPayImg"></button>
 			</form>
-		</div>
 	</div>
 
 
 	<a href="/">홈으로</a>
-
+	<!-- 
 	<script type="text/javascript"> //문서가 준비되면 제일 먼저 실행
 		//이니시스 API 연동
 		$(document).ready(function () {
@@ -212,15 +203,16 @@
 				orderNum += Math.floor(Math.random() * 8);
 			}
 			return orderNum;
-		}
+		} -->
 
-		// function payBtn() {
+	<!-- // function payBtn() {
 		//   //아래함수와 같다.
 		// }
 		const payBtn = () => {
 			location.href = "/payment";
 		}
-	</script>
+	</script> -->
+	<div th:replace="~{fragment/footer.html :: fragment-footer}"></div>
 </body>
 
 </html>
