@@ -19,8 +19,6 @@ $(document).on("click", "#postBtn", function () {
         method: "GET",
         dataType: "HTML",
         success: function (data) {
-          console.log("ajax 성공! HTML->", data);
-
           $("#bookableRoomList").html(data);
         },
         error: function (request, error) {
@@ -56,18 +54,20 @@ $(document).on("click", "#postBtn", function () {
 
   $(document).on("click", "#choiceRoom", function () {
     console.log("choiceRoom Post 시작");
-    var $row = $(this).closest("tr");
-    var roomId = $row.find("#choiceRoomId").val();
+    var roomId = document.getElementById("choiceRoomId").textContent;
+    var roomName = document.getElementById("choiceRoomName").textContent;
+    var roomPrice = document.getElementById("choiceRoomPrice").textContent;
+    var roomType = document.getElementById("choiceRoomType").textContent;
+
+    /* var roomId = $row.find("#choiceRoomId").val();
     var roomName = $row.find("#choiceRoomName").val();
     var roomPrice = $row.find("#choiceRoomPrice").val();
-    var roomType = $row.find("#choiceRoomType").val();
-    var roomDetailInfo = $row.find("#choiceRoomDetailInfo").val();
+    var roomType = $row.find("#choiceRoomType").val(); */
     const params = {
       roomId: roomId,
       roomName: roomName,
       roomPrice: roomPrice,
       roomType: roomType,
-      roomDetailInfo: roomDetailInfo,
     };
     console.log("Params :", params);
 
@@ -99,10 +99,18 @@ $(document).on("click", "#postBtn", function () {
   });
 });
 
-$(document).ready(function () {
-  $(".input-daterange").datepicker({
-    format: "yyyy-mm-dd",
-    todayHighlight: true,
-    startDate: "0d",
-  });
-});
+function mercury_RoomView_Btn() {
+  window.location.href = "/Rooms/room_Base_Mercury";
+}
+
+function mars_RoomView_Btn() {
+  window.location.href = "/Rooms/room_Base_Mars";
+}
+
+function earth_RoomView_Btn() {
+  window.location.href = "/Rooms/room_Base_Earth";
+}
+
+function jupiter_RoomView_Btn() {
+  window.location.href = "/Rooms/room_Base_Jupiter";
+}

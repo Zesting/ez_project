@@ -1,0 +1,470 @@
+/* =========================== 공통 부분 =========================== */
+
+span,
+strong,
+a,
+i {
+  display: inline-block;
+}
+
+img {
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+  vertical-align: middle;
+}
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+/* =========================== 태그 부분 =========================== */
+
+#wrapper #container.pd {
+  padding: 40px 0;
+}
+
+#wrapper #container {
+  width: 100%;
+}
+
+#container {
+  max-width: 1224px;
+  width: 92%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.list-single-main-item {
+  background: #fff;
+}
+
+.fl-wrap {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+
+.list-single-main-item-title {
+  margin: 0 0 25px 0;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.list-single-main-item-title h3 {
+  color: #222;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.rooms-container {
+  padding: 30px 30px 20px;
+  border-radius: 10px;
+  margin-top: 0;
+}
+
+.rooms-container {
+  margin-top: 20px;
+}
+
+.rooms-item {
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.rooms-item {
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.rooms-media {
+  float: left;
+  width: 40%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px 6px 6px 0;
+}
+
+.more-photos-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 34px;
+  line-height: 34px;
+  padding-left: 20px;
+  padding-right: 50px;
+  text-align: left;
+  color: #fff;
+  font-size: 12px;
+  z-index: 10;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: rgba(24, 69, 139, 0.8) !important;
+}
+
+.more-photos-button i {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 34px;
+  line-height: 34px;
+  width: 50px;
+  border-left: 1px solid rgba(0, 0, 0, 0.21);
+  text-align: center;
+}
+
+.rooms-details-header {
+  padding-bottom: 0;
+}
+
+.rooms-details-header {
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.rooms-details-header h3 {
+  color: #333;
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.rooms-details-header h5 {
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 3px;
+  color: #333;
+}
+
+.rooms-details-header h5 em {
+  color: #9999a6;
+  font-size: 11px;
+}
+
+.list-single-main-item .price {
+  color: #183c7d;
+  font-size: 23px;
+  text-align: right;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.list-single-main-item p {
+  text-align: left;
+  color: #878c9f;
+}
+
+.rooms-details .facilities-list {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.facilities-list {
+  margin: 12px 0 12px;
+  list-style: none;
+}
+
+.facilities-list .btn {
+  font-size: 13px;
+  width: 195px;
+  height: 44px;
+  line-height: 44px;
+}
+
+.facilities-list .btn {
+  float: right;
+  margin: 0;
+  top: -18px;
+  height: 40px;
+  line-height: 40px;
+}
+
+.btn {
+  width: 48.5%;
+  padding: 0 80px 0 30px;
+  /* padding: 0 50px 0 30px; */
+  height: 44px;
+  line-height: 44px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: 0px 0px 0px 5px rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: opacity 1s ease;
+}
+
+.btn:hover {
+  background: #f9b90f;
+  color: #fff;
+  opacity: 0.5;
+}
+
+.facilities-list .btn i {
+  height: 40px;
+  line-height: 40px;
+}
+
+.btn i {
+  position: absolute;
+  right: 0;
+  width: 50px;
+  height: 44px;
+  line-height: 44px;
+  border-left: 1px solid rgba(255, 255, 255, 0.21);
+  text-align: center;
+  top: 0;
+}
+
+.btn:after {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 0;
+  right: 0;
+  top: 0;
+  transition: all 200ms linear;
+}
+
+.rooms-detail-wrap {
+  width: 100%;
+  padding: 5px 0 0 0;
+}
+
+.rooms-details {
+  float: left;
+  width: 60%;
+  padding: 5px 0 0 20px;
+}
+
+.color-bg,
+.close-header-search:hover,
+#footer-twiit p.tweet:before,
+.cs-mumber-button:hover,
+.tabs-menu li a,
+.review-range-container .irs-bar,
+.review-range-container .irs-bar-edge,
+.search-input-item .irs-line,
+.col-list-search-input-item .irs-line,
+.pagination a.current-page,
+.pagination a.current-page:hover,
+.mapnavigation a:hover,
+.back-to-filters span,
+.infoBox-close,
+.slick-dots li.slick-active button,
+.map-modal-close,
+.geodir-opt-link a,
+.cluster div:hover,
+.daterangepicker td.active,
+.list-single-hero-title h2:before,
+.user-stats:before,
+.ed-btn:hover,
+.dashboard-header,
+.massage-date span:before,
+.chat-contacts-item:after,
+.lisd-link:hover,
+.scroll-nav-wrapper .scroll-nav li a.act-scrlink,
+.accordion a.toggle span,
+.list-widget-social li a,
+.box-item a.gal-link,
+.message-input button,
+.message-counter,
+.line-separator:before,
+.intro-item h2:before,
+.section-separator:before,
+#progressbar li:before,
+.price-num.col-dec-1:before,
+.tags-stylwrap.sb-tags a,
+.geodir-opt-list a:hover,
+.main-search-button:hover,
+.twitter-link,
+.recomm-price i,
+.lg-actions .lg-next,
+.lg-actions .lg-prev {
+  background: #f9b90f;
+}
+
+.float-left {
+  float: left;
+}
+
+.min-width-price {
+  min-width: 65px;
+}
+
+.float-right {
+  float: right;
+}
+
+.rooms-media img {
+  width: 100%;
+  height: 186px;
+  max-height: 186px;
+}
+
+.col-md-4 {
+  width: 33.33333333%;
+}
+
+.box-widget-item-header {
+  padding: 0 0 15px;
+  margin: 0 0 25px;
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #e6e6e6;
+  position: relative;
+}
+
+.box-widget-item-header h3 {
+  font-size: 20px;
+}
+
+.box-widget-item-header h3 {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  color: #183c7d;
+}
+
+/* =========================== 룸 디테일 토글 =========================== */
+.rooms-detail-wrap {
+  width: 100%;
+  padding: 5px 0 0 0;
+}
+
+.rooms-details {
+  float: left;
+}
+
+.rooms-details-toggle {
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 30px;
+  display: none;
+}
+
+.rooms-details-toggle ul li:last-child {
+  margin-bottom: 0;
+}
+
+.rooms-details-toggle ul li {
+  display: table;
+  width: 100%;
+  font-size: 14px;
+  color: #444;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.rooms-details-toggle ul li .detail-wrap {
+  float: left;
+  width: 100%;
+}
+
+.rooms-details-toggle ul li .detail-wrap .detail-price-wrap {
+  width: 70%;
+  line-height: 32px;
+}
+
+.rooms-details-toggle ul li .tc.tc1 {
+  text-align: center;
+  width: 50%;
+}
+
+.rooms-details-toggle ul li .tc {
+  display: table-cell;
+  float: left;
+  margin-right: 5px;
+}
+
+.rooms-details-toggle ul li strong {
+  font-weight: 500;
+}
+
+.rooms-details-toggle ul li .tc.tc2 {
+  width: 34%;
+  text-align: right;
+}
+
+.rooms-details-toggle ul li .tc {
+  display: table-cell;
+  float: left;
+  margin-right: 5px;
+}
+
+.min-width-price {
+  min-width: 65px;
+}
+
+.rooms-details-toggle ul li .detail-wrap .tc-wrap {
+  width: 30%;
+  text-align: right;
+}
+
+.rooms-details-toggle ul li .btn-wrap {
+  margin: 2px 0;
+}
+
+.float-right {
+  float: right;
+}
+
+.rooms-details-toggle ul li .btn-wrap span a {
+  position: relative;
+}
+
+.rooms-details-toggle ul li .color2-bg {
+  background-color: #333;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 3px;
+  padding: 6px 25px;
+  vertical-align: middle;
+}
+
+.rooms-details-toggle ul li .color2-bg:hover {
+  opacity: 0.5;
+  color: #f9f9f9;
+}
+
+.rooms-details-toggle ul li .detail-wrap .detail-price-wrap {
+  width: 70%;
+  line-height: 32px;
+}
+
+.rooms-details-toggle ul li {
+  display: table;
+  width: 100%;
+  font-size: 14px;
+  color: #444;
+  overflow: hidden;
+  margin-bottom: 12px;
+}

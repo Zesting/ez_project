@@ -48,10 +48,9 @@ public class ReservationController {
         System.out.println("GetMapping 실행(/selectRoom)");
         CheckDTO checkDTO = (CheckDTO) session.getAttribute("checkDTO");
         System.out.println("GetMApping CheckDTO :" + checkDTO);
+        model.addAttribute("checkDTO", checkDTO);
 
         List<?> roomList = reservationService.bookableList(checkDTO);
-
-        model.addAttribute("checkDTO", checkDTO);
         model.addAttribute("roomList", roomList);
 
         return "Reservation/SelectRoom";

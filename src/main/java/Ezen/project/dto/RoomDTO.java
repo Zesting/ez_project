@@ -18,8 +18,4 @@ public class RoomDTO {
     @NotNull
     private String roomType;
 
-    private String roomDetailInfo;
-
-    private String roomImagePath;
-
 }

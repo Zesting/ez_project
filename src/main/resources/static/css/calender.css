@@ -74,8 +74,10 @@
   background: #eee;
 }
 
-.dateRangePicker .futureDay.choiceDay,
-.dateRangePicker .today.choiceDay {
+.dateRangePicker .futureDay.choiceCheckIn,
+.dateRangePicker .today.choiceCheckIn,
+.dateRangePicker .futureDay.choiceCheckOut,
+.dateRangePicker .today.choiceCheckOut {
   background: #0a174e;
   color: #fff;
   font-weight: 600;
