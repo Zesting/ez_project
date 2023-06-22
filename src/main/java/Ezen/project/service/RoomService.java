@@ -85,8 +85,6 @@ public class RoomService {
         room.setRoomName(roomDTO.getRoomName());
         room.setRoomPrice(roomDTO.getRoomPrice());
         room.setRoomType(roomDTO.getRoomType());
-        room.setRoomDetailInfo(roomDTO.getRoomDetailInfo());
-        room.setRoomImagePath(roomDTO.getRoomImagePath());
         return room;
     }
 

@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Galaxy Palace 웨딩 문의</title>
 
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" th:href="@{/css/weddingForm.css}" />
 </head>
 
 <body style="background-image: url(../img/space8.jpg);">
     <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
     <div style="height: 100px; width: 100%;"></div>
-    <div><a href="/weddingBoard">게시판(임시 버튼)</a></div>
+    
+
     <div class="weddingPage">
+        <p><a style="color: greenyellow;" href="/weddingBoard">게시판(임시 버튼) <<<<<<<<<</a></p>
+        <p><a style="color: greenyellow;" href="/wedding/paging">페이징 게시판(임시 버튼) <<<<<<<<<</a></p>
+        <p><a style="color: greenyellow;" href="/wedding/weddingMy">내 문의(임시 버튼) <<<<<<<<<</a></p>
         <div class="text1">
             <div class="mainText">
                 <div class="t1">웨딩</div>
@@ -45,13 +50,15 @@
             <div class="">
                 <fieldset class="field2">
                     <div class="div2">
+                        <br><br>
                         <legend>예식정보</legend>
-                        <div class="weddingInfo">
+
+                        <div class="weddingInfo"><br>
                             <p>예정일</p>
                             <div class="weddingDate">
                                 <input type="date" name="weddingDueDate"><br>
                             </div><br>
-                            <legend>요청사항</legend>
+                            <legend>요청사항</legend><br>
                             <p>제목</p>
                             <div>
                                 <input type="text" name="weddingTitle"><br>
@@ -71,7 +78,7 @@
             </div>
         </form>
     </div>
-
+    <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
 </body>
 <script>
     const homeReq = () => {

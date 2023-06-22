@@ -37,11 +37,4 @@ public class Room {
     @NotNull
     @Column(name = "roomType", length = 100, nullable = false)
     private String roomType; // 룸 타입(Mercury, Mars, Jupiter).
-
-    @Column(name = "roomDetailInfo", length = 100, nullable = false)
-    private String roomDetailInfo; // 룸 상세 설명(존재 확정 x 삭제 될 수 있는 컬럼).
-
-    @Column(name = "roomImagePath", length = 100, nullable = false)
-    private String roomImagePath; // 룸 이미지 경로.
-
 }

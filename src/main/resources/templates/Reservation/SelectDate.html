@@ -4,53 +4,133 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project</title>
-    <!-- CSS Link -->
-    <link rel="stylesheet" th:href="@{/css/baseCase.css}" />
-    <!-- bootStrap_datePicker Link -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/reservation.css}" />
+
+    <title>Galaxy Palace</title>
   </head>
+
   <body>
-    <div class="container px-1 px-sm-5 mx-auto">
-      <div class="flex-sm-row flex-column d-flex">
-        <div class="col-sm-9 col-12 px-0 mb-2">
-          <div class="input-group input-daterange">
-            <input
-              type="date"
-              id="checkIn"
-              name="checkIn"
-              class="form-control"
-              placeholder="Check_In Date"
-              readonly />
-            <input
-              type="date"
-              id="checkOut"
-              name="checkOut"
-              class="form-control"
-              placeholder="Check_Out Date"
-              readonly />
+    <section id="customSection">
+      <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+      <!-- Reservation Start-->
+      <!--  wrapper  -->
+      <div id="wrapper">
+        <!-- content-->
+        <div class="content w1224">
+          <div class="overlay"></div>
+          <div class="section">
+            <h2 class="m-mb-20">RESERVATION</h2>
+            <div class="container pd m-p-07">
+              <div class="row mobile-none js-area-pc">
+                <div id="left-area" class="col-md-8">
+                  <div class="dateRangePicker" id="dateRangePicker">
+                    <!-- 달력 들어갈 부분 -->
+                    <link rel="stylesheet" th:href="@{/css/calender.css}" />
+                    <script th:src="@{/js/checkInCalender.js}"></script>
+                    <table class="Calendar" id="checkInCalendar">
+                      <thead>
+                        <tr>
+                          <td onClick="prevCalendar();" style="cursor: pointer">
+                            &#60;
+                          </td>
+                          <td colspan="5">
+                            <span id="calYear"></span>년
+                            <span id="calMonth"></span>월
+                          </td>
+                          <td onClick="nextCalendar();" style="cursor: pointer">
+                            &#62;
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>일</td>
+                          <td>월</td>
+                          <td>화</td>
+                          <td>수</td>
+                          <td>목</td>
+                          <td>금</td>
+                          <td>토</td>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <!-- 오른쪽 부분 -->
+                <div id="right-area" class="col-md-4">
+                  <div
+                    id="date_frm"
+                    name="bookFormCalc"
+                    class="book-form border custom-form">
+                    <fieldset>
+                      <div class="cal-item">
+                        <div class="bookdate-container fl-wrap">
+                          <label
+                            ><i class="fa-solid fa-calendar-days"></i> 체크인
+                          </label>
+                          <input
+                            type="date"
+                            id="checkIn"
+                            name="checkIn"
+                            placeholder="Date In-Out"
+                            readonly />
+                        </div>
+                      </div>
+                      <div class="cal-item">
+                        <div class="bookdate-container fl-wrap">
+                          <label
+                            ><i class="fa-solid fa-calendar-days"></i> 체크아웃
+                          </label>
+                          <input
+                            type="date"
+                            id="checkOut"
+                            name="checkOut"
+                            placeholder="Date In-Out"
+                            readonly />
+                        </div>
+                      </div>
+                      <script
+                        src="https://kit.fontawesome.com/2aff9b2515.js"
+                        crossorigin="anonymous"></script>
+                    </fieldset>
+                    <button
+                      id="postBtn"
+                      type="button"
+                      class="btnaplly color2-bg js-btn-room-search">
+                      객실 조회
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <script th:src="@{/js/userReservation.js}"></script>
+              <!-- row -->
+            </div>
+          </div>
+          <div id="bookableRoomList"></div>
+          <div class="bg-box m-p-07 m_hidden">
+            <span class="gr">체크인 시간</span>
+            <span class="bk">15:00</span>
+            <span class="slash">
+              <img th:src="@{/images/slash.png}" alt="" />
+            </span>
+            <span class="gr">체크아웃 시간</span>
+            <span class="bk">11:00</span><br />
+            <span class="gr"
+              ><strong>
+                3일 이상 연속된 예약은 아래의 전화번호를 통해 문의해주시길
+                바랍니다.</strong
+              ></span
+            >
+            <br />
+            <span class="gr" style="font-size: medium">TEL : </span>
+            <span class="bk" style="font-size: 17px">032-123-1234</span>
           </div>
         </div>
-        <br />
-        <div class="col-sm-3 col-12 px-0">
-          <button id="postBtn" type="button" class="btn btn-black">
-            Search
-          </button>
-        </div>
+        <!-- content end-->
       </div>
-    </div>
-    <div id="bookableRoomList"></div>
-    <script th:src="@{/js/userReservation.js}"></script>
+      <!--wrapper end -->
+    </section>
+    <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
   </body>
 </html>

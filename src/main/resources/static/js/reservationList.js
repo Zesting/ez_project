@@ -8,6 +8,7 @@ $(document).on("click", "#reservationListForm", function () {
     success: function (data) {
       console.log("ajax 성공!");
       $("#roomListContainer").html(data);
+      $("#roomModifyContainer").slideUp();
     },
     error: function (request, error) {
       console.log(
@@ -37,6 +38,7 @@ $(document).on("click", "#reservationListForm", function () {
         success: function (data) {
           console.log("무브 성공");
           $("#roomModifyContainer").html(data);
+          $("#roomModifyContainer").slideDown();
         },
         error: function (request, error) {
           console.log(

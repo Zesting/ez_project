@@ -11,6 +11,7 @@
     margin: auto;
     margin-top: 2%;
     background-color: rgba(230, 230, 230, 0.5);
+    position: relative;
 }
 
 .noticeTableDetail {
@@ -45,7 +46,7 @@
     left: 50%; 
 }
 
-.listBtn, .updateBtn, .deleteBtn{
+.listBtn, .updateBtn, .deleteBtn, .amdinPage{
     border: none;
     border-radius: 7px;
     width: 100px;
@@ -64,9 +65,16 @@
 }
 
 
-.listBtn:hover, .updateBtn:hover, .deleteBtn:hover {
+.listBtn:hover, .updateBtn:hover, .deleteBtn:hover, .amdinPage:hover {
     background-color: darkslateblue;
     cursor: pointer;
     border: none;
+}
+
+.amdinPage {
+    /* margin-left: 1%;
+    margin-top: 1%; */
+    position: absolute;
+    right: 480px;
 }
 

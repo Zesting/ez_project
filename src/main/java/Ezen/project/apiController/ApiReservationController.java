@@ -66,22 +66,4 @@ public class ApiReservationController {
         return ResponseEntity.ok(id);
     }
 
-    // @GetMapping(value = "/delete/{id}")
-    // public String deleteReservation(@PathVariable("id") Long id) {
-    // reservationService.verificationReservation(id);
-    // reservationService.dropReservation(id);
-    // return "redirect:/reservation/list";
-    // }
-
-    // @PostMapping(value = "/modify/{id}")
-    // public String modifyReservation(@PathVariable("id") Long id, ReservationDTO
-    // reservationDTO) {
-    // Optional<Reservation> reservation =
-    // reservationService.findOneReservationById(id);
-    // if (reservation.isPresent()) {
-    // reservationService.modifyReservation(reservationDTO);
-    // }
-    // return "redirect:/reservation/list";
-    // }
-
 }

@@ -14,6 +14,8 @@ import Ezen.project.domain.Room;
 import Ezen.project.service.RoomService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
+
 @RequiredArgsConstructor
 @RestController
 public class ApiRoomController {

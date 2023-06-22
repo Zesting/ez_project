@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.wedDetailDiv {
+    border: solid 1px rgba(255, 255, 255, 0.1);
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    margin-top: 2%;
+    background-color: rgba(230, 230, 230, 0.6);
+}
+
+.wedDetailText {
+    margin: 0 0 20px 0;
+}
+
+.detailTable {
+    /* border: solid 1px red; */
+    width: 750px;
+    margin: auto;
+    margin-top: 50px;
+    color: rgb(15, 15, 82);
+}
+
+.detailTable tr, .detailTable th {
+    border: solid 1px rgb(15, 15, 82);
+    height: 40px;
+    
+}
+
+.detailTable th {
+    width: 130px;
+    text-align: center;
+}
+
+.detailTable td {
+    width: 620px;
+    text-indent: 14px;
+}
+
+.detailTableContent {
+    height: 200px;
+}
+
+.detailComment {
+    /* border: solid 1px red; */
+    width: 750px;
+    margin: auto;
+    position: relative;
+}
+
+.commentContent {
+    width: 750px;
+    height: 130px;
+}
+
+.commentWriteDiv {
+    width: 750px;
+    height: 230px;
+    border-bottom: 1.5px solid rgb(15, 15, 82);
+}
+
+.commentList {
+    margin-top: -40px;
+}
+
+.commentSubmitBtn {
+    float: right;
+}
+
+
+.detailBar {
+    /* border: solid 1px red; */
+    margin: auto;
+    margin-top: 7px;
+    width: 750px;
+    height: 90px;
+}
+
+.detailListBtn, .detaildeleteBtn, .commentSubmitBtn {
+    border: none;
+    border-radius: 7px;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(15, 15, 82);
+    color: whitesmoke;
+    margin-top: 10px;
+}
+
+.detailListBtn:hover, .detaildeleteBtn:hover, .commentSubmitBtn:hover {
+    background-color: darkslateblue;
+    cursor: pointer;
+    border: none;
+}
+
+.detaildeleteBtn {
+    float: right;
+}
+
+
+/* 댓글부분 */
+.commentListTable {
+    /* border: solid 1px red; */
+    margin-top: 70px;
+    width: 750px;
+    color: rgb(15, 15, 82);
+}
+
+.commentListTable tr {
+    border-bottom: solid 1px rgb(15, 15, 82);
+}
+
+.commentWriter {
+    /* border: solid 1px red; */
+    width: 120px;
+    height: 33px;
+    text-indent: 14px;
+}
+.commentContents {
+    /* border: solid 1px red; */
+    
+    text-indent: 14px;
+
+}
+.commentDate {
+    /* border: solid 1px red; */
+    width: 140px;
+    text-indent: 14px;
+
+}

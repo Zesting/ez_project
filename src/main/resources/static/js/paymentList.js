@@ -1,16 +1,43 @@
 //결제 리스트 조회
-$(document).on("click", "#paymentListBtn", function () {
+$(document).on("click", "#paymentListBtn", function () {//paymentListBtn
   $.ajax({
     url: "/paymentList", //요청 url>> 불러올 리스트 
     method: "GET", // 방식
     dataType: "HTML", // 데이터 타입
     success: function (data) {
-      // console.log("ajax 성공! HTML->", data);
+      console.log("ajax 성공! HTML-> 리스트");
       $("#roomListContainer").html(data); //여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
+      $("#roomModifyContainer").slideUp();//다른 페이지 이동하면 접힘.
     },
     error: function (request, error) {
       console.log(
         "code:" +
+        request.status +
+        "\n" +
+        "message:" +
+        request.responseText +
+        "\n" +
+        "error:" +
+        error
+      );
+    },
+  });
+
+  $(document).on("click", "#paymentDetailBtn", function () {
+    let id = $(this).closest("tr").find("#payId").val();
+    $.ajax({
+      url: "/adminPaymentInfo/" + id,
+      method: "GET",
+      dataType: "HTML",
+      success: function (data) {
+        console.log("ajax 성공! HTML-> 조회");
+        console.log("id 값은?"+id);
+        $("#roomModifyContainer").html(data);
+        $("#roomModifyContainer").slideDown();
+      },
+      error: function (request, error) {
+        console.log(
+          "code:" +
           request.status +
           "\n" +
           "message:" +
@@ -18,36 +45,13 @@ $(document).on("click", "#paymentListBtn", function () {
           "\n" +
           "error:" +
           error
-      );
-    },
+        );
+      }
+    });
   });
+
 });
 
-//결제 삭제 요청 >> 다시 만들기 
-$(document).on("click", `#'deleteBtn('+[[${paymentList.id}]]+')'`, function () {
-  $.ajax({
-    url: "/adminPage", //요청 url>> 불러올 리스트 
-    method: "GET", // 방식
-    dataType: "HTML", // 데이터 타입
-    success: function (data) {
-      // console.log("ajax 성공! HTML->", data);
-      // location.reload();
-      $("#roomListContainer").html(data); //여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
-    },
-    error: function (request, error) {
-      console.log(
-        "code:" +
-          request.status +
-          "\n" +
-          "message:" +
-          request.responseText +
-          "\n" +
-          "error:" +
-          error
-      );
-    },
-  });
-});
 
 /* =========================================================================================== */
 /** ajax 기본 메서드(POST, PUT, DELETE) */
@@ -68,13 +72,13 @@ function ajax(url, method, data) {
     error: function (request, error) {
       console.log(
         "code:" +
-          request.status +
-          "\n" +
-          "message:" +
-          request.responseText +
-          "\n" +
-          "error:" +
-          error
+        request.status +
+        "\n" +
+        "message:" +
+        request.responseText +
+        "\n" +
+        "error:" +
+        error
       );
       window.alert("실패");
     },
