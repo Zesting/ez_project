@@ -50,19 +50,24 @@ public class UserController {
     public String logout(HttpServletRequest request) {
         // 세션이 존재하지않으면 null을 반환
         HttpSession session = request.getSession(false);
-        session.invalidate();
-        return "redirect:/";
+        if (session != null) {
+            session.invalidate();
+            return "redirect:/";
+        } else {
+            return "/";
+        }
     }
 
     @PostMapping("/user/login")
     public String userLogin(@ModelAttribute UserDTO userDTO, HttpSession session, Model model) {
         // 로그인 아이디 비밀번호 일치여부확인
         UserDTO result = userService.login(userDTO);
-        int userAuthority = 0;
+        // 로그인 권한 0일반회원 1관리자
+        int Authority = 0;
         if (result != null) {
-            userAuthority = userService.findById(result.getId()).getUserAuthority();
+            Authority = userService.findById(result.getId()).getUserAuthority();
             session.setAttribute("userId", result.getId());
-            session.setAttribute("admin", userAuthority);
+            session.setAttribute("admin", Authority);
             // 준희 수정(이전 페이지로 리턴(Post))
             String previousURL = (String) session.getAttribute("previousURL");
             System.out.println("Post에서의 previousURL : " + previousURL);
@@ -72,9 +77,49 @@ public class UserController {
             /** 로그인 성공하면 이전 화면으로 리턴 */
             return "redirect:" + previousURL;
         } else {
-            model.addAttribute("failmsg", "아이디 비밀번호를 다시 확인해주세요");
+            model.addAttribute("failmsg", "아이디 또는 비밀번호를 다시 확인해주세요");
             return "user/login";
         }
+    }
+
+    @GetMapping("/findpwd")
+    public String findPwd() {
+        return "user/findpwd";
+    }
+
+    // 세션 or url 둘중하나로 비밀번호 변경할 id 값 넘기기
+    @PostMapping("/findpassword")
+    public String findPassword(@ModelAttribute UserDTO userDTO,
+            Model model, HttpSession session) {
+        Long changeId = userService.findPassword(userDTO);
+        if (changeId != null) {
+            session.setAttribute("findPassword", changeId);
+            return "user/changepassword";
+        } else {
+            model.addAttribute("failmsg", "아이디와 이름 그리고 이메일이 일치하지않습니다.");
+            return "user/findpwd";
+        }
+    }
+
+    @PostMapping("/pwCheck")
+    @ResponseBody
+    public int changePwView(@RequestParam("newPassword") String newPw,
+            HttpSession session) {
+        Long userId = (Long) session.getAttribute("findPassword");
+        System.out.println("newPw : " + newPw);
+        System.out.println("originalpw : " + userService.findById(userId).getUserPassword());
+        return newPw.equals(userService.findById(userId).getUserPassword()) ? 0 : 1;
+    }
+
+    @PostMapping("/changepassword")
+    public String changePassword(
+            @RequestParam("newPw") String newPassword,
+            HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("findPassword");
+        userService.pwUpdate(userId, newPassword);
+        session.invalidate();
+
+        return "redirect:/";
     }
 
     // 아이디 중복체크
@@ -106,7 +151,7 @@ public class UserController {
     public String findById(@PathVariable Long id, Model model) {
         UserDTO userDTO = userService.findById(id);
         model.addAttribute("user", userDTO);
-        return "user/userdetail";
+        return "user/mypage";
     }
 
     @GetMapping("/userupdate")
@@ -129,5 +174,4 @@ public class UserController {
 
         return "redirect:/userlist";
     }
-
 }

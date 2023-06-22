@@ -16,15 +16,18 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
     private final UserRepository userRepository;
 
+    // 아이디가 중복되지않으면 db에 저장
     public void save(UserDTO userDTO) {
         List<User> userIdFilter = userRepository.findAll().stream()
                 .filter(x -> x.getUserId().equals(userDTO.getUserId())).toList();
         if (userIdFilter.isEmpty()) {
+            // UserDTO를 User로 변환 후 저장
             User user = User.userSave(userDTO);
             userRepository.save(user);
         }
     }
 
+    // 로그인 아이디랑 패스워드 검증
     public UserDTO login(UserDTO userDTO) {
         Optional<User> userId = userRepository.findByUserId(userDTO.getUserId());
         if (userId.isPresent()) {
@@ -42,9 +45,11 @@ public class UserService {
         }
     }
 
+    // db 전체 리스트
     public List<UserDTO> findAll() {
         List<User> userList = userRepository.findAll();
         List<UserDTO> userDTOList = new ArrayList<>();
+        // 보안성떄문에 DTO로 변환해서 리턴
         for (User user : userList) {
             userDTOList.add(UserDTO.saveUserDTO(user));
         }
@@ -79,8 +84,37 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public String checkId(String userId){
+    // 회원아이디 중복확인용
+    public String checkId(String userId) {
         return userRepository.checkUserId(userId);
     }
 
+    // 비밀번호 찾기 아이디랑 이름 검증
+    public Long findPassword(UserDTO userDTO) {
+        Optional<User> user = userRepository.findByUserId(userDTO.getUserId());
+        if (user.isPresent()) {
+            if (user.get().getUserName().equals(userDTO.getUserName()) &&
+                    user.get().getUserEmail().equals(userDTO.getUserEmail())) {
+                return user.get().getId();
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+    // 비밀번호 변경
+    public int pwUpdate(Long id, String newPassword) {
+        Optional<User> user = userRepository.findById(id);
+        if (!user.get().getUserPassword().equals(newPassword)) {
+            user.ifPresent(pw -> {
+                pw.setUserPassword(newPassword);
+                userRepository.save(pw);
+            });
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }

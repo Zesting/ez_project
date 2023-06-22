@@ -6,28 +6,122 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
+    <style>
+        .centered-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 90vh;
+        }
+        .loginheader{
+            margin: 100px 0px;
+            color: white;
+            font-weight: bold;
+            font-size: 50px;
+        }
 
-    <head>
-        <meta charset="UTF-8">
-        <title>로그인 페이지</title>
-    </head>
+        .login-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .left-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .right-form {
+            margin-left: 10px;
+
+
+        }
+
+        .login-input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 400px;
+        }
+
+        .login-button {
+            padding: 42px 50px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .login-button:hover {
+            background-color: #45a049;
+        }
+
+        .join-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #706d6d;
+            color: #ededed;
+            cursor: pointer;
+        }
+
+        .join-button:hover {
+            background-color: #989898;
+        }
+
+        .join-link {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .join-link:hover {
+            color: #060606;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .login-input::placeholder {
+            color: black;
+        }
+
+        .error-message {
+            font-weight: bold;
+        }
+
+    </style>
+
 </head>
 
 
-<body style="background-image: url(../img/space8.jpg);">
+<body style="background-image: url(../img/space2.jpg);">
     <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
     <div style="height: 130px; width: 100%;"></div>
     <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
 
-    <div class="container">
-        <form action="/user/login" method="post">
-            <input type="text" name="userId" placeholder="ID">
-            <input type="password" name="userPassword" placeholder="PASSWORD">
-            <button type="submit">로그인</button>
+    <div class="centered-container">
+        <h1 class="loginheader">로그인</h1>
+        <form class="login-form" action="/user/login" method="post">
+            <div class="left-form">
+                <input class="login-input" type="text" name="userId" placeholder="아이디를 입력하세요">
+                <input class="login-input" type="password" name="userPassword" placeholder="비밀번호를 입력하세요">
+            </div>
+            <div class="right-form">
+                <button class="login-button" type="submit">로그인</button>
+            </div>
+            <span class="error-message" th:text="${failmsg}"></span>
         </form>
-        <span th:text="${failmsg}" style="color: red;"></span>
+        <div class="joinfind">
+            <button class="join-button"><a class="join-link" href="/memberjoin">회원가입</a></button>
+            <button class="join-button"><a class="join-link" href="/findpwd">비밀번호 찾기</a></button>
+        </div>
     </div>
-
+    <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
 </body>
 
 </html>
