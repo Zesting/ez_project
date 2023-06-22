@@ -13,9 +13,11 @@ import Ezen.project.DTO.AdminPageDTO;
 import Ezen.project.DTO.NoticeDTO;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.DTO.WeddingDTO;
+import Ezen.project.DTO.WeddingDTO;
 import Ezen.project.service.AdminPageService;
 import Ezen.project.service.NoticeService;
 import Ezen.project.service.UserService;
+import Ezen.project.service.WeddingService;
 import Ezen.project.service.WeddingService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,7 @@ public class AdminPageController {
   private final AdminPageService adminPageService;
   private final UserService userService;
   private final NoticeService noticeService;
+  private final WeddingService weddingService;
   private final WeddingService weddingService;
 
   @GetMapping("/adminPage")
@@ -92,6 +95,7 @@ public class AdminPageController {
         return "redirect:/adminPage";
     }
 
+
   //웨딩 리스트 조회
     @GetMapping("/weddingList")
     public String weddingList(Model model){
@@ -101,4 +105,22 @@ public class AdminPageController {
     }
 
   
+
+    // 웨딩 문의 페이징 매핑
+  @GetMapping("/weddingList")
+    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
+        Page<WeddingDTO> weddingList = weddingService.paging(pageable);
+        int blockLimit = 5;
+        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
+        int endPage = ((startPage + blockLimit - 1) < weddingList.getTotalPages()) ? startPage + blockLimit - 1 : weddingList.getTotalPages();
+
+        model.addAttribute("weddingList", weddingList);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
+        return "/wedding/adminWeddingPaging";
+    }
+>>>>>>> cdd755a6fc00653e98ef994e3f7cd62fafd9b193
 }
+
+ 

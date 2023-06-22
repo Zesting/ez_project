@@ -57,19 +57,25 @@
     height: 130px;
 }
 
-.commentSubmitBtn {
-    margin-top: 10px;
-    float: right;
+.commentWriteDiv {
+    width: 750px;
+    height: 230px;
+    border-bottom: 1.5px solid rgb(15, 15, 82);
 }
 
 .commentList {
-    margin-top: 50px;
+    margin-top: -40px;
+}
+
+.commentSubmitBtn {
+    float: right;
 }
 
 
 .detailBar {
     /* border: solid 1px red; */
     margin: auto;
+    margin-top: 7px;
     width: 750px;
 }
 
