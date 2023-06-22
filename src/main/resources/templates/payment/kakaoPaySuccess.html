@@ -40,10 +40,11 @@
         <div class="itemInfo_a_b">갤럭시펠리스</div>
       </div>
       <div class="itemInfo_b">
-        <div class="itemInfo_b_a"><!--룸미니사진--></div>
-        <!-- <div class="itemInfo_b_a" th:if="${ [[${info.item_name}]] == 'Mercury_Room'}"></div>
-        <div class="itemInfo_b_a" th:if="${ [[${info.item_name}]] == 'Mars_Room'}"></div>
-        <div class="itemInfo_b_a" th:if="${ [[${info.item_name}]] == 'Jupiter_Room'}"></div> -->
+        <div class="itemInfo_b_a" th:if="${paymentDTO.roomName.equals('')}"><!--비어있을떄--></div>
+        <div class="itemInfo_b_a_1" th:if="${paymentDTO.roomName.contains('Mercury')}"><!--Mercury--></div>
+        <div class="itemInfo_b_a_2" th:if="${paymentDTO.roomName.contains('Mars')}"><!--Mars--></div>
+        <div class="itemInfo_b_a_3" th:if="${paymentDTO.roomName.contains('Earth')}"><!--Earth--></div>
+        <div class="itemInfo_b_a-4" th:if="${paymentDTO.roomName.contains('Jupiter')}"><!--Jupiter--></div>
         <div class="itemInfo_b_b">
           <div class="itemInfo_b_b_a">[[${info.item_name}]]</div>
           <div class="itemInfo_b_b_b">

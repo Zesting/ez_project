@@ -13,8 +13,10 @@
   width: 85%;
 }
 
-#roomListContainer {
+#roomListContainer,
+#roomModifyContainer {
   color: #ddd;
   align-items: center;
 }
+
 

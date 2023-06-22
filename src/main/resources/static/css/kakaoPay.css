@@ -117,9 +117,57 @@
   display: flex;
 }
 
-/* 룸 미니 사진 */
+/* 룸 미니 사진 1 ~ 4 */
 .itemInfo_b_a {
-  background-image: url('/images/room.png');
+  background-image: url('/image/room.png');
+  background-size: cover;
+  /* 이미지를 컨테이너에 맞게 조절합니다. */
+  background-position: center center;
+  /* 이미지를 가운데로 정렬합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복을 제거합니다. */
+  border-radius: 6px;
+  width: 15%;
+}
+/* Mercury */
+.itemInfo_b_a_1 {
+  background-image: url('/roomImage/Mercury1.jpg');
+  background-size: contain;
+  /* 이미지를 컨테이너에 맞게 조절합니다. */
+  background-position: center center;
+  /* 이미지를 가운데로 정렬합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복을 제거합니다. */
+  border-radius: 6px;
+  width: 15%;
+}
+/* Mars */
+.itemInfo_b_a_2 {
+  background-image: url('/roomImage/Mars1.jpg');
+  background-size: cover;
+  /* 이미지를 컨테이너에 맞게 조절합니다. */
+  background-position: center center;
+  /* 이미지를 가운데로 정렬합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복을 제거합니다. */
+  border-radius: 6px;
+  width: 15%;
+}
+/* Earth */
+.itemInfo_b_a_3 {
+  background-image: url('/roomImage/Earth1.jpg');
+  background-size: contain;
+  /* 이미지를 컨테이너에 맞게 조절합니다. */
+  background-position: center center;
+  /* 이미지를 가운데로 정렬합니다. */
+  background-repeat: no-repeat;
+  /* 이미지 반복을 제거합니다. */
+  border-radius: 6px;
+  width: 15%;
+}
+/* Jupiter */
+.itemInfo_b_a_4 {
+  background-image: url('/roomImage/Jupiter1.jpg');
   background-size: cover;
   /* 이미지를 컨테이너에 맞게 조절합니다. */
   background-position: center center;
