@@ -2,9 +2,6 @@ package Ezen.project.controller;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import Ezen.project.DTO.AdminPageDTO;
 import Ezen.project.DTO.NoticeDTO;
+import Ezen.project.DTO.PaymentInfoDTO;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.DTO.WeddingDTO;
+import Ezen.project.domain.Payment;
 import Ezen.project.service.AdminPageService;
 import Ezen.project.service.NoticeService;
+import Ezen.project.service.PaymentService;
 import Ezen.project.service.UserService;
 import Ezen.project.service.WeddingService;
 import jakarta.servlet.http.HttpSession;
@@ -34,6 +34,7 @@ public class AdminPageController {
   private final UserService userService;
   private final NoticeService noticeService;
   private final WeddingService weddingService;
+  private final PaymentService paymentService;
 
   @GetMapping("/adminPage")
   public String adminPage(Model model, HttpSession session){
@@ -49,8 +50,8 @@ public class AdminPageController {
   public String saveForm(){
     
     return "admin/adminPageSave";
-  }
-
+    }
+    //사용 x
   @PostMapping("/adminPageSave")
   public String save(@ModelAttribute AdminPageDTO adminPageDTO){
     System.out.println("adminPageDTO = "+ adminPageDTO);
@@ -58,12 +59,44 @@ public class AdminPageController {
     return "redirect:/adminPage";//나중에 보여줄 주소로 바꾸기 임시 테스트
   }
 
+  //사용 x
   @GetMapping("/adminPageList")
   public String findAll(Model model){
     List<AdminPageDTO> adminPageList = adminPageService.findAll();
     model.addAttribute("adminPageList", adminPageList);
     return "admin/adminPageList";
   }
+
+  @GetMapping("/adminPaymentInfo/{id}")
+  public String paymentInfo(HttpSession session, Model model, @PathVariable("id") Long payId) {
+    Long userDTO = (Long) session.getAttribute("userId");
+    Payment payment = paymentService.findById(payId).get();
+    UserDTO logInUser = userService.findById(userDTO);
+    // Entity -> DTO (DTO class에서 변환)
+    PaymentInfoDTO paymentInfoDTO = new PaymentInfoDTO();
+    paymentInfoDTO.setPayId(payment.getId());
+    paymentInfoDTO.setUserId(payment.getUserId());
+    paymentInfoDTO.setTid(payment.getTid());
+    paymentInfoDTO.setUserName(logInUser.getUserName());// user
+    paymentInfoDTO.setUserLoginId(logInUser.getUserId());// user
+    paymentInfoDTO.setUserPhoneNumber(logInUser.getUserPhoneNumber());// user
+    paymentInfoDTO.setOrderNumber(payment.getReservationId());
+    paymentInfoDTO.setRoomName(payment.getRoomName());
+    paymentInfoDTO.setRoomPrice(payment.getPaymentAmount());
+    paymentInfoDTO.setQuantity(1);
+    paymentInfoDTO.setFinalPrice(payment.getDiscountAmount());
+    paymentInfoDTO.setPrice(payment.getPaymentAmount());
+    paymentInfoDTO.setPoint(payment.getKakaoPoint());
+    paymentInfoDTO.setPaymentMethod(payment.getPayment_method_type());
+    paymentInfoDTO.setCardName(payment.getCardName());
+    paymentInfoDTO.setApproved_at(payment.getApproved_at());
+    paymentInfoDTO.setPayState(payment.getPayState());
+    paymentInfoDTO.setUserAuthority(logInUser.getUserAuthority());
+    model.addAttribute("payInfo", paymentInfoDTO);
+    return "admin/adminPaymentInfo";
+  }
+
+
 
   // 공지 노페이징 맵핑
   @GetMapping("/noticeList")
@@ -107,19 +140,19 @@ public class AdminPageController {
   
 
     // 웨딩 문의 페이징 매핑
-  @GetMapping("/weddingList")
-    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
-        Page<WeddingDTO> weddingList = weddingService.paging(pageable);
-        int blockLimit = 5;
-        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
-        int endPage = ((startPage + blockLimit - 1) < weddingList.getTotalPages()) ? startPage + blockLimit - 1 : weddingList.getTotalPages();
+  // @GetMapping("/weddingList")
+  //   public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
+  //       Page<WeddingDTO> weddingList = weddingService.paging(pageable);
+  //       int blockLimit = 5;
+  //       int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
+  //       int endPage = ((startPage + blockLimit - 1) < weddingList.getTotalPages()) ? startPage + blockLimit - 1 : weddingList.getTotalPages();
 
-        model.addAttribute("weddingList", weddingList);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+  //       model.addAttribute("weddingList", weddingList);
+  //       model.addAttribute("startPage", startPage);
+  //       model.addAttribute("endPage", endPage);
 
-        return "/wedding/adminWeddingPaging";
-    }
+  //       return "/wedding/adminWeddingPaging";
+  //   }
 
 }
 

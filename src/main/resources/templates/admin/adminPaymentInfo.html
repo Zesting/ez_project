@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>Project</title>
+  <link rel="stylesheet" th:href="@{/css/kakaoPay.css}">
+</head>
+  <div class="payState">
+    <div>주문 정보 상세보기</div>
+    <div>주문번호 : [[${payInfo.OrderNumber}]]</div>
+  </div>
+  <div class="userInfo">
+    <div class="userInfo_a">
+      <div class="userInfo_a_a">[[${payInfo.userName}]]</div>
+      <div class="userInfo_a_a">[[${payInfo.userPhoneNumber}]]</div>
+    </div>
+    <div class="userInfo_b">
+      <p>&lt; 요청사항 &gt; </p>
+      <div>15시 입실 예정이고, 차 1대 주차합니다.</div>
+    </div>
+  </div>
+  <div class="itemInfo">
+    <div class="itemInfoBox">
+      <div class="itemInfo_a">
+        <div class="itemInfo_a_a"><!--로고--></div>
+        <div class="itemInfo_a_b">갤럭시펠리스</div>
+      </div>
+      <div class="itemInfo_b">
+        <div class="itemInfo_b_a" th:if="${payInfo.roomName.equals('')}"><!--비어있을떄--></div>
+        <div class="itemInfo_b_a_1" th:if="${payInfo.roomName.contains('Mercury')}"><!--Mercury--></div>
+        <div class="itemInfo_b_a_2" th:if="${payInfo.roomName.contains('Mars')}"><!--Mars--></div>
+        <div class="itemInfo_b_a_3" th:if="${payInfo.roomName.contains('Earth')}"><!--Earth--></div>
+        <div class="itemInfo_b_a-4" th:if="${payInfo.roomName.contains('Jupiter')}"><!--Jupiter--></div>
+        <div class="itemInfo_b_b">
+          <div class="itemInfo_b_b_a">[[${payInfo.roomName}]]</div>
+          <div class="itemInfo_b_b_b">
+            <div class="itemInfo_b_b_b_a">[[${payInfo.roomPrice}]] 원</div>
+            <div class="itemInfo_b_b_b_b">[[${payInfo.quantity}]] 개</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="paymentInfoBox">
+    <div class="finalAmount">
+      <div class="finalAmount_a">최종 결제 금액</div>
+      <div class="finalAmount_b">[[${payInfo.finalPrice}]]원</div>
+    </div>
+    <div class="discountAmount">
+      <div class="discountAmount_a">
+        <div class="discountAmount_a_a">총 상품금액</div>
+        <div class="discountAmount_a_b">[[${payInfo.roomPrice}]]원</div>
+      </div>
+      <div class="discountAmount_b">
+        <div class="discountAmount_b_a">포인트 사용</div>
+        <div class="discountAmount_b_b">-[[${payInfo.point}]]원</div>
+      </div>
+    </div>
+    <div class="paymentInfo">
+      <div class="paymentInfo_a">
+        <div class="paymentInfo_a_a">결제수단(방법) :</div>
+        <div class="paymentInfo_a_b"> [[${payInfo.paymentMethod}]]</div>
+      </div>
+      <div class="paymentInfo_b">
+        <div class="paymentInfo_b_a">결제카드 : </div>
+        <div class="paymentInfo_b_b" th:if="${payInfo.paymentMethod != 'CARD'}">카카오페이(카드) 간편결제</div>
+        <div class="paymentInfo_b_b" th:if="${payInfo.paymentMethod != 'MONEY'}">
+          [[${payInfo.cardName}]]</div>
+      </div>
+      <div class="paymentInfo_c">
+        <div class="paymentInfo_c_a">승인 일시 :</div>
+        <div class="paymentInfo_c_b"> [[${payInfo.approved_at}]]</div>
+      </div>
+    </div>
+  </div>
+</html>

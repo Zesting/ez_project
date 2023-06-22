@@ -5,7 +5,7 @@ $(document).on("click", "#noticeListBtn", function () {//noticeListBtn
     method: "GET", // 방식
     dataType: "HTML", // 데이터 타입
     success: function (data) {
-      // console.log("ajax 성공! HTML->", data);
+      console.log("ajax 성공! HTML->리스트 ", data);
       $("#roomListContainer").html(data); //여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
       $("#roomModifyContainer").slideUp();
     },
@@ -24,12 +24,14 @@ $(document).on("click", "#noticeListBtn", function () {//noticeListBtn
   });
 
   $(document).on("click", "#noticeDetailBtn", function () {
-    let id = $(this).closest("tr").find("#noticeId").val();
+    let noticeId = $(this).closest("tr").find("#noticeId").val();
     $.ajax({
-      url: "/notice/"+id,//'/notice/{id}'
+      url: "/notice/"+noticeId,//'/notice/{id}'
       method: "GET",
       dataType: "HTML",
       success: function (data) {
+      console.log("ajax 성공! HTML->조회 ",data);
+      console.log("noticeId : "+noticeId);
         $("#roomModifyContainer").html(data);
       },
       error: function (request, error) {

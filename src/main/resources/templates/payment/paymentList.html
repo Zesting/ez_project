@@ -60,7 +60,9 @@
         <td><a th:text="${paymentList.cardName}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.payState}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.approved_at}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <td><button type="button" th:id="paymentDetailBtn">조회</button></td>
         <td><button type="button"  th:onclick="'deleteBtn('+${paymentList.id}+')'" th:id="'deleteBtn('+${paymentList.id}+')'">삭제</button></td>
+        <input type="hidden" id="payId" th:value="${paymentList.id}">
       </tr>
     </tbody>
   </table>

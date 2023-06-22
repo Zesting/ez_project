@@ -5,7 +5,7 @@ $(document).on("click", "#paymentListBtn", function () {//paymentListBtn
     method: "GET", // 방식
     dataType: "HTML", // 데이터 타입
     success: function (data) {
-      // console.log("ajax 성공! HTML->", data);
+      console.log("ajax 성공! HTML-> 리스트");
       $("#roomListContainer").html(data); //여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
       $("#roomModifyContainer").slideUp();//다른 페이지 이동하면 접힘.
     },
@@ -23,8 +23,33 @@ $(document).on("click", "#paymentListBtn", function () {//paymentListBtn
     },
   });
 
+  $(document).on("click", "#paymentDetailBtn", function () {
+    let id = $(this).closest("tr").find("#payId").val();
+    $.ajax({
+      url: "/adminPaymentInfo/" + id,
+      method: "GET",
+      dataType: "HTML",
+      success: function (data) {
+        console.log("ajax 성공! HTML-> 조회");
+        console.log("id 값은?"+id);
+        $("#roomModifyContainer").html(data);
+        $("#roomModifyContainer").slideDown();
+      },
+      error: function (request, error) {
+        console.log(
+          "code:" +
+          request.status +
+          "\n" +
+          "message:" +
+          request.responseText +
+          "\n" +
+          "error:" +
+          error
+        );
+      }
+    });
+  });
 
-  
 });
 
 
