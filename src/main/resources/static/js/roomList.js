@@ -8,6 +8,7 @@ $(document).on("click", "#listForm", function () {
     dataType: "HTML", // 데이터 타입
     success: function (data) {
       $("#roomListContainer").html(data);
+      $("#roomModifyContainer").slideUp();
     },
     error: function (request, error) {
       console.log(
@@ -41,6 +42,7 @@ $(document).on("click", "#listForm", function () {
         success: function (data) {
           // html 변수를 DOM에 삽입하는 코드
           $("#roomModifyContainer").html(data);
+          $("#roomModifyContainer").slideDown();
         },
         error: function (request, error) {
           console.log(

@@ -7,6 +7,7 @@ $(document).on("click", "#weddingListBtn", function () {
     success: function (data) {
       // console.log("ajax 성공! HTML->", data);
       $("#roomListContainer").html(data); //여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
+      $("#roomModifyContainer").slideUp();
     },
     error: function (request, error) {
       console.log(

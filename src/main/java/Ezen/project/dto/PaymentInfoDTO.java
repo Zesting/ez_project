@@ -14,6 +14,7 @@ public class PaymentInfoDTO {
   private String userLoginId;// 로그인된 사용자 아이디
   private String userPhoneNumber;// 로그인된 사용자 번호
   private String orderNumber;// 주문번호 // private String reservationId; // 예약 고유 번호
+  private Long roomId; //룸 고유 번호
   private String roomName;// 룸이름//private String roomName;
   private int roomPrice;// 룸가격
   private int quantity;// 수량

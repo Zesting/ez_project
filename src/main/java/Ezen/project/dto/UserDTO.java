@@ -1,5 +1,7 @@
 package Ezen.project.DTO;
 
+import java.util.Date;
+
 import Ezen.project.domain.User;
 import lombok.Data;
 
@@ -12,6 +14,7 @@ public class UserDTO {
     private String userName; // 유저 이름
     private String userPhoneNumber; // 유저 핸드폰번호
     private String userEmail; // 유저 이메일
+    private Date joinDate;
     private Integer userAuthority;
 
     public static UserDTO saveUserDTO(User user){
@@ -22,6 +25,7 @@ public class UserDTO {
         userDTO.setUserPassword(user.getUserPassword());
         userDTO.setUserName(user.getUserName());
         userDTO.setUserEmail(user.getUserEmail());
+        userDTO.setJoinDate(user.getJoinDate());
         userDTO.setUserPhoneNumber(user.getUserPhoneNumber());
         userDTO.setUserAuthority(user.getUserAuthority());
         return userDTO;

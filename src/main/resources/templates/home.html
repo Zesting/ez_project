@@ -187,15 +187,7 @@
       </div>
     </section>
 
-    <script src="js/jquery-1.9.1.min.js"></script>
-    <script src="slick/slick.min.js"></script>
-    <script src="magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="js/easing.min.js"></script>
-    <script src="js/jquery.singlePageNav.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
     <div><a href="/memberjoin">회원가입</a></div>
-    <div><a href="/userlist">회원목록</a></div>
 
     <a th:href="@{/Rooms}"><button>Room_List</button></a>
     <a th:href="@{/Rooms/add}"><button>Create_Room</button></a>
@@ -215,7 +207,7 @@
       $("#reservationBtn").click(function () {
         let session = $("#reservationBtn").attr("th:value");
         console.log(session);
-        if (session === undefined) {
+    if (session === undefined) {
           alert("로그인이 필요한 항목입니다.");
           window.location.href = "/login";
         } else {
