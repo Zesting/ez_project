@@ -54,7 +54,7 @@ public class AdminPageController {
     //사용 x
   @PostMapping("/adminPageSave")
   public String save(@ModelAttribute AdminPageDTO adminPageDTO){
-    System.out.println("adminPageDTO = "+ adminPageDTO);
+    // System.out.println("adminPageDTO = "+ adminPageDTO);
     adminPageService.save(adminPageDTO);
     return "redirect:/adminPage";//나중에 보여줄 주소로 바꾸기 임시 테스트
   }

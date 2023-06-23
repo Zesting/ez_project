@@ -174,7 +174,7 @@
 }
 /* Jupiter */
 .itemInfo_b_a_4 {
-  background-image: url('/roomImage/Jupiter2.png');
+  background-image: url('/roomImage/Jupiter1.png');
   background-size: contain;
   /* 이미지를 컨테이너에 맞게 조절합니다. */
   background-position: center center;
@@ -451,7 +451,7 @@
   justify-content: flex-end;
 }
 .kakaoPayForm div {
-  font-size: 40px;
+  font-size: 20px;
   font-weight: bold;
 }
 

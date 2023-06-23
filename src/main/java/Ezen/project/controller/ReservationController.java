@@ -1,6 +1,9 @@
 package Ezen.project.controller;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import Ezen.project.DTO.CheckDTO;
-import Ezen.project.DTO.UserDTO;
 import Ezen.project.domain.Reservation;
-import Ezen.project.domain.Room;
 import Ezen.project.service.ReservationService;
 import Ezen.project.service.RoomService;
 import Ezen.project.service.UserService;
@@ -36,14 +37,21 @@ public class ReservationController {
     @RequestMapping(value = "/Reservations", method = RequestMethod.GET)
     public String reservationListView(Model model) {
         List<Reservation> reservationList = reservationService.findAllReservation();
+        List<Map<String, Object>> allList = new ArrayList<>();
+
         reservationList.stream().forEach(r -> {
-            UserDTO user = userService.findById(r.getUserId());
-            Room room = roomService.findRoomById(r.getRoomId()).get();
-            model.addAttribute("user", user);
-            model.addAttribute("room", room);
+            Map<String, Object> addMap = new LinkedHashMap<>();
+            addMap.put("reservationId", r.getReservationId());
+            addMap.put("userName", userService.findById(r.getUserId()).getUserName());
+            addMap.put("roomName", roomService.findRoomById(r.getRoomId()).get().getRoomName());
+            addMap.put("checkIn", r.getCheckIn());
+            addMap.put("checkOut", r.getCheckOut());
+            addMap.put("reservationDate", r.getReservationDate());
+            addMap.put("finalPrice", r.getFinalPrice());
+            allList.add(addMap);
         });
 
-        model.addAttribute("reservationList", reservationList);
+        model.addAttribute("reservationList", allList);
         return "Reservation/reservationListView";
     }
 
@@ -76,13 +84,21 @@ public class ReservationController {
     public String myListView(Model model, HttpSession session) throws NullPointerException {
         Long userId = (Long) session.getAttribute("userId");
         List<Reservation> userReservationList = reservationService.findAllReservationByUserId(userId);
+        List<Map<String, Object>> myList = new ArrayList<>();
         userReservationList.stream().forEach(r -> {
-            UserDTO user = userService.findById(r.getUserId());
-            Room room = roomService.findRoomById(r.getRoomId()).get();
-            model.addAttribute("user", user);
-            model.addAttribute("room", room);
+            Map<String, Object> innerDate = new LinkedHashMap<>();
+
+            innerDate.put("userName", userService.findById(r.getUserId()).getUserName());
+            innerDate.put("reservationDate", r.getReservationDate());
+            innerDate.put("roomName", roomService.findRoomById(r.getRoomId()).get().getRoomName());
+            innerDate.put("roomType", roomService.findRoomById(r.getRoomId()).get().getRoomType());
+            innerDate.put("checkIn", r.getCheckIn());
+            innerDate.put("checkOut", r.getCheckOut());
+            innerDate.put("finalPrice", r.getFinalPrice());
+
+            myList.add(innerDate);
         });
-        model.addAttribute("myList", userReservationList);
+        model.addAttribute("myList", myList);
 
         return "Reservation/myReservation";
     }
