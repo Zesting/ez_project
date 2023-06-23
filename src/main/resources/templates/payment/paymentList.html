@@ -12,10 +12,7 @@
       white-space: nowrap; /* 글자를 한 줄로 표시 */
       text-align: center;
     }
-    tbody td button {
-      background-color: transparent;
-      border: none;
-    }
+   
   </style>
 </head>
 <!-- 결제리스트 할떄 로그인되어있는지 확인 -->
@@ -30,8 +27,8 @@
         <td>예약 번호</td>
         <td>방 이름</td>
         <td>최종 결제 금액</td>
-        <td>카카오 포인트</td>
-        <td>할인된 금액</td>
+        <!-- <td>카카오 포인트</td> -->
+        <!-- <td>할인된 금액</td> -->
         <td>결제 방식</td>
         <td>카드 이름</td>
         <td>결제 상태</td>
@@ -47,8 +44,8 @@
         <td><a th:text="${paymentList.reservationId}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.roomName}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.paymentAmount}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.kakaoPoint}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.discountAmount}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
+        <!-- <td><a th:text="${paymentList.kakaoPoint}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td> -->
+        <!-- <td><a th:text="${paymentList.discountAmount}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td> -->
         <td><a th:text="${paymentList.payment_method_type}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.cardName}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.payState}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>

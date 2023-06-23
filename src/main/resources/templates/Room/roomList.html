@@ -5,6 +5,8 @@
       <td>룸 이름</td>
       <td>룸 가격</td>
       <td>룸 타입</td>
+      <td>수정</td>
+      <td>삭제</td>
     </tr>
   </thead>
   <tbody>
@@ -13,8 +15,16 @@
       <td id="roomName" th:text="${roomList.roomName}"></td>
       <td id="roomPrice" th:text="${roomList.roomPrice}"></td>
       <td id="roomType" th:text="${roomList.roomType}"></td>
-      <td><button type="button" id="modifyMoveBtn">수정 폼 이동</button></td>
-      <td><button type="button" id="deleteRoomBtn">삭제</button></td>
+      <td><button type="button" id="modifyMoveBtn">
+        <!-- 수정 폼 이동 -->
+        <img src="https://ifh.cc/g/XBTqrp.png" alt="아이콘" style="width: 30px; height: 30px;">
+      </button></td>
+
+        
+      <td><button type="button" id="deleteRoomBtn">
+        <!-- 삭제 -->
+        <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
+      </button></td>
     </tr>
   </tbody>
 </table>

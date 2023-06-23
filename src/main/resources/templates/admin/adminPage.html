@@ -2,9 +2,12 @@
 
 <head>
   <title>관리자페이지</title>
+  <!-- 관리자 페이지 CSS -->
   <link rel="stylesheet" th:href="@{/css/adminPage.css}" />
+  <!-- 공지사항 개별 css 현재 공용 css사용으로 사용 안함-->
+  <!-- <link rel="stylesheet" th:href="@{/css/noticeList.css}" /> -->
+  <!-- sidebar css -->
   <link rel="stylesheet" th:href="@{/css/adminStyles.css}" />
-  <link rel="stylesheet" th:href="@{/css/noticeList.css}" />
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link
@@ -19,20 +22,25 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
     integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
     crossorigin="anonymous"></script>
-
+  <!-- J.H. for this template -->
+  <!-- <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'> -->
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
   <style>
     tbody td {
       text-align: center;
       border: 1px dotted #555;
     }
+
     thead td {
       text-align: center;
       border: 3px solid black;
     }
   </style>
 </head>
+
 <body>
-<!-- <body style="background-image: url(../img/space8.jpg)"> -->
+  <!-- <body style="background-image: url(../img/space8.jpg)"> -->
   <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
   <div style="height: 74px; width: 100%"></div>
   <!-- 헤더 불러오기 -->
@@ -42,15 +50,14 @@
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
           <!-- sidebar fragment 사용 -->
-          <th:block
-            th:replace="~{fragment/sidebar :: sidebarFragment}"></th:block>
+          <th:block th:replace="~{fragment/sidebar :: sidebarFragment}"></th:block>
         </div>
       </div>
     </div>
     <div class="containerBox">
       <div id="adminPageContainer">
         <!-- wrapper 가져옴  -->
-        
+
         <!-- 차트 가져옴 -->
         <div class="row">
           <!-- Area Chart -->
@@ -142,10 +149,11 @@
   <script th:src="@{/js/noticeList.js}"></script>
   <script th:src="@{/js/weddingList.js}"></script>
 
-  <script th:src="@{/js/sideBarToggle.js}"></script>
   <script th:src="@{/js/adminPage.js}"></script>
-
+  <!-- 사이드바 -->
+  <script th:src="@{/js/sideBarToggle.js}"></script>
   <script th:src="@{/js/datatables-simple-demo.js}"></script>
+
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -163,5 +171,11 @@
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
 
+  <!-- Table J.H. script -->
+  <!-- <script src="js/jquery.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script> -->
 </body>
+
 </html>
