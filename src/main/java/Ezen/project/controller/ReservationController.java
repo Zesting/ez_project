@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import Ezen.project.DTO.CheckDTO;
-import Ezen.project.DTO.UserDTO;
 import Ezen.project.domain.Reservation;
-import Ezen.project.domain.Room;
 import Ezen.project.service.ReservationService;
 import Ezen.project.service.RoomService;
 import Ezen.project.service.UserService;
@@ -39,14 +37,21 @@ public class ReservationController {
     @RequestMapping(value = "/Reservations", method = RequestMethod.GET)
     public String reservationListView(Model model) {
         List<Reservation> reservationList = reservationService.findAllReservation();
+        List<Map<String, Object>> allList = new ArrayList<>();
+
         reservationList.stream().forEach(r -> {
-            UserDTO user = userService.findById(r.getUserId());
-            Room room = roomService.findRoomById(r.getRoomId()).get();
-            model.addAttribute("user", user);
-            model.addAttribute("room", room);
+            Map<String, Object> addMap = new LinkedHashMap<>();
+            addMap.put("reservationId", r.getReservationId());
+            addMap.put("userName", userService.findById(r.getUserId()).getUserName());
+            addMap.put("roomName", roomService.findRoomById(r.getRoomId()).get().getRoomName());
+            addMap.put("checkIn", r.getCheckIn());
+            addMap.put("checkOut", r.getCheckOut());
+            addMap.put("reservationDate", r.getReservationDate());
+            addMap.put("finalPrice", r.getFinalPrice());
+            allList.add(addMap);
         });
 
-        model.addAttribute("reservationList", reservationList);
+        model.addAttribute("reservationList", allList);
         return "Reservation/reservationListView";
     }
 

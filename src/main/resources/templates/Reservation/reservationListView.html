@@ -18,21 +18,8 @@
         id="reservationId"
         name="reservationId"
         th:text="${reservationList.reservationId}"></td>
-      <td id="reservationUserId" th:text="${user.userName}">
-        <span
-          >(
-          <p th:text="${reservationList.userId}"></p>
-          )</span
-        >
-      </td>
-      <td id="reservationRoomId" th:text="${room.roomName}">
-        <p style="color: wheat">test</p>
-        <span
-          >(
-          <p th:text="${reservationList.roomId}"></p>
-          )</span
-        >
-      </td>
+      <td id="userName" th:text="${reservationList.userName}"></td>
+      <td id="roomName" th:text="${reservationList.roomName}"></td>
       <td id="reservationCheckIn" th:text="${reservationList.checkIn}"></td>
       <td id="reservationCheckOut" th:text="${reservationList.checkOut}"></td>
       <td
