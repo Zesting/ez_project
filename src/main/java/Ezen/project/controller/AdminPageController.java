@@ -96,13 +96,7 @@ public class AdminPageController {
     return "admin/adminPaymentInfo";
   }
 
-  // 공지 노페이징 맵핑
-  @GetMapping("/noticeList")
-  public String noticeList(Model model){
-        List<NoticeDTO> noticeDTOList = noticeService.findAll();
-        model.addAttribute("noticeList", noticeDTOList);
-    return "/notice/adminNoticeList";
-  }
+  
 
   // 공지 페이징 매핑
   // @GetMapping("/noticeList")
@@ -119,7 +113,15 @@ public class AdminPageController {
   //   return "/notice/adminNoticeListPaging";
   // }
 
-  //게시글 삭제
+  // 공지 노페이징 맵핑
+  @GetMapping("/noticeList")
+  public String noticeList(Model model){
+        List<NoticeDTO> noticeDTOList = noticeService.findAll();
+        model.addAttribute("noticeList", noticeDTOList);
+    return "/notice/adminNoticeList";
+  }
+
+  //게시글 삭제 (공지)
     @GetMapping("/adminNotice/delete/{id}")
     public String delete(@PathVariable Long id){
         noticeService.delete(id);
@@ -133,6 +135,13 @@ public class AdminPageController {
        List<WeddingDTO> weddingDTOList = weddingService.findAll();
        model.addAttribute("weddingList", weddingDTOList);
         return "/wedding/adminWeddingList";
+    }
+
+  //게시글 삭제 (웨딩)
+    @GetMapping("/adminWedding/delete/{id}")
+    public String deleteWedding(@PathVariable Long id){
+        weddingService.delete(id);
+        return "redirect:/adminPage";
     }
 
   

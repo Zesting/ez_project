@@ -30,12 +30,21 @@
                     <!-- 조회 -->
                     <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
                   </button></td>
-                  <td><button type="button" th:id="weddingDeleteBtn" >
+                  <td>
+                    <!-- <button type="button" th:id="weddingDeleteBtn" > -->
+                    <button type="button" th:id="'deleteBtn('+${wedding.weddingId}+')'" >
                     <!-- 삭제 -->
-                    <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
+                    <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;" th:onclick="'deleteBtn('+${wedding.weddingId}+')'">
                   </button></td>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+</div>
+<script>
+    function deleteBtn(id){
+      // window.location.href = "/notice/delete/"+ id;
+      window.location.href = "/adminWedding/delete/"+ id;
+    }
+</script>

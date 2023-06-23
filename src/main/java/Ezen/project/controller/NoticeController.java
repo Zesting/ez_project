@@ -79,6 +79,7 @@ public class NoticeController {
     //수정 폼 전달
     @PostMapping("/notice/update")
     public String update(@ModelAttribute NoticeDTO noticeDTO, Model model) throws IllegalStateException, IOException{
+        System.out.println(noticeDTO);
         Long notice = noticeService.update(noticeDTO);
         model.addAttribute("notice", notice);
         return "redirect:/notice/"+notice ;
@@ -100,8 +101,6 @@ public class NoticeController {
         int blockLimit = 5;
         int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
         int endPage = ((startPage + blockLimit - 1) < noticeList.getTotalPages()) ? startPage + blockLimit - 1 : noticeList.getTotalPages();
-
-        
 
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("startPage", startPage);

@@ -96,16 +96,11 @@ public class NoticeService {
 
     //수정
     public Long update(NoticeDTO noticeDTO) throws IllegalStateException, IOException {
-
-
         if(noticeDTO.getNoticeFile().isEmpty()){
             NoticeDomain noticeDomain = NoticeDomain.toUpdateEntity(noticeDTO);
             noticeRepository.save(noticeDomain);
         return noticeDomain.getNoticeId();
-
-        } else {
-           
-
+        } else{
             MultipartFile noticeFile = noticeDTO.getNoticeFile(); //1
                 String originalFileName = noticeFile.getOriginalFilename(); //2
                 String storedFileName = System.currentTimeMillis() + "_" + originalFileName; //3
