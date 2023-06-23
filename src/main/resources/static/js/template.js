@@ -87,10 +87,10 @@ $(function () {
     })
 
     // Scroll to corresponding section with animation
-    $('#tmNav').singlePageNav({
-        'easing': 'easeInOutExpo',
-        'speed': 600
-    });
+    // $('#tmNav').singlePageNav({
+    //     'easing': 'easeInOutExpo',
+    //     'speed': 600
+    // });
 
     // Add smooth scrolling to all links
     // https://www.w3schools.com/howto/howto_css_smooth_scroll.asp
