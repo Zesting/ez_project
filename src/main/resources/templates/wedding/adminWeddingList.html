@@ -1,19 +1,22 @@
 <div class="wedList">
-  <div class="wedListTable">
-      <table class="wedTable">
-          <tr>
-              <th class="wedListNo">id</th>
-              <th class="wedListTitle">제목</th>
-              <th class="wedListWriter">작성자</th>
-              <th class="wedListDate">작성일</th>
-          </tr>
-          <tr th:each="wedding: ${weddingList}">
-              <td class="wedListNo" th:text="${wedding.weddingId}"></td>
-              <td class="wedListTitle"><a th:href="@{|${wedding.weddingId}|}"
-                      th:text="${wedding.weddingTitle}"></a></td>
-              <td class="wedListWriter" th:text="${wedding.userId}"></td>
-              <td class="wedListDate" th:text="${wedding.weddingWriteDate}">
-                  <!-- <span
+    <div class="wedListTable">
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <td class="wedListNo">id</td>
+                    <td class="wedListTitle">제목</td>
+                    <td class="wedListWriter">작성자</td>
+                    <td class="wedListDate">작성일</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="wedding: ${weddingList}">
+                    <td class="wedListNo" th:text="${wedding.weddingId}"></td>
+                    <td class="wedListTitle"><a th:href="@{|${wedding.weddingId}|}"
+                            th:text="${wedding.weddingTitle}"></a></td>
+                    <td class="wedListWriter" th:text="${wedding.userId}"></td>
+                    <td class="wedListDate" th:text="${wedding.weddingWriteDate}">
+                        <!-- <span
                       th:if="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
                       <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'HH:mm')}"></span>
                   </span>
@@ -21,7 +24,8 @@
                       th:unless="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
                       <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'yy-MM-dd')}"></span>
                   </span> -->
-              </td>
-          </tr>
-      </table>
-  </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

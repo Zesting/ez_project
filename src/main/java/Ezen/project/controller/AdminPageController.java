@@ -66,7 +66,7 @@ public class AdminPageController {
     model.addAttribute("adminPageList", adminPageList);
     return "admin/adminPageList";
   }
-
+  //결제된 정보 리스트
   @GetMapping("/adminPaymentInfo/{id}")
   public String paymentInfo(HttpSession session, Model model, @PathVariable("id") Long payId) {
     Long userDTO = (Long) session.getAttribute("userId");
@@ -95,8 +95,6 @@ public class AdminPageController {
     model.addAttribute("payInfo", paymentInfoDTO);
     return "admin/adminPaymentInfo";
   }
-
-
 
   // 공지 노페이징 맵핑
   @GetMapping("/noticeList")

@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-    <nav class="navbar navbar-expand-md tm-navbar" id="tmNav" th:fragment="fragment-header"
-        style="background-image: url(../img/space8.jpg)">
-        <link rel="stylesheet" th:href="@{/fontawesome-5.5/css/all.min.css}" />
-        <link rel="stylesheet" th:href="@{/slick/slick.css}" />
-        <link rel="stylesheet" th:href="@{/slick/slick-theme.css}" />
-        <link rel="stylesheet" th:href="@{/magnific-popup/magnific-popup.css}" />
-        <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-        <link rel="stylesheet" th:href="@{/css/tooplate-infinite-loop.css}" />
+  <body>
+    <nav
+      class="navbar navbar-expand-md tm-navbar"
+      id="tmNav"
+      th:fragment="fragment-header"
+      style="background-image: url(../img/space8.jpg)">
+      <link rel="stylesheet" th:href="@{/fontawesome-5.5/css/all.min.css}" />
+      <link rel="stylesheet" th:href="@{/slick/slick.css}" />
+      <link rel="stylesheet" th:href="@{/slick/slick-theme.css}" />
+      <link rel="stylesheet" th:href="@{/magnific-popup/magnific-popup.css}" />
+      <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+      <link rel="stylesheet" th:href="@{/css/tooplate-infinite-loop.css}" />
 
       <div class="container">
         <div class="tm-next">
@@ -67,7 +69,12 @@
               >
             </li>
             <li class="nav-item" th:if="${session.admin==1}">
-              <a class="nav-link tm-nav-link" href="#infinite">Administrator</a>
+              <a
+                class="nav-link tm-nav-link"
+                href="/adminPage"
+                onclick="adminReq()"
+                >Administrator</a
+              >
             </li>
             <li class="name-item">
               <a
@@ -90,21 +97,21 @@
         </div>
       </div>
 
-    <script>
-      const homeReq = () => {
-        event.preventDefault();
-        window.location.href = "/";
-      };
+      <script>
+        const homeReq = () => {
+          event.preventDefault();
+          window.location.href = "/";
+        };
 
-      const roomList = () => {
-        event.preventDefault();
-        window.location.href = "/Rooms/room_Base_Mercury";
-      };
+        const roomList = () => {
+          event.preventDefault();
+          window.location.href = "/Rooms/room_Base_Mercury";
+        };
 
-      const reservation = () => {
-        event.preventDefault();
-        window.location.href = "/Reservations/verificationUser";
-      };
+        const reservation = () => {
+          event.preventDefault();
+          window.location.href = "/Reservations/verificationUser";
+        };
 
         const weddingReq = () => {
           event.preventDefault();
@@ -114,17 +121,23 @@
           event.preventDefault();
           window.location.href = "/notice/paging";
         };
+
+        const adminReq = () => {
+          event.preventDefault();
+          window.location.href = "/adminPage";
+        };
       </script>
 
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/jquery-1.9.1.min.js}"></script>
-    <script th:src="@{/js/easing.min.js}"></script>
-    <script th:src="@{/js/jquery.singlePageNav.min.js}"></script>
-    <script th:src="@{/js/template.js}"></script>
-    <script th:src="@{/magnific-popup/jquery.magnific-popup.min.js}"></script>
-    <script th:src="@{/slick/slick.min.js}"></script>
-    <script src="https://kit.fontawesome.com/2aff9b2515.js" crossorigin="anonymous"></script>
-  </nav>
-</body>
-
+      <script th:src="@{/js/bootstrap.min.js}"></script>
+      <script th:src="@{/js/jquery-1.9.1.min.js}"></script>
+      <script th:src="@{/js/easing.min.js}"></script>
+      <script th:src="@{/js/jquery.singlePageNav.min.js}"></script>
+      <script th:src="@{/js/template.js}"></script>
+      <script th:src="@{/magnific-popup/jquery.magnific-popup.min.js}"></script>
+      <script th:src="@{/slick/slick.min.js}"></script>
+      <script
+        src="https://kit.fontawesome.com/2aff9b2515.js"
+        crossorigin="anonymous"></script>
+    </nav>
+  </body>
 </html>

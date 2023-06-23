@@ -55,12 +55,12 @@ public class PaymentController {
       if (payment.getReservationId().equals(String.valueOf(reservation.getReservationId()))) {
         System.out.println("payment.getReservationId() ::" + payment.getReservationId());
         System.out.println("reservation.getReservationId() ::" + reservation.getReservationId());
-        System.out.println("결제가 완료된 요청입니다.!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("결제가 완료된 요청입니다.!");
         return "redirect:/pay";
       } else {
         System.out.println("payment.getReservationId() ::" + payment.getReservationId());
         System.out.println("reservation.getReservationId() ::" + reservation.getReservationId());
-        System.out.println("값이 다르게 나왔습니다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("값이 다르게 나왔습니다!");
       }
     }
     System.out.println("List 비교문 끝나고 나옴 ");
@@ -120,7 +120,7 @@ public class PaymentController {
     paymentDTO.setUserName(userService.findById(logInUser).getUserName());
     paymentDTO.setUserPhoneNumber(userService.findById(logInUser).getUserPhoneNumber());
     paymentDTO.setRoomName(roomService.findRoomById(reservation.getRoomId()).get().getRoomName());
-    System.out.println("reservation 에 저장된 값은??????" + reservation);
+    System.out.println("reservation 에 저장된 값은????" + reservation);
     model.addAttribute("reservationInfo", reservation);
     model.addAttribute("paymentDTO",paymentDTO);
     return "payment/payment";
@@ -136,18 +136,6 @@ public class PaymentController {
     model.addAttribute("paymentList", paymentList);
     System.out.println("getMapping() paymentList 출력");
     return "payment/paymentList";
-  }
-  //마이페이지에서 모든 결제 내역 리스트 [ 마이페이지 ]
-  @GetMapping("/paymentList/my")
-  public String myPaymentList(HttpSession session, Model model) {
-    Long userId = (Long) session.getAttribute("userId");
-    String userName = userService.findById(userId).getUserName();
-    List<Payment> payList = paymentService.findByUserId(userName);
-    if (userId == null) {
-      return "redirect:/login";
-    }
-    model.addAttribute("pay", payList);
-    return "payment/myPaymentList";
   }
 
   // kakaoPaySuccessInfo

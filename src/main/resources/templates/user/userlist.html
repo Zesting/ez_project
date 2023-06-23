@@ -9,34 +9,38 @@
 </head>
 
 <body>
-    <table>
-        <tr>
-            <th>id</th>
-            <th>아이디</th>
-            <th>비밀번호</th>
-            <th>이름</th>
-            <th>폰번호</th>
-            <th>생년월일</th>
-            <th>가입날짜</th>
-            <th>이메일</th>
-            <th>등급</th>
-        </tr>
-        <tr th:each="user : ${userList}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.userId}"></td>
-            <td th:text="${user.userPassword}"></td>
-            <td th:text="${user.userName}"></td>
-            <!-- 관리자 페이지 양식을 맞추기 위해 a태그에서 버튼으로 바꿈 -->
-            <td th:text="${user.userPhoneNumber}"></td>
-            <td th:text="${user.userAge}"></td>
-            <td th:text="${user.joinDate}"></td>
-            <td th:text="${user.userEmail}"></td>
-            <td th:text="${user.userAuthority}"></td>
-            <td><button type="button" id="detailBtn">조회</button></td>
-            <td><button type="button" id="deleteBtn">삭제</button></td>
-            <!-- userList.js 파일에서 ${user.id}값을 가져가기위해서 작성 -->
-            <input type="hidden" id="userId" th:value="${user.id}" />
-        </tr>
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>아이디</td>
+                <td>비밀번호</td>
+                <td>이름</td>
+                <td>폰번호</td>
+                <td>생년월일</td>
+                <td>가입날짜</td>
+                <td>이메일</td>
+                <td>등급</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${userList}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.userId}"></td>
+                <td th:text="${user.userPassword}"></td>
+                <td th:text="${user.userName}"></td>
+                <!-- 관리자 페이지 양식을 맞추기 위해 a태그에서 버튼으로 바꿈 -->
+                <td th:text="${user.userPhoneNumber}"></td>
+                <td th:text="${user.userAge}"></td>
+                <td th:text="${user.joinDate}"></td>
+                <td th:text="${user.userEmail}"></td>
+                <td th:text="${user.userAuthority}"></td>
+                <td><button type="button" id="detailBtn">조회</button></td>
+                <td><button type="button" id="deleteBtn">삭제</button></td>
+                <!-- userList.js 파일에서 ${user.id}값을 가져가기위해서 작성 -->
+                <input type="hidden" id="userId" th:value="${user.id}" />
+            </tr>
+        </tbody>
     </table>
 </body>
 

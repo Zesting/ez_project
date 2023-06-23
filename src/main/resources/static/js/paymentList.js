@@ -6,6 +6,7 @@ $(document).on("click", "#paymentListBtn", function () {//paymentListBtn
     dataType: "HTML", // 데이터 타입
     success: function (data) {
       console.log("ajax 성공! HTML-> 리스트");
+      $("#adminPageContainer").slideUp();
       $("#roomListContainer").html(data); //여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
       $("#roomModifyContainer").slideUp();//다른 페이지 이동하면 접힘.
     },

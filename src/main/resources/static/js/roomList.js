@@ -7,6 +7,7 @@ $(document).on("click", "#listForm", function () {
     method: "GET", // 방식
     dataType: "HTML", // 데이터 타입
     success: function (data) {
+      $("#adminPageContainer").slideUp();
       $("#roomListContainer").html(data);
       $("#roomModifyContainer").slideUp();
     },
@@ -96,6 +97,7 @@ $(document).on("click", "#createForm", function () {
     method: "GET",
     dataType: "HTML",
     success: function (data) {
+      $("#adminPageContainer").slideUp();
       $("#roomListContainer").html(data);
     },
     error: function (request, error) {
