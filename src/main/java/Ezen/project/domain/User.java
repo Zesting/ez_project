@@ -67,6 +67,7 @@ public class User {
         User user = new User();
         user.setId(userDTO.getId());
         user.setUserId(userDTO.getUserId());
+        user.setJoinDate(userDTO.getJoinDate());
         user.setUserPassword(userDTO.getUserPassword());
         user.setUserName(userDTO.getUserName());
         user.setUserAge(userDTO.getUserAge());

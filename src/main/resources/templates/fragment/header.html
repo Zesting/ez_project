@@ -1,143 +1,104 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <nav
-      class="navbar navbar-expand-md tm-navbar"
-      id="tmNav"
-      th:fragment="fragment-header"
-      style="background-image: url(../img/space8.jpg)">
-      <link rel="stylesheet" th:href="@{/fontawesome-5.5/css/all.min.css}" />
-      <link rel="stylesheet" th:href="@{/slick/slick.css}" />
-      <link rel="stylesheet" th:href="@{/slick/slick-theme.css}" />
-      <link rel="stylesheet" th:href="@{/magnific-popup/magnific-popup.css}" />
-      <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-      <link rel="stylesheet" th:href="@{/css/tooplate-infinite-loop.css}" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
 
-      <div class="container">
-        <div class="tm-next">
-          <a href="/" class="navbar-brand" onclick="homeReq()">Galaxy Palace</a>
-        </div>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-          <i class="fas fa-bars navbar-toggler-icon"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a
-                class="nav-link tm-nav-link"
-                href="#whatwedo"
-                onclick="roomList()"
-                >Room</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link tm-nav-link"
-                href="#testimonials"
-                onclick="reservation()"
-                >Reservation</a
-              >
-            </li>
-            <li class="nav-item">
-              <!--#gallery-->
-              <a
-                class="nav-link tm-nav-link"
-                href="/wedding/save"
-                onclick="weddingReq()"
-                >Wedding</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link tm-nav-link"
-                href="/notice/paging"
-                onclick="pagingReq()"
-                >Notice</a
-              >
-            </li>
-            <li class="nav-item" th:if="${session.admin==1}">
-              <a
-                class="nav-link tm-nav-link"
-                href="/adminPage"
-                onclick="adminReq()"
-                >Administrator</a
-              >
-            </li>
-            <li class="name-item">
-              <a
-                class="nav-link tm-nav-link"
-                th:href="${session.userId == null} ? '/login' : '/user/' + ${session.userId}">
-                <i
-                  class="fa-solid fa-user fa-xl"
-                  onclick="location.href=this.parentElement.href;"></i>
-              </a>
-            </li>
+<body>
+  <nav class="navbar navbar-expand-md tm-navbar" id="tmNav" th:fragment="fragment-header"
+    style="background-image: url(../img/space8.jpg)">
+    <link rel="stylesheet" th:href="@{/fontawesome-5.5/css/all.min.css}" />
+    <link rel="stylesheet" th:href="@{/slick/slick.css}" />
+    <link rel="stylesheet" th:href="@{/slick/slick-theme.css}" />
+    <link rel="stylesheet" th:href="@{/magnific-popup/magnific-popup.css}" />
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/tooplate-infinite-loop.css}" />
 
-            <li class="nav-item" th:if="${session.userId != null}">
-              <a class="nav-link tm-nav-link" href="/logout">
-                <i
-                  class="fa-sharp fa-solid fa-arrow-right-from-bracket fa-xl"
-                  onclick="location.href='/logout'"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+    <div class="container">
+      <div class="tm-next">
+        <a href="/" class="navbar-brand" onclick="homeReq()">Galaxy Palace</a>
       </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars navbar-toggler-icon"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="#whatwedo" onclick="roomList()">Room</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="#testimonials" onclick="reservation()">Reservation</a>
+          </li>
+          <li class="nav-item">
+            <!--#gallery-->
+            <a class="nav-link tm-nav-link" href="/wedding/save" onclick="weddingReq()">Wedding</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link tm-nav-link" href="/notice/paging" onclick="pagingReq()">Notice</a>
+          </li>
+          <li class="nav-item" th:if="${session.admin==1}">
+            <a class="nav-link tm-nav-link" href="/adminPage" onclick="adminReq()">Administrator</a>
+          </li>
+          <li class="name-item">
+            <a class="nav-link tm-nav-link"
+              th:href="${session.userId == null} ? '/login' : '/user/' + ${session.userId}">
+              <i class="fa-solid fa-user fa-xl" onclick="location.href=this.parentElement.href;"></i>
+            </a>
+          </li>
 
-      <script>
-        const homeReq = () => {
-          event.preventDefault();
-          window.location.href = "/";
-        };
+          <li class="nav-item" th:if="${session.userId != null}">
+            <a class="nav-link tm-nav-link" href="/logout">
+              <i class="fa-sharp fa-solid fa-arrow-right-from-bracket fa-xl" onclick="location.href='/logout'"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-        const roomList = () => {
-          event.preventDefault();
-          window.location.href = "/Rooms/room_Base_Mercury";
-        };
+    <script>
+      const homeReq = () => {
+        event.preventDefault();
+        window.location.href = "/";
+      };
 
-        const reservation = () => {
-          event.preventDefault();
-          window.location.href = "/Reservations/verificationUser";
-        };
+      const roomList = () => {
+        event.preventDefault();
+        window.location.href = "/Rooms/room_Base_Mercury";
+      };
 
-        const weddingReq = () => {
-          event.preventDefault();
-          window.location.href = "/wedding/save";
-        };
-        const pagingReq = () => {
-          event.preventDefault();
-          window.location.href = "/notice/paging";
-        };
+      const reservation = () => {
+        event.preventDefault();
+        window.location.href = "/Reservations/verificationUser";
+      };
 
-        const adminReq = () => {
-          event.preventDefault();
-          window.location.href = "/adminPage";
-        };
-      </script>
+      const weddingReq = () => {
+        event.preventDefault();
+        window.location.href = "/wedding/save";
+      };
+      const pagingReq = () => {
+        event.preventDefault();
+        window.location.href = "/notice/paging";
+      };
 
-      <script th:src="@{/js/bootstrap.min.js}"></script>
-      <script th:src="@{/js/jquery-1.9.1.min.js}"></script>
-      <script th:src="@{/js/easing.min.js}"></script>
-      <script th:src="@{/js/jquery.singlePageNav.min.js}"></script>
-      <script th:src="@{/js/template.js}"></script>
-      <script th:src="@{/magnific-popup/jquery.magnific-popup.min.js}"></script>
-      <script th:src="@{/slick/slick.min.js}"></script>
-      <script
-        src="https://kit.fontawesome.com/2aff9b2515.js"
-        crossorigin="anonymous"></script>
-    </nav>
-  </body>
+      const adminReq = () => {
+        event.preventDefault();
+        window.location.href = "/adminPage";
+      };
+    </script>
+
+    <script th:src="@{/js/jquery-1.9.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/easing.min.js}"></script>
+    <script th:src="@{/js/jquery.singlePageNav.min.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
+    <script th:src="@{/magnific-popup/jquery.magnific-popup.min.js}"></script>
+    <script th:src="@{/slick/slick.min.js}"></script>
+    <script src="https://kit.fontawesome.com/2aff9b2515.js" crossorigin="anonymous"></script>
+  </nav>
+</body>
+
 </html>

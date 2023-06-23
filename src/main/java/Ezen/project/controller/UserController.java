@@ -147,12 +147,6 @@ public class UserController {
         return "user/userlist";
     }
 
-    @GetMapping("/user/{id}")
-    public String findById(@PathVariable Long id, Model model) {
-        UserDTO userDTO = userService.findById(id);
-        model.addAttribute("user", userDTO);
-        return "user/mypage";
-    }
 
     @GetMapping("/userupdate")
     public String userUpdate(HttpSession session, Model model) {
@@ -168,10 +162,11 @@ public class UserController {
         return "redirect:/user/" + userDTO.getId();
     }
 
+    @ResponseBody
     @GetMapping("/user/delete/{id}")
     public String delete(@PathVariable Long id) {
         userService.delete(id);
-
-        return "redirect:/userlist";
+        return "/";
     }
 }
+        
