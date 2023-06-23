@@ -36,13 +36,9 @@ public class RoomService {
     @Transactional(readOnly = true)
     public Optional<Room> findRoomById(Long roomId) {
         Optional<Room> room = roomRepository.findById(roomId);
-        // Room roomtemp = room.get();
-        // roomtemp.setRoomName("이상한이름");
         if (room.isPresent()) {
-            System.out.println("조회된 room : " + room.get());
             return room;
         } else {
-            System.out.println("입력된 고유 번호에 대한 룸이 존재하지 않습니다.(룸 고유 번호로 룸 조회 실패)");
             return Optional.empty();
         }
     }
@@ -52,10 +48,8 @@ public class RoomService {
     public Optional<Room> findRoomByName(String roomName) {
         Optional<Room> room = roomRepository.findAll().stream().filter(r -> r.getRoomName().equals(roomName)).findAny();
         if (room.isPresent()) {
-            System.out.println("조회된 room : " + room.get());
             return room;
         } else {
-            System.out.println("입력된 이름에 대한 룸이 존재하지 않습니다.(룸 조회 실패)");
             return Optional.empty();
         }
     }
@@ -70,11 +64,9 @@ public class RoomService {
                 roomRepository.save(room);
                 return Optional.of(room);
             } else {
-                System.out.println("룸 서비스 로직 실패1");
                 return Optional.empty();
             }
         } else {
-            System.out.println("룸 서비스 로직 실패2");
             return Optional.empty();
         }
     }
@@ -91,7 +83,6 @@ public class RoomService {
     // 룸 삭제 기능 기능[관리자 파트] (비지니스 로직)
     @Transactional
     public void dropRoom(Long roomId) {
-        System.out.println("삭제된 룸 : " + roomRepository.findById(roomId).get());
         roomRepository.deleteById(roomId);
     }
 

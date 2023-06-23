@@ -30,6 +30,7 @@
                     <th>예약자</th>
                     <th>예약 날짜</th>
                     <th>룸 이름</th>
+                    <th>룸 타입</th>
                     <th>CheckIn</th>
                     <th>CheckOut</th>
                     <th>결제 가격</th>
@@ -37,9 +38,10 @@
                 </thead>
                 <tbody>
                   <tr class="alert" role="alert" th:each=" myList : ${myList}">
-                    <th scope="row" th:text="${user.userName}"></th>
+                    <th scope="row" th:text="${myList.userName}"></th>
                     <td th:text="${myList.reservationDate}"></td>
-                    <td th:text="${room.roomName}"></td>
+                    <td th:text="${myList.roomName}"></td>
+                    <td th:text="${myList.roomType}"></td>
                     <td th:text="${myList.checkIn}"></td>
                     <td th:text="${myList.checkOut}"></td>
                     <td th:text="${myList.finalPrice}"></td>
