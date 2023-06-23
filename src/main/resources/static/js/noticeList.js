@@ -24,33 +24,33 @@ $(document).on("click", "#noticeListBtn", function () {//noticeListBtn
     },
   });
   //비동기 조회를 하려했으나 플래그먼트 부분을 
-  $(document).on("click", "#noticeDetailBtn", function () {
-    let noticeId = $(this).closest("tr").find("#noticeId").val();
-    $.ajax({
-      url: "/notice/"+noticeId,//'/notice/{id}'
-      method: "GET",
-      dataType: "HTML",
-      success: function (data) {
-      console.log("ajax 성공! HTML->조회 ",data);
-      console.log("noticeId : "+noticeId);
-        $("#roomModifyContainer").html(data);
-        $("#roomModifyContainer").slideDown();
-      },
-      error: function (request, error) {
-        console.log(
-          console.log(
-            "code:" +
-            request.status +
-            "\n" +
-            "message:" +
-            request.responseText +
-            "\n" +
-            "error:" +
-            error
-          )
-        )
-      }
-    });
-  });//detail 조회
+  // $(document).on("click", "#noticeDetailBtn", function () {
+  //   let noticeId = $(this).closest("tr").find("#noticeId").val();
+  //   $.ajax({
+  //     url: "/notice/"+noticeId,//'/notice/{id}'
+  //     method: "GET",
+  //     dataType: "HTML",
+  //     success: function (data) {
+  //     console.log("ajax 성공! HTML->조회 ",data);
+  //     console.log("noticeId : "+noticeId);
+  //       $("#roomModifyContainer").html(data);
+  //       $("#roomModifyContainer").slideDown();
+  //     },
+  //     error: function (request, error) {
+  //       console.log(
+  //         console.log(
+  //           "code:" +
+  //           request.status +
+  //           "\n" +
+  //           "message:" +
+  //           request.responseText +
+  //           "\n" +
+  //           "error:" +
+  //           error
+  //         )
+  //       )
+  //     }
+  //   });
+  // });//detail 조회
 
 });//List 조회

@@ -70,16 +70,16 @@ public class KakaopayService {
       // 포스트 방식으로 아래 주소로 보낸다. 요청이 성공되면 kakaopayreadyVO로 응답정보를 보내준다.
       kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
 
-      log.info("" + kakaoPayReadyVO);
+      // log.info("" + kakaoPayReadyVO);
 
       // 결제가 완료되면 해당주소로 가게끔 한다.
       return kakaoPayReadyVO.getNext_redirect_pc_url();
 
     } catch (RestClientException e) {
-      System.out.println("RestClientException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
+      // System.out.println("RestClientException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
       e.printStackTrace();
     } catch (URISyntaxException e) {
-            System.out.println("URISyntaxException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
+            // System.out.println("URISyntaxException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
       e.printStackTrace();
     }
     return "/pay";
@@ -89,8 +89,8 @@ public class KakaopayService {
 
   public KakaoPayApprovalVO kakaoPayInfo(String pg_token, HttpSession session) {
     PaymentDTO paymentDTO = (PaymentDTO) session.getAttribute("paymentDTO");
-    log.info("KakaoPayInfoVO............................................");
-    log.info("-----------------------------");
+    // log.info("KakaoPayInfoVO............................................");
+    // log.info("-----------------------------");
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -124,8 +124,8 @@ public class KakaopayService {
       kakaoPayApprovalVO.getAmount().setDiscount(total - point);
       // 받은 값을 DB에 저장하기
       Payment pay = paymentRepository.save(kakaoPayApprovalVO.toSaveEntity());
-      System.out.println("*********************************************");
-      System.out.println(pay);
+      // System.out.println("*********************************************");
+      // System.out.println(pay);
 
       return kakaoPayApprovalVO;
 
@@ -144,8 +144,8 @@ public class KakaopayService {
 
   public KakaoPayCancelResponseVO kakaoPayCancel(Integer amount, String tid) {
 
-    log.info("KakaoPayCancelVO............................................");
-    log.info("-----------------------------");
+    // log.info("KakaoPayCancelVO............................................");
+    // log.info("-----------------------------");
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -168,7 +168,7 @@ public class KakaopayService {
     try {
       kakaoPayCancelResponseVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/cancel"), body,
           KakaoPayCancelResponseVO.class);
-      log.info("" + kakaoPayCancelResponseVO);
+      // log.info("" + kakaoPayCancelResponseVO);
 
       return kakaoPayCancelResponseVO;
 
