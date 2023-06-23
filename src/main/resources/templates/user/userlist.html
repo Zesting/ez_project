@@ -21,7 +21,6 @@
                 <td>가입날짜</td>
                 <td>이메일</td>
                 <td>등급</td>
-                <td>조회</td>
                 <td>삭제</td>
             </tr>
         </thead>
@@ -37,19 +36,28 @@
                 <td th:text="${user.joinDate}"></td>
                 <td th:text="${user.userEmail}"></td>
                 <td th:text="${user.userAuthority}"></td>
-                <td><button type="button" id="detailBtn">
-                    <!-- 조회 -->
-                    <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
-                </button></td>
                 <td><button type="button" id="deleteBtn">
-                    <!-- 삭제 -->
-                    <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
-                </button></td>
+                        <a th:href="@{|/user/delete/${user.id}|}">
+                            <!-- 삭제 -->
+                            <img src="https://ifh.cc/g/mO8TAn.png" onclick="userLeave()" alt="아이콘"
+                                style="width: 30px; height: 30px;">
+                        </a>
+                    </button></td>
+                <td></td>
                 <!-- userList.js 파일에서 ${user.id}값을 가져가기위해서 작성 -->
                 <input type="hidden" id="userId" th:value="${user.id}" />
             </tr>
         </tbody>
     </table>
+    <script>
+        function userLeave() {
+            if (confirm("회원탈퇴를 진행하시겠습니까?") == true) {
+                alert("회원 탈퇴처리가 완료되었습니다.")
+            } else {
+                return;
+            }
+        };
+    </script>
 </body>
 
 </html>

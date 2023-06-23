@@ -124,7 +124,7 @@ public class WeddingController {
         return "/wedding/weddingPaging";
     }
 
-    @GetMapping("wedding/weddingMy")
+    @GetMapping("/wedding/weddingMy")
     public String findMyAll(Model model, HttpSession session) {
 
         Long userId = (Long) session.getAttribute("userId");

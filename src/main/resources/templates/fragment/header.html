@@ -82,7 +82,7 @@
                 th:href="${session.userId == null} ? '/login' : '/user/' + ${session.userId}">
                 <i
                   class="fa-solid fa-user fa-xl"
-                  onclick="this.parentElement.href;"></i>
+                  onclick="location.href=this.parentElement.href;"></i>
               </a>
             </li>
 
@@ -90,7 +90,7 @@
               <a class="nav-link tm-nav-link" href="/logout">
                 <i
                   class="fa-sharp fa-solid fa-arrow-right-from-bracket fa-xl"
-                  onclick="logOut()"></i>
+                  onclick="location.href='/logout'"></i>
               </a>
             </li>
           </ul>

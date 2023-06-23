@@ -9,6 +9,7 @@
   <body>
     <form action="/user/update" method="post">
       <input type="hidden" th:value="${updateuser.id}" name="id" />
+      <input type="hidden" th:value="${updateuser.joinDate}" name="joinDate">
       <input
         type="hidden"
         th:value="${updateuser.userAuthority}"
