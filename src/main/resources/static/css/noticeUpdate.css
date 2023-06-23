@@ -7,10 +7,10 @@
 .noticeUpdateDiv {
     border: solid 1px rgba(255, 255, 255, 0.1);
     width: 100%;
-    height: 560px;
+    height: 620px;
     margin: auto;
     margin-top: 2%;
-    background-color: rgba(230, 230, 230, 0.5);
+    background-color: rgba(255,250,250, 1);
 }
 
 .noticeUpdateFormDiv {
@@ -30,6 +30,19 @@
 .noticeUpdateDate {
     width: 700px;
     margin: 5px;
+}
+
+.fileDiv {
+    /* border: solid 1px red; */
+    width: 700px;
+    margin-top: -30px;
+    margin-left: 10px;
+    padding-bottom: 2%;
+}
+
+.uploadImg{
+    margin-top: 1%;
+    width: 50px;
 }
 
 .noticeUpdateBtnDiv {

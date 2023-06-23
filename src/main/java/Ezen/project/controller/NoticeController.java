@@ -6,12 +6,17 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import Ezen.project.DTO.NoticeDTO;
 import Ezen.project.service.NoticeService;
@@ -51,8 +56,8 @@ public class NoticeController {
     //작성 폼 전달
     @PostMapping("/notice/save")
     public String save(@ModelAttribute NoticeDTO noticeDTO) throws IllegalStateException, IOException{
-        Long saveId = noticeService.save(noticeDTO);
-        return "redirect:/notice/" + saveId;
+        Long noticeId = noticeService.save(noticeDTO);
+        return "redirect:/notice/"+noticeId ;
     }
     
     //글 상세보기
@@ -78,10 +83,10 @@ public class NoticeController {
 
     //수정 폼 전달
     @PostMapping("/notice/update")
-    public String update(@ModelAttribute NoticeDTO noticeDTO, Model model){
-        NoticeDTO notice = noticeService.update(noticeDTO);
+    public String update(@ModelAttribute NoticeDTO noticeDTO, Model model) throws IllegalStateException, IOException{
+        Long notice = noticeService.update(noticeDTO);
         model.addAttribute("notice", notice);
-        return "/notice/detail";
+        return "redirect:/notice/"+notice ;
     }
 
     //게시글 삭제
@@ -101,8 +106,6 @@ public class NoticeController {
         int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
         int endPage = ((startPage + blockLimit - 1) < noticeList.getTotalPages()) ? startPage + blockLimit - 1 : noticeList.getTotalPages();
 
-        
-
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
@@ -111,3 +114,5 @@ public class NoticeController {
     }
 
 }
+
+

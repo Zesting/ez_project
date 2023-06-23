@@ -16,6 +16,7 @@
 .wedListTable {
     /* border: solid 1px red; */
     width: 800px;
+    height: 500px;
     margin: auto;
     margin-top: 80px;
     color: rgb(15, 15, 82);
@@ -25,7 +26,7 @@
     border-bottom: solid 1px rgb(4, 4, 26);
 }
 
-.wedTable th {text-align: center;}
+/* .wedTable th {text-align: center;} */
 
 .wedTable th, .wedTable td {
     height: 40px;
@@ -36,20 +37,30 @@
 }
 
 .wedListNo {width: 50px; text-align: center;}
-.wedListTitle {width: 500px; text-indent: 25px;}
+.wedListTitle, .wedListTitle {width: 500px; text-indent: 25px;}
 .wedListWriter {width: 110px; text-align: center;}
 .wedListDate{width: 100px; text-align: center;}
 
 .wedBtnBar {
     width: 750px;
-    margin: auto;
+    /* margin: auto; */
     margin-top: 3%;
-    text-align: center;
+    margin-left: 75%;
+    /* text-align: right; */
 }
 
-.wedBtnBar span {
-    margin: 5px;
+.writeBtn {
+    border: none;
+    border-radius: 7px;
+    width: 100px;
+    height: 40px;
+    background-color: rgb(15, 15, 82);
+    color: whitesmoke;
+    margin-top: 10px;
 }
+
+
+
 
 
 

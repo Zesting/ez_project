@@ -48,21 +48,20 @@ public class NoticeService {
                 6. notice 테이블에 해당 데이터 save 처리
                 7. notice 파일 테이블에 해당 데이터 save 처리
              */
-            NoticeDomain noticeDomain = NoticeDomain.toSaveFileEntity(noticeDTO);
-            Long savedId = noticeRepository.save(noticeDomain).getNoticeId();
-            NoticeDomain notice = noticeRepository.findById(savedId).get();
 
-            for(MultipartFile noticeFile: noticeDTO.getNoticeFile()){
-                // MultipartFile noticeFile = noticeDTO.getNoticeFile();       //1
+                MultipartFile noticeFile = noticeDTO.getNoticeFile(); //1
                 String originalFileName = noticeFile.getOriginalFilename(); //2
                 String storedFileName = System.currentTimeMillis() + "_" + originalFileName; //3
                 String savePath = System.getProperty("user.dir")+"/src/main/resources/static/images/" + storedFileName; // C:/notic_img/235235_내사진.jpg //4
                 noticeFile.transferTo(new File(savePath)); //5
 
+                NoticeDomain noticeDomain = NoticeDomain.toSaveFileEntity(noticeDTO);
+                Long saveId = noticeRepository.save(noticeDomain).getNoticeId();
+                NoticeDomain notice = noticeRepository.findById(saveId).get();
+
                 NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(notice, originalFileName, storedFileName);
                 noticeFileRepository.save(noticeFileDomain);
                 
-            }
             return noticeDomain.getNoticeId();
         }
         
@@ -94,10 +93,31 @@ public class NoticeService {
     }
 
     //수정
-    public NoticeDTO update(NoticeDTO noticeDTO) {
-        NoticeDomain noticeDomain = NoticeDomain.toUpdateEntity(noticeDTO);
-        noticeRepository.save(noticeDomain);
-        return findById(noticeDTO.getId());
+    public Long update(NoticeDTO noticeDTO) throws IllegalStateException, IOException {
+
+        if(noticeDTO.getNoticeFile().isEmpty()){
+            NoticeDomain noticeDomain = NoticeDomain.toUpdateEntity(noticeDTO);
+            noticeRepository.save(noticeDomain);
+        return noticeDomain.getNoticeId();
+
+        } else {
+           
+            MultipartFile noticeFile = noticeDTO.getNoticeFile(); //1
+                String originalFileName = noticeFile.getOriginalFilename(); //2
+                String storedFileName = System.currentTimeMillis() + "_" + originalFileName; //3
+                String savePath = System.getProperty("user.dir")+"/src/main/resources/static/images/" + storedFileName; // C:/notic_img/235235_내사진.jpg //4
+                noticeFile.transferTo(new File(savePath)); //5
+
+                NoticeDomain noticeDomain = NoticeDomain.toSaveFileEntity(noticeDTO);
+                Long saveId = noticeRepository.save(noticeDomain).getNoticeId();
+                NoticeDomain notice = noticeRepository.findById(saveId).get();
+
+                NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(notice, originalFileName, storedFileName);
+                noticeFileRepository.save(noticeFileDomain);
+
+                return noticeDomain.getNoticeId();
+        }
+        
     }
 
     //삭제 기능

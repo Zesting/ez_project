@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import Ezen.project.DTO.CheckDTO;
+import Ezen.project.DTO.UserDTO;
 import Ezen.project.domain.Reservation;
+import Ezen.project.domain.Room;
 import Ezen.project.service.ReservationService;
+import Ezen.project.service.RoomService;
+import Ezen.project.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +23,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReservationController {
     private final ReservationService reservationService;
+    private final UserService userService;
+    private final RoomService roomService;
 
     @RequestMapping(value = "/Reservations/verificationUser", method = RequestMethod.GET)
     public String verification(HttpSession session, Model model) {
@@ -60,6 +66,21 @@ public class ReservationController {
     public String modifyView(@PathVariable("id") Long id, Model model) {
         model.addAttribute("reservation", reservationService.findOneReservationById(id).get());
         return "Reservation/modifyView";
+    }
+
+    @RequestMapping(value = "/Reservations/myList", method = RequestMethod.GET)
+    public String myListView(Model model, HttpSession session) throws NullPointerException {
+        Long userId = (Long) session.getAttribute("userId");
+        List<Reservation> userReservationList = reservationService.findAllReservationByUserId(userId);
+        userReservationList.stream().forEach(r -> {
+            UserDTO user = userService.findById(r.getUserId());
+            Room room = roomService.findRoomById(r.getRoomId()).get();
+            model.addAttribute("user", user);
+            model.addAttribute("room", room);
+        });
+        model.addAttribute("myList", userReservationList);
+
+        return "Reservation/myReservation";
     }
 
 }
