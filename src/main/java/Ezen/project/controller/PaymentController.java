@@ -137,18 +137,6 @@ public class PaymentController {
     System.out.println("getMapping() paymentList 출력");
     return "payment/paymentList";
   }
-  //마이페이지에서 모든 결제 내역 리스트 [ 마이페이지 ]
-  @GetMapping("/paymentList/my")
-  public String myPaymentList(HttpSession session, Model model) {
-    Long userId = (Long) session.getAttribute("userId");
-    String userName = userService.findById(userId).getUserName();
-    List<Payment> payList = paymentService.findByUserId(userName);
-    if (userId == null) {
-      return "redirect:/login";
-    }
-    model.addAttribute("pay", payList);
-    return "payment/myPaymentList";
-  }
 
   // kakaoPaySuccessInfo
   // Payment 결제 별 정보 보기

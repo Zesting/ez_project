@@ -207,7 +207,7 @@
         // 생년월일 정규식
         $("#uage").on("keyup", function () {
             // 생년월일 정규식
-            const regExp = /^[12][190][0-9]{6}$/;
+            const regExp = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
             if (!regExp.test($("#uage").val())) {
                 $("#uageTxt").html("생년월일 형식을 확인해주세요(YYYY.MM.DD)");
                 $("#uageTxt").css({
