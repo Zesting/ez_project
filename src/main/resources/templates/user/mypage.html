@@ -9,25 +9,27 @@
     <style>
         .mysection {
             width: 80%;
-            margin: 0 auto;
+            margin: 50px auto;
             display: flex;
         }
 
         .left-div {
             width: 24%;
-            background-color: #797979;
+            border: solid 1px #fefefe;
         }
 
         .right-div {
             width: 74%;
-            background-color: #b4b4b4;
+            border: solid 1px #fefefe;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* 왼쪽메뉴바 */
         .menu-bar {
             width: 100%;
             height: 100vh;
-            background-color: #f2f2f2;
             left: 0;
             top: 0;
             padding: 30px;
@@ -36,42 +38,60 @@
         .menu-list {
             list-style-type: none;
             padding: 0;
+            text-align: right;
         }
 
         .menu-item {
-            padding: 10px;
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #b3b2b2;
+            margin-bottom: 10px;
         }
 
         .menu-item a {
             text-decoration: none;
-            color: #333;
-            font-size: 20px;
+            color: #fefefe;
+            font-size: 24px;
         }
 
         .menu-item:hover {
             background-color: #ccc;
         }
+
+        .mypage-h2 {
+            margin: 30px 10%;
+            color: azure;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .bottom-list {
+            margin-top: auto;
+        }
     </style>
 </head>
 
-<body>
+<body style="background-color: #423b5b;">
     <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
     <div style="height: 100px; width: 100%"></div>
+    <h2 class="mypage-h2">마이페이지</h2>
     <section class="mysection">
         <div class="left-div">
             <div class="menu-bar">
                 <ul class="menu-list">
-                    <li class="menu-item"><a href="#">내 정보수정하기 ></a></li>
-                    <li class="menu-item"><a href="#">내 예약정보 ></a></li>
-                    <li class="menu-item"><a href="#">결제내역 보기 ></a></li>
-                    <li class="menu-item"><a href="#">내 문의내역 ></a></li>
+                    <li class="menu-item"><a id="myinfo" href="#">내 정보 변경</a></li>
+                    <li class="menu-item"><a id="myreservation" href="#">내 예약정보</a></li>
+                    <li class="menu-item"><a id="mypayment" href="#">결제내역 보기</a></li>
+                    <li class="menu-item"><a id="mywedding" href="#">내 문의내역</a></li>
                     <li class="menu-item"><a href="#">Menu 5</a></li>
                     <li class="menu-item"><a href="#">Menu 6</a></li>
+                </ul>
+                <ul class="bottom-list">
+                    <li class="menu-item"><a href="#">회원탈퇴</a></li>
                 </ul>
             </div>
         </div>
         <div class="right-div">
+            <div id="mypage-container" class="myinfo">
+
+            </div>
         </div>
     </section>
     <table>
@@ -91,9 +111,29 @@
         </tr>
     </table>
 
-    <button><a href="/userupdate">내정보수정하기</a></button>
+    <button><a href="/userupdate">내정보</a></button>
 
     <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
+    <script>
+        $("#mypayment").on("click", function (myinfo) {
+            myinfo.preventDefault();
+            page("/paymentList/my");
+        });
+
+        function page(url) {
+            $.ajax({
+                url: url,
+                method: "GET",
+                dataType: "HTML",
+                success: function (data) {
+                    $("#mypage-container").html(data);
+                },
+                error: function (request, error) {
+                    console.log("페이지 전송 오류");
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>
