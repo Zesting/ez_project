@@ -1,15 +1,31 @@
+body {
+  /* padding: 10px; */
+}
+
+tbody td {
+  text-align: center;
+  /* border: 1px dotted #555; */
+}
+
+thead td,
+thead th {
+  text-align: center;
+  border: 3px solid white;
+}
+
 .listBox {
-  border: 1px solid rgb(0, 255, 38);
+  /* border: 1px solid rgb(0, 255, 38); */
   display: flex;
 }
 
 .sidebarBox {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   width: 235px;
 
 }
 .containerBox {
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  /* margin-left: 5px; */
   width: 85%;
 }
 
