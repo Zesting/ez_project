@@ -12,6 +12,10 @@
       white-space: nowrap; /* 글자를 한 줄로 표시 */
       text-align: center;
     }
+    tbody td button {
+      background-color: transparent;
+      border: none;
+    }
   </style>
 </head>
 <!-- 결제리스트 할떄 로그인되어있는지 확인 -->
@@ -53,7 +57,7 @@
           <!-- 조회 -->
           <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
         </button></td>
-        <td><button type="button"  th:onclick="'deleteBtn('+${paymentList.id}+')'" th:id="'deleteBtn('+${paymentList.id}+')'" >
+        <td><button type="button"  th:onclick="'deleteBtn('+${paymentList.id}+')'" th:id="'deleteBtn('+${paymentList.id}+')'">
           <!-- 삭제 -->
           <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
         </button></td>
