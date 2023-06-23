@@ -10,10 +10,10 @@
     <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
   </head>
 
-<body>
-  <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-  <div style="height: 50px; width: 100%"></div>
-  <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
+  <body>
+    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
+    <div style="height: 50px; width: 100%"></div>
+    <!-- 이 아래다가 내용 넣어주시면 됩니다. -->
 
     <section id="infinite" class="text-white tm-font-big tm-parallax">
       <div class="text-center tm-hero-text-container">
@@ -37,7 +37,7 @@
     <section
       id="whatwedo"
       class="tm-section-pad-top"
-      style="background-color: #333">
+      style="background-color: #444">
       <div class="container">
         <div class="row tm-content-box">
           <!-- first row -->
@@ -186,28 +186,6 @@
         <!-- third row -->
       </div>
     </section>
-
-    <div><a href="/roomDetailView">Test</a></div>
-    <script src="js/jquery-1.9.1.min.js"></script>
-    <script src="slick/slick.min.js"></script>
-    <script src="magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="js/easing.min.js"></script>
-    <script src="js/jquery.singlePageNav.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
-    <div><a href="/userlist">회원목록</a></div>
-
-    <div><a href="/notice">공지사항(페이징 없음)</a></div>
-    <div>
-      <button onclick="pagingReq()">페이징 목록보기</button>
-    </div>
-
-    <a th:href="@{/Rooms}"><button>Room_List</button></a>
-    <a th:href="@{/Rooms/add}"><button>Create_Room</button></a>
-    <a th:href="@{/Reservations}"><button>Reservation</button></a>
-    <a th:href="@{/verificationUser}">예약하기</a>
-    <br />
-    <a href="/kakaoMap">찾아오시는 길</a><br />
     <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
   </body>
 
@@ -220,7 +198,7 @@
       $("#reservationBtn").click(function () {
         let session = $("#reservationBtn").attr("th:value");
         console.log(session);
-    if (session === undefined) {
+        if (session === undefined) {
           alert("로그인이 필요한 항목입니다.");
           window.location.href = "/login";
         } else {
