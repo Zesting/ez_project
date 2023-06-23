@@ -26,16 +26,27 @@
                       th:unless="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
                       <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'yy-MM-dd')}"></span>
                   </span> -->
-                  <td><button type="button" th:id="weddingDetailBtn">
+                  <td><button type="button" th:id="'weddingDetailBtn('+${wedding.weddingId}+')'" th:onclick="'weddingDetailBtn('+${wedding.weddingId}+')'">
                     <!-- 조회 -->
                     <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
                   </button></td>
-                  <td><button type="button" th:id="weddingDeleteBtn" >
+                  <td>
+                    <!-- <button type="button" th:id="weddingDeleteBtn" > -->
+                    <button type="button" th:id="'weddinDeleteBtn('+${wedding.weddingId}+')'" >
                     <!-- 삭제 -->
-                    <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
+                    <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;" th:onclick="'weddinDeleteBtn('+${wedding.weddingId}+')'">
                   </button></td>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+</div>
+<script>
+    function weddinDeleteBtn(id){
+      window.location.href = "/adminWedding/delete/"+ id;
+    }
+    function weddingDetailBtn(id){
+      window.location.href = "/wedding/"+ id;
+    }
+</script>

@@ -16,7 +16,6 @@ import Ezen.project.DTO.KakaoPayApprovalVO;
 import Ezen.project.DTO.KakaoPayCancelResponseVO;
 import Ezen.project.DTO.KakaoPayReadyVO;
 import Ezen.project.DTO.PaymentDTO;
-import Ezen.project.domain.Payment;
 import Ezen.project.repository.PaymentRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -35,7 +34,10 @@ public class KakaopayService {
   private KakaoPayCancelResponseVO kakaoPayCancelResponseVO;
   private final PaymentRepository paymentRepository;
 
-  /*...............................결제 준비.............................................*/
+  /*
+   * ...............................결제
+   * 준비.............................................
+   */
   public String kakaoPayReady(PaymentDTO paymentDTO) {
     RestTemplate restTemplate = new RestTemplate();
 
@@ -70,27 +72,30 @@ public class KakaopayService {
       // 포스트 방식으로 아래 주소로 보낸다. 요청이 성공되면 kakaopayreadyVO로 응답정보를 보내준다.
       kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
 
-      log.info("" + kakaoPayReadyVO);
+      // log.info("" + kakaoPayReadyVO);
 
       // 결제가 완료되면 해당주소로 가게끔 한다.
       return kakaoPayReadyVO.getNext_redirect_pc_url();
 
     } catch (RestClientException e) {
-      System.out.println("RestClientException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
+      // System.out.println("RestClientException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
       e.printStackTrace();
     } catch (URISyntaxException e) {
-            System.out.println("URISyntaxException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
+      // System.out.println("URISyntaxException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
       e.printStackTrace();
     }
     return "/pay";
   }
 
-  /*  ...............................결제 승인 요청.............................................*/
+  /*
+   * ...............................결제 승인
+   * 요청.............................................
+   */
 
   public KakaoPayApprovalVO kakaoPayInfo(String pg_token, HttpSession session) {
     PaymentDTO paymentDTO = (PaymentDTO) session.getAttribute("paymentDTO");
-    log.info("KakaoPayInfoVO............................................");
-    log.info("-----------------------------");
+    // log.info("KakaoPayInfoVO............................................");
+    // log.info("-----------------------------");
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -123,9 +128,9 @@ public class KakaopayService {
       int point = kakaoPayApprovalVO.getAmount().getPoint();
       kakaoPayApprovalVO.getAmount().setDiscount(total - point);
       // 받은 값을 DB에 저장하기
-      Payment pay = paymentRepository.save(kakaoPayApprovalVO.toSaveEntity());
-      System.out.println("*********************************************");
-      System.out.println(pay);
+      paymentRepository.save(kakaoPayApprovalVO.toSaveEntity());
+      // System.out.println("*********************************************");
+      // System.out.println(pay);
 
       return kakaoPayApprovalVO;
 
@@ -144,8 +149,8 @@ public class KakaopayService {
 
   public KakaoPayCancelResponseVO kakaoPayCancel(Integer amount, String tid) {
 
-    log.info("KakaoPayCancelVO............................................");
-    log.info("-----------------------------");
+    // log.info("KakaoPayCancelVO............................................");
+    // log.info("-----------------------------");
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -168,7 +173,7 @@ public class KakaopayService {
     try {
       kakaoPayCancelResponseVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/cancel"), body,
           KakaoPayCancelResponseVO.class);
-      log.info("" + kakaoPayCancelResponseVO);
+      // log.info("" + kakaoPayCancelResponseVO);
 
       return kakaoPayCancelResponseVO;
 

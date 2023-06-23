@@ -25,7 +25,7 @@ public class PaymentService {
   
   //전체 결제 리스트 출력
   public List<Payment> findByAll() {
-    System.out.println("전체 결제 리스트 출력");
+    // System.out.println("전체 결제 리스트 출력");
     return paymentRepository.findAll();
   }
 

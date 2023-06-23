@@ -79,6 +79,7 @@ public class NoticeController {
     //수정 폼 전달
     @PostMapping("/notice/update")
     public String update(@ModelAttribute NoticeDTO noticeDTO, Model model) throws IllegalStateException, IOException{
+        System.out.println(noticeDTO);
         Long notice = noticeService.update(noticeDTO);
         model.addAttribute("notice", notice);
         return "redirect:/notice/"+notice ;

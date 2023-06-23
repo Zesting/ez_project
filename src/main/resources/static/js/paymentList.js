@@ -5,7 +5,7 @@ $(document).on("click", "#paymentListBtn", function () {//paymentListBtn
     method: "GET", // 방식
     dataType: "HTML", // 데이터 타입
     success: function (data) {
-      console.log("ajax 성공! HTML-> 리스트");
+      // console.log("ajax 성공! HTML-> 리스트");
       $("#adminPageContainer").slideUp();
       $("#roomListContainer").html(data); //여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
       $("#roomModifyContainer").slideUp();//다른 페이지 이동하면 접힘.
@@ -24,6 +24,7 @@ $(document).on("click", "#paymentListBtn", function () {//paymentListBtn
     },
   });
 
+  //조회 버튼 클릭 > 결제id 조회 불러오기
   $(document).on("click", "#paymentDetailBtn", function () {
     let id = $(this).closest("tr").find("#payId").val();
     $.ajax({
@@ -31,8 +32,8 @@ $(document).on("click", "#paymentListBtn", function () {//paymentListBtn
       method: "GET",
       dataType: "HTML",
       success: function (data) {
-        console.log("ajax 성공! HTML-> 조회");
-        console.log("id 값은?"+id);
+        // console.log("ajax 성공! HTML-> 조회");
+        // console.log("id 값은?"+id);
         $("#roomModifyContainer").html(data);
         $("#roomModifyContainer").slideDown();
       },

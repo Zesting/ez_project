@@ -29,7 +29,11 @@
         <input class="noticeUpdateDate" type="hidden" name="writeDate" th:value="${noticeUpdate.writeDate}" readonly>
         <br>
         <div class="fileDiv">
-          <input type="file" name="noticeFile">
+          <input type="file" name="noticeFile" th:value="${noticeUpdate.noticeFile}">
+          <input type="hidden" name="originalFileName" th:value="${noticeUpdate.originalFileName}">
+          <input type="hidden" name="storedFileName" th:value="${noticeUpdate.storedFileName}">
+          <input type="hidden" name="fileAttached" th:value="${noticeUpdate.fileAttached}">
+
           <div th:if="${noticeUpdate.fileAttached == 1}">
             <span th:each="fileName: ${noticeUpdate.storedFileName}">
               <img class="uploadImg" id="uploadFile" th:src="@{'/upload/images/' + ${fileName}}">
@@ -53,23 +57,7 @@
 
     function deleteFile() {
 
-      $.ajax({
-        url: "/notice/update/" + noticeId,
-        type: "GET",
-        data: {
-          id: noticeId
-        },
-        success: function (response) {
-
-          window.alert("파일이 삭제되었습니다.");
-
-        },
-        error: function (xhr, status, error) {
-
-          window.alert("파일 삭제에 실패했습니다.");
-
-        },
-      });
+      
     }
 
   </script>
