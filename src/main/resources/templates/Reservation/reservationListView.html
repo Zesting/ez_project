@@ -2,11 +2,11 @@
   <thead>
     <tr>
       <td>예약 고유 번호</td>
-      <td>예약한 회원 고유 번호</td>
-      <td>회원이 예약한 룸 고유 번호</td>
+      <td>예약한 회원 이름(회원고유번호)</td>
+      <td>회원이 예약한 룸 이름(룸고유번호)</td>
       <td>체크 인 날짜</td>
       <td>체크 아웃 날짜</td>
-      <td>예약한 날짜</td>
+      <td>예약 날짜</td>
       <td>최종 예약 금액</td>
       <td>수정</td>
       <td>삭제</td>
@@ -18,8 +18,21 @@
         id="reservationId"
         name="reservationId"
         th:text="${reservationList.reservationId}"></td>
-      <td id="reservationUserId" th:text="${reservationList.userId}"></td>
-      <td id="reservationRoomId" th:text="${reservationList.roomId}"></td>
+      <td id="reservationUserId" th:text="${user.userName}">
+        <span
+          >(
+          <p th:text="${reservationList.userId}"></p>
+          )</span
+        >
+      </td>
+      <td id="reservationRoomId" th:text="${room.roomName}">
+        <p style="color: wheat">test</p>
+        <span
+          >(
+          <p th:text="${reservationList.roomId}"></p>
+          )</span
+        >
+      </td>
       <td id="reservationCheckIn" th:text="${reservationList.checkIn}"></td>
       <td id="reservationCheckOut" th:text="${reservationList.checkOut}"></td>
       <td
@@ -28,14 +41,24 @@
       <td
         id="reservationFinalPrice"
         th:text="${reservationList.finalPrice}"></td>
-      <td><button type="button" id="modifyMoveBtn">
-        <!-- 수정 폼 이동 -->
-        <img src="https://ifh.cc/g/XBTqrp.png" alt="아이콘" style="width: 30px; height: 30px;">
-      </button></td>
-      <td><button type="button" id="deleteSubmit">
-        <!-- 삭제 -->
-        <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
-      </button></td>
+      <td>
+        <button type="button" id="modifyMoveBtn">
+          <!-- 수정 폼 이동 -->
+          <img
+            src="https://ifh.cc/g/XBTqrp.png"
+            alt="아이콘"
+            style="width: 30px; height: 30px" />
+        </button>
+      </td>
+      <td>
+        <button type="button" id="deleteSubmit">
+          <!-- 삭제 -->
+          <img
+            src="https://ifh.cc/g/mO8TAn.png"
+            alt="아이콘"
+            style="width: 30px; height: 30px" />
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

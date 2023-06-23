@@ -54,15 +54,14 @@ $(document).on("click", "#postBtn", function () {
 
   $(document).on("click", "#choiceRoom", function () {
     console.log("choiceRoom Post 시작");
-    var roomId = document.getElementById("choiceRoomId").textContent;
-    var roomName = document.getElementById("choiceRoomName").textContent;
-    var roomPrice = document.getElementById("choiceRoomPrice").textContent;
-    var roomType = document.getElementById("choiceRoomType").textContent;
+    var listItem = event.target.closest("li");
 
-    /* var roomId = $row.find("#choiceRoomId").val();
-    var roomName = $row.find("#choiceRoomName").val();
-    var roomPrice = $row.find("#choiceRoomPrice").val();
-    var roomType = $row.find("#choiceRoomType").val(); */
+    // li 태그 내의 정보 요소를 찾아서 정보 추출
+    var roomId = listItem.querySelector("#choiceRoomId").innerText;
+    var roomName = listItem.querySelector("#choiceRoomName").innerText;
+    var roomPrice = listItem.querySelector("#choiceRoomPrice").innerText;
+    var roomType = listItem.querySelector("#choiceRoomType").innerText;
+
     const params = {
       roomId: roomId,
       roomName: roomName,
@@ -78,7 +77,7 @@ $(document).on("click", "#postBtn", function () {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify(params), // 폼 데이터 직렬화하여 전송
       success: function (data) {
-        console.log("modifyForm Post Ajax 성공!", data);
+        console.log("Reservation create Post Ajax 성공!", data);
         location.href = "/payment";
         window.alert("성공");
       },
