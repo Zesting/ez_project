@@ -9,8 +9,8 @@
   <title>Project</title>
   <link rel="stylesheet" th:href="@{/css/kakaoPay.css}">
 </head>
-
-<body style="background-image: url(../img/space8.jpg);">
+<body>
+<!-- <body style="background-image: url(../img/space8.jpg);"> -->
   <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
   <div style="height: 100px; width: 100%;"></div>
 
@@ -43,7 +43,7 @@
         <div class="itemInfo_b_a_1" th:if="${payInfo.roomName.contains('Mercury')}"><!--Mercury--></div>
         <div class="itemInfo_b_a_2" th:if="${payInfo.roomName.contains('Mars')}"><!--Mars--></div>
         <div class="itemInfo_b_a_3" th:if="${payInfo.roomName.contains('Earth')}"><!--Earth--></div>
-        <div class="itemInfo_b_a-4" th:if="${payInfo.roomName.contains('Jupiter')}"><!--Jupiter--></div>
+        <div class="itemInfo_b_a_4" th:if="${payInfo.roomName.contains('Jupiter')}"><!--Jupiter--></div>
         <div class="itemInfo_b_b">
           <div class="itemInfo_b_b_a">[[${payInfo.roomName}]]</div>
           <div class="itemInfo_b_b_b">

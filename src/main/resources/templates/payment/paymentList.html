@@ -8,22 +8,9 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <title>Project</title>
   <style>
-    .paymentTable th,
-    .paymentTable td {
-      border: 1px solid black;
+    th {
+      white-space: nowrap; /* 글자를 한 줄로 표시 */
       text-align: center;
-    }
-
-    .paymentTable td>a {
-      cursor: pointer;
-    }
-
-    .paymentTable tr:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
-    body {
-      color: white;
     }
   </style>
 </head>
@@ -31,20 +18,22 @@
 <body>
   <!-- 헤더 불러오기 -->
   <!-- <a href="/adminPage">관리자 페이지 홈</a> -->
-  <table class="paymentTable">
+  <table class="table table-dark table-hover">  
     <thead>
       <tr>
-        <th>결제 번호</th>
-        <th>회원 이름</th>
-        <th>예약 번호</th>
-        <th>방 이름</th>
-        <th>최종 결제 금액</th>
-        <th>카카오포인트</th>
-        <th>할인된 금액</th>
-        <th>결제 방식</th>
-        <th>카드 이름</th>
-        <th>결제 상태</th>
-        <th>결제 시간</th>
+        <td>결제 번호</td>
+        <td>회원 이름</td>
+        <td>예약 번호</td>
+        <td>방 이름</td>
+        <td>최종 결제 금액</td>
+        <td>카카오 포인트</td>
+        <td>할인된 금액</td>
+        <td>결제 방식</td>
+        <td>카드 이름</td>
+        <td>결제 상태</td>
+        <td>결제 시간</td>
+        <td>조회</td>
+        <td>삭제</td>
       </tr>
     </thead>
     <tbody>
@@ -60,8 +49,14 @@
         <td><a th:text="${paymentList.cardName}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.payState}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
         <td><a th:text="${paymentList.approved_at}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><button type="button" th:id="paymentDetailBtn">조회</button></td>
-        <td><button type="button"  th:onclick="'deleteBtn('+${paymentList.id}+')'" th:id="'deleteBtn('+${paymentList.id}+')'">삭제</button></td>
+        <td><button type="button" th:id="paymentDetailBtn" >
+          <!-- 조회 -->
+          <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
+        </button></td>
+        <td><button type="button"  th:onclick="'deleteBtn('+${paymentList.id}+')'" th:id="'deleteBtn('+${paymentList.id}+')'" >
+          <!-- 삭제 -->
+          <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
+        </button></td>
         <input type="hidden" id="payId" th:value="${paymentList.id}">
       </tr>
     </tbody>

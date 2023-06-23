@@ -7,6 +7,7 @@ $(document).on("click", "#reservationListForm", function () {
     dataType: "HTML",
     success: function (data) {
       console.log("ajax 성공!");
+      $("#adminPageContainer").slideUp();
       $("#roomListContainer").html(data);
       $("#roomModifyContainer").slideUp();
     },

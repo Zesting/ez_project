@@ -13,7 +13,10 @@
 .payState {
   color: black;
   background-color: rgba(255, 255, 255, 1);
-  border: 1px solid white;
+  /* border: 1px solid white; */
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
   border-radius: 6px 6px 0 0;
   height: 150px;
   text-align: center;
@@ -26,7 +29,9 @@
 /* userInfo 블럭 */
 .userInfo {
   width: 60%;
-  border: 1px solid white;
+  /* border: 1px solid white; */
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
   /* border-radius: 6px; */
   padding: 8px 20px;
   color: black;
@@ -63,7 +68,9 @@
 .itemInfo {
   color: black;
   background-color: rgba(255, 255, 255, 1);
-  border: 1px solid white;
+  /* border: 1px solid white; */
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
   padding: 8px 20px;
   /* border-radius: 6px; */
   height: 240px;
@@ -167,8 +174,8 @@
 }
 /* Jupiter */
 .itemInfo_b_a_4 {
-  background-image: url('/roomImage/Jupiter1.jpg');
-  background-size: cover;
+  background-image: url('/roomImage/Jupiter2.png');
+  background-size: contain;
   /* 이미지를 컨테이너에 맞게 조절합니다. */
   background-position: center center;
   /* 이미지를 가운데로 정렬합니다. */
@@ -223,13 +230,17 @@
 /* finalAmount 블럭 */
 .paymentInfoBox {
   width: 60%;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0 0 6px 6px;
   margin: auto;
 }
 
 .finalAmount {
   color: black;
   background-color: rgba(255, 255, 255, 1);
-  border: 1px solid white;
+  /* border: 1px solid white; */
   /* border-radius: 6px; */
   padding: 8px 20px;
   /* background: transparent; */
@@ -442,4 +453,9 @@
 .kakaoPayForm div {
   font-size: 40px;
   font-weight: bold;
+}
+
+tbody td button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
 }
