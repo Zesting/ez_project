@@ -16,15 +16,15 @@
       <td><a th:href="@{|notice/${notice.id}|}" th:text="${notice.title}"></a></td>
       <!-- <td th:text="*{#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></td> -->
       <td th:text=${notice.writeDate}></td>
-      <td><button type="button" th:id="noticeDetailBtn">
+      <td><button type="button" th:id="'noticeDetailBtn('+${notice.id}+')'" th:onclick="'noticeDetailBtn('+${notice.id}+')'">
         <!-- 조회 -->
         <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
       </button></td>
       <td>
         <!-- <button type="button" th:id="noticeDeleteBtn" > 원래 있던 버튼 -->
-          <button type="button" th:id="'deleteBtn('+${notice.id}+')'" >
+          <button type="button" th:id="'noticeDeleteBtn('+${notice.id}+')'" >
         <!-- 삭제 -->
-        <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;" th:onclick="'deleteBtn('+${notice.id}+')'">
+        <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;" th:onclick="'noticeDeleteBtn('+${notice.id}+')'">
       </button></td>
       <input type="hidden" id="noticeId" th:value="${notice.id}">
 
@@ -34,9 +34,13 @@
     const saveReq = () => {
         location.href = "/notice/save";
     }
-    function deleteBtn(id){
+    function noticeDeleteBtn(id){
       // window.location.href = "/notice/delete/"+ id;
       window.location.href = "/adminNotice/delete/"+ id;
+    }
+    function noticeDetailBtn(id){
+      // window.location.href = "/notice/delete/"+ id;
+      window.location.href = "/notice/"+ id;
     }
 </script>
 </table>

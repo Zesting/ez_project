@@ -18,7 +18,7 @@ public class AdminPageService {
   public void save(AdminPageDTO adminPageDTO){
     AdminPage adminPage = AdminPage.toSaveEntity(adminPageDTO);
     adminPageRepository.save(adminPage);
-    System.out.println(adminPage);
+    // System.out.println(adminPage);
   }
 
   public List<AdminPageDTO> findAll() {

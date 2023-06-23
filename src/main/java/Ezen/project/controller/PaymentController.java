@@ -53,17 +53,17 @@ public class PaymentController {
     List<Payment> payments = paymentService.findByAll();
     for (Payment payment : payments) {
       if (payment.getReservationId().equals(String.valueOf(reservation.getReservationId()))) {
-        System.out.println("payment.getReservationId() ::" + payment.getReservationId());
-        System.out.println("reservation.getReservationId() ::" + reservation.getReservationId());
-        System.out.println("결제가 완료된 요청입니다.!");
+        // System.out.println("payment.getReservationId() ::" + payment.getReservationId());
+        // System.out.println("reservation.getReservationId() ::" + reservation.getReservationId());
+        // System.out.println("결제가 완료된 요청입니다.!");
         return "redirect:/pay";
       } else {
-        System.out.println("payment.getReservationId() ::" + payment.getReservationId());
-        System.out.println("reservation.getReservationId() ::" + reservation.getReservationId());
-        System.out.println("값이 다르게 나왔습니다!");
+        // System.out.println("payment.getReservationId() ::" + payment.getReservationId());
+        // System.out.println("reservation.getReservationId() ::" + reservation.getReservationId());
+        // System.out.println("값이 다르게 나왔습니다!");
       }
     }
-    System.out.println("List 비교문 끝나고 나옴 ");
+    // System.out.println("List 비교문 끝나고 나옴 ");
     // 로그인 되어 있는 userID를 가져옴
     UserDTO logInUser = userService.findById(userId);
     // 새로운 객체를 만들어 필요한 값을 저장.
@@ -77,15 +77,15 @@ public class PaymentController {
     paymentDTO.setAmount(reservation.getFinalPrice());
     // 다른 곳에서 DTO를 쓰기 위해 세션에 paymentDTO를 저장.
     session.setAttribute("paymentDTO", paymentDTO);
-    System.out.println("포스트맵핑/kakaopay dto 저장" + paymentDTO);
+    // System.out.println("포스트맵핑/kakaopay dto 저장" + paymentDTO);
     return "redirect:" + kakaoPayService.kakaoPayReady(paymentDTO);
   }
 
   // 결제가 성공되었을때.
   @GetMapping("/kakaoPaySuccess")
   public String kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model, HttpSession session) {
-    log.info("kakaoPaySuccess get............................................");
-    log.info("kakaoPaySuccess pg_token : " + pg_token);
+    // log.info("kakaoPaySuccess get............................................");
+    // log.info("kakaoPaySuccess pg_token : " + pg_token);
     model.addAttribute("info", kakaoPayService.kakaoPayInfo(pg_token, session));
     model.addAttribute("payment", paymentService.findByAll());
     model.addAttribute("paymentDTO", session.getAttribute("paymentDTO"));
@@ -120,7 +120,7 @@ public class PaymentController {
     paymentDTO.setUserName(userService.findById(logInUser).getUserName());
     paymentDTO.setUserPhoneNumber(userService.findById(logInUser).getUserPhoneNumber());
     paymentDTO.setRoomName(roomService.findRoomById(reservation.getRoomId()).get().getRoomName());
-    System.out.println("reservation 에 저장된 값은????" + reservation);
+    // System.out.println("reservation 에 저장된 값은????" + reservation);
     model.addAttribute("reservationInfo", reservation);
     model.addAttribute("paymentDTO",paymentDTO);
     return "payment/payment";
@@ -134,7 +134,7 @@ public class PaymentController {
     }
     List<Payment> paymentList = paymentService.findByAll();
     model.addAttribute("paymentList", paymentList);
-    System.out.println("getMapping() paymentList 출력");
+    // System.out.println("getMapping() paymentList 출력");
     return "payment/paymentList";
   }
 
