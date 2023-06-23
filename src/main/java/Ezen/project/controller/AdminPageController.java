@@ -161,6 +161,15 @@ public class AdminPageController {
   //       return "/wedding/adminWeddingPaging";
   //   }
 
+
+  //공지사항 등록
+  @GetMapping("/adminNoticeSave")
+    public String adminSave(Model model, HttpSession session){
+       Long userId = (Long) session.getAttribute("userId");
+        model.addAttribute("user", userService.findById(userId));
+        return "/notice/adminNoticeSave";
+    }
+
 }
 
  
