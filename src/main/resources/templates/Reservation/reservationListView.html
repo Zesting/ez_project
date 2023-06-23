@@ -8,6 +8,8 @@
       <td>체크 아웃 날짜</td>
       <td>예약한 날짜</td>
       <td>최종 예약 금액</td>
+      <td>수정</td>
+      <td>삭제</td>
     </tr>
   </thead>
   <tbody>
@@ -26,8 +28,14 @@
       <td
         id="reservationFinalPrice"
         th:text="${reservationList.finalPrice}"></td>
-      <td><button type="button" id="modifyMoveBtn">수정 폼 이동</button></td>
-      <td><button type="button" id="deleteSubmit">삭제</button></td>
+      <td><button type="button" id="modifyMoveBtn">
+        <!-- 수정 폼 이동 -->
+        <img src="https://ifh.cc/g/XBTqrp.png" alt="아이콘" style="width: 30px; height: 30px;">
+      </button></td>
+      <td><button type="button" id="deleteSubmit">
+        <!-- 삭제 -->
+        <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
+      </button></td>
     </tr>
   </tbody>
 </table>

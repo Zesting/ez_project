@@ -7,6 +7,8 @@
                     <td class="wedListTitle">제목</td>
                     <td class="wedListWriter">작성자</td>
                     <td class="wedListDate">작성일</td>
+                    <td class="wedListDate">조회</td>
+                    <td class="wedListDate">삭제</td>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +26,14 @@
                       th:unless="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
                       <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'yy-MM-dd')}"></span>
                   </span> -->
+                  <td><button type="button" th:id="weddingDetailBtn">
+                    <!-- 조회 -->
+                    <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
+                  </button></td>
+                  <td><button type="button" th:id="weddingDeleteBtn" >
+                    <!-- 삭제 -->
+                    <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
+                  </button></td>
                     </td>
                 </tr>
             </tbody>

@@ -21,6 +21,8 @@
                 <td>가입날짜</td>
                 <td>이메일</td>
                 <td>등급</td>
+                <td>조회</td>
+                <td>삭제</td>
             </tr>
         </thead>
         <tbody>
@@ -35,8 +37,14 @@
                 <td th:text="${user.joinDate}"></td>
                 <td th:text="${user.userEmail}"></td>
                 <td th:text="${user.userAuthority}"></td>
-                <td><button type="button" id="detailBtn">조회</button></td>
-                <td><button type="button" id="deleteBtn">삭제</button></td>
+                <td><button type="button" id="detailBtn">
+                    <!-- 조회 -->
+                    <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
+                </button></td>
+                <td><button type="button" id="deleteBtn">
+                    <!-- 삭제 -->
+                    <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
+                </button></td>
                 <!-- userList.js 파일에서 ${user.id}값을 가져가기위해서 작성 -->
                 <input type="hidden" id="userId" th:value="${user.id}" />
             </tr>

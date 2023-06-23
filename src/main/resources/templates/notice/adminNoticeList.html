@@ -11,10 +11,12 @@
 <table class="table table-dark table-hover">
   <thead>
     <tr>
-      <td>id</td>
-      <td>writer</td>
-      <td>title</td>
-      <td>date</td>
+      <td>번호</td>
+      <td>작성자</td>
+      <td>제목</td>
+      <td>작성시간</td>
+      <td>조회</td>
+      <td>삭제</td>
     </tr>
   </thead>
   <tbody>
@@ -24,7 +26,10 @@
       <td><a th:href="@{|notice/${notice.id}|}" th:text="${notice.title}"></a></td>
       <!-- <td th:text="*{#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></td> -->
       <td th:text=${notice.writeDate}></td>
-      <td><button type="button" th:id="noticeDetailBtn">조회</button></td>
+      <td><button type="button" th:id="noticeDetailBtn">
+        <!-- 조회 -->
+        <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
+      </button></td>
       <td><button type="button" th:id="noticeDeleteBtn" >
         <!-- 삭제 -->
         <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
