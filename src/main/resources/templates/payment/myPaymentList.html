@@ -8,62 +8,61 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <title>Project</title>
   <style>
-    .paymentTable th,
-    .paymentTable td {
-      border: 1px solid black;
-      text-align: center;
-    }
-
-    .paymentTable td>a {
-      cursor: pointer;
-    }
-
-    .paymentTable tr:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-
     body {
-      color: black;
+      background: #1E1930;
+      color: #D2D1D5;
+    }
+
+    tr:nth-child(even) {
+      background-color: #2e2649;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #423b5b;
+    }
+
+    th {
+      background-color: #342F44;
+      color: white;
+    }
+
+    .noBorder {
+      border: none !important;
     }
   </style>
 </head>
 <!-- 결제리스트 할떄 로그인되어있는지 확인 -->
+
 <body>
   <!-- 헤더 불러오기 -->
   <!-- <a href="/adminPage">관리자 페이지 홈</a> -->
-  <table class="paymentTable">
-    <thead>
-      <tr>
-        <th>결제 번호</th>
-        <th>회원 이름</th>
-        <th>예약 번호</th>
-        <th>방 이름</th>
-        <th>최종 결제 금액</th>
-        <th>카카오포인트</th>
-        <th>할인된 금액</th>
-        <th>결제 방식</th>
-        <th>카드 이름</th>
-        <th>결제 상태</th>
-        <th>결제 시간</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr th:each="paymentList: ${pay}"> 
-        <td><a th:text="${paymentList.id}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.userId}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.reservationId}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.roomName}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.paymentAmount}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.kakaoPoint}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.discountAmount}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.payment_method_type}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.cardName}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.payState}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <td><a th:text="${paymentList.approved_at}" th:onclick="'payInfo('+${paymentList.id}+')'"></a></td>
-        <!-- <td><button type="button"  th:onclick="'deleteBtn('+${paymentList.id}+')'" th:id="'deleteBtn('+${paymentList.id}+')'">삭제</button></td> -->
-      </tr>
-    </tbody>
-  </table>
+  <div class="mypage-container">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">방 이름</th>
+            <th scope="col">최종 결제 금액</th>
+            <th scope="col">결제 방식</th>
+            <th scope="col">카드 이름</th>
+            <th scope="col">결제 상태</th>
+            <th scope="col">결제 시간</th>
+            <th scope="col">상세내역</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="paymentList: ${pay}">
+            <td th:text="${paymentList.roomName}"></td>
+            <td th:text="${paymentList.paymentAmount}"></td>
+            <td th:text="${paymentList.payment_method_type}"></td>
+            <td th:text="${paymentList.cardName}"></td>
+            <td th:text="${paymentList.payState}"></td>
+            <td th:text="${#dates.format(paymentList.approved_at, 'yy-MM-dd HH:mm')}" ></td>
+            <td><button><a th:onclick="'payInfo('+${paymentList.id}+')'">상세내역</a></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script>
@@ -75,9 +74,6 @@
       window.location.href = "/payment/delete/" + id;
 
     }
-
   </script>
-  <div th:replace="~{fragment/footer.html :: fragment-footer}"></div>
 </body>
-
 </html>
