@@ -18,14 +18,25 @@
 
   <div class="noticeUpdateDiv">
     <div class="noticeUpdateFormDiv">
-      <form class="noticeUpdateForm" action="/notice/update" method="post" name="updateForm">
+      <form class="noticeUpdateForm" action="/notice/update" method="post" name="updateForm"
+        enctype="multipart/form-data">
 
         <input type="hidden" name="id" th:value="${noticeUpdate.id}">
         <input type="hidden" name="userId" th:value="${noticeUpdate.userId}" readonly> <br>
         <input class="noticeUpdateTitle" type="text" name="title" th:value="${noticeUpdate.title}"> <br>
-        <textarea class="noticeUpdateContent" name="content" cols="30" rows="10" th:text="${noticeUpdate.content}"></textarea> <br>
-        <input class="noticeUpdateDate" type="hidden" name="writeDate" th:value="${noticeUpdate.writeDate}" readonly> <br>
-
+        <textarea class="noticeUpdateContent" name="content" cols="30" rows="10"
+          th:text="${noticeUpdate.content}"></textarea> <br>
+        <input class="noticeUpdateDate" type="hidden" name="writeDate" th:value="${noticeUpdate.writeDate}" readonly>
+        <br>
+        <div class="fileDiv">
+          <input type="file" name="noticeFile">
+          <div th:if="${noticeUpdate.fileAttached == 1}">
+            <span th:each="fileName: ${noticeUpdate.storedFileName}">
+              <img class="uploadImg" id="uploadFile" th:src="@{'/upload/images/' + ${fileName}}">
+            </span>
+            <button class="fileDeleteBtn" type="button" onclick="deleteFile()">삭제</button>
+          </div>
+        </div>
         <input class="noticeUpdateSumbit" type="submit" value="글수정">
       </form>
     </div>
@@ -37,6 +48,30 @@
     const listReq = () => {
       location.href = "/notice/paging";
     }
+
+    const noticeId = "[[${noticeUpdate.id}]]";
+
+    function deleteFile() {
+
+      $.ajax({
+        url: "/notice/update/" + noticeId,
+        type: "GET",
+        data: {
+          id: noticeId
+        },
+        success: function (response) {
+
+          window.alert("파일이 삭제되었습니다.");
+
+        },
+        error: function (xhr, status, error) {
+
+          window.alert("파일 삭제에 실패했습니다.");
+
+        },
+      });
+    }
+
   </script>
   <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
 </body>

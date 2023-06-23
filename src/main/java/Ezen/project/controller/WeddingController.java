@@ -106,21 +106,13 @@ public class WeddingController {
     }
 
     @GetMapping("wedding/weddingMy")
-    public String myPaging(@PageableDefault(page = 1) Pageable pageable, Model model, HttpSession session){
+    public String findMyAll(Model model, HttpSession session) {
         
         Long userId = (Long) session.getAttribute("userId");
 
-        Page<WeddingDTO> weddingList = weddingService.paging(pageable);
-        int blockLimit = 5;
-        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
-        int endPage = ((startPage + blockLimit - 1) < weddingList.getTotalPages()) ? startPage + blockLimit - 1 : weddingList.getTotalPages();
-
-        
-        System.out.println(userId);
-
-        model.addAttribute("weddingList", weddingList);
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
+        List<WeddingDTO> weddingDTOList = weddingService.findAll();
+        // List<WeddingDTO> weddingDTOList = weddingService.findAll(Sort.by(Sort.Direction.DESC , "weddingWriteDate"));
+        model.addAttribute("weddingList", weddingDTOList);
 
         model.addAttribute("myWedding", userId);
 
