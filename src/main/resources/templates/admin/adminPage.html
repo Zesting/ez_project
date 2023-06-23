@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <head>
   <title>관리자페이지</title>
-  <link rel="stylesheet" th:href="@{/css/adminPage.css}">
-  <link rel="stylesheet" th:href="@{/css/adminStyles.css}">
+  <link rel="stylesheet" th:href="@{/css/adminPage.css}" />
+  <link rel="stylesheet" th:href="@{/css/adminStyles.css}" />
   <link rel="stylesheet" th:href="@{/css/noticeList.css}" />
   <style>
     tbody td {
@@ -15,12 +15,11 @@
       border: 3px solid black;
     }
   </style>
-
 </head>
 
-<body style="background-image: url(../img/space8.jpg);">
+<body style="background-image: url(../img/space8.jpg)">
   <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-  <div style="height: 130px; width: 100%;"></div>
+  <div style="height: 130px; width: 100%"></div>
   <!-- 헤더 불러오기 -->
   <!-- <p>관리자 페이지 home입니다.</p> -->
   <div class="listBox">
@@ -28,7 +27,8 @@
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
           <!-- sidebar fragment 사용 -->
-          <th:block th:replace="fragment/sidebar :: sidebarFragment"></th:block>
+          <th:block
+            th:replace="~{fragment/sidebar :: sidebarFragment}"></th:block>
         </div>
       </div>
     </div>
@@ -39,8 +39,8 @@
   </div>
 
   <div th:replace="~{fragment/footer.html :: fragment-footer}"></div>
-  
-  <script th:src="@{/js/userList.js}"></script> 
+
+  <script th:src="@{/js/userList.js}"></script>
   <script th:src="@{/js/roomList.js}"></script>
   <script th:src="@{/js/reservationList.js}"></script>
   <script th:src="@{/js/paymentList.js}"></script>
@@ -49,8 +49,6 @@
 
   <script th:src="@{/js/sideBarToggle.js}"></script>
   <script th:src="@{/js/adminPage.js}"></script>
-  
-  <script th:src="@{/js/datatables-simple-demo.js}"></script>
 
+  <script th:src="@{/js/datatables-simple-demo.js}"></script>
 </body>
-</html>

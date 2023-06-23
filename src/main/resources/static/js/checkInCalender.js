@@ -100,10 +100,7 @@ function buildCalendar() {
 function checkLastDay(selectedDate) {
   if (selectedDate.getFullYear() < today.getFullYear()) {
     alert(
-      "선택한 년도 " +
-        selectedDate.getFullYear() +
-        "올해 년도 " +
-        today.getFullYear()
+      "체크인 & 체크아웃 날짜를 이미 지난 날짜로 선택할 수 없습니다. 다시 선택해 주시길 바랍니다."
     );
     selectedDate = null;
     selectedDate.classList.remove("choiceDay");
@@ -111,7 +108,7 @@ function checkLastDay(selectedDate) {
   }
   if (selectedDate.getMonth() < today.getMonth()) {
     alert(
-      "선택한 달 " + selectedDate.getMonth() + "이번 달 " + today.getMonth()
+      "체크인 & 체크아웃 날짜를 이미 지난 날짜로 선택할 수 없습니다. 다시 선택해 주시길 바랍니다."
     );
     selectedDate = null;
     selectedDate.classList.remove("choiceDay");
@@ -122,7 +119,9 @@ function checkLastDay(selectedDate) {
     selectedDate.getMonth() <= today.getMonth() &&
     selectedDate.getDate() < today.getDate()
   ) {
-    alert("선택한 날 " + selectedDate.getDate() + "금일 " + today.getDate());
+    alert(
+      "체크인 & 체크아웃 날짜를 이미 지난 날짜로 선택할 수 없습니다. 다시 선택해 주시길 바랍니다."
+    );
     selectedDate = null;
     selectedDate.classList.remove("choiceDay");
     return;
@@ -144,10 +143,11 @@ function checkEqualDay(selectedDate1, selectedDate2) {
 }
 
 /* 집 or 학원(목)에서 수정할 것 */
+// 3개만 검증 체크인 체크아웃 월이 같을 때,  체크아웃 월이 클 때
 function checkMinus(selectedDate1, selectedDate2) {
-  if (selectedDate1.getDate() < selectedDate2.getDate()) {
+  if (selectedDate1.getMonth() == selectedDate2.getMonth()) {
     if (selectedDate2.getDate() - selectedDate1.getDate() > 2) {
-      alert(selectedDate2.getDate() - selectedDate1.getDate());
+      /* alert(selectedDate2.getDate() - selectedDate1.getDate()); */
       alert(
         " 숙박 기간을 2일 이상 선택할 수 없습니다.(최대 2일 가능)\n 체크아웃 날짜를 다시 선택해 주세요.\n (체크인 날짜 + 2일까지 선택 가능) \n 3일 이상 숙박을 원하시는 회원은 아래의 번호로 문의부탁드립니다. \n TEL : 032-123-1234"
       );
@@ -157,10 +157,22 @@ function checkMinus(selectedDate1, selectedDate2) {
       selectedDate2.classList.remove("choiceCheckOut");
       return;
     }
-  } else if (selectedDate1.getDate() > selectedDate2.getDate()) {
+  } else if (
+    selectedDate1.getMonth() < selectedDate2.getMonth() &&
+    selectedDate1.getDate() <= selectedDate2.getDate()
+  ) {
+    alert("잘못된 날짜 선택입니다. 숙박 기간을 다시 선택해주세요.");
+    selectedDate1 = null;
+    selectedDate2 = null;
+    selectedDate1.classList.remove("choiceCheckIn");
+    selectedDate2.classList.remove("choiceCheckOut");
+    checkInDate = null;
+  } else if (
+    selectedDate1.getMonth() < selectedDate2.getMonth() &&
+    selectedDate1.getDate() > selectedDate2.getDate()
+  ) {
     let totalDate = selectedDate2.getDate() + selectedDate1.getDate();
     if (totalDate - selectedDate1.getDate() > 2) {
-      alert(totalDate);
       alert(
         " 숙박 기간을 2일 이상 선택할 수 없습니다.(최대 2일 가능)\n 체크아웃 날짜를 다시 선택해 주세요.\n (체크인 날짜 + 2일까지 선택 가능) \n 3일 이상 숙박을 원하시는 회원은 아래의 번호로 문의부탁드립니다. \n TEL : 032-123-1234"
       );
@@ -168,6 +180,7 @@ function checkMinus(selectedDate1, selectedDate2) {
       selectedDate2 = null;
       selectedDate1.classList.remove("choiceCheckIn");
       selectedDate2.classList.remove("choiceCheckOut");
+
       return;
     }
   }

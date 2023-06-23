@@ -147,18 +147,40 @@
                         class="detail-wrap"
                         style="border-top: solid 1px #333">
                         <div class="float-left detail-price-wrap">
-                          <span class="tc tc1">
-                            <strong th:text="${roomList.roomName}"></strong>
+                          <!-- Post로 보낼 roomId -->
+                          <span style="display: none">
+                            <strong
+                              id="choiceRoomId"
+                              th:text="${roomList.roomId}"></strong>
                           </span>
+                          <!-- Post로 보낼 roomName -->
+                          <span class="tc tc1">
+                            <strong
+                              id="choiceRoomName"
+                              th:text="${roomList.roomName}"></strong>
+                          </span>
+                          <!-- Post로 보낼 roomPrice -->
                           <span class="tc detail-price tc2">
                             <strong
+                              id="choiceRoomPrice"
                               class="min-width-price"
                               th:text="${roomList.roomPrice}"></strong>
+                          </span>
+                          <!-- Post로 보낼 roomType -->
+                          <span style="display: none">
+                            <strong
+                              id="choiceRoomType"
+                              th:text="${roomList.roomType}"></strong>
                           </span>
                         </div>
                         <div class="float-right btn-wrap tc-wrap">
                           <span class="text-right">
-                            <a class="color2-bg select-btn">선택</a>
+                            <button
+                              type="button"
+                              class="color2-bg select-btn"
+                              id="choiceRoom">
+                              선택
+                            </button>
                           </span>
                         </div>
                       </div>
@@ -213,18 +235,40 @@
                         class="detail-wrap"
                         style="border-top: solid 1px #333">
                         <div class="float-left detail-price-wrap">
-                          <span class="tc tc1">
-                            <strong th:text="${roomList.roomName}"></strong>
+                          <!-- Post로 보낼 roomId -->
+                          <span style="display: none">
+                            <strong
+                              id="choiceRoomId"
+                              th:text="${roomList.roomId}"></strong>
                           </span>
+                          <!-- Post로 보낼 roomName -->
+                          <span class="tc tc1">
+                            <strong
+                              id="choiceRoomName"
+                              th:text="${roomList.roomName}"></strong>
+                          </span>
+                          <!-- Post로 보낼 roomPrice -->
                           <span class="tc detail-price tc2">
                             <strong
+                              id="choiceRoomPrice"
                               class="min-width-price"
                               th:text="${roomList.roomPrice}"></strong>
+                          </span>
+                          <!-- Post로 보낼 roomType -->
+                          <span style="display: none">
+                            <strong
+                              id="choiceRoomType"
+                              th:text="${roomList.roomType}"></strong>
                           </span>
                         </div>
                         <div class="float-right btn-wrap tc-wrap">
                           <span class="text-right">
-                            <a class="color2-bg select-btn">선택</a>
+                            <button
+                              type="button"
+                              class="color2-bg select-btn"
+                              id="choiceRoom">
+                              선택
+                            </button>
                           </span>
                         </div>
                       </div>
@@ -281,18 +325,40 @@
                         class="detail-wrap"
                         style="border-top: solid 1px #333">
                         <div class="float-left detail-price-wrap">
-                          <span class="tc tc1">
-                            <strong th:text="${roomList.roomName}"></strong>
+                          <!-- Post로 보낼 roomId -->
+                          <span style="display: none">
+                            <strong
+                              id="choiceRoomId"
+                              th:text="${roomList.roomId}"></strong>
                           </span>
+                          <!-- Post로 보낼 roomName -->
+                          <span class="tc tc1">
+                            <strong
+                              id="choiceRoomName"
+                              th:text="${roomList.roomName}"></strong>
+                          </span>
+                          <!-- Post로 보낼 roomPrice -->
                           <span class="tc detail-price tc2">
                             <strong
+                              id="choiceRoomPrice"
                               class="min-width-price"
                               th:text="${roomList.roomPrice}"></strong>
+                          </span>
+                          <!-- Post로 보낼 roomType -->
+                          <span style="display: none">
+                            <strong
+                              id="choiceRoomType"
+                              th:text="${roomList.roomType}"></strong>
                           </span>
                         </div>
                         <div class="float-right btn-wrap tc-wrap">
                           <span class="text-right">
-                            <a class="color2-bg select-btn">선택</a>
+                            <button
+                              type="button"
+                              class="color2-bg select-btn"
+                              id="choiceRoom">
+                              선택
+                            </button>
                           </span>
                         </div>
                       </div>
