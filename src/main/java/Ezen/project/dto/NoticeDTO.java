@@ -49,7 +49,7 @@ public class NoticeDTO {
         noticeDTO.setContent(noticeDomain.getNoticeContent());
         noticeDTO.setWriteDate(noticeDomain.getNoticeWriteDate());
 
-        if(noticeDomain.getFileAttached() == 0){
+        if(noticeDomain.getFileAttached() == null){
             noticeDTO.setFileAttached(noticeDTO.getFileAttached()); //0
         } else {
             List<String> originalFileNameList = new ArrayList<>();

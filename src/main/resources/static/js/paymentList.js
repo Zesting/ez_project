@@ -24,6 +24,7 @@ $(document).on("click", "#paymentListBtn", function () {//paymentListBtn
     },
   });
 
+  //조회 버튼 클릭 > 결제id 조회 불러오기
   $(document).on("click", "#paymentDetailBtn", function () {
     let id = $(this).closest("tr").find("#payId").val();
     $.ajax({

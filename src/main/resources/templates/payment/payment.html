@@ -14,9 +14,7 @@
 		.kakaopayBtn {
 			border: none;
 			border-radius: 6px;
-
 		}
-
 		.infoBox {
 			background-color: rgba(255, 255, 255, 1);
 			border-radius: 6px;
@@ -24,15 +22,11 @@
 			color: black;
 			height: 330px;
 			width: 300px;
-
 			/* display: flex; */
-
 		}
-
 		.kakaoPayForm {
 			width: 300px;
 		}
-
 		.kakaoPayImg {
 			/* width: 576px; */
 			border-radius: 6px;
@@ -84,7 +78,7 @@
         <div class="itemInfo_b_a_1" th:if="${paymentDTO.roomName.contains('Mercury')}"><!--Mercury--></div>
         <div class="itemInfo_b_a_2" th:if="${paymentDTO.roomName.contains('Mars')}"><!--Mars--></div>
         <div class="itemInfo_b_a_3" th:if="${paymentDTO.roomName.contains('Earth')}"><!--Earth--></div>
-        <div class="itemInfo_b_a-4" th:if="${paymentDTO.roomName.contains('Jupiter')}"><!--Jupiter--></div>
+        <div class="itemInfo_b_a_4" th:if="${paymentDTO.roomName.contains('Jupiter')}"><!--Jupiter--></div>
 				<div class="itemInfo_b_b">
 					<div class="itemInfo_b_b_a">[[${paymentDTO.roomName}]]</div>
 					<div class="itemInfo_b_b_b">
@@ -108,7 +102,6 @@
 	</div>
 
 
-	<a href="/">홈으로</a>
 	<!-- 
 	<script type="text/javascript"> //문서가 준비되면 제일 먼저 실행
 		//이니시스 API 연동
