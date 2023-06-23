@@ -36,8 +36,14 @@ public class ReservationController {
     @RequestMapping(value = "/Reservations", method = RequestMethod.GET)
     public String reservationListView(Model model) {
         List<Reservation> reservationList = reservationService.findAllReservation();
+        reservationList.stream().forEach(r -> {
+            UserDTO user = userService.findById(r.getUserId());
+            Room room = roomService.findRoomById(r.getRoomId()).get();
+            model.addAttribute("user", user);
+            model.addAttribute("room", room);
+        });
+
         model.addAttribute("reservationList", reservationList);
-        System.out.println("reservationList : " + reservationList);
         return "Reservation/reservationListView";
     }
 
@@ -51,9 +57,7 @@ public class ReservationController {
     @RequestMapping(value = "/Reservations/SelectRoom", method = RequestMethod.GET)
     public String reservationSelectRoomView(Model model, HttpSession session) {
 
-        System.out.println("GetMapping 실행(/selectRoom)");
         CheckDTO checkDTO = (CheckDTO) session.getAttribute("checkDTO");
-        System.out.println("GetMApping CheckDTO :" + checkDTO);
         model.addAttribute("checkDTO", checkDTO);
 
         List<?> roomList = reservationService.bookableList(checkDTO);
