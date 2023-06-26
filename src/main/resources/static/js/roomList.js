@@ -98,6 +98,7 @@ $(document).on("click", "#createForm", function () {
     dataType: "HTML",
     success: function (data) {
       $("#adminPageContainer").slideUp();
+      $("#roomModifyContainer").slideUp();
       $("#roomListContainer").html(data);
     },
     error: function (request, error) {
