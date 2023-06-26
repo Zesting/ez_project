@@ -1,0 +1,39 @@
+<link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" th:href="@{/css/noticeSave.css}" />
+
+<div class="noticeSave">
+    <div class="saveForm">
+        <form action="/notice/save" id="myForm" method="post" enctype="multipart/form-data">
+            <!-- 파일첨부할때 enctype 필수-->
+
+            <input type="hidden" name="userId" th:value="${user.id}"><br>
+            <input class="saveTitle" type="text" name="title" placeholder="제목을 입력하세요"><br>
+            <textarea class="saveContent" name="content" placeholder="내용을 입력하세요"></textarea><br>
+            <label class="saveFileCss">
+                <input class="saveFile" type="file" name="noticeFile" multiple><br>
+            </label>
+            <!-- <input type="submit" value="작성"> -->
+        </form>
+    </div>
+    <div class="saveBar">
+        <button class="saveListBtn" onclick="listReq()">관리자 페이지</button>
+
+        <button class="saveSubmitBtn" onclick="submitForm()">제출</button>
+    </div>
+</div>
+<div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
+
+
+
+
+
+<script th:inline="javascript">
+    const listReq = () => {
+        location.href = "/adminPage";
+    }
+    const submitForm = () => {
+        document.getElementById("myForm").submit();
+    }
+</script>
+
+</html>

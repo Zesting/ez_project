@@ -1,6 +1,9 @@
 package Ezen.project.controller;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +40,7 @@ public class WeddingController {
 
     // 검증 후 폼 받기
     @GetMapping("/wedding/weddingForm")
-    public String verification(Model model, HttpSession session){
+    public String verification(Model model, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
         model.addAttribute("user", userService.findById(userId));
         return "wedding/weddingForm";
@@ -54,7 +57,8 @@ public class WeddingController {
     @GetMapping("weddingBoard")
     public String findAll(Model model) {
         List<WeddingDTO> weddingDTOList = weddingService.findAll();
-        // List<WeddingDTO> weddingDTOList = weddingService.findAll(Sort.by(Sort.Direction.DESC , "weddingWriteDate"));
+        // List<WeddingDTO> weddingDTOList =
+        // weddingService.findAll(Sort.by(Sort.Direction.DESC , "weddingWriteDate"));
         model.addAttribute("weddingList", weddingDTOList);
         return "/wedding/weddingBoard";
     }
@@ -79,7 +83,7 @@ public class WeddingController {
         model.addAttribute("wedding", weddingDTO);
         model.addAttribute("logInUser", user);
         model.addAttribute("commentWriter", weddingDTOUser);
-        System.out.println("유저 이름값 : "+ user.getUserName());
+        System.out.println("유저 이름값 : " + user.getUserName());
 
         return "/wedding/detail";
     }
@@ -92,12 +96,27 @@ public class WeddingController {
     }
 
     @GetMapping("wedding/paging")
-    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
+    public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
+        // 페이징 로직
         Page<WeddingDTO> weddingList = weddingService.paging(pageable);
         int blockLimit = 5;
-        int startPage = (((int)(Math.ceil((double)pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1 4 7 10 ~~
-        int endPage = ((startPage + blockLimit - 1) < weddingList.getTotalPages()) ? startPage + blockLimit - 1 : weddingList.getTotalPages();
+        int startPage = (((int) (Math.ceil((double) pageable.getPageNumber() / blockLimit))) - 1) * blockLimit + 1; // 1
 
+        int endPage = ((startPage + blockLimit - 1) < weddingList.getTotalPages()) ? startPage + blockLimit - 1
+                : weddingList.getTotalPages();
+
+        List<Map<String, Object>> listAll = new ArrayList<>();
+        weddingList.stream().forEach(r -> {
+            Map<String, Object> addMap = new LinkedHashMap<>();
+            addMap.put("userName", userService.findById(r.getUserId()).getUserName());
+            addMap.put("weddingId", r.getWeddingId());
+            addMap.put("weddingTitle", r.getWeddingTitle());
+            addMap.put("weddingWriteDate", r.getWeddingWriteDate());
+
+            listAll.add(addMap);
+
+        });
+        model.addAttribute("allList", listAll);
         model.addAttribute("weddingList", weddingList);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
@@ -105,20 +124,19 @@ public class WeddingController {
         return "/wedding/weddingPaging";
     }
 
-    @GetMapping("wedding/weddingMy")
+    @GetMapping("/wedding/weddingMy")
     public String findMyAll(Model model, HttpSession session) {
-        
+
         Long userId = (Long) session.getAttribute("userId");
 
         List<WeddingDTO> weddingDTOList = weddingService.findAll();
-        // List<WeddingDTO> weddingDTOList = weddingService.findAll(Sort.by(Sort.Direction.DESC , "weddingWriteDate"));
+        // List<WeddingDTO> weddingDTOList =
+        // weddingService.findAll(Sort.by(Sort.Direction.DESC , "weddingWriteDate"));
         model.addAttribute("weddingList", weddingDTOList);
 
         model.addAttribute("myWedding", userId);
 
         return "/wedding/weddingMy";
     }
-
-    
 
 }

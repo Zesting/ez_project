@@ -34,7 +34,10 @@ public class KakaopayService {
   private KakaoPayCancelResponseVO kakaoPayCancelResponseVO;
   private final PaymentRepository paymentRepository;
 
-  /*...............................결제 준비.............................................*/
+  /*
+   * ...............................결제
+   * 준비.............................................
+   */
   public String kakaoPayReady(PaymentDTO paymentDTO) {
     RestTemplate restTemplate = new RestTemplate();
 
@@ -78,13 +81,16 @@ public class KakaopayService {
       // System.out.println("RestClientException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
       e.printStackTrace();
     } catch (URISyntaxException e) {
-            // System.out.println("URISyntaxException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
+      // System.out.println("URISyntaxException 예외 발생!!!!!!!!!!!!!!!!!!!!!!!!!");
       e.printStackTrace();
     }
     return "/pay";
   }
 
-  /*  ...............................결제 승인 요청.............................................*/
+  /*
+   * ...............................결제 승인
+   * 요청.............................................
+   */
 
   public KakaoPayApprovalVO kakaoPayInfo(String pg_token, HttpSession session) {
     PaymentDTO paymentDTO = (PaymentDTO) session.getAttribute("paymentDTO");
