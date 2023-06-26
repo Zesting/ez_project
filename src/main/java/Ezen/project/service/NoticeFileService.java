@@ -15,6 +15,7 @@ public class NoticeFileService {
 
     private final NoticeFileRepository noticeFileRepository;
 
+    //findById
     @Transactional
     public NoticeFileDomain findById(Long id) {
         Optional<NoticeFileDomain> optionalNoticeFileDomain = noticeFileRepository.findById(id);

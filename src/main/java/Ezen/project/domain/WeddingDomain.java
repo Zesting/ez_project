@@ -35,8 +35,6 @@ public class WeddingDomain extends BaseWeddingDomain {
     @Column(name = "userId")
     private Long userId; // wedding 문의글 작성자
 
-    
-
     @Column(name = "weddingTitle")
     private String weddingTitle; // wedding 문의글 제목
 
@@ -56,7 +54,6 @@ public class WeddingDomain extends BaseWeddingDomain {
         WeddingDomain weddingDomain = new WeddingDomain();
         weddingDomain.setWeddingId(weddingDTO.getWeddingId());
         weddingDomain.setUserId(weddingDTO.getUserId());
-        
         weddingDomain.setWeddingTitle(weddingDTO.getWeddingTitle());
         weddingDomain.setWeddingContent(weddingDTO.getWeddingContent());
         weddingDomain.setWeddingWriteDate(weddingDTO.getWeddingWriteDate());

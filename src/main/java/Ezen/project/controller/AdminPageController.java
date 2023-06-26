@@ -1,8 +1,9 @@
 package Ezen.project.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -155,13 +156,29 @@ public class AdminPageController {
     return "redirect:/adminPage";
   }
 
-  // 웨딩 리스트 조회
-  @GetMapping("/weddingList")
-  public String weddingList(Model model) {
-    List<WeddingDTO> weddingDTOList = weddingService.findAll();
-    model.addAttribute("weddingList", weddingDTOList);
-    return "/wedding/adminWeddingList";
-  }
+
+   //웨딩 리스트 조회
+    @GetMapping("/weddingList")
+    public String weddingList(Model model){
+      List<WeddingDTO> weddingDTOList = weddingService.findAll();
+      
+      
+
+      List<Map<String, Object>> listAll = new ArrayList<>();
+      weddingDTOList.stream().forEach(r -> {
+        Map<String, Object> addMap = new LinkedHashMap<>();
+        addMap.put("userName", userService.findById(r.getUserId()).getUserName());
+        addMap.put("weddingId", r.getWeddingId());
+        addMap.put("weddingTitle", r.getWeddingTitle());
+        addMap.put("weddingWriteDate", r.getWeddingWriteDate());
+
+        listAll.add(addMap);
+      });
+
+       model.addAttribute("weddingList", weddingDTOList);
+       model.addAttribute("allList", listAll);
+        return "/wedding/adminWeddingList";
+    }
 
   // 웨딩 문의 페이징 매핑
   // @GetMapping("/weddingList")

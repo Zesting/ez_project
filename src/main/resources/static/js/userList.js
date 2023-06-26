@@ -53,11 +53,3 @@ $(document).on("click", "#userListBtn", function () {
     });
   });
 });
-
-$("#deleteBtn").on("click", function () {
-  if (confirm("회원탈퇴를 진행하시겠습니까?") == true) {
-    alert("회원 탈퇴처리가 완료되었습니다.")
-  } else {
-    return;
-  }
-})

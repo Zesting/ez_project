@@ -64,13 +64,11 @@ public class ReservationController {
     // 예약 룸 선택 뷰 메서드
     @RequestMapping(value = "/Reservations/SelectRoom", method = RequestMethod.GET)
     public String reservationSelectRoomView(Model model, HttpSession session) {
-
         CheckDTO checkDTO = (CheckDTO) session.getAttribute("checkDTO");
-        model.addAttribute("checkDTO", checkDTO);
-
         List<?> roomList = reservationService.bookableList(checkDTO);
-        model.addAttribute("roomList", roomList);
 
+        model.addAttribute("checkDTO", checkDTO);
+        model.addAttribute("roomList", roomList);
         return "Reservation/SelectRoom";
     }
 

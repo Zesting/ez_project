@@ -81,13 +81,12 @@
                 <textarea class="commentContent" type="text" id="commentContents" placeholder="내용"></textarea>
                 <button class="commentSubmitBtn" id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
             </div>
-
-
         </div>
         <div class="detailBar">
             <button class="detailListBtn" th:if="${session.admin==1}" onclick="listReq()">목록</button>
-            <button class="detailListBtn" th:if="${session.admin!=1}" onclick="myListReq()">목록</button>
-            <button class="detaildeleteBtn" onclick="deleteReq()">삭제</button>
+            <button class="detailListBtn" th:if="${session.admin!=1}" onclick="myListReq()">MyPage</button>
+            <button class="detaildeleteBtn" th:if="${session.admin==1}" onclick="deleteReq()">삭제</button>
+            <button class="detaildeleteBtn" th:if="${session.admin!=1}" onclick="deleteMyReq()">삭제</button>
         </div>
     </div>
     <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
@@ -96,15 +95,17 @@
     const id = "[[${wedding.weddingId}]]"; //게시글 번호
 
     const listReq = () => {
-        location.href = "/wedding/paging";
+        location.href = "/adminPage";
     }
     const myListReq = () => {
-        location.href = "/wedding/weddingMy";
-    } 
+        location.href = "/user/" + id;
+    }
     const deleteReq = () => {
         location.href = "/wedding/delete/" + id;
     }
-
+    const deleteMyReq = () => {
+        location.href = "/weddingMy/delete/" + id;
+    }
     const commentWrite = () => {
         const writer = document.getElementById("commentWriter").value;
         const constens = document.getElementById("commentContents").value;
@@ -123,7 +124,7 @@
             success: function (res) {
                 console.log("요청성공", res);
                 let output = "<table class='commentListTable'>";
-                
+
                 for (let i in res) {
                     output += "<tr>";
                     output += "<td class='commentWriter'>" + res[i].commentWriter + "</td>";
@@ -151,24 +152,16 @@
                     }
 
                     output += "<td class='commentDate'>" + formattedDate + "</td>";
-
                     output += "</tr>";
                 }
                 output += "</table>";
                 document.getElementById('comment-list').innerHTML = output;
                 document.getElementById('commentContents').value = '';
-
             },
             error: function (err) {
                 console.log("요청 실패", err)
             }
         });
     }
-
-
-
-
-
 </script>
-
 </html>

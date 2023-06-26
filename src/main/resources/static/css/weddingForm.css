@@ -70,9 +70,10 @@ legend {
 }
 
 .okbtn {
-    float: left;
+    float: right;
 }
 
 .cancelbtn {
-    float: right;
+    float: left;
+    
 }

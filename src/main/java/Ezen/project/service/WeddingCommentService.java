@@ -15,38 +15,39 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class WeddingCommentService {    
+public class WeddingCommentService {
 
     private final WeddingCommentRepository weddingCommentRepository;
     private final WeddingRepository weddingRepository;
 
+    // save
     public Long save(WeddingCommentDTO weddingCommentDTO) {
         /* 부모 엔티티(WeddingDomain) 조회 */
         Optional<WeddingDomain> optionalWeddingDomain = weddingRepository.findById(weddingCommentDTO.getWeddingId());
-        if(optionalWeddingDomain.isPresent()){
+        if (optionalWeddingDomain.isPresent()) {
             WeddingDomain weddingDomain = optionalWeddingDomain.get();
-            WeddingCommentEntity weddingCommentEntity = WeddingCommentEntity.toSaveEntity(weddingCommentDTO, weddingDomain);
+            WeddingCommentEntity weddingCommentEntity = WeddingCommentEntity.toSaveEntity(weddingCommentDTO,
+                    weddingDomain);
             return weddingCommentRepository.save(weddingCommentEntity).getId();
         } else {
             return null;
         }
-        
-
     }
 
+    // findAll
     public List<WeddingCommentDTO> findAll(Long weddingId) {
         // select * from weddingComment where weddingId = ? order by id desc;
         WeddingDomain weddingDomain = weddingRepository.findById(weddingId).get();
-        List<WeddingCommentEntity> weddingCommentEntityList = weddingCommentRepository.findAllByWeddingDomainOrderByIdDesc(weddingDomain);
+        List<WeddingCommentEntity> weddingCommentEntityList = weddingCommentRepository
+                .findAllByWeddingDomainOrderByIdDesc(weddingDomain);
         /* EntityList -> DTOList */
         List<WeddingCommentDTO> weddingCommentDTOList = new ArrayList<>();
-        for(WeddingCommentEntity weddingCommentEntity: weddingCommentEntityList){
-            WeddingCommentDTO weddingCommentDTO = WeddingCommentDTO.toWeddingCommentDTO(weddingCommentEntity, weddingId);
+        for (WeddingCommentEntity weddingCommentEntity : weddingCommentEntityList) {
+            WeddingCommentDTO weddingCommentDTO = WeddingCommentDTO.toWeddingCommentDTO(weddingCommentEntity,
+                    weddingId);
             weddingCommentDTOList.add(weddingCommentDTO);
         }
         return weddingCommentDTOList;
     }
 
-
-    
 }

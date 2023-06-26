@@ -32,7 +32,6 @@ public class WeddingDTO {
         WeddingDTO weddingDTO = new WeddingDTO();
         weddingDTO.setWeddingId(weddingDomain.getWeddingId());
         weddingDTO.setUserId(weddingDomain.getUserId());
-
         weddingDTO.setWeddingTitle(weddingDomain.getWeddingTitle());
         weddingDTO.setWeddingContent(weddingDomain.getWeddingContent());
         weddingDTO.setWeddingWriteDate(weddingDomain.getWeddingWriteDate());
