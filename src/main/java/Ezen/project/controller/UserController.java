@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -118,7 +117,6 @@ public class UserController {
         Long userId = (Long) session.getAttribute("findPassword");
         userService.pwUpdate(userId, newPassword);
         session.invalidate();
-
         return "redirect:/";
     }
 
@@ -147,7 +145,6 @@ public class UserController {
         return "user/userlist";
     }
 
-
     @GetMapping("/userupdate")
     public String userUpdate(HttpSession session, Model model) {
         Long id = (Long) session.getAttribute("userId");
@@ -163,10 +160,10 @@ public class UserController {
     }
 
     @ResponseBody
-    @GetMapping("/user/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        userService.delete(id);
-        return "/";
+    @PostMapping("/user/delete")
+    public String delete(@RequestParam Long userId) throws Exception {
+        String userName = userService.findById(userId).getUserName();
+        userService.delete(userId);
+        return userName;
     }
 }
-        

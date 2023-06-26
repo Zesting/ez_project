@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import Ezen.project.DTO.UserDTO;
@@ -54,6 +55,11 @@ public class MyPageController {
         return "user/userdetail";
     }
 
+    @RequestMapping(value = "/changeMyInfo", method = RequestMethod.GET)
+    public String changeMyInfo() {
+        return "user/changemyinfo";
+    }
+
     @ResponseBody
     @PostMapping("/deleteUser")
     public String deleteUser(HttpSession session) {
@@ -61,5 +67,25 @@ public class MyPageController {
         userService.delete(userId);
         session.invalidate();
         return "success";
+    }
+
+    @PostMapping("/myInfoPwCheck")
+    @ResponseBody
+    public int changePw(@RequestParam("newPassword") String newPw,
+            HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        System.out.println("newPw : " + newPw);
+        System.out.println("originalpw : " + userService.findById(userId).getUserPassword());
+        return newPw.equals(userService.findById(userId).getUserPassword()) ? 0 : 1;
+    }
+
+    @PostMapping("/myInfoChangePw")
+    public String changePassword(
+            @RequestParam("newPw") String newPassword,
+            HttpSession session, Model model) {
+        Long userId = (Long) session.getAttribute("userId");
+        userService.pwUpdate(userId, newPassword);
+        session.invalidate();
+        return "redirect:/";
     }
 }

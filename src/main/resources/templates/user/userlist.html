@@ -26,7 +26,7 @@
         </thead>
         <tbody>
             <tr th:each="user : ${userList}">
-                <td th:text="${user.id}"></td>
+                <td th:text="${user.id}" id="userId" th:value="${user.id}"></td>
                 <td th:text="${user.userId}"></td>
                 <td th:text="${user.userPassword}"></td>
                 <td th:text="${user.userName}"></td>
@@ -36,27 +36,59 @@
                 <td th:text="${user.joinDate}"></td>
                 <td th:text="${user.userEmail}"></td>
                 <td th:text="${user.userAuthority}"></td>
-                <td><button type="button" id="deleteBtn">
-                        <a th:href="@{|/user/delete/${user.id}|}">
-                            <!-- 삭제 -->
-                            <img src="https://ifh.cc/g/mO8TAn.png" onclick="userLeave()" alt="아이콘"
-                                style="width: 30px; height: 30px;">
-                        </a>
+                <td><button type="button" id="deleteBtn" th:onclick="'userLeave('+${user.id}+')'">
+                        <!-- 삭제 -->
+                        <img src="https://ifh.cc/g/mO8TAn.png" alt="아이콘" style="width: 30px; height: 30px;">
                     </button></td>
                 <td></td>
                 <!-- userList.js 파일에서 ${user.id}값을 가져가기위해서 작성 -->
-                <input type="hidden" id="userId" th:value="${user.id}" />
             </tr>
         </tbody>
     </table>
     <script>
-        function userLeave() {
+        function userLeave(id) {
             if (confirm("회원탈퇴를 진행하시겠습니까?") == true) {
-                alert("회원 탈퇴처리가 완료되었습니다.")
+                $.ajax({
+                    type: "POST",
+                    url: "/user/delete",
+                    data: { "userId": id },
+                    success: function (data) {
+                        alert(data + "회원의 탈퇴처리가 완료되었습니다.");
+                        $.ajax({
+                            url: "/userlist", //요청 url
+                            method: "GET", // 방식
+                            dataType: "HTML", // 데이터 타입
+                            success: function (data) {
+                                // console.log("ajax 성공! HTML-> 리스트");
+                                $("#adminPageContainer").slideUp();
+                                $("#roomListContainer").html(data); //여기 roomListContainer는 준희가 만든 컨테이너박스에 데이터를 준다.
+                                $("#roomModifyContainer").slideUp();
+                            },
+                            error: function (request, error) {
+                                console.log(
+                                    "code:" +
+                                    request.status +
+                                    "\n" +
+                                    "message:" +
+                                    request.responseText +
+                                    "\n" +
+                                    "error:" +
+                                    error
+                                );
+                            },
+                        });
+                        // window.location.href = "/adminPage";
+                    },
+                    error: function () {
+                        alert("잠시 후 다시 시도해주세요.")
+                        window.location.href = "/adminPage";
+                    }
+                });
             } else {
                 return;
             }
         };
+
     </script>
 </body>
 

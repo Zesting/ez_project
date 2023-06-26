@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>비밀번호 재설정</title>
+    <style>
+        .mypage-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .find-header {
+            width: 100%;
+            font-size: 30px;
+            margin: 40px auto;
+            text-align: center;
+            color: rgb(248, 248, 248);
+            font-weight: bold;
+        }
+
+        .login-form {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .find-input {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #c1c1c1;
+            border-radius: 5px;
+            width: 400px;
+        }
+
+        .find-button {
+            padding: 12px 112px;
+            margin: 30px auto;
+            border: none;
+            border-radius: 5px;
+            background-color: blueviolet;
+            color: #fff;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        .find-button:hover {
+            background-color: #45a049;
+        }
+
+        .find-input::placeholder {
+            color: black;
+        }
+
+        .find-p {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="mypage-container">
+        <h2 class="find-header">비밀번호 재설정</h1>
+
+            <form class="find-form" action="/myInfoChangePw" method="post">
+                <p class="find-p">현재 비밀번호</p>
+                <input class="find-input" id="opw" type="password" placeholder="현재 비밀번호를 입력해주세요.">
+                <br>
+                <p id="opwTxt"></p>
+                <p class="find-p">새 비밀번호</p>
+                <input class="find-input" id="upw" type="password" name="newPw" placeholder="새로운 비밀번호를 입력해주세요.">
+                <br>
+                <p id="upwTxt"></p>
+                <p class="find-p">새 비밀번호 확인</p>
+                <input class="find-input" id="upwcheck" type="password" placeholder="비밀번호를 한번더 입력해주세요.">
+                <br>
+                <p id="upwcTxt"></p>
+                <button type="submit" class="find-button" onclick="return submitCheck()">
+                    비밀번호 재설정
+                </button><br>
+                <span id="submitTxt"></span>
+            </form>
+            <br><br>
+            <script>
+                // submit 유효성검사용
+                let originalPw = false;
+                let passwordchk = false;
+                let passwordconfirmchk = false;
+
+                // 기존비밀번호 확인
+                $("#opw").on("keyup", function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "/myInfoPwCheck",
+                        data: {
+                            "newPassword": $("#opw").val()
+                        },
+                        success: function (data) {
+                            if (data == 0) {
+                                $("#opwTxt").html("");
+                                originalPw = true;
+                            } else {
+                                $("#opwTxt").html("비밀번호가 틀립니다.");
+                                $("#opwTxt").css({
+                                    "color": "#FF0000",
+                                    "font-weight": "bold",
+                                    "font-size": "14px"
+                                });
+                                originalPw = false;
+                            }
+                        }
+                    });
+                });
+
+                // 비밀번호 정규식
+                $("#upw").on("keyup", function () {
+                    // 비밀번호 정규식 (영문자1개이상 숫자1개이상 특수문자 ~!@#$%^&* 중에 1개이상 8자에서20자까지)
+                    const regExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~!@#$%^&*])[a-zA-Z\d~!@#$%^&*]{8,20}$/;
+                    if (!regExp.test($("#upw").val())) {
+                        $("#upwTxt").html("하나이상의 영문자,숫자,특수문자를 포함해야합니다.");
+                        $("#upwTxt").css({
+                            "color": "#FF0000",
+                            "font-weight": "bold",
+                            "font-size": "14px"
+                        });
+                        passwordchk = false;
+                    } else {
+                        $("#upwTxt").html("사용가능한 비밀번호입니다.");
+                        $("#upwTxt").css({
+                            "color": "#00FF2B",
+                            "font-weight": "bold",
+                            "font-size": "14px"
+                        });
+                        passwordchk = true;
+                    }
+                });
+                // 비밀번호 재확인 값비교
+                $("#upwcheck").on("keyup", function () {
+                    if ($("#upw").val() != $("#upwcheck").val()) {
+                        $("#upwcTxt").html("비밀번호가 일치하지 않습니다.");
+                        $("#upwcTxt").css({
+                            "color": "#FF0000",
+                            "font-weight": "bold",
+                            "font-size": "14px"
+                        });
+                        passwordconfirmchk = false;
+                    } else {
+                        $("#upwcTxt").html("비밀번호가 일치합니다.");
+                        $("#upwcTxt").css({
+                            "color": "#00FF2B",
+                            "font-weight": "bold",
+                            "font-size": "14px"
+                        });
+                        passwordconfirmchk = true;
+                    }
+                });
+
+                function submitCheck() {
+                    if (!passwordchk) {
+                        $("#submitTxt").html("비밀번호를 확인하세요");
+                        $("#submitTxt").css({
+                            "color": "#FF0000",
+                            "font-weight": "bold",
+                            "font-size": "18px"
+                        })
+                        return false;
+                    }
+                    if (!passwordconfirmchk) {
+                        $("#submitTxt").html("비밀번호 재입력을 확인하세요");
+                        $("#submitTxt").css({
+                            "color": "#FF0000",
+                            "font-weight": "bold",
+                            "font-size": "18px"
+                        })
+                        return false;
+                    }
+                    if (!originalPw) {
+                        $("#submitTxt").html("현재 비밀번호가 틀렸습니다.");
+                        $("#submitTxt").css({
+                            "color": "#FF0000",
+                            "font-weight": "bold",
+                            "font-size": "18px"
+                        })
+                        return false;
+                    }
+                    alert("비밀번호 재설정이 완료되었습니다. 변경된 비밀번호로 로그인해주세요.")
+                }
+            </script>
+    </div>
+</body>
+
+</html>

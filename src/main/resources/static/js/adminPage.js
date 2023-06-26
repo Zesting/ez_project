@@ -7,7 +7,7 @@
 // Scripts
 // 
 
-window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('DOM ContentLoaded', event => {
 
   // Toggle the side navigation
   const sidebarToggle = document.body.querySelector('#sidebarToggle');
