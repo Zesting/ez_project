@@ -1,57 +1,77 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700"
-      rel="stylesheet"
-      type="text/css" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" th:href="@{/css/tableStyle.css}" />
-  </head>
-  <body>
-    <section class="ftco-section">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-md-6 text-center mb-5">
-            <h2 class="heading-section">나의 예약 리스트</h2>
-          </div>
+<body>
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,700"
+    rel="stylesheet"
+    type="text/css" />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <style>
+    body {
+      background-color: #333; /* 어두운 배경 색상 */
+    }
+
+    .table-wrap {
+      background-color: #333; /* 어두운 배경 색상 */
+      color: #fff; /* 하얀색 글씨 색상 */
+    }
+
+    .table-wrap table,
+    .table-wrap th,
+    .table-wrap td {
+      border-color: beige;
+    }
+
+    .table-wrap tr th,
+    .table-wrap tr td {
+      text-align: center;
+    }
+
+    .table-wrap thead th {
+      background-color: #000; /* 머리글 배경 색상 */
+    }
+  </style>
+
+  <section class="ftco-section">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6 text-center mb-5">
+          <h2 class="heading-section" style="color: #fff; width: auto">
+            나의 예약 리스트
+          </h2>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="table-wrap">
-              <table class="table">
-                <thead class="thead-dark">
-                  <tr>
-                    <th>예약자</th>
-                    <th>예약 날짜</th>
-                    <th>룸 이름</th>
-                    <th>룸 타입</th>
-                    <th>CheckIn</th>
-                    <th>CheckOut</th>
-                    <th>결제 가격</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="alert" role="alert" th:each=" myList : ${myList}">
-                    <th scope="row" th:text="${myList.userName}"></th>
-                    <td th:text="${myList.reservationDate}"></td>
-                    <td th:text="${myList.roomName}"></td>
-                    <td th:text="${myList.roomType}"></td>
-                    <td th:text="${myList.checkIn}"></td>
-                    <td th:text="${myList.checkOut}"></td>
-                    <td th:text="${myList.finalPrice}"></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      </div>
+      <div class="row" id="tableSection">
+        <div class="col-md-12">
+          <div class="table-wrap">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr>
+                  <th>예약자</th>
+                  <th>예약 날짜</th>
+                  <th>룸 이름</th>
+                  <th>룸 타입</th>
+                  <th>CheckIn</th>
+                  <th>CheckOut</th>
+                  <th>결제 가격</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="alert" role="alert" th:each=" myList : ${myList}">
+                  <th scope="row" th:text="${myList.userName}"></th>
+                  <td th:text="${myList.reservationDate}"></td>
+                  <td th:text="${myList.roomName}"></td>
+                  <td th:text="${myList.roomType}"></td>
+                  <td th:text="${myList.checkIn}"></td>
+                  <td th:text="${myList.checkOut}"></td>
+                  <td th:text="${myList.finalPrice}"></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-    </section>
-  </body>
-</html>
+    </div>
+  </section>
+</body>
