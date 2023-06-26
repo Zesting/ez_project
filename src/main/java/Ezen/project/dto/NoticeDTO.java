@@ -55,7 +55,6 @@ public class NoticeDTO {
             List<String> originalFileNameList = new ArrayList<>();
             List<String> storedFileNameList = new ArrayList<>();
             noticeDTO.setFileAttached(noticeDomain.getFileAttached().intValue()); //1
-            
 
             for(NoticeFileDomain noticeFileDomain: noticeDomain.getNoticeFileDomainList()){
                 originalFileNameList.add(noticeFileDomain.getOriginalFileName());
@@ -63,9 +62,6 @@ public class NoticeDTO {
             }
             noticeDTO.setOriginalFileName(originalFileNameList);
             noticeDTO.setStoredFileName(storedFileNameList);
-
-        
-
         }
         return noticeDTO;
     }

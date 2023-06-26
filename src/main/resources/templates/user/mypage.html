@@ -122,10 +122,11 @@
             myinfo.preventDefault();
             page("/wedding/weddingMy");
         });
+
         // 내정보 첫 화면
-        // $(document).ready(function (myInfo) {
-        //     page("/user/myinfo");
-        // });
+        $(document).ready(function (myInfo) {
+            page("/user/myinfo");
+        });
         $("#myinfoPw").on("click", function (myinfo) {
             myinfo.preventDefault();
             page("/changeMyInfo");

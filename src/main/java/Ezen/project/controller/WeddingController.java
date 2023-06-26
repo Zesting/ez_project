@@ -79,7 +79,6 @@ public class WeddingController {
         /* 댓글 목록 가져오기 */
         List<WeddingCommentDTO> weddingCommentDTOList = weddingCommentService.findAll(id);
         model.addAttribute("commentList", weddingCommentDTOList);
-
         model.addAttribute("wedding", weddingDTO);
         model.addAttribute("logInUser", user);
         model.addAttribute("commentWriter", weddingDTOUser);
@@ -88,13 +87,21 @@ public class WeddingController {
         return "/wedding/detail";
     }
 
-    // 문의글 삭제
+    //delete
     @GetMapping("/wedding/delete/{id}")
     public String delete(@PathVariable Long id) {
         weddingService.delete(id);
-        return "redirect:/weddingBoard";
+        return "redirect:/adminPage";
     }
 
+    //deleteMy
+    @GetMapping("/weddingMy/delete/{id}")
+    public String deleteMy(@PathVariable Long id) {
+        weddingService.delete(id);
+        return "redirect:/user/" + id;
+    }
+
+    //페이징
     @GetMapping("wedding/paging")
     public String paging(@PageableDefault(page = 1) Pageable pageable, Model model) {
         // 페이징 로직
@@ -124,6 +131,7 @@ public class WeddingController {
         return "/wedding/weddingPaging";
     }
 
+    //마이페이지 웨딩 문의 보기
     @GetMapping("/wedding/weddingMy")
     public String findMyAll(Model model, HttpSession session) {
 
@@ -133,7 +141,6 @@ public class WeddingController {
         // List<WeddingDTO> weddingDTOList =
         // weddingService.findAll(Sort.by(Sort.Direction.DESC , "weddingWriteDate"));
         model.addAttribute("weddingList", weddingDTOList);
-
         model.addAttribute("myWedding", userId);
 
         return "/wedding/weddingMy";

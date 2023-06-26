@@ -52,7 +52,6 @@ public class NoticeDomain extends BaseNoticeDomain {
         noticeDomain.setNoticeContent(noticeDTO.getContent());
         noticeDomain.setNoticeWriteDate(noticeDTO.getWriteDate());
         noticeDomain.setFileAttached(0); // 파일 없음
-        // noticeDomain.setFileAttached(noticeDTO.getFileAttached() != null ? noticeDTO.getFileAttached() : 0); // 파일 없으면 0, 파일 있으면 값 사용
         return noticeDomain;
     }
 
@@ -75,7 +74,6 @@ public class NoticeDomain extends BaseNoticeDomain {
         noticeDomain.setNoticeContent(noticeDTO.getContent());
         noticeDomain.setNoticeWriteDate(noticeDTO.getWriteDate());
         noticeDomain.setFileAttached(1); //파일 있음
-        // noticeDomain.setFileAttached(noticeDTO.getFileAttached() != null ? noticeDTO.getFileAttached() : 1); // 파일 있으면 1, 파일 없으면 값 사용
         return noticeDomain;
     }
 

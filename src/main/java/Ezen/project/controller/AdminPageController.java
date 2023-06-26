@@ -1,21 +1,20 @@
 package Ezen.project.controller;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import Ezen.project.DTO.AdminPageDTO;
 import Ezen.project.DTO.NoticeDTO;
 import Ezen.project.DTO.PaymentInfoDTO;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.DTO.WeddingDTO;
 import Ezen.project.domain.Payment;
-import Ezen.project.service.AdminPageService;
 import Ezen.project.service.NoticeService;
 import Ezen.project.service.PaymentService;
 import Ezen.project.service.UserService;
@@ -26,11 +25,9 @@ import lombok.RequiredArgsConstructor;
 //DTO -> Entity (Entity class에서 변환)
 //Entity -> DTO (DTO class에서 변환)
 
-
 @Controller
 @RequiredArgsConstructor
 public class AdminPageController {
-  private final AdminPageService adminPageService;
   private final UserService userService;
   private final NoticeService noticeService;
   private final WeddingService weddingService;
@@ -51,21 +48,7 @@ public class AdminPageController {
     
     return "admin/adminPageSave";
     }
-    //사용 x
-  @PostMapping("/adminPageSave")
-  public String save(@ModelAttribute AdminPageDTO adminPageDTO){
-    // System.out.println("adminPageDTO = "+ adminPageDTO);
-    adminPageService.save(adminPageDTO);
-    return "redirect:/adminPage";//나중에 보여줄 주소로 바꾸기 임시 테스트
-  }
 
-  //사용 x
-  @GetMapping("/adminPageList")
-  public String findAll(Model model){
-    List<AdminPageDTO> adminPageList = adminPageService.findAll();
-    model.addAttribute("adminPageList", adminPageList);
-    return "admin/adminPageList";
-  }
   //결제된 정보 리스트
   @GetMapping("/adminPaymentInfo/{id}")
   public String paymentInfo(HttpSession session, Model model, @PathVariable("id") Long payId) {
@@ -96,7 +79,13 @@ public class AdminPageController {
     return "admin/adminPaymentInfo";
   }
 
-  
+  // 공지 노페이징 맵핑
+  @GetMapping("/noticeList")
+  public String noticeList(Model model){
+        List<NoticeDTO> noticeDTOList = noticeService.findAll();
+        model.addAttribute("noticeList", noticeDTOList);
+    return "/notice/adminNoticeList";
+  }
 
   // 공지 페이징 매핑
   // @GetMapping("/noticeList")
@@ -113,15 +102,7 @@ public class AdminPageController {
   //   return "/notice/adminNoticeListPaging";
   // }
 
-  // 공지 노페이징 맵핑
-  @GetMapping("/noticeList")
-  public String noticeList(Model model){
-        List<NoticeDTO> noticeDTOList = noticeService.findAll();
-        model.addAttribute("noticeList", noticeDTOList);
-    return "/notice/adminNoticeList";
-  }
-
-  //게시글 삭제 (공지)
+  //게시글 삭제
     @GetMapping("/adminNotice/delete/{id}")
     public String delete(@PathVariable Long id){
         noticeService.delete(id);
@@ -132,16 +113,24 @@ public class AdminPageController {
   //웨딩 리스트 조회
     @GetMapping("/weddingList")
     public String weddingList(Model model){
-       List<WeddingDTO> weddingDTOList = weddingService.findAll();
-       model.addAttribute("weddingList", weddingDTOList);
-        return "/wedding/adminWeddingList";
-    }
+      List<WeddingDTO> weddingDTOList = weddingService.findAll();
+      
+      
 
-  //게시글 삭제 (웨딩)
-    @GetMapping("/adminWedding/delete/{id}")
-    public String deleteWedding(@PathVariable Long id){
-        weddingService.delete(id);
-        return "redirect:/adminPage";
+      List<Map<String, Object>> listAll = new ArrayList<>();
+      weddingDTOList.stream().forEach(r -> {
+        Map<String, Object> addMap = new LinkedHashMap<>();
+        addMap.put("userName", userService.findById(r.getUserId()).getUserName());
+        addMap.put("weddingId", r.getWeddingId());
+        addMap.put("weddingTitle", r.getWeddingTitle());
+        addMap.put("weddingWriteDate", r.getWeddingWriteDate());
+
+        listAll.add(addMap);
+      });
+
+       model.addAttribute("weddingList", weddingDTOList);
+       model.addAttribute("allList", listAll);
+        return "/wedding/adminWeddingList";
     }
 
   

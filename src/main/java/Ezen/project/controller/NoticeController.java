@@ -94,7 +94,6 @@ public class NoticeController {
 
     //페이징 처리 /notice/paging?page=1
     @GetMapping("/notice/paging")
-    //세션 넣는다
     public String paging(@PageableDefault(page = 1) Pageable pageable, Model model){
         // pageable.getPageNumber();
         Page<NoticeDTO> noticeList = noticeService.paging(pageable);

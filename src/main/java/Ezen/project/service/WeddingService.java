@@ -27,6 +27,7 @@ public class WeddingService {
 		return weddingDomain.getWeddingId();
 	}
 
+    //findAll
     public List<WeddingDTO> findAll() {
         // List<WeddingDomain> weddingDomainList = weddingRepository.findAll();
         List<WeddingDomain> weddingDomainList = weddingRepository.findAll(Sort.by(Sort.Direction.DESC, "weddingWriteDate"));
@@ -37,6 +38,7 @@ public class WeddingService {
         return weddingDTOList;
     }
 
+    //findById
     public WeddingDTO findById(Long id) {
         Optional<WeddingDomain> optionalNoticeDomain = weddingRepository.findById(id);
         if(optionalNoticeDomain.isPresent()){
@@ -48,10 +50,12 @@ public class WeddingService {
         }
     }
 
+    //delete
     public void delete(Long id) {
         weddingRepository.deleteById(id);
     }
 
+    //페이징
     public Page<WeddingDTO> paging(Pageable pageable) {
         int page = pageable.getPageNumber() -1;
         int pageLimit = 10;
