@@ -49,51 +49,22 @@
               <i class="fa-solid fa-user fa-xl" onclick="location.href=this.parentElement.href;"></i>
             </a>
           </li>
-    <div class="container">
-      <div class="tm-next">
-        <a href="/" class="navbar-brand" onclick="homeReq()">Galaxy Palace</a>
-      </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars navbar-toggler-icon"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link tm-nav-link" href="#whatwedo" onclick="roomList()">Room</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link tm-nav-link" href="#testimonials" onclick="reservation()">Reservation</a>
-          </li>
-          <li class="nav-item">
-            <!--#gallery-->
-            <a class="nav-link tm-nav-link" href="/wedding/save" onclick="weddingReq()">Wedding</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link tm-nav-link" href="/notice/paging" onclick="pagingReq()">Notice</a>
-          </li>
-          <li class="nav-item" th:if="${session.admin==1}">
-            <a class="nav-link tm-nav-link" href="/adminPage" onclick="adminReq()">Administrator</a>
-          </li>
-          <li class="name-item">
-            <a class="nav-link tm-nav-link"
-              th:href="${session.userId == null} ? '/login' : '/user/' + ${session.userId}">
-              <i class="fa-solid fa-user fa-xl" onclick="location.href=this.parentElement.href;"></i>
+
+          <li class="nav-item" th:if="${session.userId != null}">
+            <a class="nav-link tm-nav-link" href="/logout">
+              <i class="fa-sharp fa-solid fa-arrow-right-from-bracket fa-xl" onclick="location.href='/logout'"></i>
             </a>
           </li>
-
-            <li class="nav-item" th:if="${session.userId != null}">
-              <a class="nav-link tm-nav-link" href="/logout">
-                <i
-                  class="fa-sharp fa-solid fa-arrow-right-from-bracket fa-xl"
-                  onclick="location.href='/logout'"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
+        </ul>
       </div>
+    </div>
 
     <script>
+      const logOut = () => {
+        event.preventDefault();
+        window.location.href = "/logout";
+      };
+
       const homeReq = () => {
         event.preventDefault();
         window.location.href = "/";
@@ -124,16 +95,15 @@
       };
     </script>
 
-      <script th:src="@{/js/jquery-1.9.1.min.js}"></script>
-      <script th:src="@{/js/bootstrap.min.js}"></script>
-      <script th:src="@{/js/jquery.singlePageNav.min.js}"></script>
-      <script th:src="@{/js/easing.min.js}"></script>
-      <script th:src="@{/js/template.js}"></script>
-      <script th:src="@{/magnific-popup/jquery.magnific-popup.min.js}"></script>
-      <script th:src="@{/slick/slick.min.js}"></script>
-      <script
-        src="https://kit.fontawesome.com/2aff9b2515.js"
-        crossorigin="anonymous"></script>
-    </nav>
-  </body>
+    <script th:src="@{/js/jquery-1.9.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.singlePageNav.min.js}"></script>
+    <script th:src="@{/js/easing.min.js}"></script>
+    <script th:src="@{/js/template.js}"></script>
+    <script th:src="@{/magnific-popup/jquery.magnific-popup.min.js}"></script>
+    <script th:src="@{/slick/slick.min.js}"></script>
+    <script src="https://kit.fontawesome.com/2aff9b2515.js" crossorigin="anonymous"></script>
+  </nav>
+</body>
+
 </html>
