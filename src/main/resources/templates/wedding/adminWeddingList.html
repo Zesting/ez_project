@@ -14,7 +14,7 @@
             <tbody>
                 <tr th:each="wedding: ${weddingList}">
                     <td class="wedListNo" th:text="${wedding.weddingId}"></td>
-                    <td class="wedListTitle"><a th:href="@{|${wedding.weddingId}|}"
+                    <td class="wedListTitle"><a th:href="@{|/wedding/${wedding.weddingId}|}"
                             th:text="${wedding.weddingTitle}"></a></td>
                     <td class="wedListWriter" th:text="${wedding.userId}"></td>
                     <td class="wedListDate" th:text="${wedding.weddingWriteDate}">

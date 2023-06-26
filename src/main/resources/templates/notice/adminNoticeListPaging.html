@@ -16,7 +16,6 @@
     <!-- <div th:replace="~{/fragment/header.html :: fragment-header}"></div> -->
     <!-- <div style="height: 100px; width: 100%;"></div> -->
 
-
     <div class="noticeList">
         <table class=noticeTable>
             <tr>
@@ -48,10 +47,8 @@
         <div class="listBar">
                                      <!-- First 버튼 경로-->
             <a class="firstBtn" th:href="@{/notice/paging(page=1)}">First</a>
-            
                                                                 <!-- '<' 버튼 경로 -->
             <a class="prevBtn" th:href="${noticeList.first} ? '#' : @{/notice/paging(page=${noticeList.number})}">&nbsp;&lt;&nbsp;</a>
-
             <span th:each="page: ${#numbers.sequence(startPage, endPage)}">
                 <span th:if="${page == noticeList.number + 1}" th:text="${page}"></span>
                 <span th:unless="${page == noticeList.number + 1}">
@@ -66,10 +63,8 @@
             <div class="submitBtnDiv">
             <!-- <div class="submitBtnDiv" th:if="${session.admin==1}"> -->
                 <button class="submitBtn" onclick="saveReq()">글쓰기</button>
-            </div>
-        
-        </div>
-        
+            </div>      
+        </div>     
     </div>
 </body>
 <script>
@@ -82,5 +77,4 @@
     }
 </script>
 </body>
-
 </html>

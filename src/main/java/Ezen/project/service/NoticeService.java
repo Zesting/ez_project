@@ -62,8 +62,6 @@ public class NoticeService {
                 NoticeFileDomain noticeFileDomain = NoticeFileDomain.toNoticeFileEntity(notice, originalFileName, storedFileName);
                 noticeFileRepository.save(noticeFileDomain);
                 
-            
-
             return noticeDomain.getNoticeId();
         }
         
@@ -72,7 +70,6 @@ public class NoticeService {
     //공지 테이블 모든 데이터 값 찾는 기능
     @Transactional
     public List<NoticeDTO> findAll() {
-        // List<NoticeDomain> noticeDomainList = noticeRepository.findAll();
         List<NoticeDomain> noticeDomainList = noticeRepository.findAll(Sort.by(Sort.Direction.DESC, "noticeWriteDate"));
         List<NoticeDTO> noticeDTOList = new ArrayList<>();
         for(NoticeDomain noticeDomain: noticeDomainList){
@@ -115,8 +112,7 @@ public class NoticeService {
                 noticeFileRepository.save(noticeFileDomain);
 
                 return noticeDomain.getNoticeId();
-        }
-        
+        }        
     }
 
     //삭제 기능

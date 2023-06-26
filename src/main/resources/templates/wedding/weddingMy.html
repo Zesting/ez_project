@@ -11,48 +11,49 @@
 </head>
 
 <body style="background-image: url(../img/space8.jpg);">
-    <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
-    <div style="height: 100px; width: 100%;"></div>
+    <!-- <div th:replace="~{/fragment/header.html :: fragment-header}"></div> -->
+    <!-- <div style="height: 100px; width: 100%;"></div> -->
 
     <div class="wedList">
         <div class="wedListTable">
-            <table class="wedTable">
-                <tr>
-                    <!-- <th class="wedListNo">No</th> -->
-                    <th class="wedListTitle">제목</th>
-                    <th class="wedListWriter">작성자</th>
-                    <th class="wedListDate">작성일</th>
-                </tr>
-                <tr th:each="wedding: ${weddingList}" th:if="${wedding.userId == myWedding}">
-                    <!-- <td class="wedListNo" th:text="${wedding.weddingId}"></td> -->
-                    <td class="wedListTitle"><a th:href="@{|${wedding.weddingId}|}"
-                            th:text="${wedding.weddingTitle}"></a></td>
-                    <td class="wedListWriter" th:text="${wedding.userId}"></td>
-                    <td class="wedListDate">
-                        <span
-                            th:if="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
-                            <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'HH:mm')}"></span>
-                        </span>
-                        <span
-                            th:unless="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
-                            <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'yy-MM-dd')}"></span>
-                        </span>
-                    </td>
-                </tr>
-            </table>
+            <div class="wedTableDiv">
+                <table class="wedTable">
+                    <tr>
+                        <!-- <th class="wedListNo">No</th> -->
+                        <th class="wedListTitle">제목</th>
+                        <th class="wedListWriter">작성자</th>
+                        <th class="wedListDate">작성일</th>
+                    </tr>
+                    <tr th:each="wedding: ${weddingList}" th:if="${wedding.userId == myWedding}">
+                        <!-- <td class="wedListNo" th:text="${wedding.weddingId}"></td> -->
+                        <td class="wedListTitle"><a th:href="@{|/wedding/${wedding.weddingId}|}"
+                                th:text="${wedding.weddingTitle}"></a></td>
+                        <td class="wedListWriter" th:text="${wedding.userId}"></td>
+                        <td class="wedListDate">
+                            <span
+                                th:if="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+                                <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'HH:mm')}"></span>
+                            </span>
+                            <span
+                                th:unless="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
+                                <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'yy-MM-dd')}"></span>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <div class="wedBtnBar">
-                <button class="writeBtn" onclick="writeFormReq()"><span>신규 문의</span></button>
+                <button class="writeBtn"><a href="/wedding/weddingForm">신규 문의</a></button>
+                <!-- <button class="writeBtn" onclick="writeFormReq()"><span>신규 문의</span></button> -->
             </div>
         </div>
-        
+
     </div>
-    <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
+    <!-- <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div> -->
 </body>
 <script>
-const writeFormReq = () => {
-        window.location.href = "/wedding/save";
+    const writeFormReq = () => {
+        window.location.href = "/wedding/weddingForm";
     }
-
 </script>
-
 </html>

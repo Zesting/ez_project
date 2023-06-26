@@ -106,7 +106,7 @@
             myinfo.preventDefault();
             page("/user/myPayment");
         });
-        $("#myinfo").on("click",function(myinfo){
+        $("#myinfo").on("click", function (myinfo) {
             myinfo.preventDefault();
             page("/user/myinfo");
         });
@@ -118,10 +118,16 @@
             myInfo.preventDefault();
             page("/Reservations/myList");
         });
-        $("#mywedding").on("click",function(myinfo){
+        $("#mywedding").on("click", function (myinfo) {
             myinfo.preventDefault();
             page("/wedding/weddingMy");
         });
+        let myListReq = () => {
+            $("#mywedding").on("click", function (myinfo) {
+                myinfo.preventDefault();
+                page("/wedding/weddingMy");
+            });
+        }
 
         function page(url) {
             $.ajax({

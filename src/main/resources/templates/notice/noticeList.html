@@ -29,12 +29,10 @@
             <td th:text="*{#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
         </tr>
     </table>
-
     <div>
         <button onclick="saveReq()">글작성</button>
     </div>
     <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
-
     <script>
         const saveReq = () => {
             location.href = "/notice/save";
