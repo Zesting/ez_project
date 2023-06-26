@@ -16,7 +16,6 @@ import Ezen.project.DTO.KakaoPayApprovalVO;
 import Ezen.project.DTO.KakaoPayCancelResponseVO;
 import Ezen.project.DTO.KakaoPayReadyVO;
 import Ezen.project.DTO.PaymentDTO;
-import Ezen.project.domain.Payment;
 import Ezen.project.repository.PaymentRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
@@ -123,7 +122,7 @@ public class KakaopayService {
       int point = kakaoPayApprovalVO.getAmount().getPoint();
       kakaoPayApprovalVO.getAmount().setDiscount(total - point);
       // 받은 값을 DB에 저장하기
-      Payment pay = paymentRepository.save(kakaoPayApprovalVO.toSaveEntity());
+      paymentRepository.save(kakaoPayApprovalVO.toSaveEntity());
       // System.out.println("*********************************************");
       // System.out.println(pay);
 

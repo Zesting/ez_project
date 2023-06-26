@@ -1,13 +1,55 @@
-<div>
+<div class="roomCreateBox">
   <input type="hidden" id="roomId" name="roomId" />
-  <label for="roomName">신규 룸 이름</label><br />
-  <input type="text" id="roomName" name="roomName" /><br />
-  <label for="roomPrice">룸 1박 가격</label><br />
-  <input type="number" id="roomPrice" name="roomPrice" /><br />
-  <label for="roomType">룸 타입</label><br />
-  <input type="radio" name="roomType" value="Mars" />Mars
-  <input type="radio" name="roomType" value="Earth" />Earth
-  <input type="radio" name="roomType" value="Jupiter" />Jupiter
-  <br />
-  <input type="button" value="생성" id="postBtn" /><br />
+  <div class="row mb-3">
+    <label for="roomName" class="col-sm-2 col-form-label">
+      신규 룸 이름
+    </label>
+    <div class="col-sm-10">
+      <input type="text" id="roomName" name="roomName" class="form-control" />
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="roomPrice" class="col-sm-2 col-form-label">
+      룸 1박 가격
+    </label>
+    <div class="col-sm-10">
+      <input type="number" id="roomPrice" name="roomPrice" class="form-control" />
+    </div>
+  </div>
+  <fieldset class="row mb-3">
+    <legend class="col-form-label col-sm-2 pt-0">
+      룸 타입
+    </legend>
+    <div class="col-sm-10">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="roomType" value="Mercury" checked />
+        <label class="from-check-label" for="roomType">
+          Mercury
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="roomType" value="Mars" />
+        <label class="from-check-label" for="roomType">
+          Mars
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="roomType" value="Earth" />
+        <label class="from-check-label" for="roomType">
+          Earth
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="roomType" value="Jupiter" />
+        <label class="from-check-label" for="roomType">
+          Jupiter
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  <!-- <label for="roomType">룸 타입</label> -->
+  <!-- <input type="radio" name="roomType" value="Mars" />Mars -->
+  <!-- <input type="radio" name="roomType" value="Earth" />Earth -->
+  <!-- <input type="radio" name="roomType" value="Jupiter" />Jupiter -->
+  <input type="button" value="생성" id="postBtn" class="btn btn-success" />
 </div>

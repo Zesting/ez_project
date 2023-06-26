@@ -39,3 +39,14 @@ tbody td button {
 .active-tab {
   color: red;
 }
+
+/* 룸 생성 페이지 */
+.roomCreateBox {
+  margin: auto;
+  width: 60%;
+  color: black;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-top: 50px;
+}
