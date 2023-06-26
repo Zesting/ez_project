@@ -121,8 +121,6 @@ $(document).on("click", "#createForm", function () {
       roomName: document.getElementById("roomName").value,
       roomPrice: document.getElementById("roomPrice").value,
       roomType: $("input:radio[name=roomType]:checked").val(),
-      roomDetailInfo: document.getElementById("roomDetailInfo").value,
-      roomImagePath: document.getElementById("roomImagePath").value,
     };
     ajax("/Rooms/add", "POST", params);
   });
