@@ -15,7 +15,7 @@
       <td>관리자</td>
       <td><a th:href="@{|notice/${notice.id}|}" th:text="${notice.title}"></a></td>
       <!-- <td th:text="*{#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:mm:ss')}"></td> -->
-      <td th:text="${#temporals.format(notice.writeDate, 'yyyy-MM-dd HH-mm')}"></td>
+      <td th:text="${#temporals.format(notice.writeDate, 'yyyy-MM-dd HH:mm')}"></td>
       <td><button type="button" th:id="'noticeDetailBtn('+${notice.id}+')'" th:onclick="'noticeDetailBtn('+${notice.id}+')'">
         <!-- 조회 -->
         <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
