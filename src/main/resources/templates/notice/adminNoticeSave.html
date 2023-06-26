@@ -16,7 +16,7 @@
         </form>
     </div>
     <div class="saveBar">
-        <button class="saveListBtn" onclick="listReq()">목록</button>
+        <button class="saveListBtn" onclick="listReq()">관리자 페이지</button>
 
         <button class="saveSubmitBtn" onclick="submitForm()">제출</button>
     </div>
@@ -29,7 +29,7 @@
 
 <script th:inline="javascript">
     const listReq = () => {
-        location.href = "/notice/paging";
+        location.href = "/adminPage";
     }
     const submitForm = () => {
         document.getElementById("myForm").submit();
