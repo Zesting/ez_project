@@ -12,20 +12,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="wedding: ${weddingList}">
+                <tr th:each="wedding: ${allList}">
                     <td class="wedListNo" th:text="${wedding.weddingId}"></td>
                     <td class="wedListTitle"><a th:href="@{|/wedding/${wedding.weddingId}|}"
                             th:text="${wedding.weddingTitle}"></a></td>
-                    <td class="wedListWriter" th:text="${wedding.userId}"></td>
-                    <td class="wedListDate" th:text="${wedding.weddingWriteDate}">
-                        <!-- <span
-                      th:if="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
-                      <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'HH:mm')}"></span>
-                  </span>
-                  <span
-                      th:unless="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd') == #temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}">
-                      <span th:text="*{#temporals.format(wedding.weddingWriteDate, 'yy-MM-dd')}"></span>
-                  </span> -->
+                    <td class="wedListWriter" th:text="${wedding.userName}"></td>
+                    <td class="wedListDate" th:text="${#temporals.format(wedding.weddingWriteDate, 'yyyy-MM-dd HH:mm')}">
                   <td><button type="button" th:id="'weddingDetailBtn('+${wedding.weddingId}+')'" th:onclick="'weddingDetailBtn('+${wedding.weddingId}+')'">
                     <!-- 조회 -->
                     <img src="https://ifh.cc/g/gs0Rv9.png" alt="아이콘" style="width: 30px; height: 30px;">
