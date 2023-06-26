@@ -13,22 +13,23 @@ $(document).on("click", "#userListBtn", function () {
     error: function (request, error) {
       console.log(
         "code:" +
-          request.status +
-          "\n" +
-          "message:" +
-          request.responseText +
-          "\n" +
-          "error:" +
-          error
+        request.status +
+        "\n" +
+        "message:" +
+        request.responseText +
+        "\n" +
+        "error:" +
+        error
       );
     },
   });
-  
+
+
   //user id별 detail조회
-  $(document).on("click", "#detailBtn", function(){
+  $(document).on("click", "#detailBtn", function () {
     let userId = $(this).closest("tr").find("#userId").val(); // 선택한 행의 userId 값을 가져옴
     $.ajax({
-      url: "/user/"+userId,
+      url: "/user/" + userId,
       method: "GET",
       dataType: "HTML",
       success: function(data){
@@ -37,20 +38,26 @@ $(document).on("click", "#userListBtn", function () {
         $("#roomModifyContainer").html(data);//roomModifyContainer에 붙이기위함.
         $("#roomModifyContainer").slideDown();
       },
-      error: function(request, error){
+      error: function (request, error) {
         console.log(
           "code:" +
-            request.status +
-            "\n" +
-            "message:" +
-            request.responseText +
-            "\n" +
-            "error:" +
-            error
+          request.status +
+          "\n" +
+          "message:" +
+          request.responseText +
+          "\n" +
+          "error:" +
+          error
         );
       }
     });
   });
-
-
 });
+
+$("#deleteBtn").on("click", function () {
+  if (confirm("회원탈퇴를 진행하시겠습니까?") == true) {
+    alert("회원 탈퇴처리가 완료되었습니다.")
+  } else {
+    return;
+  }
+})
