@@ -4,12 +4,24 @@ Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
+let Mercury = document.getElementById("mercuryCount").value;
+let Mars = document.getElementById("marsCount").value;
+let Earth = document.getElementById("earthCount").value;
+let Jupiter = document.getElementById("jupiterCount").value;
+let total = (Mercury + Mars + Earth + Jupiter)/100;
+
+console.log(Mercury);
+console.log(Mars);
+console.log(Earth);
+console.log(Jupiter);
+
+
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Mars", "Mercury", "Earth","Jupiter"],
+    labels: ["Mercury", "Mars", "Earth","Jupiter"],
     datasets: [{
-      data: [45, 25, 10, 20],
+      data: [Mercury, Mars, Earth, Jupiter],
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#f6c23e'],
       hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf','#dda20a'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",

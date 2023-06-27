@@ -57,7 +57,7 @@
     <div class="containerBox">
       <div id="adminPageContainer">
         <!-- 차트 가져옴 -->
-        <div class="row">
+        <div class="row" id="chartBox">
           <!-- Pie Chart -->
           <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
@@ -85,8 +85,37 @@
                   </span>
                 </div>
               </div>
+
             </div>
           </div>
+          <pre>
+          Mercury 룸 : [[${roomNameCount.mercuryCount}]]
+          Mars 룸 : [[${roomNameCount.marsCount}]]
+          Earth 룸 : [[${roomNameCount.earthCount}]]
+          Jupiter 룸 : [[${roomNameCount.jupiterCount}]]
+        </pre>
+          <!-- <div class="roomNameBox">
+            <div class="MercuryBox">
+              <div>Mercury 룸 : </div>
+              <div>[[${roomNameCount.mercuryCount}]]</div>
+            </div>
+            <div class="MarsBox">
+              <div>Mars 룸 : </div>
+              <div>[[${roomNameCount.marsCount}]]</div>
+            </div>
+            <div class="EarthBox">
+              <div>Earth 룸 : </div>
+              <div>[[${roomNameCount.earthCount}]]</div>
+            </div>
+            <div class="JupiterBox">
+              <div>Jupiter 룸 : </div>
+              <div>[[${roomNameCount.jupiterCount}]]</div>
+            </div>
+          </div> -->
+          <input type="hidden" id="mercuryCount" th:value="${roomNameCount.mercuryCount}">
+          <input type="hidden" id="marsCount" th:value="${roomNameCount.marsCount}">
+          <input type="hidden" id="earthCount" th:value="${roomNameCount.earthCount}">
+          <input type="hidden" id="jupiterCount" th:value="${roomNameCount.jupiterCount}">
         </div>
       </div>
       <div id="roomListContainer"></div>

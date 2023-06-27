@@ -181,4 +181,22 @@ public class ReservationService {
         return bookableRooms;
     }
 
+    // 재영이형 admin
+    @Transactional
+    public List<Room> bookableListAdmin(Date date) { // ? -> roomList
+        List<Room> bookableRooms = roomRepository.findAll();
+        List<Reservation> checkInReservation = findAllReservationByCheckIn(date);
+        List<Room> roomsToRemove1 = new ArrayList<>();
+        for (Reservation reservation : checkInReservation) {
+            for (Room checkOnRoom : bookableRooms) {
+                if (checkOnRoom.getRoomId().equals(reservation.getRoomId())) {
+                    roomsToRemove1.add(checkOnRoom);
+                }
+            }
+        }
+
+        bookableRooms.removeAll(roomsToRemove1);
+        return bookableRooms;
+    }
+
 }

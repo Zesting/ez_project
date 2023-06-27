@@ -52,5 +52,40 @@ $(document).on("click", "#noticeListBtn", function () {//noticeListBtn
   //     }
   //   });
   // });//detail 조회
-
 });//List 조회
+  //공지사항 등록
+$(document).on("click", "#noticeForm", function () {
+  $.ajax({
+    url: "/adminNoticeSave",
+    method: "GET",
+    dataType: "HTML",
+    success: function (data) {
+      $("#adminPageContainer").slideUp();
+      $("#roomModifyContainer").slideUp();
+      $("#roomListContainer").html(data);
+    },
+    error: function (request, error) {
+      console.log(
+        "code:" +
+          request.status +
+          "\n" +
+          "message:" +
+          request.responseText +
+          "\n" +
+          "error:" +
+          error
+      );
+    },
+  });
+
+  $(document).on("click", "#noticePostBtn", function () {
+    // console.log("RoomAdd start");
+    const params = {
+      userId: document.getElementById("userId").value,
+      title: document.getElementById("noticeTitle").value,
+      content: document.getElementById("noticeContent").value,
+      roomDnoticeFileetailInfo: document.getElementById("noticeFile").value
+    };
+    ajax("/notice/save", "POST", params);
+  });
+});

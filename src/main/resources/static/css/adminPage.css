@@ -40,6 +40,44 @@ tbody td button {
   color: red;
 }
 
+/* 어드민 홈 CSS */
+#adminPageContainer {
+  position: relative;
+}
+/* 룸생성 페이지랑 CSS 충돌 여기 다시 확인
+.row { 
+  position: absolute;
+  width: 100%;
+} */
+
+
+.roomNameBox {
+  width: 500px;
+  margin-left: 500px;
+  /* border: 1px solid red; */
+  height: 420px;
+}
+.MercuryBox {
+  display: flex;
+  justify-content: space-around;
+}
+
+.MarsBox {
+  display: flex;
+  justify-content: space-around;
+}
+
+.EarthBox {
+  display: flex;
+  justify-content: space-around;
+}
+
+.JupiterBox {
+  display: flex;
+  justify-content: space-around;
+}
+
+
 /* 룸 생성 페이지 */
 .roomCreateBox {
   margin: auto;
@@ -50,3 +88,4 @@ tbody td button {
   border-radius: 6px;
   margin-top: 50px;
 }
+
