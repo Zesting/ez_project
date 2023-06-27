@@ -79,7 +79,7 @@ $(document).on("click", "#postBtn", function () {
       success: function (data) {
         console.log("Reservation create Post Ajax 성공!", data);
         location.href = "/payment";
-        window.alert("성공");
+        window.alert("예약에 성공하였습니다.");
       },
       error: function (request, error) {
         console.log(
@@ -92,7 +92,7 @@ $(document).on("click", "#postBtn", function () {
             "error:" +
             error
         );
-        window.alert("실패");
+        window.alert("예약에 실패하였습니다.");
       },
     });
   });
