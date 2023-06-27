@@ -13,6 +13,9 @@
     background-color: rgba(255,250,250, 1);
 }
 
+::placeholder {
+    color: gray;
+}
 
 .saveForm {
     /* border: solid 1px red; */
@@ -54,13 +57,18 @@
     cursor: pointer;
 }
 
+.h2Title {
+    margin: 0;
+}
+
 .saveBar {
     /* border: solid 1px red; */
     position: absolute;
-    margin: 5px;
+    /* margin: 5px; */
     width: 700px;
     transform: translateX(-50%);
     left: 50%; 
+    margin-top: -17px;
 }
 
 .saveListBtn, .saveSubmitBtn{
@@ -72,6 +80,10 @@
     color: whitesmoke;
 }
 
+.saveListBtn {
+    width: 150px
+}
+
 .saveListBtn:hover, .saveSubmitBtn:hover {
     background-color: darkslateblue;
     cursor: pointer;
@@ -79,5 +91,5 @@
 }
 
 .saveSubmitBtn {
-    margin-left: 68%;
+    margin-left: 60.2%;
 }
