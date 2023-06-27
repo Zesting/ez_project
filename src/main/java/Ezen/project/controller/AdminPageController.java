@@ -17,12 +17,10 @@ import Ezen.project.DTO.PaymentInfoDTO;
 import Ezen.project.DTO.UserDTO;
 import Ezen.project.DTO.WeddingDTO;
 import Ezen.project.domain.Payment;
-import Ezen.project.domain.Reservation;
 import Ezen.project.domain.Room;
 import Ezen.project.service.NoticeService;
 import Ezen.project.service.PaymentService;
 import Ezen.project.service.ReservationService;
-import Ezen.project.service.RoomService;
 import Ezen.project.service.UserService;
 import Ezen.project.service.WeddingService;
 import jakarta.servlet.http.HttpSession;
@@ -39,7 +37,6 @@ public class AdminPageController {
   private final WeddingService weddingService;
   private final PaymentService paymentService;
   private final ReservationService reservationService;
-  private final RoomService roomService;
 
   @GetMapping("/adminPage")
   public String adminPage(Model model, HttpSession session) {
@@ -49,42 +46,73 @@ public class AdminPageController {
     List<UserDTO> userDTOList = userService.findAll();
     model.addAttribute("userList", userDTOList);
     Date today = new Date(System.currentTimeMillis());
-    List<Reservation> checkInRoom = reservationService.findAllReservationByCheckIn(today);
-    List<Room> allRoom = roomService.findAllRoom();
+    /*
+     * List<Reservation> checkInRoom =
+     * reservationService.findAllReservationByCheckIn(today);
+     * List<Room> allRoom = roomService.findAllRoom();
+     */
+    List<Room> allList = reservationService.bookableListAdmin(today);
 
-    System.out.println("allRoom -> " + allRoom);
-    System.out.println("오늘 체크인 된 수:" + checkInRoom);
-    List<String> nameList = new ArrayList<>();
-    for (int i = 0; i < checkInRoom.size(); i++) {
-      // System.out.println(checkInRoom.get(i).getRoomId()); //룸 ID 확인
-      Room roomName = roomService.findRoomById(checkInRoom.get(i).getRoomId()).get();
-      System.out.println(roomName.getRoomName()); // 룸 이름 확인
-      nameList.add(roomName.getRoomName());
-    }
-    ;
-    System.out.println(nameList);
-    int earthCount = 0, marsCount = 0, jupiterCount = 0, mercuryCount = 0;
-    for (int i = 0; i < nameList.size(); i++) {
-      if (nameList.get(i).contains("Mercury")) {
-        mercuryCount++;
-      } else if (nameList.get(i).contains("Mars")) {
-        marsCount++;
-      } else if (nameList.get(i).contains("Earth")) {
-        earthCount++;
-      } else if (nameList.get(i).contains("Jupiter")) {
-        jupiterCount++;
+    List<Room> mercuryList = new ArrayList<>();
+    List<Room> marsList = new ArrayList<>();
+    List<Room> earthList = new ArrayList<>();
+    List<Room> jupiterList = new ArrayList<>();
+    allList.stream().forEach(r -> {
+      if (r.getRoomType().equals("Mercury")) {
+        mercuryList.add(r);
+      } else if (r.getRoomType().equals("Mars")) {
+        marsList.add(r);
+      } else if (r.getRoomType().equals("Earth")) {
+        earthList.add(r);
+      } else {
+        jupiterList.add(r);
       }
-    }
-    System.out.println("Mercury 카운트: " + mercuryCount);
-    System.out.println("Earth 카운트: " + earthCount);
-    System.out.println("Mars 카운트: " + marsCount);
-    System.out.println("Jupiter 카운트: " + jupiterCount);
-    AdminCountDTO adminCountDTO = new AdminCountDTO();
-    adminCountDTO.setMercuryCount(mercuryCount);
-    adminCountDTO.setMarsCount(marsCount);
-    adminCountDTO.setEarthCount(earthCount);
-    adminCountDTO.setJupiterCount(jupiterCount);
-    model.addAttribute("roomNameCount", adminCountDTO);
+      AdminCountDTO adminCountDTO = new AdminCountDTO();
+      adminCountDTO.setMercuryCount(mercuryList.size());
+      adminCountDTO.setMarsCount(marsList.size());
+      adminCountDTO.setEarthCount(earthList.size());
+      adminCountDTO.setJupiterCount(jupiterList.size());
+      model.addAttribute("roomNameCount", adminCountDTO);
+    });
+
+    System.out.println(" mercuryList ->" + allList);
+    /* System.out.println("allRoom -> " + allList); */
+    /* System.out.println("오늘 체크인 된 수:" + checkInRoom); */
+    /* List<String> nameList = new ArrayList<>(); */
+
+    /*
+     * for (int i = 0; i < checkInRoom.size(); i++) {
+     * // System.out.println(checkInRoom.get(i).getRoomId()); //룸 ID 확인
+     * Room roomName =
+     * roomService.findRoomById(checkInRoom.get(i).getRoomId()).get();
+     * System.out.println(roomName.getRoomName()); // 룸 이름 확인
+     * nameList.add(roomName.getRoomName());
+     * }
+     * ;
+     * System.out.println(nameList);
+     * int earthCount = 0, marsCount = 0, jupiterCount = 0, mercuryCount = 0;
+     * for (int i = 0; i < nameList.size(); i++) {
+     * if (nameList.get(i).contains("Mercury")) {
+     * mercuryCount++;
+     * } else if (nameList.get(i).contains("Mars")) {
+     * marsCount++;
+     * } else if (nameList.get(i).contains("Earth")) {
+     * earthCount++;
+     * } else if (nameList.get(i).contains("Jupiter")) {
+     * jupiterCount++;
+     * }
+     * }
+     * System.out.println("Mercury 카운트: " + mercuryCount);
+     * System.out.println("Earth 카운트: " + earthCount);
+     * System.out.println("Mars 카운트: " + marsCount);
+     * System.out.println("Jupiter 카운트: " + jupiterCount);
+     * AdminCountDTO adminCountDTO = new AdminCountDTO();
+     * adminCountDTO.setMercuryCount(mercuryCount);
+     * adminCountDTO.setMarsCount(marsCount);
+     * adminCountDTO.setEarthCount(earthCount);
+     * adminCountDTO.setJupiterCount(jupiterCount);
+     */
+    /* model.addAttribute("roomNameCount", adminCountDTO); */
     return "admin/adminPage";
   }
 
@@ -157,29 +185,26 @@ public class AdminPageController {
     return "redirect:/adminPage";
   }
 
+  // 웨딩 리스트 조회
+  @GetMapping("/weddingList")
+  public String weddingList(Model model) {
+    List<WeddingDTO> weddingDTOList = weddingService.findAll();
 
-   //웨딩 리스트 조회
-    @GetMapping("/weddingList")
-    public String weddingList(Model model){
-      List<WeddingDTO> weddingDTOList = weddingService.findAll();
-      
-      
+    List<Map<String, Object>> listAll = new ArrayList<>();
+    weddingDTOList.stream().forEach(r -> {
+      Map<String, Object> addMap = new LinkedHashMap<>();
+      addMap.put("userName", userService.findById(r.getUserId()).getUserName());
+      addMap.put("weddingId", r.getWeddingId());
+      addMap.put("weddingTitle", r.getWeddingTitle());
+      addMap.put("weddingWriteDate", r.getWeddingWriteDate());
 
-      List<Map<String, Object>> listAll = new ArrayList<>();
-      weddingDTOList.stream().forEach(r -> {
-        Map<String, Object> addMap = new LinkedHashMap<>();
-        addMap.put("userName", userService.findById(r.getUserId()).getUserName());
-        addMap.put("weddingId", r.getWeddingId());
-        addMap.put("weddingTitle", r.getWeddingTitle());
-        addMap.put("weddingWriteDate", r.getWeddingWriteDate());
+      listAll.add(addMap);
+    });
 
-        listAll.add(addMap);
-      });
-
-       model.addAttribute("weddingList", weddingDTOList);
-       model.addAttribute("allList", listAll);
-        return "/wedding/adminWeddingList";
-    }
+    model.addAttribute("weddingList", weddingDTOList);
+    model.addAttribute("allList", listAll);
+    return "/wedding/adminWeddingList";
+  }
 
   // 웨딩 문의 페이징 매핑
   // @GetMapping("/weddingList")

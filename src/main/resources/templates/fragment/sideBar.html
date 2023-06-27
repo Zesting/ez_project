@@ -1,72 +1,96 @@
 <html lagn="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>sidebar</title>
-</head>
-<!--sidebarFragment 선언-->
-<nav th:fragment="sidebarFragment" class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-  <div class="sb-sidenav-menu">
-    <div class="nav">
-      <div class="sb-sidenav-menu-heading">Core</div>
-      <a class="nav-link" href="/adminPage">
-        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-        Administrator
-      </a>
-      <div class="sb-sidenav-menu-heading">Interface</div>
-      <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
-        aria-expanded="false" aria-controls="collapseLayouts">
-        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-        룸 상태 체크
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-      </a>
-     
-      <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
-        aria-expanded="false" aria-controls="collapsePages" id="createForm">
-        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-        룸 생성
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-      </a>
-      <a class="nav-link collapsed" href="/adminNoticeSave" data-bs-target="#collapsePages"
-        aria-expanded="false" aria-controls="collapsePages" id="noticeForm">
-        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>공지사항 등록
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-      </a>
-      <div class="sb-sidenav-menu-heading" id="listForm">List</div>
-      <a class="nav-link" href="#" id="userListBtn">
-        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-        회원 리스트
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
-      </a>
-      <a class="nav-link" href="#" id="listForm">
-        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-        룸 리스트
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
-      </a>
-      <a class="nav-link" href="#" id="reservationListForm">
-        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-        예약 리스트
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
-      </a>
-      <a class="nav-link" href="#" id="paymentListBtn">
-        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-        결제 리스트
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
-      </a>
-      <a class="nav-link" href="#" id="noticeListBtn">
-        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-        공지 리스트
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
-      </a>
-      <a class="nav-link" href="#" id="weddingListBtn">
-        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-        웨딩 문의 리스트
-        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
-      </a>
+  </head>
+  <!--sidebarFragment 선언-->
+  <nav
+    th:fragment="sidebarFragment"
+    class="sb-sidenav accordion sb-sidenav-dark"
+    id="sidenavAccordion">
+    <div class="sb-sidenav-menu">
+      <div class="nav">
+        <div class="sb-sidenav-menu-heading">Core</div>
+        <a class="nav-link" href="/adminPage">
+          <div class="sb-nav-link-icon">
+            <i class="fas fa-tachometer-alt"></i>
+          </div>
+          Administrator
+        </a>
+        <div class="sb-sidenav-menu-heading">Interface</div>
+        <a
+          class="nav-link collapsed"
+          href="#"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapsePages"
+          aria-expanded="false"
+          aria-controls="collapsePages"
+          id="createForm">
+          <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+          룸 생성
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+          </div>
+        </a>
+        <a
+          class="nav-link collapsed"
+          href="/adminNoticeSave"
+          data-bs-target="#collapsePages"
+          aria-expanded="false"
+          aria-controls="collapsePages"
+          id="noticeForm">
+          <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+          공지사항 등록
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-down"></i>
+          </div>
+        </a>
+        <div class="sb-sidenav-menu-heading" id="listForm">List</div>
+        <a class="nav-link" href="#" id="userListBtn">
+          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+          회원 리스트
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-right"></i>
+          </div>
+        </a>
+        <a class="nav-link" href="#" id="listForm">
+          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+          룸 리스트
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-right"></i>
+          </div>
+        </a>
+        <a class="nav-link" href="#" id="reservationListForm">
+          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+          예약 리스트
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-right"></i>
+          </div>
+        </a>
+        <a class="nav-link" href="#" id="paymentListBtn">
+          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+          결제 리스트
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-right"></i>
+          </div>
+        </a>
+        <a class="nav-link" href="#" id="noticeListBtn">
+          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+          공지 리스트
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-right"></i>
+          </div>
+        </a>
+        <a class="nav-link" href="#" id="weddingListBtn">
+          <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+          웨딩 문의 리스트
+          <div class="sb-sidenav-collapse-arrow">
+            <i class="fas fa-angle-right"></i>
+          </div>
+        </a>
+      </div>
     </div>
-  </div>
-    
-</nav>
-<script th:src="@{/js/paymentList.js}"></script>
-
+  </nav>
+  <script th:src="@{/js/paymentList.js}"></script>
 </html>
