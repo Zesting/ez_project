@@ -11,6 +11,7 @@
   width: 100%;
   height: 100%;
 }
+
 #reservationContainer {
   width: 100%;
   height: 100%;
@@ -37,10 +38,12 @@
   border-bottom: 3px solid #333;
   text-align: center;
 }
+
 #tableSection table tbody {
   top: 30px;
   padding: 10px;
 }
+
 #tableSection table tbody tr {
   bottom: 10px;
 }
@@ -50,4 +53,14 @@
   text-align: center;
   padding: 25px 0px 15px 0px;
   border-bottom: 1px solid #333;
+}
+
+.myRv-h2 {
+  font-size: 30px;
+  margin-top: 10px;
+  text-align: center;
+  color: rgb(35, 35, 35);
+  font-weight: bold;
+  margin-bottom: 30px;
+  border-bottom: 3px solid #999999;
 }
