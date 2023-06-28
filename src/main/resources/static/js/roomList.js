@@ -69,8 +69,6 @@ $(document).on("click", "#listForm", function () {
         roomName: document.getElementById("updateRoomName").value,
         roomPrice: document.getElementById("updateRoomPrice").value,
         roomType: document.getElementById("updateRoomType").value,
-        roomDetailInfo: document.getElementById("updateRoomDetailInfo").value,
-        roomImagePath: document.getElementById("updateRoomImagePath").value,
       };
       console.log("params", params);
 
@@ -137,10 +135,10 @@ function ajax(url, method, data) {
     dataType: "JSON",
     contentType: "application/json; charset=UTF-8",
     data: JSON.stringify(data), // 폼 데이터 직렬화하여 전송
-    success: function (data, alert) {
-      console.log("modifyForm Post Ajax 성공!", data);
+    success: function (data) {
+      alert("성공");
+      console.log("Ajax 성공!", data);
       location.reload();
-      window.alert("성공");
     },
     error: function (request, error) {
       console.log(
@@ -153,7 +151,6 @@ function ajax(url, method, data) {
           "error:" +
           error
       );
-      window.alert("실패");
     },
   });
 }
