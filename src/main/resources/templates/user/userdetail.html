@@ -7,12 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>detail</title>
     <style>
+        .myinfo-container {
+            border: none;
+        }
+
         tr:nth-child(even) {
-            background-color: #2e2649;
+            background-color: #ffffff;
         }
 
         tr:nth-child(odd) {
-            background-color: #423b5b;
+            background-color: #fefefe;
         }
 
         th {
@@ -29,19 +33,22 @@
             font-size: 30px;
             margin: 40px auto;
             text-align: center;
-            color: rgb(248, 248, 248);
+            color: rgb(16, 16, 16);
             font-weight: bold;
+            border-bottom: 3px solid #999999;
         }
 
         .mytr {
             text-align: center;
-            color: white;
+            color: rgb(34, 34, 34);
+            font-weight: bold;
+            font-size: 24px;
         }
     </style>
 </head>
 
 <body>
-    <div class="mypage-container" style="width: 100%;">
+    <div class="myinfo-container" style="width: 100%;">
         <h2 class="myinfo-h2">내 가입정보</h2>
         <div class="table-responsive">
             <table class="table">
@@ -92,9 +99,9 @@
                     <td th:text="${user.userEmail}"></td>
                 </tr>
             </table>
-        </div><br>
+        </div>
     </div>
-    <br><br>
+    <br>
 
 
 </body>

@@ -8,6 +8,11 @@
     <title>회원가입</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
+        .memberJoin-title{
+            font-size: 30px;
+            margin-top: 10px;
+            color: azure;
+        }
         .memberjoincontainer {
             display: flex;
             justify-content: center;
@@ -19,50 +24,78 @@
         }
 
         .memberjoin-inputcontainer {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
-        /* .memberjoin-submitbtn {} */
+        .memberjoin-submitbtn {
+            padding: 16px 50px;
+            margin-bottom: 50px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+            font-size: 30px;
+            width: 100%;
+            font-weight: bold;
+        }
+        .memberjoin-submitbtn:hover{
+            background-color: rgb(24, 197, 61);
+        }
+        .itemName{
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 
-<body style="background-image: url(../img/space1.jpg);">
+<body style="background-image: url(../img/space7.jpg);">
     <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
     <div style="height: 90px; width: 100%;"></div>
 
     <div class="memberjoincontainer">
         <form action="/user/memberjoin" method="post" class="membership-form">
-            <h3 class="tm-section-title">GalaxyPalace회원 가입</h3><br>
+            <h2 class="memberJoin-title">GalaxyPalace 회원가입</h2><br>
             <div class="memberjoin-inputcontainer">
+                <p class="itemName">아이디</p>
                 <input type="text" name="userId" placeholder="사용할 아이디를 입력하세요" class="tm-input" id="userId" required><br>
                 <button type="button" id="idcheck" class="btn-primary">중복확인</button>
                 <span id="userIdConfirmTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
+                <p class="itemName">비밀번호</p>
                 <input type="password" name="userPassword" placeholder="비밀번호를 입력하세요" class="tm-input" id="upw"
                     required><br>
+                    <p class="itemName">비밀번호 확인</p>
                 <input type="password" name="verifyPassword" placeholder="한번 더 같은 비밀번호를 입력하세요" class="tm-input"
                     id="upwcheck" required>
                 <span id="upwTxt"></span><br><span id="upwcTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
+                <p class="itemName">이름</p>
                 <input type="text" name="userName" placeholder="이름(성명)을 입력하세요" class="tm-input" required id="uname"><br>
                 <span id="unameTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
+                <p class="itemName">생년월일</p>
                 <input type="text" name="userAge" placeholder="YYYYMMDD(출생년도를 입력하세요)" class="tm-input" id="uage"
                     required><br>
                 <span id="uageTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
+                <p class="itemName">핸드폰번호</p>
                 <input type="text" name="userPhoneNumber" placeholder="전화번호를 입력하세요('띄어쓰기없이 '-'는 생략한 형식)"
                     class="tm-input" id="uphone" required><br>
                 <span id="uphoneTxt"></span>
             </div>
             <div class="memberjoin-inputcontainer">
+                <p class="itemName">이메일</p>
                 <input type="text" name="userEmail" id="useremail" placeholder="사용할 이메일을 입력하세요" class="tm-input"><br>
                 <button type="button" id="emcheck" class="btn-primary">인증번호 요청</button><span id="emailTxt"></span><br>
+                <p class="itemName">이메일 인증번호</p>
                 <input type="text" class="tm-input" id="emailConfirm" placeholder="인증번호를 입력하세요"><br>
                 <label for="check" id="emailConfirmTxt" class="verification-label"></label>
             </div>
@@ -73,6 +106,7 @@
     </div>
     <div th:replace="~{/fragment/footer.html :: fragment-footer}"></div>
 
+    <!-- 유효성검사 script -->
     <script>
         // submit 유효성검사를 위한 체크
         let idchk = false;
