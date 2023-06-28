@@ -38,7 +38,7 @@
             <span th:each="fileName: ${noticeUpdate.storedFileName}">
               <img class="uploadImg" id="uploadFile" th:src="@{'/upload/images/' + ${fileName}}">
             </span>
-            <button class="fileDeleteBtn" type="button" onclick="deleteFile()">삭제</button>
+            <!-- <button class="fileDeleteBtn" type="button" onclick="deleteFile()">삭제</button> -->
           </div>
         </div>
         <input class="noticeUpdateSumbit" type="submit" value="글수정">

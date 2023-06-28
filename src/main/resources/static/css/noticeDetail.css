@@ -24,6 +24,10 @@
     color: rgb(15, 15, 82);
 }
 
+.tableContent {
+    white-space: pre-wrap;
+}
+
 .tableDetail tr {
     border-bottom: solid 1px rgb(15, 15, 82);
 }
@@ -39,7 +43,7 @@
 }
 
 img {
-    max-width: 400px;
+    max-width: 700px;
     
 }
 
