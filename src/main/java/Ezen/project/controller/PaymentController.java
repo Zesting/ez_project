@@ -94,9 +94,10 @@ public class PaymentController {
 
   // 결제 진행 중 취소하였을 때.
   @GetMapping("/kakaoPayCancel")
-  public String kakaoPayCancel(PaymentDTO paymentDTO, HttpSession session) {
+  public String kakaoPayCancel(PaymentDTO paymentDTO, HttpSession session, Model model) {
     // 취소 되었다고 결제 데이터 베이스에 취소 상태해서 넣기
-    log.info("kakaoPayCancel get............................................");
+    // log.info("kakaoPayCancel get............................................");
+        model.addAttribute("paymentDTO", session.getAttribute("paymentDTO"));
     return "payment/kakaoPayCancel";
   }
 

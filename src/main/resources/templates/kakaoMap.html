@@ -12,36 +12,36 @@
       display: flex;
     }
     .directions {
-      color: white;
-      border: 1px solid white;
+      /* color: white; */
+      border: 1px solid #ddd;
       border-radius: 6px;
       width: 65%;
     }
     .directions_a {
-      color: white;
-      border: 1px solid white;
+      /* color: white; */
+      border: 1px solid #ddd;
       border-radius: 6px;
       width: 35%;
     }
 
     .duration {
       font-weight: bold;
-      color: wheat;
+      color: black;
       /* text-align: center; */
     }
   </style>
 </head>
 
-<body style="background-image: url(../img/space8.jpg);">
+<body>
   <div th:replace="~{/fragment/header.html :: fragment-header}"></div>
   <div style="height: 100px; width: 100%;"></div>
   <!-- 헤더 불러오기 -->
 
   <!-- 지도크기 정하기 -->
   <div id="map" style="width:60%;height:500px; margin: auto; border-radius: 6px;"></div>
-  <p><em>지도를 확대 또는 축소 해주세요!</em></p>
+  <p><em style="display: none;">지도를 확대 또는 축소 해주세요!</em></p>
   <!-- 확대 축소 레벨 -->
-  <p id="result"></p>
+  <p id="result" style="display: none;"></p>
   <div class="posting">
     <div class="directions">
       <div>주소 : 강원특별자치도 영월군 영월읍 갤럭시펠리스길 397</div>
